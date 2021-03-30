@@ -1,0 +1,9 @@
+2021-03-29
+
+Web Service Architecture - LAMP stack
+front-end framwork - react
+front-end - HTML, CSS, Javascript
+Web Server - Apache HTTP Server
+Web Server Language- PHP
+WAS - Apache Tomcat(Java)
+DB - MySQL(using phpmyadmin)
