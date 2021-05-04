@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>product_list_admin</title>
+        <link rel="stylesheet" href="./add_product_admin.css" type="text/css">
+        <script src="add_product_admin.js"></script>
+
+    </head>
+    <body>
+        <header>
+
+        </header>
+        <nav class="nav">
+            <ul>
+                <li><a href="./main_admin.html" class="active">Home</a></li>
+                <li><a href="./banner_admin.html">Notice/Event 관리</a></li>
+                <li><a href="./product_list_admin.html" class="current">Product 관리</a></li>
+                <li><a href="./logout_admin.html">Logout</a></li>
+            </ul>
+        </nav>
+        <section>
+            <h2>New Product</h2>
+            <form action="#" method="POST" enctype="multipart/form-data">
+                <div>
+                    <table>
+                        <tr><td>상품 코드</td><td><input type="text" id="pcode" size=6></td></tr>
+                        <tr><td>상품 이름</td><td><input type="text" id="pname" maxsize=20></td></tr>
+                        <tr><td>상품 사진</td><td><input type="file" id="pimg" accept="image/*"></td></tr>
+                        <tr><td>상품 가격</td><td><input type="text" id="pprice"></td></tr>
+                        <tr><td>상품 수량</td><td><input type="number" id="pcnt" pattern="\d*"></td></tr>
+                        <tr><td>상품 설명</td><td><textarea id="pexplain" rows="5" cols="30"></textarea></td></tr>
+                        <tr><td>등록 날짜</td><td><input type="date" id="pregdate"></td></tr>
+                        <tr><td colspan="2"><a href="./add_product_admin.html" onclick="check()">등록하기</a></td></tr>
+                    </table>
+                </div>
+                
+            </form>
+        </section>
+        
+        <footer>
+
+        </footer>
+    </body>
+</html>

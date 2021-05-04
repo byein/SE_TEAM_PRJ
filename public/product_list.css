@@ -1,0 +1,145 @@
+html{
+    font-family: "Noto Sans KR", sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}            
+.nav{
+    width: 230px;
+    height: 70%;
+    float: left;
+}
+.section{
+    width: 70%;
+    height: 70%;
+    float: left;
+}
+
+ul.menu{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+li a{
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active{
+    background-color: #4CAF50;
+    color: white;
+}
+.menu>li :hover:not(.active){
+    background-color: #555;
+    color: white;
+}
+li a.current{
+    background-color: #555;
+    color: white;
+}
+th{
+    background-color: #4CAF50;
+    padding: 30px;
+}
+div a{
+    display: block;
+    color: white;
+    float: right;
+    margin: 15px auto;
+    text-decoration: none;
+    background-color: #555;
+    padding: 10px;
+    border-radius: 10px;
+}
+table{
+    padding: auto;
+    margin: auto 10px;
+}
+
+
+
+section, ul, li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.cell{
+    float: left;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+.row::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.img_box>img{
+    display: block;
+    width: 100%;
+}
+section{
+    overflow-x: hidden;
+    padding-right: 30px;
+}
+.list>ul>li{
+    width: calc(100%/6);
+}
+.list>ul>li{
+    padding: 0 10px;
+}
+.list>ul{
+    margin: 0 -10px;
+}
+.list>ul>li>.product_name{
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+}
+.list>ul>li>.product_price{
+    text-align: center;
+    font-weight: bold;
+    font-size:medium;
+}
+.list>ul>li>.product_price::after{
+    content: "원";
+    font-size: medium;
+    font-weight: bold;
+}
+@media(max-width:800px){
+    .list>ul>li{
+        width: calc(100%/5);
+    }
+}
+@media(max-width:650px){
+    .list>ul>li{
+        width: calc(100%/4);
+    }
+}
+@media(max-width:500px){
+    .list>ul>li{
+        width: calc(100%/3);
+    }
+}
+@media(max-width:400px){
+    .list>ul>li{
+        width: calc(100%/2);
+    }
+}
+@media(max-width:300px){
+    .list>ul>li{
+        width: calc(100%/1);
+    }
+}
+
