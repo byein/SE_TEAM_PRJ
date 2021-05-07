@@ -1,0 +1,147 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+.nav{
+    width: 230px;
+    height: 70%;
+    float: left;
+}
+section{
+    overflow-x: hidden;
+    padding-right: 30px;
+}
+.section{    
+    width: 70%;
+    height: 70%;
+    float: left;
+}
+.nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+.nav li a{
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.nav li a.active{
+    background-color: #4CAF50;
+    color: white;
+}
+.nav li :hover:not(.active){
+    background-color: #555;
+    color: white;
+}
+.nav li a.current{
+    background-color: #555;
+    color: white;
+}
+tr, td{
+    padding: 10px;
+}
+
+
+.outer{
+    display: flex;
+    justify-content: center;
+}
+.pagination {
+    display: inline-block;
+}
+  
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+div caption a{
+    display: block;
+    color: white;
+    text-align: center;
+    
+    width: 100px;
+    float: right;
+    margin: 15px auto;
+    text-decoration: none;
+    background-color: #555;
+
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.notice_list {
+    width: 70%;
+    margin: auto;
+    word-wrap: break-word;
+    border-bottom: 1px solid #999;
+    color: #666;
+    font-size: 12px;
+    table-layout: fixed;
+    position:relative;
+    margin: 30px auto;
+}
+.notice_list, .notice_list th, .notice_list td{
+    border: 0;
+    border-collapse: collapse;
+}
+.notice_list td a {
+    color: #383838; 
+    text-decoration: none;
+}
+.notice_list th{
+    padding: 5px 0 6px;
+    border-top: solid 1px #999;
+    border-bottom: solid 1px #b2b2b2;
+    background-color: #f1f1f4;
+    color: #333;
+    font-weight: bold;
+    line-height: 20px;
+    vertical-align: top;
+}
+.notice_list td{
+    padding: 8px 0 9px;
+    border-bottom: solid 1px #d2d2d2;
+    text-align: center;
+    line-height: 18px;
+}
+
+.notice_list .title{
+    width: 60%;
+}
+.notice_list .num, .notice_list .date, .notice_list .hit, .notice_list .name{
+    padding: 0;
+    font-size: 11px;
+    line-height: normal;
+    width: 10%;
+}
+.notice_list .title{
+    text-align: left;
+    padding-left: 15px;
+    font-size: 13px;
+    width: 60%;
+}
+
+
+tbody tr:hover, .notice_list td a:hover{
+    background-color: #b2b2b2;
+    color: white;
+    
+}

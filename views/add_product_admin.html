@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>product_list_admin</title>
-        <link rel="stylesheet" href="/add_product_admin.css" type="text/css">
-        <script src="/add_product_admin.js"></script>
-
+        <title>add_product_admin</title>
+        <link rel="stylesheet" href="../public/add_product_admin.css" type="text/css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script src="../router/add_product_admin.js"></script>
     </head>
     <body>
         <header>
 
         </header>
         <nav class="nav">
-            <ul>
+            <ul class="menu">
                 <li><a href="./main_admin.html" class="active">Home</a></li>
-                <li><a href="./banner_admin.html">Notice/Event 관리</a></li>
+                <li><a href="./banner_list_admin.html">Notice/Event 관리</a></li>
                 <li><a href="./product_list_admin.html" class="current">Product 관리</a></li>
                 <li><a href="./logout_admin.html">Logout</a></li>
             </ul>
@@ -26,6 +26,14 @@
                         <tr><td>상품 코드</td><td><input type="text" id="pcode" size=6></td></tr>
                         <tr><td>상품 이름</td><td><input type="text" id="pname" maxsize=20></td></tr>
                         <tr><td>상품 사진</td><td><input type="file" id="pimg" accept="image/*"></td></tr>
+                        <tr><td>카테고리</td><td>
+                            <select name="main_category" id="main_category">
+                                <option value="">전체</option>
+                            </select>
+                            <select name="sub_category" id="sub_category">
+                                <option value="">전체</option>                                
+                            </select>
+                        </td></tr>                        
                         <tr><td>상품 가격</td><td><input type="text" id="pprice"></td></tr>
                         <tr><td>상품 수량</td><td><input type="number" id="pcnt" pattern="\d*"></td></tr>
                         <tr><td>상품 설명</td><td><textarea id="pexplain" rows="5" cols="30"></textarea></td></tr>
