@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>banner_admin</title>
+        <link rel="stylesheet" href="../public/banner_list_admin.css" type="text/css">
+    </head>
+    <body>
+        <header>
+
+        </header>
+        <nav class="nav">
+            <ul>
+                <li><a href="./main_admin.html" class="active">Home</a></li>
+                <li><a href="./banner_list_admin.html" class="current">Notice/Event 관리</a></li>
+                <li><a href="./product_list_admin.html">Product 관리</a></li>
+                <li><a href="./logout_admin.html">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <section>
+            <h2>Notice/Event</h2>
+            <div class="notice_list_div">
+                <table class="notice_list">
+                    <caption><a href="./add_banner_admin.html">공지 등록</a></caption>
+                    <colgroup>
+                    <col width="15">
+                    <col width="80">
+                    <col width="15">
+                    <col width="20">
+                    <col width="15">
+                    </colgroup>
+                    <thead>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>조회수</th>
+                        <th>등록일</th>
+                        <th>작성자</th>
+                    </thead>
+                    <!--상품 정보 들어갈 공간 list 개수만큼 tr-->
+                    <tbody>
+                        <tr>
+                            <td class="num">1</td>
+                            <td class="title">
+                                <a href="banner_detail_admin.html">공지 제목이 들어가는 곳</a>
+                            </td>
+                            <td class="hit">123</td>
+                            <td class="date">2021/05/06</td>
+                            <td class="name">작성자</td>
+                        </tr>
+                        <tr>
+                            <td class="num">1234</td>
+                            <td class="title">
+                                <a href="banner_detail_admin.html">공지 제목이 들어가는 곳 공지 제목이 들어가는 곳 공지 제목이 들어가는 곳</a>
+                            </td>
+                            <td class="hit">123</td>
+                            <td class="date">2021/05/06</td>
+                            <td class="name">seoultech</td>
+                        </tr>
+                        <tr>
+                            <td class="num">123456</td>
+                            <td class="title">
+                                <a href="banner_detail_admin.html">공지 제목이 들어가는 곳</a>
+                            </td>
+                            <td class="hit">12356</td>
+                            <td class="date">2021/05/06</td>
+                            <td class="name">쿠팡</td>
+                        </tr>
+
+                    </tbody>
+    
+                </table>
+            </div>
+            <div class="outer">
+                <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>
