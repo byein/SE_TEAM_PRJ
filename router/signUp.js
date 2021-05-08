@@ -1,3 +1,17 @@
+var db = require('./db');
+
+exports.create = function(request, response){
+    var post = request.body;
+    db.query(`INSERT INTO member (mId, mPwd, mEmail, mDate, mName, mPost_code, mRoad_address, mJibun_address, mDetail_address, mExtra_address) VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?)`,
+            [post.userid, post.userpw, post.usermail, post.username, post.postcode, post.road, post.jibun, post.detail, post.extra], function(error, result){
+                    if(error){
+                            throw error;
+                    }
+                    response.redirect(`/signUp`);
+            }
+    )
+}
+
 function check() {
     var objName = document.getElementById("userName");//이름 id
     var regname = /^[가-힣]{2,}$/; //이름에 사용할 정규 표현식
