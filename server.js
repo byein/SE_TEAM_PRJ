@@ -40,5 +40,5 @@ app.get('/product_list', function(request, response){
 });
 
 app.listen(3000, function(){
-        console.log('App is listening 3000 port');
+        console.log('3000 port');
 });
