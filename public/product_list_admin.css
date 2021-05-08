@@ -25,21 +25,21 @@ ul.menu{
     width: 200px;
     background-color: #f1f1f1;
 }
-.nav li a{
+li a{
     display: block;
     color: #000;
     padding: 8px 16px;
     text-decoration: none;
 }
-.nav li a.active{
+li a.active{
     background-color: #4CAF50;
     color: white;
 }
-.nav .menu>li :hover:not(.active){
+.menu>li :hover:not(.active){
     background-color: #555;
     color: white;
 }
-.nav li a.current{
+li a.current{
     background-color: #555;
     color: white;
 }
@@ -47,7 +47,7 @@ th{
     background-color: #4CAF50;
     padding: 30px;
 }
-.btn a{
+div a{
     display: block;
     color: white;
     float: right;
@@ -61,29 +61,8 @@ table{
     padding: auto;
     margin: auto 10px;
 }
-.outer{
-    display: flex;
-    justify-content: center;
-}
-.pagination {
-    display: inline-block;
-}
-  
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-}
 
-.pagination a.active {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-}
+
 
 section, ul, li{
     margin: 0;
