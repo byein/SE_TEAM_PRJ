@@ -7,7 +7,7 @@ exports.create = function(request, response){
                     if(error){
                             throw error;
                     }
-                    response.redirect(`/signUp`);
+                    response.redirect(`/`);
             }
     )
 }
