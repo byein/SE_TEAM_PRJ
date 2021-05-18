@@ -2,15 +2,15 @@
 <html>
     <head>
         <title>add_product_admin</title>
-        <link rel="stylesheet" href="/public/add_product_admin.css" type="text/css">
+        <link rel="stylesheet" href="/add_product_admin.css" type="text/css">
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-        <script src="/router/add_product_admin.js"></script>
+        <script src="/add_product_admin.js"></script>
     </head>
     <body>
         <header id="header">
             <div id="head-wrapper">
                 <h1>
-                    <a id="logo" href="/views/mainPage_admin.html" title="로고">로고</a>
+                    <a id="logo" href="/admin" title="로고">로고</a>
                 </h1>
                 <form id="search-form" method="GET">
                     <input id="search" type="search" placeholder="검색">
@@ -19,30 +19,33 @@
                     </button>
                 </form>
                 <div class="wrap-user-util">
-                    <button id="logout">
-                        <a href="/logout">logout</a>
-                    </button>
-                    <button id="bucket">
-                        <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
-                    </button>
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+                        </button>
+                    <% } %>
                 </div>
             </div>
         </header>
         <nav id="category">
-            <a class="category-menu" href="/views/product_list_admin.html">상의</a>
-            <a class="category-menu" href="/views/product_list_admin.html">하의</a>
-            <a class="category-menu" href="/views/product_list_admin.html">원피스</a>
-            <a class="category-menu" href="/views/product_list_admin.html">잡화류</a>
-            <a class="category-menu" href="/views/product_list_admin.html">악세서리</a>
+            <a class="category-menu" href="/product_list_admin">상의</a>
+            <a class="category-menu" href="/product_list_admin">하의</a>
+            <a class="category-menu" href="/product_list_admin">원피스</a>
+            <a class="category-menu" href="/product_list_admin">잡화류</a>
+            <a class="category-menu" href="/product_list_admin">악세서리</a>
         </nav>
 
 
         <nav class="nav">
             <ul class="menu">
-                <li><a href="/views/mainPage_admin.html" class="active">Home</a></li>
-                <li><a href="/views/banner_list_admin.html">Notice/Event 관리</a></li>
-                <li><a href="/views/product_list_admin.html" class="current">Product 관리</a></li>
-                <li><a href="/views/mainPage.html">Logout</a></li>
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin">Product 관리</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
         <section>
@@ -65,7 +68,7 @@
                         <tr><td>상품 수량</td><td><input type="number" id="pcnt" pattern="\d*"></td></tr>
                         <tr><td>상품 설명</td><td><textarea id="pexplain" rows="5" cols="30"></textarea></td></tr>
                         <tr><td>등록 날짜</td><td><input type="date" id="pregdate"></td></tr>
-                        <tr><td colspan="2"><a class="btn" href="/views/add_product_admin.html" onclick="check()">등록하기</a></td></tr>
+                        <tr><td colspan="2"><a class="btn" href="/add_product_admin" onclick="check()">등록하기</a></td></tr>
                     </table>
                 </div>
                 

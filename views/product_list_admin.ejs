@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>product_list</title>
-        <link rel="stylesheet" href="/public/product_list.css" type="text/css">
+        <title>product_list_admin</title>
+        <link rel="stylesheet" href="/product_list_admin.css" type="text/css">
     </head>
     <body>
         <header id="header">
             <div id="head-wrapper">
                 <h1>
-                    <a id="logo" href="/views/mainPage.html" title="로고">로고</a>
+                    <a id="logo" href="/admin" title="로고">로고</a>
                 </h1>
                 <form id="search-form" method="GET">
                     <input id="search" type="search" placeholder="검색">
@@ -17,25 +17,39 @@
                     </button>
                 </form>
                 <div class="wrap-user-util">
-                    <button id="logout">
-                        <a href="/logout">logout</a>
-                    </button>
-                    <button id="bucket">
-                        <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
-                    </button>
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+                        </button>
+                    <% } %>
                 </div>
             </div>
         </header>
         <nav id="category">
-            <a class="category-menu" href="/views/product_list.html">상의</a>
-            <a class="category-menu" href="/views/product_list.html">하의</a>
-            <a class="category-menu" href="/views/product_list.html">원피스</a>
-            <a class="category-menu" href="/views/product_list.html">잡화류</a>
-            <a class="category-menu" href="/views/product_list.html">악세서리</a>
+            <a class="category-menu" href="/product_list_admin">상의</a>
+            <a class="category-menu" href="/product_list_admin">하의</a>
+            <a class="category-menu" href="/product_list_admin">원피스</a>
+            <a class="category-menu" href="/product_list_admin">잡화류</a>
+            <a class="category-menu" href="/product_list_admin">악세서리</a>
         </nav>
 
 
 
+        <nav class="nav">
+            <ul class="menu">
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin">Product 관리</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="btn">
+            <a href="/add_product_admin">상품 등록</a>
+        </div>
         <section>
             <h2>Product list</h2>
             
@@ -145,9 +159,9 @@
                     <a href="#">&raquo;</a>
                 </div>
             </div>
+            
         </section>
         
-
         <footer id="footer">
             <p>Copyright 2021. 24팀 all rights reserved.</p>
         </footer>

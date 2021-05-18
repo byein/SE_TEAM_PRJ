@@ -2,14 +2,14 @@
 <html>
     <head>
         <title>banner_admin</title>
-        <link rel="stylesheet" href="/public/banner_detail_admin.css" type="text/css">
-        <script src="/router/banner_detail_admin.js"></script>
+        <link rel="stylesheet" href="/banner_detail_admin.css" type="text/css">
+        <script src="/banner_detail_admin.js"></script>
     </head>
     <body>
         <header id="header">
             <div id="head-wrapper">
                 <h1>
-                    <a id="logo" href="/views/mainPage_admin.html" title="로고">로고</a>
+                    <a id="logo" href="/admin" title="로고">로고</a>
                 </h1>
                 <form id="search-form" method="GET">
                     <input id="search" type="search" placeholder="검색">
@@ -18,30 +18,33 @@
                     </button>
                 </form>
                 <div class="wrap-user-util">
-                    <button id="logout">
-                        <a href="/logout">logout</a>
-                    </button>
-                    <button id="bucket">
-                        <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
-                    </button>
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+                        </button>
+                    <% } %>
                 </div>
             </div>
         </header>
         <nav id="category">
-            <a class="category-menu" href="/views/product_list_admin.html">상의</a>
-            <a class="category-menu" href="/views/product_list_admin.html">하의</a>
-            <a class="category-menu" href="/views/product_list_admin.html">원피스</a>
-            <a class="category-menu" href="/views/product_list_admin.html">잡화류</a>
-            <a class="category-menu" href="/views/product_list_admin.html">악세서리</a>
+            <a class="category-menu" href="/product_list_admin">상의</a>
+            <a class="category-menu" href="/product_list_admin">하의</a>
+            <a class="category-menu" href="/product_list_admin">원피스</a>
+            <a class="category-menu" href="/product_list_admin">잡화류</a>
+            <a class="category-menu" href="/product_list_admin">악세서리</a>
         </nav>
 
 
         <nav class="nav">
             <ul>
-                <li><a href="/views/mainPage_admin.html" class="active">Home</a></li>
-                <li><a href="/views/banner_list_admin.html" class="current">Notice/Event 관리</a></li>
-                <li><a href="/views/product_list_admin.html">Product 관리</a></li>
-                <li><a href="/views/mainPage.html">Logout</a></li>
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin">Product 관리</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
         
@@ -75,7 +78,7 @@
                         </tr>
                         <tr class="blank"><td></td></tr>
                         <tr class="btn"><td></td><td></td>
-                            <td class="modify"><a href="/views/add_banner_admin.html">수정</a></td>
+                            <td class="modify"><a href="/add_banner_admin">수정</a></td>
                             <td class="delete"><a href="javascript:void(0);" onclick="delete_check()">삭제</a></td>
                         </tr>
                     </tbody>

@@ -2,13 +2,13 @@
 <html>
     <head>
         <title>banner_admin</title>
-        <link rel="stylesheet" href="/public/banner_list_admin.css" type="text/css">
+        <link rel="stylesheet" href="/banner_list_admin.css" type="text/css">
     </head>
     <body>
         <header id="header">
             <div id="head-wrapper">
                 <h1>
-                    <a id="logo" href="/views/mainPage_admin.html" title="로고">로고</a>
+                    <a id="logo" href="/admin" title="로고">로고</a>
                 </h1>
                 <form id="search-form" method="GET">
                     <input id="search" type="search" placeholder="검색">
@@ -17,31 +17,34 @@
                     </button>
                 </form>
                 <div class="wrap-user-util">
-                    <button id="logout">
-                        <a href="/logout">logout</a>
-                    </button>
-                    <button id="bucket">
-                        <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
-                    </button>
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+                        </button>
+                    <% } %>
                 </div>
             </div>
         </header>
         <nav id="category">
-            <a class="category-menu" href="/views/product_list_admin.html">상의</a>
-            <a class="category-menu" href="/views/product_list_admin.html">하의</a>
-            <a class="category-menu" href="/views/product_list_admin.html">원피스</a>
-            <a class="category-menu" href="/views/product_list_admin.html">잡화류</a>
-            <a class="category-menu" href="/views/product_list_admin.html">악세서리</a>
+            <a class="category-menu" href="/product_list_admin">상의</a>
+            <a class="category-menu" href="/product_list_admin">하의</a>
+            <a class="category-menu" href="/product_list_admin">원피스</a>
+            <a class="category-menu" href="/product_list_admin">잡화류</a>
+            <a class="category-menu" href="/product_list_admin">악세서리</a>
         </nav>
 
 
 
         <nav class="nav">
             <ul>
-                <li><a href="/views/mainPage_admin.html" class="active">Home</a></li>
-                <li><a href="/views/banner_list_admin.html" class="current">Notice/Event 관리</a></li>
-                <li><a href="/views/product_list_admin.html">Product 관리</a></li>
-                <li><a href="/views/mainPage.html">Logout</a></li>
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin">Product 관리</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
         
@@ -49,7 +52,7 @@
             <h2>Notice/Event</h2>
             <div class="notice_list_div">
                 <table class="notice_list">
-                    <caption><a href="/views/add_banner_admin.html">공지 등록</a></caption>
+                    <caption><a href="/add_banner_admin">공지 등록</a></caption>
                     <colgroup>
                     <col width="15">
                     <col width="80">
@@ -69,7 +72,7 @@
                         <tr>
                             <td class="num">1</td>
                             <td class="title">
-                                <a href="/views/banner_detail_admin.html">공지 제목이 들어가는 곳</a>
+                                <a href="/banner_detail_admin">공지 제목이 들어가는 곳</a>
                             </td>
                             <td class="hit">123</td>
                             <td class="date">2021/05/06</td>
@@ -78,7 +81,7 @@
                         <tr>
                             <td class="num">1234</td>
                             <td class="title">
-                                <a href="/views/banner_detail_admin.html">공지 제목이 들어가는 곳 공지 제목이 들어가는 곳 공지 제목이 들어가는 곳</a>
+                                <a href="/banner_detail_admin">공지 제목이 들어가는 곳 공지 제목이 들어가는 곳 공지 제목이 들어가는 곳</a>
                             </td>
                             <td class="hit">123</td>
                             <td class="date">2021/05/06</td>
@@ -87,7 +90,7 @@
                         <tr>
                             <td class="num">123456</td>
                             <td class="title">
-                                <a href="/views/banner_detail_admin.html">공지 제목이 들어가는 곳</a>
+                                <a href="/banner_detail_admin">공지 제목이 들어가는 곳</a>
                             </td>
                             <td class="hit">12356</td>
                             <td class="date">2021/05/06</td>

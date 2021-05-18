@@ -2,14 +2,27 @@ var db = require('./db');
 
 exports.create = function(request, response){
     var post = request.body;
-    db.query(`INSERT INTO member (mId, mPwd, mEmail, mDate, mName, mPost_code, mRoad_address, mJibun_address, mDetail_address, mExtra_address) VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?)`,
-            [post.userid, post.userpw, post.usermail, post.username, post.postcode, post.road, post.jibun, post.detail, post.extra], function(error, result){
-                    if(error){
-                            throw error;
+    db.query(`SELECT mId FROM member WHERE mId=?`, [post.userid], function(error, mem){
+        db.query(`SELECT aId FROM admin WHERE aId=?`, [post.userid], function(error2, admin){
+            db.query(`SELECT mEmail FROM member WHERE mEmail=?`, [post.usermail], function(error3, email){
+                if (!mem[0] && !admin[0]){
+                    if (!email[0]) {
+                        db.query(`INSERT INTO member (mId, mPwd, mEmail, mDate, mName, mPost_code, mRoad_address, mJibun_address, mDetail_address, mExtra_address) VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?)`,
+                        [post.userid, post.userpw, post.usermail, post.username, post.postcode, post.road, post.jibun, post.detail, post.extra], function(error, result){
+                            if(error){
+                                throw error;
+                            }
+                            response.send('<script>alert("회원가입이 완료되었습니다."); window.location.href = `/`;</script>');
+                        });
+                    } else {
+                        response.send('<script>alert("이미 등록된 이메일입니다."); window.location.href = `/signUp`;</script>'); 
                     }
-                    response.redirect(`/`);
-            }
-    )
+                } else {
+                    response.send('<script>alert("이미 등록된 아이디입니다."); window.location.href = `/signUp`;</script>');
+                }
+            });
+        });
+    });
 }
 
 function check() {
@@ -24,8 +37,6 @@ function check() {
         alert("이름을 잘못 입력하셨습니다.");
         return false;
     } else { //유효성 검사 완료시 회원가입 진행
-        alert("회원가입이 완료되었습니다.");
-        window.location.href="/views/mainPage.html"
         return true;
     }
 }
