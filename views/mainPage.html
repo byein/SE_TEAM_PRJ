@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+    <link rel="stylesheet" href="/public/mainPage.css">
+    <script type="text/javascript" src="/router/mainPage.js"></script>
+    <script type="text/javascript" src="/router/banner_main.js"></script>
+</head>
+<body>
+    <header id="header">
+        <div id="head-wrapper">
+            <h1>
+                <a id="logo" href="/views/mainPage.html" title="로고">로고</a>
+            </h1>
+            <form id="search-form" method="GET">
+                <input id="search" type="search" placeholder="검색">
+                <button id="search-btn" class="search">
+                    <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+                </button>
+            </form>
+            <div class="wrap-user-util">
+                <button id="login">
+                    <a href="/views/signUp.html">로그인</a>
+                </button>
+                <button id="signup-btn">
+                    <a id="goto-signup" href="/views/signUp.html">회원가입</a>
+                </button>
+                <button id="bucket">
+                    <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+                </button>
+            </div>
+        </div>
+    </header>
+    <nav id="category">
+        <a class="category-menu" href="/views/product_list.html">상의</a>
+        <a class="category-menu" href="/views/product_list.html">하의</a>
+        <a class="category-menu" href="/views/product_list.html">원피스</a>
+        <a class="category-menu" href="/views/product_list.html">잡화류</a>
+        <a class="category-menu" href="/views/product_list.html">악세서리</a>
+    </nav>
+
+    <section id="main-container">
+        <div id="main-banner">
+            <div id="banner-img-wrapper">
+                <ul class="rollimgs">
+                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1615422266317.png" alt="1st"></li>
+                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1552549610052.jpg" alt="2st"></li>
+                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt="3st"></li>
+                </ul>
+            </div>
+        </div>
+        <div id="latest-items">
+            <h2>최신상품</h2>
+            <ul class="row">
+                <li class="cell">
+                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg" alt=""></div>
+                    <div class="product_name">단가라 ops</div>
+                    <div class="product_price">19800</div>
+                </li>
+                <li class="cell">
+                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg" alt=""></div>
+                    <div class="product_name">단가라 ops</div>
+                    <div class="product_price">19800</div>
+                </li>
+                <li class="cell">
+                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt=""></div>
+                    <div class="product_name">단가라 ops</div>
+                    <div class="product_price">19800</div>
+                </li>
+                <li class="cell">
+                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_04_list.jpg" alt=""></div>
+                    <div class="product_name">단가라 ops</div>
+                    <div class="product_price">19800</div>
+                </li>
+                <li class="cell">
+                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_05_list.jpg" alt=""></div>
+                    <div class="product_name">단가라 ops</div>
+                    <div class="product_price">19800</div>
+                </li>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <p>Copyright 2021. 24팀 all rights reserved.</p>
+    </footer>
+</body>
+
+</html>

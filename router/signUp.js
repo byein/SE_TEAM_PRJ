@@ -25,6 +25,7 @@ function check() {
         return false;
     } else { //유효성 검사 완료시 회원가입 진행
         alert("회원가입이 완료되었습니다.");
+        window.location.href="/views/mainPage.html"
         return true;
     }
 }

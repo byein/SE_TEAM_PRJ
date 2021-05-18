@@ -2,19 +2,50 @@
 <html>
     <head>
         <title>add_banner_admin</title>
-        <link rel="stylesheet" href="../public/add_banner_admin.css" type="text/css">
-        <script src="../router/add_banner_admin.js"></script>
+        <link rel="stylesheet" href="/public/add_banner_admin.css" type="text/css">
+        <script src="/router/add_banner_admin.js"></script>
     </head>
     <body>
-        <header>
-
+        <header id="header">
+            <div id="head-wrapper">
+                <h1>
+                    <a id="logo" href="/views/mainPage_admin.html" title="로고">로고</a>
+                </h1>
+                <form id="search-form" method="GET">
+                    <input id="search" type="search" placeholder="검색">
+                    <button id="search-btn" class="search">
+                        <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+                    </button>
+                </form>
+                <div class="wrap-user-util">
+                    <button id="login">
+                        <a href="/views/signUp.html">로그인</a>
+                    </button>
+                    <button id="signup-btn">
+                        <a id="goto-signup" href="/views/signUp.html">회원가입</a>
+                    </button>
+                    <button id="bucket">
+                        <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+                    </button>
+                </div>
+            </div>
         </header>
+        <nav id="category">
+            <a class="category-menu" href="/views/product_list_admin.html">상의</a>
+            <a class="category-menu" href="/views/product_list_admin.html">하의</a>
+            <a class="category-menu" href="/views/product_list_admin.html">원피스</a>
+            <a class="category-menu" href="/views/product_list_admin.html">잡화류</a>
+            <a class="category-menu" href="/views/product_list_admin.html">악세서리</a>
+        </nav>
+
+
+
         <nav class="nav">
             <ul>
-                <li><a href="./main_admin.html" class="active">Home</a></li>
-                <li><a href="./banner_list_admin.html" class="current">Notice/Event 관리</a></li>
-                <li><a href="./product_list_admin.html">Product 관리</a></li>
-                <li><a href="./logout_admin.html">Logout</a></li>
+                <li><a href="/views/mainPage_admin.html" class="active">Home</a></li>
+                <li><a href="/views/banner_list_admin.html" class="current">Notice/Event 관리</a></li>
+                <li><a href="/views/product_list_admin.html">Product 관리</a></li>
+                <li><a href="/views/mainPage.html">Logout</a></li>
             </ul>
         </nav>
         <section>
@@ -31,13 +62,13 @@
                             <input type="date" id="banner_period_end" pattern="\d*"></td></tr>
                         <tr><td>기타 설명</td><td><textarea id="banner_explain" rows="5" cols="30"></textarea></td></tr>
                         <tr><td>등록 날짜</td><td><input type="date" id="banner_reg_date"></td></tr>
-                        <tr><td colspan="2"><a href="./add_banner_admin.html" onclick="check()">등록하기</a></td></tr>
+                        <tr><td colspan="2"><a class="btn" href="/views/add_banner_admin.html" onclick="check()">등록하기</a></td></tr>
                     </table>
                 </div>    
             </form>
         </section>
-        <footer>
-
+        <footer id="footer">
+            <p>Copyright 2021. 24팀 all rights reserved.</p>
         </footer>
     </body>
 </html>

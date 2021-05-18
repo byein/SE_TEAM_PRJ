@@ -2,20 +2,43 @@
 <html>
     <head>
         <title>product_list</title>
-        <link rel="stylesheet" href="../public/product_list.css" type="text/css">
+        <link rel="stylesheet" href="/public/product_list.css" type="text/css">
     </head>
     <body>
-        <header>
-
+        <header id="header">
+            <div id="head-wrapper">
+                <h1>
+                    <a id="logo" href="/views/mainPage.html" title="로고">로고</a>
+                </h1>
+                <form id="search-form" method="GET">
+                    <input id="search" type="search" placeholder="검색">
+                    <button id="search-btn" class="search">
+                        <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+                    </button>
+                </form>
+                <div class="wrap-user-util">
+                    <button id="login">
+                        <a href="/views/signUp.html">로그인</a>
+                    </button>
+                    <button id="signup-btn">
+                        <a id="goto-signup" href="/views/signUp.html">회원가입</a>
+                    </button>
+                    <button id="bucket">
+                        <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+                    </button>
+                </div>
+            </div>
         </header>
-        <nav class="nav">
-            <ul class="menu">
-                <li><a href="./main_admin.html" class="active">Home</a></li>
-                <li><a href="./banner_list_admin.html">Notice/Event 관리</a></li>
-                <li><a href="./product_list_admin.html" class="current">Product 관리</a></li>
-                <li><a href="./logout_admin.html">Logout</a></li>
-            </ul>
+        <nav id="category">
+            <a class="category-menu" href="/views/product_list.html">상의</a>
+            <a class="category-menu" href="/views/product_list.html">하의</a>
+            <a class="category-menu" href="/views/product_list.html">원피스</a>
+            <a class="category-menu" href="/views/product_list.html">잡화류</a>
+            <a class="category-menu" href="/views/product_list.html">악세서리</a>
         </nav>
+
+
+
         <section>
             <h2>Product list</h2>
             
@@ -25,11 +48,6 @@
                         <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg" alt=""><!--상품사진--></div>
                         <div class="product_name">상품명</div>
                         <div class="product_price">상품가격</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
                     </li>
                     <li class="cell">
                         <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg" alt=""></div>
@@ -133,8 +151,8 @@
         </section>
         
 
-        <footer>
-
+        <footer id="footer">
+            <p>Copyright 2021. 24팀 all rights reserved.</p>
         </footer>
     </body>
 </html>

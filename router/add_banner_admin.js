@@ -11,6 +11,7 @@ function check() {
         return false;
     } else {
         alert("상품이 성공적으로 등록되었습니다.");
+        window.location.href="/views/banner_list_admin.html"
         return true;
     }
 }
