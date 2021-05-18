@@ -80,28 +80,53 @@ app.post('/signUp_create', function(request, response){
 });
 
 app.get('/add_banner_admin', function(request, response){
-        response.render('add_banner_admin');
+        if(request.session.is_logined == true){
+                response.render('add_banner_admin', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }
 });
 
 app.get('/add_product_admin', function(request, response){
-        response.render('add_product_admin');
+        if(request.session.is_logined == true){
+                response.render('add_product_admin', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }
 });
 
 
 app.get('/product_list_admin', function(request, response){
-        response.render('product_list_admin');
+        if(request.session.is_logined == true){
+                response.render('product_list_admin', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }
 });
 
 app.get('/banner_list_admin', function(request, response){
-        response.render('banner_list_admin');
+        if(request.session.is_logined == true){
+                response.render('banner_list_admin', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }
 });
 
 app.get('/banner_detail_admin', function(request, response){
-        response.render('bannner_datail_admin');
+        if(request.session.is_logined == true){
+                response.render('bannner_datail_admin', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }
 });
 
 app.get('/product_list', function(request, response){
-        response.render('/product_list');
+        response.render('product_list');
 });
 
 app.listen(3000, function(){
