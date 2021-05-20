@@ -1,0 +1,301 @@
+.basketdiv {
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+    float: left;
+    font-size: 0.9375em;
+    margin-bottom: 20px;
+}
+    .basketdiv .row.head {
+        border-bottom: 2px solid #888;
+        box-sizing: border-box;
+        background-color: #f4f4f4;
+        font-weight: 500;
+    }
+    .basketdiv .data {
+        border-bottom: 1px dashed #888;
+        box-sizing: border-box;
+        cursor: pointer;
+        float: left;
+        width: 100%;
+    }
+    .basketdiv .data .empty{
+        text-align: center;
+        padding: 12px 0;
+    }
+    .basketdiv .row.head .subdiv {
+        background-color: #f4f4f4;
+    }
+    .basketdiv .row > .subdiv {
+        display: block;
+        float: left;
+    }
+    .basketdiv .row > .subdiv:nth-child(1) {
+        width: 50%;
+    }
+    .basketdiv .row > .subdiv:nth-child(2) {
+        width: 40%;
+    }
+    .basketdiv .row > .subdiv:nth-child(3) {
+        width: 10%;
+    }
+    .basketdiv2 .row > .subdiv:nth-child(1) {
+        width: 60%;
+    }
+    .basketdiv2 .row > .subdiv:nth-child(2) {
+        width: 40%;
+    }
+    .basketdiv .row > div > div {
+        display: block;
+        float: left;
+        text-align: center;
+        margin: 0;
+        padding: 12px 0;
+    }
+    .basketdiv .row.data > div > div {
+        height: 60px;
+        line-height: 60px;
+    }
+        .basketdiv .data .num .updown {
+            color: #0075ff;
+            font-size: 2em;
+            letter-spacing: -5px;
+        }
+        .basketdiv .check {
+            width: 10%;
+        }
+    .basketdiv .check input[type=checkbox] {
+        transform: scale(1.5);
+    }
+    .basketdiv .img{
+        width: 20%;
+    }
+    .basketdiv .pname{
+        width: 70%;
+    }
+    .basketdiv2 .pname {
+        width: 80%;
+    }
+    .basketdiv .basketprice {
+        width: 33%;
+    }
+    .basketdiv .num {
+        width: 33%;
+      min-width: 105px;
+    }
+    .basketdiv .sum {
+        width: 34%;
+      max-width: 80px;
+        color: #0000aa;
+    }
+    .basketdiv .point {
+        width: 50%;
+    }
+    .basketdiv2 .basketprice {
+        width: 25%;
+    }
+
+    .basketdiv2 .num {
+        width: 25%;
+    }
+
+    .basketdiv2 .sum {
+        width: 25%;
+        color: #0000aa;
+    }
+
+    .basketdiv2 .point {
+        width: 25%;
+    }
+    .basketdiv .basketcmd{
+        width: 100%;
+    }
+    .basketdiv .data .pname {
+        text-align: left !important;
+      line-height: 1.2 !important;
+    }
+    .basketdiv .data .price, .basketdiv .data .sum, .basketdiv .data .point {
+        text-align: right;
+    }
+    .baseform > tbody > tr > td:first-child {
+        width: 100px;
+    }
+
+.buttongroup {
+    padding: 11px 0;
+    margin: 50px 0;
+}
+.narrowbuttongroup{
+    margin: 15px 0;
+}
+    .buttongroup.center {
+        text-align: center;
+    }
+    .buttongroup input[type=text], .buttongroup input[type=password] {
+        height: 30px;
+    }
+    .buttongroup button, .buttongroup a {
+        margin-right: 5px;
+    }
+        .buttongroup button:last-child, .buttongroup a:last-child {
+            margin-right: 0;
+        }
+
+    .abutton, .abutton:link, .abutton:visited, .abutton:active, input[type=button] {
+        background-color: #383838;
+        border: 1px solid #888888;
+        color: #ffffff;
+        cursor: pointer;
+        letter-spacing: -1px;
+        padding: 3px 5px;
+        margin: 2px 3px;
+        width: auto;
+        word-break: keep-all;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 0.9375em;
+    }
+
+.abutton-alt {
+    background-color: #d3e2c6;
+}
+
+.red {
+    color:#b00;
+}
+.blue {
+  color: #0075ff;
+}
+.basketrowcmd, .sumcount, .summoney{
+  text-align: right;
+  margin-bottom: 10px;
+}
+.sumcount, .summoney{
+  font-size: 1.25em;
+    font-weight: bold;
+}
+.buttongroup{
+  text-align: center;
+}
+.buttongroup a{
+  text-decoration: none;
+}
+.cmd a, .cmd span {
+    padding: 12px 30px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #000;
+    background-color: #f4f4f4;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+.cmd.small a, .cmd.small span {
+    padding: 6px 20px;
+    font-size: 0.8125em;
+}
+
+.orderform .p_num {
+    text-align: right;
+    width: 40px;
+    font-size: 1em;
+}
+
+
+#header {
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 200px;
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+  }
+
+  #head-wrapper {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+  }
+
+  #logo {
+    position: absolute;
+    left: 10%;
+    text-decoration: none;
+    text-align: center;
+    padding: auto;
+    display: flex;
+    float: left;
+
+
+  }
+
+  #footer {
+  position: absolute;
+  bottom: 0%;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  background-color: aquamarine;
+  padding: 0.1px;
+}
+
+.wrap-user-util {
+  display:inline;
+  position: relative;
+  width: 30%;
+}
+
+.wrap-user-util button {
+  background: none;
+}
+
+#category {
+  position: relative;
+  top: 0px;
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  background-color: lightpink;
+}
+
+.category-menu {
+  display: inline-block;
+  margin: 17px 4.5%;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
+
+#search-form {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  left: 35%;
+  float: left;
+}
+
+#search {
+  display: block;
+  margin: 3px;
+  height: 40px;
+  width: 30%;
+  border-radius: 15px;
+  float: left;
+
+}
+
+#search-btn{
+  border-radius: none;
+  background: none;
+}
+
+#search-btn a {
+  background: none;
+}
+#search-btn a img {
+  width: 35px;
+  height: 35px;  
+}

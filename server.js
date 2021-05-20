@@ -125,6 +125,15 @@ app.get('/banner_detail_admin', function(request, response){
         }
 });
 
+app.get('/basket', function(request, response){
+        if(request.session.is_logined == true){
+                response.render('bannner_datail_admin', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }  
+});
+
 app.get('/product_list', function(request, response){
         response.render('product_list');
 });
