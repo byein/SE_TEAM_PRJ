@@ -1,0 +1,130 @@
+html,
+body {
+  margin: 0;
+  overflow-x: hidden;
+  min-width: 100px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: lightcyan;
+  overflow-x: hidden;
+}
+
+#header {
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 200px;
+  width: 100%;
+  background-color: antiquewhite;
+  display: flex;
+  align-items: center;
+}
+
+body a {
+  text-decoration: none;
+}
+
+#head-wrapper {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+#logo {
+  position: absolute;
+  left: 10%;
+  text-decoration: none;
+  text-align: center;
+  padding: auto;
+  display: flex;
+  float: left;
+}
+
+a {
+  text-decoration: none;
+  color: lightcoral;
+}
+
+h1 {
+  margin: 70px 0;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  margin: 0 10%;
+}
+
+.order-product {
+  background-color: bisque;
+}
+
+.order-list {
+  display: table-row;
+}
+
+.order-product-item-info div {
+  display: inline-block;
+  margin: 0;
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+  height: 100px;
+}
+
+.orderSubject {
+  width: 700px;
+  height: 100px;
+  margin: 0;
+}
+
+.orderQuantity {
+  width: 100px;
+  margin: 0;
+}
+
+.orderPrice {
+  width: 100px;
+  margin: 0;
+}
+
+.dt dd {
+  display: inline-block;
+}
+
+.address-info {
+  background-color: beige;
+  height: 500px;
+}
+
+.orderer-info {
+  margin: 0 10px;
+  padding: 10px;
+  background-color: white;
+}
+
+.address-select-wrap {
+  background-color: white;
+  margin: 0 10px 10px 10px;
+  height: auto;
+}
+
+.confirm-address {
+  margin-left: 10px;
+}
+
+.pay {
+  height: 300px;
+}
+
+.footer {
+  text-align: center;
+}
