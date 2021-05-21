@@ -1,6 +1,3 @@
-html{
-    font-family: "Noto Sans KR", sans-serif;
-}
 body{
     margin: 0;
     padding: 0;
@@ -8,8 +5,8 @@ body{
     width: 100%;
     background-color: lightcyan;
     overflow-x: hidden;
-}
-#header {
+  }
+  #header {
     left: 0;
     top: 0;
     height: 200px;
@@ -21,10 +18,6 @@ body{
   
   body a {
     text-decoration: none;
-  }
-
-  section h2{
-      text-align: center;
   }
   
   section{
@@ -114,65 +107,158 @@ body{
     color: black;
   }
   
-
-
-.nav{
+  
+  
+ 
+  .nav{
     width: 230px;
     height: 70%;
     float: left;
-}
-.section{
-    width: 70%;
-    height: 70%;
-    float: left;
-}
-
-ul.menu{
+  }
+  
+  section h2{
+    text-align: center;
+  }
+  
+  
+  ul.menu{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 100%;
     background-color: #f1f1f1;
-}
-.nav li a{
+  }
+  .nav li a{
     display: block;
     color: #000;
     padding: 8px 16px;
     text-decoration: none;
-}
-.nav li a.active{
+  }
+  .nav li a.active{
     background-color: lightseagreen;
     color: white;
-}
-.nav .menu>li :hover:not(.active){
+  }
+  .nav .menu>li :hover:not(.active){
     background-color: lightpink;
     color: white;
-}
-.nav li a.current{
+  }
+  .nav li a.current{
     background-color: lightcoral;
     color: white;
-}
-th{
+  }
+  th{
     background-color: lightseagreen;
     padding: 30px;
-}
-.btn a{
-    display: block;
-    color: white;
-    float: right;
-    margin: 15px auto;
+  }
+  
+  section, ul, li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  a{
     text-decoration: none;
-    background-color: lightcoral;
-    padding: 10px;
+  }
+  
+  
+
+
+
+
+
+#sales_statistics{
+    height: fit-content;
+    justify-content: center;
+}
+
+#check_order{
+    width: 90%;
+    height: 80%;
+}
+
+#check_order {
+    width: 90%;
+    margin: auto;
+    word-wrap: break-word;
+    table-layout: fixed;
+    position: relative;
+}
+
+#search_period{
+    width: fit-content;
+
+}
+
+#sales_statistics table{
+    margin: 80px auto;
+    text-align: center;
+}
+
+#search_sales_statistics {
+    width: 90%;
+    margin: auto;
+    word-wrap: break-word;
+    color: #666;
+    table-layout: fixed;
+    position: relative;
+}
+
+
+#sales_statistics, #sales_statistics th, #sales_statistics tr, #sales_statistics td{
+    border: 0;
     border-radius: 10px;
 }
-table{
-    padding: auto;
-    margin: auto 10px;
+
+
+
+#sales_statistics th{
+    color: black;
+    padding: 30px;
 }
+
+#sales_statistics td{
+    background-color:snow;
+    padding: 15px;
+    font-weight: bold;
+}
+
+#sales_statistics .table_space td{
+    background-color: lightcyan;
+    height: 30px;
+}
+
+
+#check_order button{
+    border-radius: 5px;
+    background-color: lightcoral;
+    color: white;
+    padding: 10px;
+}
+
+#check_order .sales_date {
+    background-color: coral;
+}
+#check_order .sales_product {
+    background-color:coral;
+}
+#check_order .sales_processing_phase {
+    background-color:coral;
+}
+#check_order .sales_count {
+    background-color: coral;
+}
+#check_order .sales_price {
+    background-color: coral;
+}
+#check_order .sales_processing_btn {
+    background-color: lightcyan;
+}
+
 .outer{
     display: flex;
     justify-content: center;
+    padding-bottom: 30px;
 }
 .pagination {
     display: inline-block;
@@ -186,7 +272,7 @@ table{
 }
 
 .pagination a.active {
-    background-color: lightseagreen;
+    background-color: lightcoral;
     color: white;
   }
   
@@ -194,88 +280,23 @@ table{
     background-color: #ddd;
 }
 
-section, ul, li{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-a{
+div caption a{
+    display: block;
+    color: white;
+    text-align: center;
+    
+    width: 100px;
+    float: right;
+    margin: 15px auto;
     text-decoration: none;
-}
+    background-color: lightcoral;
 
-.cell{
-    float: left;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-}
-.row::after{
-    content: "";
-    display: block;
-    clear: both;
-}
-.img_box>img{
-    display: block;
-    width: 100%;
-}
-section{
-    overflow-x: hidden;
-    padding: 30px;
-}
-.list>ul>li{
-    width: calc(100%/6);
-}
-.list>ul>li{
-    padding: 0 10px;
-}
-.list>ul{
-    margin: 0 -10px;
-}
-.list>ul>li>.product_name{
-    text-align: center;
-    font-weight: bold;
-    font-size: medium;
-}
-.list>ul>li>.product_price{
-    text-align: center;
-    font-weight: bold;
-    font-size:medium;
-}
-.list>ul>li>.product_price::after{
-    content: "원";
-    font-size: medium;
-    font-weight: bold;
-}
-@media(max-width:800px){
-    .list>ul>li{
-        width: calc(100%/5);
-    }
-}
-@media(max-width:650px){
-    .list>ul>li{
-        width: calc(100%/4);
-    }
-}
-@media(max-width:500px){
-    .list>ul>li{
-        width: calc(100%/3);
-    }
-}
-@media(max-width:400px){
-    .list>ul>li{
-        width: calc(100%/2);
-    }
-}
-@media(max-width:300px){
-    .list>ul>li{
-        width: calc(100%/1);
-    }
+    padding: 10px;
+    border-radius: 10px;
 }
 
 
-
-
-#footer {
+  #footer {
     position: relative;
     bottom: 0;
     height: 150px;
@@ -284,4 +305,3 @@ section{
     background-color: aquamarine;
     padding: 0.1px;
   }
-  
