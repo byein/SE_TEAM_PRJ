@@ -10,49 +10,32 @@ const imp = new Iamport({
 });
 */
 
-exports.in = function(request, response){ //alert가 안됨
+// db에서 이름, 전화번호, 우편번호, 이메일 얻어오기
+exports.in = function(request, response){
     var post = request.body;
     db.query(`SELECT * FROM member WHERE mId=?`, [post.userid], function(error, results){
-               if (!results[0]){
-                       if (!admin[0]){
-                               response.send('<script>alert("아이디 또는 비밀번호가 일치하지 않습니다."); window.location.href = `/login`;</script>');
-                       } else {
-                               if(post.userpw != admin[0].aPwd){
-                                       response.send('<script>alert("아이디 또는 비밀번호가 일치하지 않습니다."); window.location.href = `/login`;</script>');
-                               } else {
-                               request.session.is_logined = true;
-                               request.session.name = admin[0].aId;
-                               request.session.pw = admin[0].aPwd;
-                               request.session.save(function(){
-                                       response.render('mainPage_admin', {
-                                               name    : admin[0].aId,
-                                               is_logined      : true
-                                       });
-                               });
-                               response.redirect(`/admin`);
-                               }
-                       }
-               } else if (error){
-                       console.log(error);
-               } else {
+            if ( error ){
+                console.log(error);
+            }
+            else {
                 const mPhone_num = results[0].mPhone_num;
                 const mName = results[0].mPhone_num;
-                       request.session.is_logined = true;
-                       request.session.name = results[0].mName;
-                       request.session.id = results[0].mId;
-                       request.session.pw = results[0].mPwd;
-                       request.session.save(function(){
-                               response.render('mainPage', {
-                                       name    : results[0].mName,
-                                       id      : results[0].mId,
-                                       is_logined      : true
-                               });
-                       });
-                       response.redirect(`/`);
-               }
-       });
-}
+                const mPost_num = results[0].mPost_num;
+                const mEmail = results[0].mEmail;
 
+                request.session.save(function() {
+                    response.render('payment', {
+                        name: mName,
+                        phone_num = mPhone_num,
+                        post_num = mPost_num,
+                        email = mEmail
+                    });
+                });
+            }
+       });
+};
+
+// iamport를 이용해서 결제 진행
 function requestPay() {
     IMP.request_pay({
         pg : 'inicis', // version 1.1.0부터 지원.
@@ -60,11 +43,11 @@ function requestPay() {
         merchant_uid : 'merchant_' + new Date().getTime(),
         name : '단가라 원피스',
         amount : 14000,
-        buyer_email : 'iamport@siot.do',
-        buyer_name : '구매자이름',
-        buyer_tel : '010-1234-5678',
+        buyer_email : mEmail,
+        buyer_name : mName,
+        buyer_tel : mPhone_num,
         buyer_addr : '서울특별시 강남구 삼성동',
-        buyer_postcode : '123-456',
+        buyer_postcode : mPost_num,
         m_redirect_url : 'https://www.yourdomain.com/payments/complete'
     }, function(rsp) {
         if ( rsp.success ) {
@@ -79,12 +62,4 @@ function requestPay() {
         }
         alert(msg);
     });
-}
-
-function success () {
-
-}  
-
-function cancle () {
-
 }

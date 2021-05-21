@@ -42,20 +42,19 @@
                 <h3>주문자 정보</h3>
                 <dl>
                     <dt>주문자</dt>
-                    <dd>이정현</dd>
+                    <dd><%= name %></dd>
                     <dt>이메일</dt>
-                    <dd>seoultech.ac.kr</dd>
+                    <dd><%= email %></dd>
                     <dt>연락처</dt>
-                    <dd>012-345-6789</dd>
+                    <dd><%= phone_num %></dd>
                 </dl>
             </div>
             <div class="address-select-wrap">
                 <h3>배송지</h3>
                 <div class="confirm-address">
-                    <p>이정현</p>
-                    <p>01234</p>
-                    <p>서울특별시 노원구 서울과학기술대학교 미래관 101호</p>
-                    <p>012-345-6789</p>
+                    <p>이름 : </p>
+                    <p>우편번호 : <%= post_num %></p>
+                    <p>주소 : 서울특별시 노원구 서울과학기술대학교 미래관 101호</p>
                 </div>
             </div>
         </div>
