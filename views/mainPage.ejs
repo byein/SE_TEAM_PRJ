@@ -7,7 +7,7 @@
     <title>main</title>
     <link rel="stylesheet" href="/mainPage.css">
     <script type="text/javascript" src="/mainPage.js"></script>
-    <script type="text/javascript" src="/banner_main.js"></script>
+    <script type="text/javascript" src="/main_banner.js"></script>
 </head>
 <body>
     <div id="header">
@@ -49,14 +49,25 @@
     </nav>
 
     <div id="main-container">
-        <div id="main-banner">
-            <div id="banner-img-wrapper">
-                <ul class="rollimgs">
-                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg" alt="1st"></li>
-                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg" alt="2st"></li>
-                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt="3st"></li>
-                </ul>
+        <div class="main-banner">
+            <div class="mySlides fade">
+              <img class="banner-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1615422266317.png">
+              <div class="text">Caption One</div>
             </div>
+            <div class="mySlides fade">
+              <img class="banner-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1552549610052.jpg">
+              <div class="text">Caption Two</div>
+            </div>
+            <div class="mySlides fade">
+              <img class="banner-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg">
+              <div class="text">Caption Three</div>
+            </div>   
+        </div>
+        <br>
+        <div id="dots" style="text-align:center">
+            <span class="dot"></span> 
+            <span class="dot"></span> 
+            <span class="dot"></span> 
         </div>
         <div id="latest-items">
             <h2>최신상품</h2>

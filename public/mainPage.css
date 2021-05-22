@@ -1,9 +1,10 @@
-html, body {
+html,
+body {
   margin: 0;
   overflow-x: hidden;
 }
 
-body{
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -27,7 +28,7 @@ body a {
   text-decoration: none;
 }
 
-section{
+section {
   overflow: hidden;
 }
 
@@ -64,10 +65,9 @@ section{
   width: 30%;
   border-radius: 15px;
   float: left;
-
 }
 
-#search-btn{
+#search-btn {
   border-radius: none;
   background: none;
 }
@@ -77,11 +77,11 @@ section{
 }
 #search-btn a img {
   width: 35px;
-  height: 35px;  
+  height: 35px;
 }
 
 .wrap-user-util {
-  display:inline;
+  display: inline;
   position: relative;
   width: 30%;
 }
@@ -121,7 +121,7 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  height: 800px;
+  height: 1000px;
   /*
   height: 1400px;
   */
@@ -132,7 +132,7 @@ a {
   top: auto;
   left: auto;
   width: 100%;
-  height: 50%;
+  height: 55%;
   /*width: 1600px;
   height: 800px;
   */
@@ -151,7 +151,7 @@ ul {
   /*
   height: 600px;
   */
-  height: 50%;
+  height: 45%;
   background-color: lightgray;
   margin: 0;
   padding: 0.1px;
@@ -169,11 +169,11 @@ ul {
   text-align: center;
 }
 
-.img_box{
+.img_box {
   text-align: center;
 }
 
-#latest-items img{
+#latest-items img {
   width: 60%;
   height: 20%;
 }
@@ -189,64 +189,88 @@ ul {
 }
 
 /* banner css*/
-#banner-img-wrapper {
-  height: 1000px;
-  /*width: 1800px;
-  */
-  width: 100%;
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Verdana, sans-serif;
+}
+.mySlides {
+  display: none;
+}
+img {
+  vertical-align: middle;
+}
+
+/* Slideshow container */
+.main-banner {
+  max-width: 1000px;
   position: relative;
-  /*
-  left: 100px;
-  */
-  top: 0;
-  left: 10%;
-  overflow: hidden;
+  margin: auto;
+  width: 1200px;
+  height: 500px;
 }
 
-.rollimgs {
-  list-style: none;
-  padding: 0;
-  margin: 0 50px;
-}
-
-.roll-img {
-}
-
-.rollimgs li {
-  display: block;
+/* Caption text */
+.text {
+  color: #000000;
+  font-size: 15px;
+  padding: 8px 12px;
   position: absolute;
-  /*
-  width: 800px;
-  */
-  width: 40%;
-  height: 40%;
-  left: 40%;
-}
-.rollimgs li img {
+  bottom: 8px;
   width: 100%;
-  height: 100%;
-}
-.rollimgs li.currentroll {
-  left: 800;
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
-}
-.rollimgs li.prevroll {
-  left: 0px;
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
-}
-.rollimgs.reverse li.prevroll {
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
-}
-.rollimgs li.nextroll {
-  left: -800px;
-  display: block;
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+  text-align: center;
 }
 
-.rollimgs.reverse li.currentroll {
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+.banner-img {
+  width: 100%;
+  height: 500px;
 }
 
-.rollimgs.reverse li.nextroll {
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {
+    font-size: 11px;
+  }
 }
