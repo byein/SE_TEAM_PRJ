@@ -1,7 +1,4 @@
-const db = require('./db');
-
-const IMP = window.IMP; 
-IMP.init("imp15169128"); // 발급받은 "가맹점 식별코드"를 사용
+//const db = require('./db');
 
 /*const Iamport = require('iamport');
 const imp = new Iamport({
@@ -11,7 +8,7 @@ const imp = new Iamport({
 */
 
 // db에서 이름, 전화번호, 우편번호, 이메일 얻어오기
-exports.in = function(request, response){
+/*exports.in = function(request, response){
     var post = request.body;
     db.query(`SELECT * FROM member WHERE mId=?`, [post.userid], function(error, results){
             if ( error ){
@@ -22,32 +19,26 @@ exports.in = function(request, response){
                 const mName = results.mName;
                 const mPost_num = results.mPost_num;
                 const mEmail = results.mEmail;
-
-                request.session.save(function() {
-                    response.render('payment', {
-                        name: mName,
-                        phone_num = mPhone_num,
-                        post_num = mPost_num,
-                        email = mEmail
-                    });
-                });
             }
        });
-};
+};*/
 
 // iamport를 이용해서 결제 진행
 function requestPaywithCard() {
+    const IMP = window.IMP; 
+    IMP.init("imp15169128"); // 발급받은 "가맹점 식별코드"를 사용
+
     IMP.request_pay({
         pg : 'inicis', // version 1.1.0부터 지원.
         pay_method : 'card',
-        merchant_uid : 'merchant_' + new Date().getTime(),
+        merchant_uid : 'merchant_' + new Date().getTime(),      // 주문번호
         name : '단가라 원피스',
         amount : 14000,
-        buyer_email : mEmail,
-        buyer_name : mName,
-        buyer_tel : mPhone_num,
-        buyer_addr : '서울특별시 강남구 삼성동',
-        buyer_postcode : mPost_num,
+        buyer_email : 'dlqjdgus99@naver.com', //mEmail,
+        buyer_name : '이정현', //mName,
+        buyer_tel : '010-2345-6789',//mPhone_num,
+        buyer_addr : '주소',
+        buyer_postcode : '12345',//mPost_num,
         m_redirect_url : 'http://3.36.117.232:3000/views/payment' // 카드결제 완료시 이동할 페이지
     }, function(rsp) {
         if ( rsp.success ) {
