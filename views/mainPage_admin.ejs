@@ -35,11 +35,11 @@
         </div>
     </header>
     <nav id="category">
-        <a class="category-menu" href="/product_list_admin">상의</a>
-            <a class="category-menu" href="/product_list_admin">하의</a>
-            <a class="category-menu" href="/product_list_admin">원피스</a>
-            <a class="category-menu" href="/product_list_admin">잡화류</a>
-            <a class="category-menu" href="/product_list_admin">악세서리</a>
+        <a class="category-menu" href="/category/TOP">상의</a>
+        <a class="category-menu" href="/category/BOTTOM">하의</a>
+        <a class="category-menu" href="/category/DRESS">원피스</a>
+        <a class="category-menu" href="/category/BAG&SOCKS">잡화류</a>
+        <a class="category-menu" href="/category/ACC">악세서리</a>
     </nav>
 
     <nav class="nav">
@@ -63,31 +63,13 @@
         <div id="latest-items">
             <h2>최신상품</h2>
             <ul class="row">
-                <li class="cell">
-                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg" alt=""></div>
-                    <div class="product_name">단가라 ops</div>
-                    <div class="product_price">19800</div>
-                </li>
-                <li class="cell">
-                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg" alt=""></div>
-                    <div class="product_name">단가라 ops</div>
-                    <div class="product_price">19800</div>
-                </li>
-                <li class="cell">
-                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt=""></div>
-                    <div class="product_name">단가라 ops</div>
-                    <div class="product_price">19800</div>
-                </li>
-                <li class="cell">
-                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_04_list.jpg" alt=""></div>
-                    <div class="product_name">단가라 ops</div>
-                    <div class="product_price">19800</div>
-                </li>
-                <li class="cell">
-                    <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_05_list.jpg" alt=""></div>
-                    <div class="product_name">단가라 ops</div>
-                    <div class="product_price">19800</div>
-                </li>
+                <% for(let i=0; i<new_products.length; i++){ %>
+                    <li class="cell">
+                            <div class="img_box"><img src="<%= new_products[i].pImg %>" alt=""><!--상품사진--></div>
+                            <div class="product_name"><a href="/product/<%= new_products[i].pIdx %>"><%= new_products[i].pName %></div>
+                            <div class="product_price"><%= new_products[i].pPrice %></div>
+                    </li>
+                <%} %>
         </div>
     </section>
 

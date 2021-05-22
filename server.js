@@ -35,26 +35,53 @@ app.use(session({
 app.get('/', function(request, response){
         console.log('메인페이지 작동');
         console.log(request.session);
-        if(request.session.is_logined == true){
-                response.render('mainPage', {
-                        is_logined : request.session.is_logined,
-                        name : request.session.name
-                });
-        }else{
-                response.render('mainPage', {
-                        is_logined : false
-                });
-        }
+        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+                if(request.session.is_logined == true){
+                        response.render('mainPage', {
+                                is_logined : request.session.is_logined,
+                                name : request.session.name,
+                                new_products : new_products
+                        });
+                }else{
+                        response.render('mainPage', {
+                                is_logined : false,
+                                new_products : new_products
+                        });
+                }
+        });
+});
+
+app.get('/category/:categoryName', function(request, response){
+        var filteredId = path.parse(request.params.categoryName).base;
+        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=?`, [filteredId], function(error, products){
+                if(error) throw error;
+                else {
+                        response.render('product_list', {
+                                is_logined : request.session.is_logined,
+                                name : request.session.name,
+                                products : products
+                        });
+                }
+        });
 });
 
 app.get('/admin', function(request, response){
         console.log(request.session);
-        if(request.session.is_logined == true){
-                response.render('mainPage_admin', {
-                        is_logined : request.session.is_logined,
-                        name : request.session.name
+        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+                db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                        if(!admin[0]){
+                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        } else {
+                                if(request.session.is_logined == true){
+                                        response.render('mainPage_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name,
+                                                new_products : new_products
+                                        });
+                                }
+                        }
                 });
-        }
+        });
 });
 
 app.get('/login', function(request, response){
@@ -80,49 +107,111 @@ app.post('/signUp_create', function(request, response){
 });
 
 app.get('/add_banner_admin', function(request, response){
-        if(request.session.is_logined == true){
-                response.render('add_banner_admin', {
-                        is_logined : request.session.is_logined,
-                        name : request.session.name
+        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+                db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                        if(!admin[0]){
+                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        } else {
+                                if(request.session.is_logined == true){
+                                        response.render('add_banner_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name
+                                        });
+                                }
+                        }
                 });
-        }
+        });
+        
 });
 
 app.get('/add_product_admin', function(request, response){
-        if(request.session.is_logined == true){
-                response.render('add_product_admin', {
-                        is_logined : request.session.is_logined,
-                        name : request.session.name
+        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+                db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                        if(!admin[0]){
+                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        } else {
+                                if(request.session.is_logined == true){
+                                        response.render('add_product_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name
+                                        });
+                                }
+                        }
                 });
-        }
+        });
 });
 
 
 app.get('/product_list_admin', function(request, response){
-        if(request.session.is_logined == true){
-                response.render('product_list_admin', {
-                        is_logined : request.session.is_logined,
-                        name : request.session.name
+        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+                db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                        if(!admin[0]){
+                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        } else {
+                                db.query(`SELECT * FROM product ORDER BY pDate`, function(error, products){                    
+                                        if(error2) throw error2;
+                                        else {
+                                                response.render('product_list_admin', {
+                                                        is_logined : request.session.is_logined,
+                                                        name : request.session.name,
+                                                        products        : products
+                                                });
+                                        }
+                                });
+                        }
                 });
-        }
+        });
+        
+});
+
+app.get('/product/:productId', function(request, response){
+        var filteredId = path.parse(request.params.productId).base;
+        db.query(`SELECT * FROM product WHERE pIdx=?`, [filteredId], function(error, product){
+                if(error) throw error;
+                else {
+                        response.render('detail_page', {
+                                is_logined : request.session.is_logined,
+                                name : request.session.name,
+                                product : product
+                        });
+                }
+        });
 });
 
 app.get('/banner_list_admin', function(request, response){
-        if(request.session.is_logined == true){
-                response.render('banner_list_admin', {
-                        is_logined : request.session.is_logined,
-                        name : request.session.name
+        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+                db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                        if(!admin[0]){
+                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        } else {
+                                if(request.session.is_logined == true){
+                                        response.render('banner_list_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name
+                                        });
+                                }
+                        }
                 });
-        }
+        });
+        
 });
 
 app.get('/banner_detail_admin', function(request, response){
-        if(request.session.is_logined == true){
-                response.render('bannner_datail_admin', {
-                        is_logined : request.session.is_logined,
-                        name : request.session.name
+        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+                db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                        if(!admin[0]){
+                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        } else {
+                                if(request.session.is_logined == true){
+                                        response.render('bannner_datail_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name
+                                        });
+                                }
+                        }
                 });
-        }
+        });
+        
 });
 
 app.get('/basket', function(request, response){

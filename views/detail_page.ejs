@@ -26,7 +26,7 @@
 
         <div class="wrap-user-util">
             <% if(is_logined == true){ %>
-                <a><%= name %> 관리자</a>
+                <a><%= name %> 님 환영합니다!</a>
                 <button id="logout">
                     <a href="/logout">logout</a>
                 </button>
@@ -41,11 +41,11 @@
 
 </header>
 <nav id="category">
-    <a class="category-menu" href="/product_list">상의</a>
-    <a class="category-menu" href="/product_list">하의</a>
-    <a class="category-menu" href="/product_list">원피스</a>
-    <a class="category-menu" href="/product_list">잡화류</a>
-    <a class="category-menu" href="/product_list">악세서리</a>
+  <a class="category-menu" href="/category/TOP">상의</a>
+  <a class="category-menu" href="/category/BOTTOM">하의</a>
+  <a class="category-menu" href="/category/DRESS">원피스</a>
+  <a class="category-menu" href="/category/BAG&SOCKS">잡화류</a>
+  <a class="category-menu" href="/category/ACC">악세서리</a>
 </nav>
 
 
@@ -55,13 +55,13 @@
       alt="">
     <article id="slide">
       <ul id="slide_box">
-        <li><img src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/img1.png"
+        <li><img src="<%= product[0].pImg %>"
             alt="img1"></li>
-        <li><img src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/img2.png"
+        <li><img src="<%= product[0].pImg %>"
             alt="img2"></li>
-        <li><img src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/img3.png"
+        <li><img src="<%= product[0].pImg %>"
             alt="img3"></li>
-        <li><img src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/img4.png"
+        <li><img src="<%= product[0].pImg %>"
             alt="img4"></li>
       </ul>
     </article>
@@ -70,10 +70,10 @@
   </section>
 
   <section id="product_name">
-    <h3> 스프라이트 티셔츠</h3><br>
-    <h3> 12,900원</h3><br>
+    <h3><%= product[0].pName %></h3><br>
+    <h3><%= product[0].pPrice %></h3><br>
     <form name="form" method="get">
-      수량 선택 : <input type=hidden name="sell_price" value="12900">
+      수량 선택 : <input type=hidden name="sell_price" value="<%= product[0].pPrice %>">
       <input type="text" name="amount" value="1" size="3" onchange="change();">
       <input type="button" value=" - " onclick="del();"><input type="button" value=" + " onclick="add();"><br>
 
@@ -93,7 +93,7 @@
 
     <br><br>
 
-    <h4>상품 상세 설명란 - 스프라이트 티셔츠</h3>
+    <h4><img src="<%= product[0].pDetail %>"></h4>
   </section>
 
   <footer id="footer">

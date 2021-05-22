@@ -55,96 +55,13 @@
             
             <div class="list">
                 <ul class="row">
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg" alt=""><!--상품사진--></div>
-                        <div class="product_name">상품명</div>
-                        <div class="product_price">상품가격</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_04_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_05_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_06_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_07_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_08_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_09_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_10_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_11_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_12_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_13_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_14_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_15_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_16_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_17_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
-                    <li class="cell">
-                        <div class="img_box"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_18_list.jpg" alt=""></div>
-                        <div class="product_name">단가라 ops</div>
-                        <div class="product_price">19800</div>
-                    </li>
+                    <% for(let i=0; i<products.length; i++){ %>
+                        <li class="cell">
+                                <div class="img_box"><img src="<%= products[i].pImg %>" alt=""><!--상품사진--></div>
+                                <div class="product_name"><a href="/product/<%= products[i].pIdx %>"><%= products[i].pName %></div>
+                                <div class="product_price"><%= products[i].pPrice %></div>
+                        </li>
+                    <%} %>
                     <!--상품 수만큼 li 반복-->
                 </ul>
             </div>

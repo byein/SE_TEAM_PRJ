@@ -25,7 +25,7 @@
 
             <div class="wrap-user-util">
                 <% if(is_logined == true){ %>
-                    <a><%= name %> 관리자</a>
+                    <a><%= name %> 님 환영합니다!</a>
                     <button id="logout">
                         <a href="/logout">logout</a>
                     </button>
@@ -40,11 +40,11 @@
     </header>
 
     <nav id="category">
-        <a class="category-menu" href="/product_list">상의</a>
-        <a class="category-menu" href="/product_list">하의</a>
-        <a class="category-menu" href="/product_list">원피스</a>
-        <a class="category-menu" href="/product_list">잡화류</a>
-        <a class="category-menu" href="/product_list">악세서리</a>
+        <a class="category-menu" href="/category/TOP">상의</a>
+        <a class="category-menu" href="/category/BOTTOM">하의</a>
+        <a class="category-menu" href="/category/DRESS">원피스</a>
+        <a class="category-menu" href="/category/BAG&SOCKS">잡화류</a>
+        <a class="category-menu" href="/category/ACC">악세서리</a>
     </nav>
 
 
