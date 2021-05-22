@@ -1,3 +1,4 @@
+const https = require('https')
 var express = require('express');
 var app = express();
 var qs = require('querystring');
@@ -226,6 +227,17 @@ app.get('/basket', function(request, response){
 app.get('/product_list', function(request, response){
         response.render('product_list');
 });
+
+app.get('/payment', function(request, response) {
+        response.render('payment', {
+                is_logined: true,
+                mName : request.session.name,
+                pPrice: request.session.mPrice,
+                pImg: request.session.mImg,
+                pName: request.session.pName
+        })
+})
+
 
 app.listen(3000, function(){
         console.log('3000 port');

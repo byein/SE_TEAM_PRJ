@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/payment.css">
+    <script type="text/javascript" src="/router/payment.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header id="header">
+        <div id="head-wrapper">
+            <h1>
+                <a id="logo" href="/" title="로고">로고</a>
+            </h1>
+        </div>
+    </header>
+    <div class="container">
+        <h1>주문하기</h1>
+        <div class="order-product">
+            <h2>주문 상품</h2>
+            <ul id="order-list">
+                <li class="order-product-item-info">
+                    <img class="orderProductImg" src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg"/>
+                    <div class="orderSubject">단가라원피스</div>
+                    <div class="orderQuantity">1개</div>
+                    <div class="orderPrice">14000원</div>
+                </li>
+                <li class="order-product-item-info">
+                    <img class="orderProductImg" src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg"/>
+                    <div class="orderSubject">단가라원피스</div>
+                    <div class="orderQuantity">2개</div>
+                    <div class="orderPrice">14000원</div>
+                </li>
+            </ul>
+            <div class="sum">
+                합계 : 42000원
+            </div>
+        </div>
+
+        <div class="address-info">
+            <h2>배송 정보</h2>
+            <div class="orderer-info">
+                <h3>주문자 정보</h3>
+                <dl>
+                    <dt>주문자</dt>
+                    <dd><%= mName %></dd>
+                    <dt>이메일</dt>
+                    <dd><%= email %></dd>
+                    <dt>연락처</dt>
+                    <dd><%= phone_num %></dd>
+                </dl>
+            </div>
+            <div class="address-select-wrap">
+                <h3>배송지</h3>
+                <div class="confirm-address">
+                    <p>이름 : <%= mName %></p>
+                    <p>우편번호 : <%= post_num %></p>
+                    <p>주소 : 서울특별시 노원구 서울과학기술대학교 미래관 101호</p>
+                </div>
+            </div>
+        </div>
+        <div class="pay">
+            <h2>결제하기</h2>
+            <button id="pay-with-kakao" class="pay-btn" onclick="requestPaywithKakao()">
+                <a href="#">카카오페이 결제</a>
+            </button>
+            <button id="pay-with-card" class="pay-btn" onclick="requestPaywithCard()">
+                <a href="">카드결제</a>
+            </button>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>Copyright 2021. 24팀 all rights reserved.</p>
+    </footer>
+</body>
+</html>
