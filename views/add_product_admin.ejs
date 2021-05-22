@@ -41,10 +41,11 @@
 
 
         <nav class="nav">
-            <ul class="menu">
+            <ul>
                 <li><a href="/admin" class="active">Home</a></li>
-                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
-                <li><a href="/product_list_admin">Product 관리</a></li>
+                <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin" class="current">Product 관리</a></li>
+                <li><a href="/product_information_admin">Sales Information</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
@@ -53,9 +54,8 @@
             <form action="#" method="POST" enctype="multipart/form-data">
                 <div>
                     <table>
-                        <tr><td>상품 코드</td><td><input type="text" id="pcode" size=6></td></tr>
                         <tr><td>상품 이름</td><td><input type="text" id="pname" maxsize=20></td></tr>
-                        <tr><td>상품 사진</td><td><input type="file" id="pimg" accept="image/*"></td></tr>
+                        <tr><td>상품 사진</td><td><input type="file" multiple id="pimg" accept="image/*"></td></tr>
                         <tr><td>카테고리</td><td>
                             <select name="main_category" id="main_category">
                                 <option value="">전체</option>
@@ -67,7 +67,6 @@
                         <tr><td>상품 가격</td><td><input type="text" id="pprice"></td></tr>
                         <tr><td>상품 수량</td><td><input type="number" id="pcnt" pattern="\d*"></td></tr>
                         <tr><td>상품 설명</td><td><textarea id="pexplain" rows="5" cols="30"></textarea></td></tr>
-                        <tr><td>등록 날짜</td><td><input type="date" id="pregdate"></td></tr>
                         <tr><td colspan="2"><a class="btn" href="/add_product_admin" onclick="check()">등록하기</a></td></tr>
                     </table>
                 </div>

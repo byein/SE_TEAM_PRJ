@@ -44,13 +44,14 @@
 
     <nav class="nav">
         <ul class="menu">
-            <li><a href="/admin" class="active">Home</a></li>
-                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
+            <li><a href="/admin" class="active" class="current">Home</a></li>
+                <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
                 <li><a href="/product_list_admin">Product 관리</a></li>
+                <li><a href="/product_information_admin">Sales Information</a></li>
                 <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
-    <section id="main-container">
+    <section>
         <div id="main-banner">
             <div id="banner-img-wrapper">
                 <ul class="rollimgs">
@@ -60,7 +61,9 @@
                 </ul>
             </div>
         </div>
-        <div id="latest-items">
+    </section>
+    <section id="latest-items">
+        <div>
             <h2>최신상품</h2>
             <ul class="row">
                 <% for(let i=0; i<new_products.length; i++){ %>

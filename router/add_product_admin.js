@@ -1,9 +1,5 @@
 function check() {
-    if (!PRegDateCheck()) {
-        return false;
-    } else if (!PCategoryCheck()) {
-        return false;
-    } else if (!PCodeCheck()) {
+    if (!PCategoryCheck()) {
         return false;
     } else if (!PNameCheck()) {
         return false;
@@ -23,21 +19,6 @@ function check() {
     
 }
 
-function PCodeCheck() {
-    var objpCode = document.getElementById("pcode");
-    var regPCode = /^[A-Z]{2}[0-9]{4}$/;
-
-    if (objpCode.value == "") {
-        alert("상품 코드를 입력해 주세요.");
-        return false;
-    } else if (!regPCode.test(objpCode.value)) {
-        alert("상품코드를 영문 대문자 2자 숫자 4자의 조합으로 만들어주세요. ex)AC1234");
-        objpCode.value == "";
-        return false;
-    } else {
-        return true;
-    }
-}
 function PNameCheck() {
     var objpName = document.getElementById("pname");
 
@@ -118,36 +99,6 @@ function PExplainCheck() {
 
     if (objpExplain.value == "") {
         alert("상품 설명을 입력해 주세요.");
-        return false;
-    } else {
-        return true;
-    }
-}
-function PRegDateCheck() {
-    var objpRegDate = document.getElementById("pregdate");
-
-    objpRegDate = new Date(objpRegDate.value);
-    var year = objpRegDate.getFullYear();
-    var month = objpRegDate.getMonth() + 1;
-    var date = objpRegDate.getDate();
-
-    if (isNaN(year) || isNaN(month) || isNaN(date)) {
-        year = 0;
-        month = 0;
-        date = 0;
-    }
-
-    var today = new Date();
-    var todayYear = today.getFullYear();
-    var todayMonth = today.getMonth() + 1;
-    var todayDate = today.getDate();
-
-    if (year==0&&month==0&date==0) {
-        alert("등록 날짜를 입력해 주세요.");
-        return false;
-    } else if (todayYear != year || todayMonth != month || todayDate != date) {
-        alert("등록 날짜는 오늘만 가능합니다.");
-        objpRegDate.value == "";
         return false;
     } else {
         return true;
