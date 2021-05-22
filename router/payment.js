@@ -1,7 +1,7 @@
 const db = require('./db');
 
-const IMP = window.IMP; // 생략해도 괜찮습니다.
-IMP.init("imp15169128"); // 발급받은 "가맹점 식별코드"를 사용합니다.
+const IMP = window.IMP; 
+IMP.init("imp15169128"); // 발급받은 "가맹점 식별코드"를 사용
 
 /*const Iamport = require('iamport');
 const imp = new Iamport({
@@ -18,10 +18,10 @@ exports.in = function(request, response){
                 console.log(error);
             }
             else {
-                const mPhone_num = results[0].mPhone_num;
-                const mName = results[0].mPhone_num;
-                const mPost_num = results[0].mPost_num;
-                const mEmail = results[0].mEmail;
+                const mPhone_num = results.mPhone_num;
+                const mName = results.mName;
+                const mPost_num = results.mPost_num;
+                const mEmail = results.mEmail;
 
                 request.session.save(function() {
                     response.render('payment', {
@@ -36,7 +36,7 @@ exports.in = function(request, response){
 };
 
 // iamport를 이용해서 결제 진행
-function requestPay() {
+function requestPaywithCard() {
     IMP.request_pay({
         pg : 'inicis', // version 1.1.0부터 지원.
         pay_method : 'card',
@@ -48,7 +48,7 @@ function requestPay() {
         buyer_tel : mPhone_num,
         buyer_addr : '서울특별시 강남구 삼성동',
         buyer_postcode : mPost_num,
-        m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+        m_redirect_url : 'http://3.36.117.232:3000/views/payment' // 카드결제 완료시 이동할 페이지
     }, function(rsp) {
         if ( rsp.success ) {
             var msg = '결제가 완료되었습니다.';
@@ -62,4 +62,8 @@ function requestPay() {
         }
         alert(msg);
     });
+}
+
+function requestPaywithKakao() {
+
 }

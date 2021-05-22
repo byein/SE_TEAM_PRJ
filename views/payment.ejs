@@ -14,7 +14,7 @@
     <header id="header">
         <div id="head-wrapper">
             <h1>
-                <a id="logo" href="/views/mainPage.html" title="로고">로고</a>
+                <a id="logo" href="/" title="로고">로고</a>
             </h1>
         </div>
     </header>
@@ -24,16 +24,21 @@
             <h2>주문 상품</h2>
             <ul id="order-list">
                 <li class="order-product-item-info">
-                    <div class="orderSubject">제목</div>
-                    <div class="orderQuantity">수량</div>
-                    <div class="orderPrice">가격</div>
+                    <img class="orderProductImg" src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg"/>
+                    <div class="orderSubject">단가라원피스</div>
+                    <div class="orderQuantity">1개</div>
+                    <div class="orderPrice">14000원</div>
                 </li>
                 <li class="order-product-item-info">
-                    <div class="orderSubject">제목</div>
-                    <div class="orderQuantity">수량</div>
-                    <div class="orderPrice">가격</div>
+                    <img class="orderProductImg" src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg"/>
+                    <div class="orderSubject">단가라원피스</div>
+                    <div class="orderQuantity">2개</div>
+                    <div class="orderPrice">14000원</div>
                 </li>
             </ul>
+            <div class="sum">
+                합계 : 42000원
+            </div>
         </div>
 
         <div class="address-info">
@@ -42,7 +47,7 @@
                 <h3>주문자 정보</h3>
                 <dl>
                     <dt>주문자</dt>
-                    <dd><%= name %></dd>
+                    <dd><%= mName %></dd>
                     <dt>이메일</dt>
                     <dd><%= email %></dd>
                     <dt>연락처</dt>
@@ -52,7 +57,7 @@
             <div class="address-select-wrap">
                 <h3>배송지</h3>
                 <div class="confirm-address">
-                    <p>이름 : </p>
+                    <p>이름 : <%= mName %></p>
                     <p>우편번호 : <%= post_num %></p>
                     <p>주소 : 서울특별시 노원구 서울과학기술대학교 미래관 101호</p>
                 </div>
@@ -60,8 +65,11 @@
         </div>
         <div class="pay">
             <h2>결제하기</h2>
-            <button class="pay-btn" onclick="requestPay()">
-                <a href="#">결제하기</a>
+            <button id="pay-with-kakao" class="pay-btn" onclick="requestPaywithKakao()">
+                <a href="#">카카오페이 결제</a>
+            </button>
+            <button id="pay-with-card" class="pay-btn" onclick="requestPaywithCard()">
+                <a href="">카드결제</a>
             </button>
         </div>
     </div>
