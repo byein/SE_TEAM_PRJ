@@ -2,52 +2,83 @@
 <html lang="kr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main</title>
-    <link rel="stylesheet" href="../public/mainPage.css">
-    <script type="text/javascript" src="../router/mainPage.js"></script>
-    <script type="text/javascript" src="../router/banner_main.js"></script>
+    <link rel="stylesheet" href="/Users/johwajin/Documents/SW_24/online_shoppingmall/main_page_category/mainPage.css">
+    <script type="text/javascript" src="/Users/johwajin/Documents/SW_24/online_shoppingmall/main_page_category/mainPage.js"></script>
+    <script type="text/javascript" src="/Users/johwajin/Documents/SW_24/online_shoppingmall/main_page_category/banner_main.js"></script>
 </head>
 <body>
-    <div id="header">
+    <header id="header">
         <div id="head-wrapper">
             <h1>
-                <a id="logo" href="./mainPage.html" title="로고">로고</a>
+                <a id="logo" href="/views/mainPage.html" title="로고">로고</a>
             </h1>
             <form id="search-form" method="GET">
                 <input id="search" type="search" placeholder="검색">
                 <button id="search-btn" class="search">
-                    <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/1462/PNG/512/036search_100009.png" alt="검색"></a>
+                    <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
                 </button>
             </form>
             <div class="wrap-user-util">
-                <button id="login">
-                    <a href="signUp.html">로그인</a>
-                </button>
-                <button id="signup-btn">
-                    <a id="goto-signup" href="signUp.html">회원가입</a>
+                <button id="logout">
+                    <a href="/logout">logout</a>
                 </button>
                 <button id="bucket">
-                    <a id="goto-bucket" href="bucket.html">장바구니</a>
+                    <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+                </button>
+                <button id="notice">
+                    <a id="goto-notice" href="#">공지사항</a>
                 </button>
             </div>
         </div>
-    </div>
-    <nav id="category">
-        <a class="category-menu" href="./product_list.html">상의</a>
-        <a class="category-menu" href="./product_list.html">하의</a>
-        <a class="category-menu" href="./product_list.html">원피스</a>
-        <a class="category-menu" href="./product_list.html">잡화류</a>
-        <a class="category-menu" href="./product_list.html">악세서리</a>
-    </nav>
+    </header>
 
-    <div id="main-container">
+    <!-- 카테고리 드롭박스 구현 -->
+    <div class="dropmenu">
+        <ul>
+            <li><a href="/views/product_list.html">상의</a>
+                <ul>
+                    <li><a href="#">반팔</a></li>
+                    <li><a href="#">긴팔</a></li>
+                </ul>
+            </li>
+            <li><a href="/views/product_list.html">하의</a>
+                <ul>
+                    <li><a href="#">반바지</a></li>
+                    <li><a href="#">긴바지</a></li>
+                    <li><a href="#">치마</a></li>
+                </ul>
+            </li>
+            <li><a href="/views/product_list.html">원피스</a>
+                <ul>
+                    <li><a href="#">롱원피스</a></li>
+                    <li><a href="#">숏원피스</a></li>
+                </ul>
+            </li>
+            <li><a href="/views/product_list.html">잡화류</a>
+                <ul>
+                    <li><a href="#">양말</a></li>
+                    <li><a href="#">가방</a></li>
+                </ul>
+            </li>
+            <li><a href="/views/product_list.html">악세사리</a>
+                <ul>
+                    <li><a href="#">목걸이</a></li>
+                    <li><a href="#">귀걸이</a></li>
+                    <li><a href="#">팔찌</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+  
+
+    <section id="main-container">
         <div id="main-banner">
             <div id="banner-img-wrapper">
                 <ul class="rollimgs">
-                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg" alt="1st"></li>
-                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg" alt="2st"></li>
+                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1615422266317.png" alt="1st"></li>
+                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1552549610052.jpg" alt="2st"></li>
                     <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt="3st"></li>
                 </ul>
             </div>
@@ -81,10 +112,11 @@
                     <div class="product_price">19800</div>
                 </li>
         </div>
-    </div>
+    </section>
 
-    <div id="footer">
-        <p>copyright by 24팀</p>
-    </div>
+    <footer id="footer">
+        <p>Copyright 2021. 24팀 all rights reserved.</p>
+    </footer>
 </body>
+
 </html>
