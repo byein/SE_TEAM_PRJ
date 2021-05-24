@@ -48,8 +48,29 @@
     </nav>
 
 
-    <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
+    <form name="orderform" id="orderform" method="post" class="orderform" action="/basket_update">
+        <% if(!basket[0]) { %>
+            <div class="basketdiv" id="basket">
+                <div class="row head">
+                    <div class="subdiv">
+                        <div class="check">선택</div>
+                        <div class="img">이미지</div>
+                        <div class="pname">상품명</div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="basketprice">가격</div>
+                        <div class="num">수량</div>
+                        <div class="sum">합계</div>
+                    </div>
+                    <div class="subdiv">
 
+                        <div class="basketcmd">삭제</div>
+                    </div>
+                    <div class="split"></div>
+                </div>
+            </div>
+        <% } else { %>
+            <input type="hidden" name="userid" value="<%= basket[0].member_id %>" />
             <input type="hidden" name="cmd" value="order">
             <div class="basketdiv" id="basket">
                 <div class="row head">
@@ -69,92 +90,54 @@
                     </div>
                     <div class="split"></div>
                 </div>
-
+            <% for(let i=0; i<basket.length; i++) { %>
                 <div class="row data">
                     <div class="subdiv">
+                        <input type="hidden" name="b_id<%= i %>" value="<%= basket[i].bIdx %>" />
                         <div class="check"><input type="checkbox" name="buy" value="260" checked="">&nbsp;</div>
-                        <div class="img"><img src="./img/basket1.jpg" width="60"></div>
+                        <div class="img"><img src="<%= basket[i].pImg %>" width="60"></div>
                         <div class="pname">
-                            <span>A sample</span>
+                            <span><%= basket[i].pName %></span>
                         </div>
                     </div>
                     <div class="subdiv">
-                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="20000">20,000원</div>
+                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="<%= basket[i].pPrice %>"><%= basket[i].pPrice %>원</div>
                         <div class="num">
                             <div class="updown">
-                                <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="2" onkeyup="javascript:basket.changePNum(1);">
-                                <span onclick="javascript:basket.changePNum(1);"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-                                <span onclick="javascript:basket.changePNum(1);"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+                                <input type="text" name="p_num<%= i %>" id="p_num<%= i %>" size="2" maxlength="4" class="p_num" value="<%= basket[i].bQuantity %>" onkeyup="javascript:basket.changePNum(<%= i %>);">
+                                <span onclick="javascript:basket.changePNum(<%= i %>);"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+                                <span onclick="javascript:basket.changePNum(<%= i %>);"><i class="fas fa-arrow-alt-circle-down down"></i></span>
                             </div>
                         </div>
-                        <div class="sum">40,000원</div>
+                        <% var sum = basket[i].pPrice * basket[i].bQuantity %>
+                        <div class="sum"><%= sum %>원</div>
                     </div>
                     <div class="subdiv">
                         <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
                     </div>
                 </div>
-                <div class="row data">
-                    <div class="subdiv">
-                        <div class="check"><input type="checkbox" name="buy" value="261" checked="">&nbsp;</div>
-                        <div class="img"><img src="./img/basket2.jpg" width="60"></div>
-                        <div class="pname">
-                            <span>B sample</span>
-                        </div>
-                    </div>
-                    <div class="subdiv">
-                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price2" class="p_price" value="19000">19,000원</div>
-                        <div class="num">
-                            <div class="updown">
-                                <input type="text" name="p_num2" id="p_num2" size="2" maxlength="4" class="p_num" value="1" onkeyup="javascript:basket.changePNum(2);">
-                                <span onclick="javascript:basket.changePNum(2);"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-                                <span onclick="javascript:basket.changePNum(2);"><i class="fas fa-arrow-alt-circle-down down"></i></span>
-                            </div>
-                        </div>
-                        <div class="sum">19,000원</div>
-                    </div>
-                    <div class="subdiv">
-                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
-                    </div>
-                </div>
-                <div class="row data">
-                    <div class="subdiv">
-                        <div class="check"><input type="checkbox" name="buy" value="262" checked="">&nbsp;</div>
-                        <div class="img"><img src="./img/basket3.jpg" width="60"></div>
-                        <div class="pname">
-                            <span>C sample</span>
-                        </div>
-                    </div>
-                    <div class="subdiv">
-                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price3" class="p_price" value="15200">15,200원</div>
-                        <div class="num">
-                            <div class="updown">
-                                <input type="text" name="p_num3" id="p_num3" size="2" maxlength="4" class="p_num" value="1" onkeyup="javascript:basket.changePNum(3);">
-                                <span onclick="javascript:basket.changePNum(3);"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-                                <span onclick="javascript:basket.changePNum(3);"><i class="fas fa-arrow-alt-circle-down down"></i></span>
-                            </div>
-                        </div>
-                        <div class="sum">15,200원</div>
-                    </div>
-                    <div class="subdiv">
-                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
-                    </div>
-                </div>
-
+                <% } %>
             </div>
 
             <div class="right-align basketrowcmd">
                 <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
             </div>
-
-            <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 4개</div>
-            <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 74,200원</div>
+            <% var product_sum = 0; var price_num = 0; %>
+            <% for(let i=0; i<basket.length; i++) { %>
+            <% product_sum = product_sum + basket[i].bQuantity %>
+            <% price_num = price_num + basket[i].bQuantity * basket[i].pPrice %>
+            <% } %>
+            <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: <%= product_num %>개</div>
+            <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: <%= price_num %>원</div>
 
             <div id="goorder" class="">
                 <div class="clear"></div>
                 <div class="buttongroup right-align cmd">
                     <a href="/views/payment">결제하기</a>
+                    <input type = "submit" value="장바구니 저장" />
                 </div>
             </div>
+            <% } %>
         </form>
 
     <footer id="footer">

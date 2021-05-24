@@ -16,7 +16,7 @@ function func_confirm() {
 
   } else {
     //
-    return;
+    return false;
   }
 }
 
