@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>상품 상세 관리자페이지</title>
+
+  <link rel="stylesheet" href="/detail_page_admin.css"/>
+
+
+</head>
+
+<body onload="init();">
+
+  <header id="header">
+    <div id="head-wrapper">
+        <h1>
+            <a id="logo" href="/" title="로고">로고</a>
+        </h1>
+
+        <form id="search-form" method="GET">
+          <input id="search" type="search" placeholder="검색">
+          <button id="search-btn" class="search">
+              <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+          </button>
+      </form>
+
+        <div class="wrap-user-util">
+            <% if(is_logined == true){ %>
+                <a><%= name %> 님 환영합니다!</a>
+                <button id="logout">
+                    <a href="/logout">logout</a>
+                </button>
+                <button id="bucket">
+                    <a id="goto-bucket" href="/basket">장바구니</a>
+                </button>
+            <% } %>
+            </button>
+        </div>
+
+    </div>
+
+    </header>
+    <nav id="category">
+        <a class="category-menu" href="/category/TOP">상의</a>
+        <a class="category-menu" href="/category/BOTTOM">하의</a>
+        <a class="category-menu" href="/category/DRESS">원피스</a>
+        <a class="category-menu" href="/category/BAG&SOCKS">잡화류</a>
+        <a class="category-menu" href="/category/ACC">악세서리</a>
+    </nav>
+    <nav class="nav">
+      <ul class="menu">
+          <li><a href="/admin" class="active">Home</a></li>
+              <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
+              <li><a href="/product_list_admin" class="current">Product 관리</a></li>
+              <li><a href="/product_information_admin">Sales Information</a></li>
+              <li><a href="/logout">Logout</a></li>
+      </ul>
+  </nav>
+
+  <section>
+    <nav id="box"> 
+      <div id="wrap_product_img">
+      <img id="left_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
+      alt="">
+      <article id="slide">
+        <ul id="slide_box">
+          <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+          <% if (!product[0].pImg2 == false) { %>
+          <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
+          <% } %>
+          <% if (!product[0].pImg3 == false) { %>
+          <li><img src="<%= product[0].pImg3 %>" alt="img3"></li>
+          <% } %>
+          <% if (!product[0].pImg4 == false) { %>
+          <li><img src="<%= product[0].pImg4 %>" alt="img4"></li>
+          <% } %>
+          <% if (!product[0].pImg5 == false) { %>
+          <li><img src="<%= product[0].pImg5 %>" alt="img4"></li>
+          <% } %>
+        </ul>
+      </article>
+      <img id="right_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
+      alt="">
+      </div>
+   </nav>
+
+    <div id="product_name">
+      <h3><%= product[0].pName %></h3><br>
+      <h3><%= product[0].pPrice %></h3><br>
+      <form name="form" action="/basket_in" method="post" onsubmit="return func_confirm()" />
+        수량 선택 : <input type=hidden name="sell_price" value="<%= product[0].pPrice %>">
+        <input type="text" name="amount" value="1" size="3" onchange="change();">
+        <input type="button" value=" - " onclick="del();"><input type="button" value=" + " onclick="add();"><br>
+
+        금액 : <input type="text" name="sum" size="11" readonly>원
+      </form>
+
+      <br>
+
+      <input type="button" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/>
+    
+      <br>  
+      <input type = "hidden" name="userid" value="<%= ID %>" />
+      <input type = "hidden" name="productid" value="<%= product[0].pIdx %>" />
+      <input type="submit" value="장바구니추가" style="width: 200px; height: 150px; font-size:2em;" />
+    </form>
+
+    
+    <br>
+    <input type="button" value="구매하기" style="width: 200px; height: 150px; font-size:2em;" />
+
+    <br><br>
+  </div>
+  <h4><img src="<%= product[0].pDetail %>"></h4>
+    <table class="product_detail_btn">
+      <tr class="btn">
+        <td class="modify"><a href="/add_product_admin">수정</a></td>
+        <td class="delete"><a href="javascript:void(0);" onclick="delete_check()">삭제</a></td>
+      </tr>
+    </table>
+  </section>
+
+    <footer id="footer">
+        <p>Copyright 2021. 24팀 all rights reserved.</p>
+    </footer>
+
+    <script type="text/javascript" src="/detail_page_admin.js"></script>
+
+</body>
+
+</html>
