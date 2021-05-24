@@ -122,9 +122,9 @@
             <div class="right-align basketrowcmd">
                 <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
             </div>
-            <% var product_sum = 0; var price_num = 0; %>
+            <% var product_num = 0; var price_num = 0; %>
             <% for(let i=0; i<basket.length; i++) { %>
-            <% product_sum = product_sum + basket[i].bQuantity %>
+            <% product_num = product_num + basket[i].bQuantity %>
             <% price_num = price_num + basket[i].bQuantity * basket[i].pPrice %>
             <% } %>
             <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: <%= product_num %>개</div>
