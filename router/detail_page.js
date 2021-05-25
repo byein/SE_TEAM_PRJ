@@ -12,7 +12,7 @@ var amount;
 function func_confirm() {
   if(confirm("장바구니에 담으시겠습니까?") == true) {
     // 확인
-    alert("장바구니 담기 성공!")
+    return true;
 
   } else {
     //

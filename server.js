@@ -221,14 +221,14 @@ app.get('/product_admin/:productId', function(request, response){
                 if(error) throw error;
                 else {
                         if(request.session.is_logined == true){
-                                response.render('detail_page', {
+                                response.render('detail_page_admin', {
                                         is_logined : request.session.is_logined,
                                         name : request.session.name,
                                         ID : request.session.name,
                                         product : product
                                 });
                         } else {
-                                response.render('detail_page', {
+                                response.render('detail_page_admin', {
                                         is_logined : request.session.is_logined,
                                         ID : false,
                                         product : product
@@ -282,9 +282,13 @@ app.get('/basket', function(request, response){
 
 app.post('/basket_in', function(request, response){
         var post = request.body;
-        db.query(`INSERT INTO basket (member_id, product_id, bQuantity) VALUES (?, ?, ?)`, [post.userid, post.productid, post.amount], function(error, result){
-                response.redirect('/basket');
-        })     
+        if(post.userid=='false'){
+                response.send('<script>alert("로그인이 필요합니다."); window.location.href = `/login` ; </script>');
+        } else {
+                db.query(`INSERT INTO basket (member_id, product_id, bQuantity) VALUES (?,?,?)`, [post.userid, post.productid, post.amount], function(error, result){
+                        response.redirect('/basket');
+                });
+        }     
 });
 
 app.post('/basket_update', function(request, response){
