@@ -1,3 +1,12 @@
+function delete_check(){
+  if(confirm("해당 상품을 정말 삭제하시겠습니까?")){
+      //확인 버튼 클릭 시 이벤트
+      alert("삭제되었습니다.");
+      return true;
+  }
+  return false;
+}
+
 {/* <script type="text/javascript"> */}
 var slide = document.getElementById('slide_box');
 var slide_bt_L = document.getElementById('left_bt');
@@ -12,13 +21,14 @@ var amount;
 function func_confirm() {
   if(confirm("장바구니에 담으시겠습니까?") == true) {
     // 확인
-    return true;
+    alert("장바구니 담기 성공!")
 
   } else {
     //
-    return false;
+    return;
   }
 }
+
 
 function init() {
   sell_price = document.form.sell_price.value;
@@ -105,3 +115,5 @@ function S_ani_L() {
 }
 
 {/* </script> */}
+
+

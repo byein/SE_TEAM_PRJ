@@ -27,7 +27,6 @@ body {
   display: flex;
   align-items: center;
 }
-
 body a {
   text-decoration: none;
 }
@@ -103,29 +102,106 @@ a {
   text-decoration: none;
 }
 
-#category {
-  position: relative;
-  top: 0px;
-  width: 100%;
-  height: fit-content;
-  text-align: center;
-  background-color: lightpink;
+/*카테고리 드롭다운 코드 */
+
+.dropmenu {
+  border: none;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  font: "sans-serif";
+  font-size: 20px;
 }
 
-.category-menu {
-  display: inline-block;
-  margin: 17px 4.5%;
-  text-decoration: none;
-  font-size: 20px;
-  color: black;
+.dropmenu ul {
+  background: lightpink;
+  height: 100px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
 }
+
+.dropmenu li {
+  /* float: left; */
+  margin-right: 50px;
+  padding: 0px;
+  display: inline-block;
+}
+
+.dropmenu li a {
+  background: lightpink;
+  color: #000000;
+  display: block;
+  line-height: 100px;
+  margin: 0px;
+  padding: 0px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.dropmenu li a:hover,
+.dropmenu ul li:hover a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dropmenu li ul {
+  background: lightpink;
+  display: none;
+  height: auto;
+  border: 0px;
+  position: absolute;
+  width: 200px;
+  z-index: 200;
+}
+
+.dropmenu li:hover ul {
+  display: block;
+}
+
+.dropmenu li li {
+  background: lightpink;
+  display: block;
+  float: center;
+  margin: 0px;
+  padding: 0px;
+  width: 200px;
+}
+
+.dropmenu li:hover li a {
+  background: none;
+}
+
+.dropmenu li ul a {
+  display: block;
+  height: 80px;
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px 10px 0px 15px;
+  text-align: left;
+}
+
+.dropmenu li ul a:hover,
+.dropmenu li ul li:hover a {
+  background: lightslategray;
+  border: 0px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dropmenu p {
+  clear: left;
+}
+/*카테고리 드롭다운 끝*/
 
 #main-container {
   position: relative;
   top: 0;
   left: 0;
   width: 100%;
-  height: 1000px;
+  height: 800px;
   /*
   height: 1400px;
   */
@@ -141,7 +217,7 @@ ul {
   /*
   height: 600px;
   */
-  height: 45%;
+  height: 50%;
   background-color: lightgray;
   margin: 0;
   padding: 0.1px;
@@ -179,7 +255,6 @@ ul {
 }
 
 /* banner css*/
-
 .mySlides {
   display: none;
 }
@@ -203,6 +278,13 @@ img {
   width: 100%;
   height: 500px;
 }
+
+/* 배너 btn 추가할 수도 있음
+.banner-roll-btn img { 
+  width: 50px;
+  height: 50px;
+}
+*/
 
 /* The dots/bullets/indicators */
 #dot {
