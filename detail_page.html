@@ -5,6 +5,7 @@
   <title>상품 상세페이지</title>
 
   <link rel="stylesheet" href="detail_page.css"/>
+  <link rel="stylesheet" href="delivery_address2.css"/>
 
 
 </head>
@@ -31,37 +32,69 @@
             <button id="bucket">
                 <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
             </button>
+            <button id="notice">
+              <a id="goto-notice" href="#">공지사항</a>
+          </button>
         </div>
 
     </div>
     
 </header>
-<nav id="category">
-  <a class="category-menu" href="/views/product_list.html">상의</a>
-  <a class="category-menu" href="/views/product_list.html">하의</a>
-  <a class="category-menu" href="/views/product_list.html">원피스</a>
-  <a class="category-menu" href="/views/product_list.html">잡화류</a>
-  <a class="category-menu" href="/views/product_list.html">악세서리</a>
-</nav>
+ <!-- 카테고리 드롭박스 구현 -->
+ <div class="dropmenu">
+  <ul>
+      <li><a href="/views/product_list.html">상의</a>
+          <ul>
+              <li><a href="#">반팔</a></li>
+              <li><a href="#">긴팔</a></li>
+          </ul>
+      </li>
+      <li><a href="/views/product_list.html">하의</a>
+          <ul>
+              <li><a href="#">반바지</a></li>
+              <li><a href="#">긴바지</a></li>
+              <li><a href="#">치마</a></li>
+          </ul>
+      </li>
+      <li><a href="/views/product_list.html">원피스</a>
+          <ul>
+              <li><a href="#">롱원피스</a></li>
+              <li><a href="#">숏원피스</a></li>
+          </ul>
+      </li>
+      <li><a href="/views/product_list.html">잡화류</a>
+          <ul>
+              <li><a href="#">양말</a></li>
+              <li><a href="#">가방</a></li>
+          </ul>
+      </li>
+      <li><a href="/views/product_list.html">악세사리</a>
+          <ul>
+              <li><a href="#">목걸이</a></li>
+              <li><a href="#">귀걸이</a></li>
+              <li><a href="#">팔찌</a></li>
+          </ul>
+      </li>
+  </ul>
+</div>
 
 
   <section>
-    <nav id="box"> </nav>
-    <img id="left_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
+    <img id="left_bt" src="/Users/johwajin/Documents/SW_24/online_shoppingmall/detail_product_page/image/next2.png"
       alt="">
     <article id="slide">
       <ul id="slide_box">
-        <li><img src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/img1.png"
+        <li><img src="/Users/johwajin/Documents/SW_24/online_shoppingmall/detail_product_page/image/img1.png"
             alt="img1"></li>
-        <li><img src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/img2.png"
+        <li><img src="/Users/johwajin/Documents/SW_24/online_shoppingmall/detail_product_page/image/img2.png"
             alt="img2"></li>
-        <li><img src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/img3.png"
+        <li><img src="/Users/johwajin/Documents/SW_24/online_shoppingmall/detail_product_page/image/img3.png"
             alt="img3"></li>
-        <li><img src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/img4.png"
+        <li><img src="/Users/johwajin/Documents/SW_24/online_shoppingmall/detail_product_page/image/img4.png"
             alt="img4"></li>
       </ul>
     </article>
-    <img id="right_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next.png"
+    <img id="right_bt" src="/Users/johwajin/Documents/SW_24/online_shoppingmall/detail_product_page/image/next.png"
       alt="">
   </section>
 
@@ -78,7 +111,17 @@
 
     <br>
 
-    <input type="button" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/>
+    <input type="button" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;" onclick="location.href='/Users/johwajin/Documents/SW_24/online_shoppingmall/detail_product_page/delivery_address2.html'"/>
+    
+    <br>
+    
+    <input type="text" id="sample4_postcode" placeholder="우편번호">
+    <!-- <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br> -->
+    <input type="text" id="sample4_roadAddress" placeholder="도로명주소"><br> 
+    <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+    <span id="guide" style="color:#999;display:none"></span>
+    <input type="text" id="sample4_detailAddress" placeholder="상세주소">
+    <input type="text" id="sample4_extraAddress" placeholder="참고항목">
 
     <br>
 
