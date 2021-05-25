@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>update_product_admin</title>
+        <link rel="stylesheet" href="/add_product_admin.css" type="text/css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script src="/add_product_admin.js"></script>
+    </head>
+    <body>
+        <header id="header">
+            <div id="head-wrapper">
+                <h1>
+                    <a id="logo" href="/admin" title="로고">로고</a>
+                </h1>
+                <form id="search-form" method="GET">
+                    <input id="search" type="search" placeholder="검색">
+                    <button id="search-btn" class="search">
+                        <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+                    </button>
+                </form>
+                <div class="wrap-user-util">
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/basket">장바구니</a>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </header>
+        <nav id="category">
+            <a class="category-menu" href="/product_list_admin">상의</a>
+            <a class="category-menu" href="/product_list_admin">하의</a>
+            <a class="category-menu" href="/product_list_admin">원피스</a>
+            <a class="category-menu" href="/product_list_admin">잡화류</a>
+            <a class="category-menu" href="/product_list_admin">악세서리</a>
+        </nav>
+
+
+        <nav class="nav">
+            <ul>
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin" class="current">Product 관리</a></li>
+                <li><a href="/product_information_admin">Sales Information</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <section>
+            <h2>Update Product</h2>
+            <form action="/update_product_admin_in" method="post" onsubmit="return check()" enctype="multipart/form-data">
+                <div>
+                    <table>
+                            <input type="hidden" name="pIdx" value="<%= product[0].pIdx %>" />
+                            <tr><td>상품 이름</td><td><input type="text" name="pname" id="pname"  value="<%= product[0].pName %>" placeholder="<%= product[0].pName %>"maxsize=20></td></tr>
+                        <tr><td>상품 사진</td><td><input type="file" multiple name="pimg" multiple id="pimg" accept="image/*"></td></tr>
+                        <tr><td>카테고리</td><td>
+                            <select name="main_category" id="main_category">
+                                    <option value="">전체</option>
+                            </select>
+                            <select name="sub_category" id="sub_category">
+                                    <option value="">전체</option>
+                                <% console.log(product); %>
+                            </select>
+                        </td></tr>
+                        <tr><td>상품 가격</td><td><input type="text" name="pprice" id="pprice" value="<%= product[0].pPrice %>" placeholder="<%= product[0].pPrice %>"></td></tr>
+                        <tr><td>상품 수량</td><td><input type="number" name="pquantity" id="pcnt" pattern="\d*" value="<%= product[0].sQuantity %>" placeholder="<%= product[0].sQuantity %>"></td></tr>
+                        <tr><td>상품 설명</td><td><input type="file" multiple name="pdetail" multiple id="pexplain" accept="image/*" ></td></tr>
+                        <tr><td colspan="2"><input type="submit" value="수정하기" class="btn"></td></tr>
+                    </table>
+                </div>
+
+            </form>
+        </section>
+        <footer id="footer">
+            <p>Copyright 2021. 24팀 all rights reserved.</p>
+        </footer>
+    </body>
+</html>
