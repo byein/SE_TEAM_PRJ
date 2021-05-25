@@ -48,7 +48,7 @@ var upload = multer({
 app.get('/', function(request, response){
         console.log('메인페이지 작동');
         console.log(request.session);
-        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+        db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                 if(request.session.is_logined == true){
                         response.render('mainPage', {
                                 is_logined : request.session.is_logined,
@@ -66,7 +66,7 @@ app.get('/', function(request, response){
 
 app.get('/category/:categoryName', function(request, response){
         var filteredId = path.parse(request.params.categoryName).base;
-        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=?`, [filteredId], function(error, products){
+        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=? WHERE pDelete=0 ORDER BY p.pDate DESC;`, [filteredId], function(error, products){
                 if(error) throw error;
                 else {
                         if(request.session.is_logined == true){
@@ -88,7 +88,7 @@ app.get('/category/:categoryName', function(request, response){
 
 app.get('/admin', function(request, response){
         console.log(request.session);
-        db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
+        db.query(`SELECT * FROM productWHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                 db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                         if(!admin[0]){
                                 response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
@@ -173,12 +173,56 @@ app.post('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdet
         });
 });
 
+app.get('/update_product_admin/:productId', function(request, response){
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                } else {
+                        var filteredId = path.parse(request.params.productId).base;
+                        db.query(`SELECT * FROM product p, stock s WHERE p.pIdx=s.product_id and p.pIdx=?`, [filteredId], function(error, product){
+                                if(request.session.is_logined == true){
+                                        response.render('update_product_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name,
+                                                product : product
+                                        });
+                                }
+                        });
+                }
+        });
+});
+
+app.post('/update_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
+        var body = request.body;
+        var file = request.files;
+        var img = new Array();
+        for(var i=0; i<file['pimg'].length; i++){
+                img[i] = '/uploads/'+`${file['pimg'][i].filename}`;
+        }
+        var detail = '/uploads/' + `${file['pdetail'][0].filename}`;
+
+        db.query(`UPDATE product SET category_id=?, pName=?, pPrice=?, pImg=?, pImg2=?, pImg3=?, pImg4=?, pImg5=?, pDetail=? WHERE pIdx=?`, [body.sub_category, body.pname, body.pprice, img[0], img[1], img[2], img[3], img[4], detail, body.pIdx], function(error2, result){
+                db.query(`UPDATE stock SET sQuantity=? WHERE product_id=?`, [body.pquantity, body.pIdx], function(error3, results){
+                response.redirect(`/product_admin/${body.pIdx}`);
+                });
+        });
+});
+
+app.get('/delete_product_admin/:productId', function(request, response){
+        var filteredId = path.parse(request.params.productId).base;
+        db.query(`SELECT * FROM product p, stock s WHERE p.pIdx=s.product_id and p.pIdx=?`, [filteredId], function(error, product){
+                db.query(`UPDATE product SET pDelete=? WHERE pIdx=?`, [1, filteredId], function(error, result){
+                        response.redirect(`/product_list_admin`);
+                });
+        });
+});
+
 app.get('/product_list_admin', function(request, response){
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
                         response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
                 } else {
-                        db.query(`SELECT * FROM product ORDER BY pDate`, function(error, products){                    
+                        db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC;`, function(error, products){                    
                                 if(error2) throw error2;
                                 else {
                                         response.render('product_list_admin', {

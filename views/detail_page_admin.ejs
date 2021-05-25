@@ -114,8 +114,8 @@
   <h4><img src="<%= product[0].pDetail %>"></h4>
     <table class="product_detail_btn">
       <tr class="btn">
-        <td class="modify"><a href="/add_product_admin">수정</a></td>
-        <td class="delete"><a href="javascript:void(0);" onclick="delete_check()">삭제</a></td>
+        <td class="modify"><a href="/update_product_admin/<%= product[0].pIdx %>">수정</a></td>
+        <td class="delete"><a href="/delete_product_admin/<%= product[0].pIdx %>;" onclick="delete_check()">삭제</a></td>
       </tr>
     </table>
   </section>
