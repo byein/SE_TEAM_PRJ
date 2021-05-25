@@ -47,7 +47,11 @@
 
 
         <section>
-            <h2>Product list</h2>
+            <h2><%= products[0].main_name %>
+                        <% if(!sub) { }else { %>
+                        <h2><%=sub %></h2>
+                <% } %>
+            </h2>
             
             <div class="list">
                 <ul class="row">
