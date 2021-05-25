@@ -63,16 +63,16 @@ li {
   margin: 0 10%;
 }
 
-.order-product {
+.order-product-container {
   background-color: bisque;
 }
 
-.order-list {
+#order-ul {
   float: left;
   margin-bottom: 10px;
 }
 
-.order-product-item-info div {
+#product-info-to-order div {
   display: inline-block;
   margin: 0;
   border: black;
@@ -81,25 +81,29 @@ li {
   height: 100px;
 }
 
-.orderProductImg {
+.product-info-to-order {
+  text-align: center;
+}
+
+#orderProductImg {
   width: 80px;
   height: 100px;
   margin: 0;
   float: left;
 }
 
-.orderSubject {
+#orderSubject {
   width: 700px;
   height: 100px;
   margin: 0;
 }
 
-.orderQuantity {
+#orderQuantity {
   width: 100px;
   margin: 0;
 }
 
-.orderPrice {
+#orderPrice {
   width: 100px;
   margin: 0;
 }
