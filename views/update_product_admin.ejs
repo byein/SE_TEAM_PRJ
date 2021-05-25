@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>product_list_admin</title>
-        <link rel="stylesheet" href="/product_list_admin.css" type="text/css">
+        <title>update_product_admin</title>
+        <link rel="stylesheet" href="/add_product_admin.css" type="text/css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script src="/add_product_admin.js"></script>
     </head>
     <body>
         <header id="header">
@@ -38,9 +40,8 @@
         </nav>
 
 
-
         <nav class="nav">
-            <ul class="menu">
+            <ul>
                 <li><a href="/admin" class="active">Home</a></li>
                 <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
                 <li><a href="/product_list_admin" class="current">Product 관리</a></li>
@@ -48,38 +49,32 @@
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
-        <div class="btn">
-            <a href="/add_product_admin">상품 등록</a>
-        </div>
         <section>
-            <h2>Product list</h2>
-            
-            <div class="list">
-                <ul class="row">
-                    <% for(let i=0; i<products.length; i++){ %>
-                        <li class="cell">
-                                <div class="img_box"><img src="<%= products[i].pImg %>" alt=""><!--상품사진--></div>
-                                <div class="product_name"><a href="/product_admin/<%= products[i].pIdx %>"><%= products[i].pName %></div>
-                                <div class="product_price"><%= products[i].pPrice %></div>
-                        </li>
-                    <%} %>
-                    <!--상품 수만큼 li 반복-->
-                </ul>
-            </div>
-            <div class="outer">
-                <div class="pagination">
-                    <a href="#">&laquo;</a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">&raquo;</a>
+            <h2>Update Product</h2>
+            <form action="/update_product_admin_in" method="post" onsubmit="return check()" enctype="multipart/form-data">
+                <div>
+                    <table>
+                            <input type="hidden" name="pIdx" value="<%= product[0].pIdx %>" />
+                            <tr><td>상품 이름</td><td><input type="text" name="pname" id="pname"  value="<%= product[0].pName %>" placeholder="<%= product[0].pName %>"maxsize=20></td></tr>
+                        <tr><td>상품 사진</td><td><input type="file" multiple name="pimg" multiple id="pimg" accept="image/*"></td></tr>
+                        <tr><td>카테고리</td><td>
+                            <select name="main_category" id="main_category">
+                                    <option value="">전체</option>
+                            </select>
+                            <select name="sub_category" id="sub_category">
+                                    <option value="">전체</option>
+                                <% console.log(product); %>
+                            </select>
+                        </td></tr>
+                        <tr><td>상품 가격</td><td><input type="text" name="pprice" id="pprice" value="<%= product[0].pPrice %>" placeholder="<%= product[0].pPrice %>"></td></tr>
+                        <tr><td>상품 수량</td><td><input type="number" name="pquantity" id="pcnt" pattern="\d*" value="<%= product[0].sQuantity %>" placeholder="<%= product[0].sQuantity %>"></td></tr>
+                        <tr><td>상품 설명</td><td><input type="file" multiple name="pdetail" multiple id="pexplain" accept="image/*" ></td></tr>
+                        <tr><td colspan="2"><input type="submit" value="수정하기" class="btn"></td></tr>
+                    </table>
                 </div>
-            </div>
-            
+
+            </form>
         </section>
-        
         <footer id="footer">
             <p>Copyright 2021. 24팀 all rights reserved.</p>
         </footer>

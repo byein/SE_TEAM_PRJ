@@ -31,13 +31,13 @@ exports.in = function(request, response){ //alert가 안됨
                         } else {
                                 request.session.is_logined = true;
                                 request.session.name = results[0].mName;
-                                request.session.id = results[0].mId;
+                                request.session.ID = results[0].mId;
                                 request.session.pw = results[0].mPwd;
 
                                 request.session.save(function(){
                                         response.render('mainPage', {
                                                 name    : results[0].mName,
-                                                id      : results[0].mId,
+                                                ID     : results[0].mId,
                                                 is_logined      : true
                                         });
                                 });
