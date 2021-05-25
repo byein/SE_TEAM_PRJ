@@ -3,7 +3,11 @@ html, body {
   overflow-x: hidden;
 }
 
-body{
+* {
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -191,9 +195,6 @@ a {
   }
 /*카테고리 드롭다운 끝*/
 
-
-
-
 #main-container {
   position: relative;
   top: 0;
@@ -205,19 +206,6 @@ a {
   */
 }
 
-#main-banner {
-  position: relative;
-  top: auto;
-  left: auto;
-  width: 100%;
-  height: 50%;
-  /*width: 1600px;
-  height: 800px;
-  */
-  text-align: center;
-  overflow: hidden;
-  margin: 0;
-}
 ul {
   list-style: none;
 }
@@ -266,60 +254,76 @@ ul {
 }
 
 /* banner css*/
-#banner-img-wrapper {
-  height: 1000px;
-  /*width: 1800px;
-  */
-  width: 100%;
-  position: relative;
-  /*
-  left: 100px;
-  */
-  top: 0;
-  left: 10%;
-  overflow: hidden;
+.mySlides {
+  display: none;
+}
+img {
+  vertical-align: middle;
 }
 
-.rollimgs {
-  list-style: none;
-  padding: 0;
-  margin: 0 50px;
+/* Slideshow container */
+.main-banner {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
 }
-.roll-img {
-}
-.rollimgs li {
-  display: block;
-  position: absolute;
-  /*
-  width: 800px;
-  */
-  width: 40%;
-  height: 40%;
-  left: 40%;
-}
-.rollimgs li img {
+.banner-img {
   width: 100%;
-  height: 100%;
+  height: 500px;
 }
-.rollimgs li.currentroll {
-  left: 800;
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+
+/* 배너 btn 추가할 수도 있음
+.banner-roll-btn img { 
+  width: 50px;
+  height: 50px;
 }
-.rollimgs li.prevroll {
-  left: 0px;
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+*/
+
+/* The dots/bullets/indicators */
+#dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: #bbb 0.6s ease;
 }
-.rollimgs.reverse li.prevroll {
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+
+.active {
+  background-color: #717171;
 }
-.rollimgs li.nextroll {
-  left: -800px;
-  display: block;
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
 }
-.rollimgs.reverse li.currentroll {
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.rollimgs.reverse li.nextroll {
-  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {
+    font-size: 11px;
+  }
+}
+

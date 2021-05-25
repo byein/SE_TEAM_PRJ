@@ -7,7 +7,7 @@
     <title>main</title>
     <link rel="stylesheet" href="/mainPage.css">
     <script type="text/javascript" src="/mainPage.js"></script>
-    <script type="text/javascript" src="/main_banner.js"></script>
+    <script defer type="text/javascript" src="/main_banner.js"></script>
 </head>
 <body>
     <header id="header">
@@ -79,16 +79,22 @@
             </li>
         </ul>
     </div>
-    
+
+    <nav id="category">
+        <a class="category-menu" href="/category/TOP">상의</a>
+        <a class="category-menu" href="/category/BOTTOM">하의</a>
+        <a class="category-menu" href="/category/DRESS">원피스</a>
+        <a class="category-menu" href="/category/BAG&SOCKS">잡화류</a>
+        <a class="category-menu" href="/category/ACC">악세서리</a>
+    </nav>
+
     <section id="main-container">
-        <div id="main-banner">
-            <div id="banner-img-wrapper">
-                <ul class="rollimgs">
-                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1615422266317.png" alt="1st"></li>
-                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1552549610052.jpg" alt="2st"></li>
-                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt="3st"></li>
-                </ul>
-            </div>   
+        <div class="main-banner">
+            <% for(let i=0; i<banner_imgs.length; i++){ %>
+            <div class="mySlides fade">
+                <img class="banner-img" src="<%= banner_imgs[i] %>">
+            </div>
+            <%} %>
         </div>
         <br>
         <div id="dots" style="text-align:center">
@@ -97,15 +103,15 @@
             <span class="dot"></span> 
         </div>
         <div id="latest-items">
-            <h2>최신상품</h2>
-            <ul class="row">
+           <h2>최신상품</h2>
+           <ul class="row">
                 <% for(let i=0; i<new_products.length; i++){ %>
                     <li class="cell">
                             <div class="img_box"><img src="<%= new_products[i].pImg %>" alt=""><!--상품사진--></div>
                             <div class="product_name"><a href="/product/<%= new_products[i].pIdx %>"><%= new_products[i].pName %></div>
                             <div class="product_price"><%= new_products[i].pPrice %></div>
                     </li>
-                <%} %>
+               <%} %>
         </div>
     </section>
 
