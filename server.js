@@ -66,22 +66,47 @@ app.get('/', function(request, response){
 
 app.get('/category/:categoryName', function(request, response){
         var filteredId = path.parse(request.params.categoryName).base;
-        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=? WHERE pDelete=0 ORDER BY p.pDate DESC;`, [filteredId], function(error, products){
+        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=? and p.pDelete=0 ORDER BY p.pDate DESC;`, [filteredId], function(error, products){
                 if(error) throw error;
                 else {
                         if(request.session.is_logined == true){
                                 response.render('product_list', {
                                         is_logined : request.session.is_logined,
                                         name : request.session.name,
-                                        products : products
+                                        products : products,
+                                        sub : false
                                 });
                         } else {
                                 response.render('product_list', {
                                         is_logined : false,
-                                        products : products
+                                        products : products,
+                                        sub : false
                                 });
                         }
 
+                }
+        });
+});
+
+app.get('/sub_category/:categoryId', function(request, response){
+        var filteredId = path.parse(request.params.categoryId).base;
+        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and p.pDelete=0 and c.sub_id=? ORDER BY p.pDATE DESC;`, [filteredId], function(error, products){
+                if(error) throw error;
+                else {
+                        if(request.session.is_logined == true){
+                                response.render('product_list', {
+                                        is_logined : request.session.is_logined,
+                                        name : request.session.name,
+                                        products : products,
+                                        sub : products[0].sub_name
+                                });
+                        } else {
+                                response.render('product_list', {
+                                        is_logined : false,
+                                        products : products,
+                                        sub : products[0].sub_name
+                                });
+                        }
                 }
         });
 });
