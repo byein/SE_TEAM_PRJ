@@ -36,6 +36,11 @@ app.use(session({
 app.get('/', function(request, response){
         console.log('메인페이지 작동');
         console.log(request.session);
+        db.query(`SELECT * FROM event WHERE eDate + Period <= 오늘날짜`, function(error, banner_imgs){
+                response.render('mainPage', {
+                        banner_imgs: banner_imgs
+                })
+        });
         db.query(`SELECT * FROM product ORDER BY pDate DESC limit 5;`, function(error, new_products){
                 if(request.session.is_logined == true){
                         response.render('mainPage', {
@@ -237,7 +242,6 @@ app.get('/payment', function(request, response) {
                 pName: request.session.pName
         })
 })
-
 
 app.listen(3000, function(){
         console.log('3000 port');

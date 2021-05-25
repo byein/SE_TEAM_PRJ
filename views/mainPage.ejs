@@ -50,15 +50,11 @@
 
     <div id="main-container">
         <div class="main-banner">
+            <% for(let i=0; i<banner_imgs.length; i++){ %>
             <div class="mySlides fade">
-              <img class="banner-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1615422266317.png">
+              <img class="banner-img" src="<%= banner_imgs[i] %>">
             </div>
-            <div class="mySlides fade">
-              <img class="banner-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1552549610052.jpg">
-            </div>
-            <div class="mySlides fade">
-              <img class="banner-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg">
-            </div>   
+            <%} %>
         </div>
         <br>
         <div id="dots" style="text-align:center">
