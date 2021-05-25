@@ -10,7 +10,7 @@
     <script type="text/javascript" src="/main_banner.js"></script>
 </head>
 <body>
-    <div id="header">
+    <header id="header">
         <div id="head-wrapper">
             <h1>
                 <a id="logo" href="/" title="로고">로고</a>
@@ -18,7 +18,7 @@
             <form id="search-form" method="GET">
                 <input id="search" type="search" placeholder="검색">
                 <button id="search-btn" class="search">
-                    <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/1462/PNG/512/036search_100009.png" alt="검색"></a>
+                    <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
                 </button>
             </form>
             <div class="wrap-user-util">
@@ -36,31 +36,58 @@
                     <button id="bucket">
                     <a id="goto-bucket" href="/basket">장바구니</a>
                     </button>
+                    <button id="notice">
+                        <a id="goto-notice" href="#">공지사항</a>
+                    </button>
                 <% } %>
             </div>
         </div>
+    </header>
+    <div class="dropmenu">
+        <ul>
+                <li><a href="/category/TOP">상의</a>
+                        <ul>
+                                <li><a href="/category/TOP/short">반팔</a></li>
+                                <li><a href="/category/TOP/long">긴팔</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/BOTTOM">하의</a>
+                        <ul>
+                                <li><a href="/category/BOTTOM/short">반바지</a></li>
+                                <li><a href="/category/BOTTOM/long">긴바지</a></li>
+                                <li><a href="/category/BOTTOM/skirt">치마</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/DRESS">원피스</a>
+                        <ul>
+                                <li><a href="/category/DRESS/short">숏원피스</a></li>
+                                <li><a href="/category/DRESS/long">롱원피스</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/BAG&SOCKS">잡화류</a>
+                        <ul>
+                                <li><a href="/category/BAG&SOCKS/bag">가방</a></li>
+                                <li><a href="/category/BAG&SOCKS/socks">양말</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/ACC">악세사리</a>
+                        <ul>
+                                <li><a href="/category/ACC/necklace">목걸이</a></li>
+                                <li><a href="/category/ACC/earring">귀걸이</a></li>
+                                <li><a href="/category/ACC/bracelet">팔찌</a></li>
+                        </ul>
+                </li>
+        </ul>
     </div>
-    <nav id="category">
-        <a class="category-menu" href="/category/TOP">상의</a>
-        <a class="category-menu" href="/category/BOTTOM">하의</a>
-        <a class="category-menu" href="/category/DRESS">원피스</a>
-        <a class="category-menu" href="/category/BAG&SOCKS">잡화류</a>
-        <a class="category-menu" href="/category/ACC">악세서리</a>
-    </nav>
-
-    <div id="main-container">
+    
+    <section id="main-container">
         <div class="main-banner">
-            <div class="mySlides fade">
-              <img class="banner-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1615422266317.png">
-              <div class="text">Caption One</div>
-            </div>
-            <div class="mySlides fade">
-              <img class="banner-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1552549610052.jpg">
-              <div class="text">Caption Two</div>
-            </div>
-            <div class="mySlides fade">
-              <img class="banner-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg">
-              <div class="text">Caption Three</div>
+            <div id="banner-img-wrapper">
+                <ul class="rollimgs">
+                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1615422266317.png" alt="1st"></li>
+                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1552549610052.jpg" alt="2st"></li>
+                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt="3st"></li>
+                </ul>
             </div>   
         </div>
         <br>
@@ -80,10 +107,10 @@
                     </li>
                 <%} %>
         </div>
-    </div>
+    </section>
 
-    <div id="footer">
-        <p>copyright by 24팀</p>
-    </div>
+    <footer id="footer">
+        <p>copyright by 24팀 all rights reserved.</p>
+    </footer>
 </body>
 </html>

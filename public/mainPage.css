@@ -1,10 +1,9 @@
-html,
-body {
+html, body {
   margin: 0;
   overflow-x: hidden;
 }
 
-body {
+body{
   margin: 0;
   padding: 0;
   height: 100%;
@@ -28,7 +27,7 @@ body a {
   text-decoration: none;
 }
 
-section {
+section{
   overflow: hidden;
 }
 
@@ -65,9 +64,10 @@ section {
   width: 30%;
   border-radius: 15px;
   float: left;
+
 }
 
-#search-btn {
+#search-btn{
   border-radius: none;
   background: none;
 }
@@ -81,7 +81,7 @@ section {
 }
 
 .wrap-user-util {
-  display: inline;
+  display:inline;
   position: relative;
   width: 30%;
 }
@@ -99,29 +99,108 @@ a {
   text-decoration: none;
 }
 
-#category {
-  position: relative;
-  top: 0px;
-  width: 100%;
-  height: fit-content;
-  text-align: center;
-  background-color: lightpink;
-}
+/*카테고리 드롭다운 코드 */
 
-.category-menu {
+ .dropmenu{
+  border:none;
+  border:0px;
+  margin:0px;
+  padding:0px;
+  font: "sans-serif";
+  font-size:20px;
+  }
+
+  .dropmenu ul{
+
+  background: lightpink;
+  height:100px;
+  list-style:none;
+  margin:0px;
+  padding:0px;
+  text-align: center;
+  }
+
+  .dropmenu li{
+  /* float: left; */
+  margin-right: 50px;
+  padding:0px;
   display: inline-block;
-  margin: 17px 4.5%;
-  text-decoration: none;
-  font-size: 20px;
-  color: black;
-}
+  }
+
+  .dropmenu li a{
+  background: lightpink;
+  color:#000000;
+  display:block;
+  line-height:100px;
+  margin:0px;
+  padding:0px 25px;
+  text-align:center;
+  text-decoration:none;
+  display: inline-block;
+  }
+
+  .dropmenu li a:hover, .dropmenu ul li:hover a{
+  color:#ffffff;
+  text-decoration:none;
+  }
+
+  .dropmenu li ul{
+  background: lightpink;
+  display:none;
+  height:auto;
+  border:0px;
+  position: absolute;
+  width:200px;
+  z-index:200;
+  }
+
+  .dropmenu li:hover ul{
+  display:block;
+  }
+
+  .dropmenu li li {
+  background: lightpink;
+  display:block;
+  float:center;
+  margin:0px;
+  padding:0px;
+  width:200px;
+  }
+
+  .dropmenu li:hover li a{
+  background:none;
+  }
+
+  .dropmenu li ul a{
+  display:block;
+  height:80px;
+  font-size:14px;
+  margin:0px;
+  padding:0px 10px 0px 15px;
+  text-align:left;
+  }
+
+  .dropmenu li ul a:hover, .dropmenu li ul li:hover a{
+  background: lightslategray;
+  border:0px;
+  color:#ffffff;
+  text-decoration:none;
+  }
+
+  .dropmenu p{
+  clear: left;
+  }
+/*카테고리 드롭다운 끝*/
+
+
+
 
 #main-container {
   position: relative;
   top: 0;
   left: 0;
   width: 100%;
-  height: 1000px;
+  height: 800px;
   /*
   height: 1400px;
   */
@@ -132,7 +211,7 @@ a {
   top: auto;
   left: auto;
   width: 100%;
-  height: 55%;
+  height: 50%;
   /*width: 1600px;
   height: 800px;
   */
@@ -151,7 +230,7 @@ ul {
   /*
   height: 600px;
   */
-  height: 45%;
+  height: 50%;
   background-color: lightgray;
   margin: 0;
   padding: 0.1px;
@@ -169,11 +248,11 @@ ul {
   text-align: center;
 }
 
-.img_box {
+.img_box{
   text-align: center;
 }
 
-#latest-items img {
+#latest-items img{
   width: 60%;
   height: 20%;
 }
@@ -189,88 +268,65 @@ ul {
 }
 
 /* banner css*/
-* {
-  box-sizing: border-box;
-}
-body {
-  font-family: Verdana, sans-serif;
-}
-.mySlides {
-  display: none;
-}
-img {
-  vertical-align: middle;
-}
-
-/* Slideshow container */
-.main-banner {
-  max-width: 1000px;
+#banner-img-wrapper {
+  height: 1000px;
+  /*width: 1800px;
+  */
+  width: 100%;
   position: relative;
-  margin: auto;
-  width: 1200px;
-  height: 500px;
+  /*
+  left: 100px;
+  */
+  top: 0;
+  left: 10%;
+  overflow: hidden;
 }
 
-/* Caption text */
-.text {
-  color: #000000;
-  font-size: 15px;
-  padding: 8px 12px;
+.rollimgs {
+  list-style: none;
+  padding: 0;
+  margin: 0 50px;
+}
+
+.roll-img {
+}
+
+.rollimgs li {
+  display: block;
   position: absolute;
-  bottom: 8px;
+  /*
+  width: 800px;
+  */
+  width: 40%;
+  height: 40%;
+  left: 40%;
+}
+.rollimgs li img {
   width: 100%;
-  text-align: center;
+  height: 100%;
+}
+.rollimgs li.currentroll {
+  left: 800;
+  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+}
+.rollimgs li.prevroll {
+  left: 0px;
+  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+}
+.rollimgs.reverse li.prevroll {
+  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+}
+.rollimgs li.nextroll {
+  left: -800px;
+  display: block;
+  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
 }
 
-.banner-img {
-  width: 100%;
-  height: 500px;
+.rollimgs.reverse li.currentroll {
+  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
 }
 
-/* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
+.rollimgs.reverse li.nextroll {
+  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
 }
 
-.active {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {
-    font-size: 11px;
-  }
-}
