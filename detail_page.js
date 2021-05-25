@@ -56,12 +56,12 @@
 
 
     slide_bt_R.addEventListener('click', function () {
-      if (s_count < 4) {
+      if (s_count < 5) {
         clearInterval(s_itv);
         s_count++;
         S_ani_R();
       }
-      if (s_count == 3) {
+      if (s_count == 4) {
         slide_bt_R.style.display = "none";
       } else {
         slide_bt_L.style.display = "block";
