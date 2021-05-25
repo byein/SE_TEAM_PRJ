@@ -1,4 +1,5 @@
-html, body{
+html,
+body {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -9,12 +10,11 @@ body {
   overflow-x: hidden;
 }
 h2 {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px auto;            
+  margin: 50px auto;
 }
-
 
 #header {
   position: relative;
@@ -31,7 +31,7 @@ body a {
   text-decoration: none;
 }
 
-section{
+section {
   overflow: hidden;
   position: relative;
   top: 0;
@@ -70,10 +70,9 @@ section{
   width: 30%;
   border-radius: 15px;
   float: left;
-
 }
 
-#search-btn{
+#search-btn {
   border-radius: none;
   background: none;
 }
@@ -83,11 +82,11 @@ section{
 }
 #search-btn a img {
   width: 35px;
-  height: 35px;  
+  height: 35px;
 }
 
 .wrap-user-util {
-  display:inline;
+  display: inline;
   position: relative;
   width: 30%;
 }
@@ -120,7 +119,9 @@ a {
   color: black;
 }
 
-
+li {
+  list-style: none;
+}
 
 #body {
   position: relative;
@@ -130,20 +131,20 @@ a {
   align-items: center;
   margin: auto auto;
 }
-table{
+table {
   width: 50vsh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto auto;
 }
-tr, td{
+tr,
+td {
   padding: 10px;
 }
 
 .information {
   margin: 20px;
-
 }
 
 label {
@@ -162,19 +163,19 @@ input {
 }
 
 #btn_id_check {
-  border: 1px solid #4CAF50;
+  border: 1px solid #4caf50;
   background-color: white;
-  color: #4CAF50;
+  color: #4caf50;
 }
 
 #btn_id_check:hover {
   color: white;
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
 .btn {
   border: 1px solid lightcoral;
-  background-color:lightcoral;
+  background-color: lightcoral;
   color: white;
   padding: 10px;
   width: 30vh;
@@ -187,13 +188,106 @@ input {
   text-align: center;
 }
 
-
 #footer {
-position: relative;
-left: 0;
-bottom: 0;
-height: 150px;
-width: 100%;
-text-align: center;
-background-color: aquamarine;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  background-color: aquamarine;
 }
+
+/*카테고리 드롭다운 코드 */
+
+.dropmenu {
+  border: none;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  font: "sans-serif";
+  font-size: 20px;
+}
+
+.dropmenu ul {
+  background: lightpink;
+  height: 100px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+.dropmenu li {
+  /* float: left; */
+  margin-right: 50px;
+  padding: 0px;
+  display: inline-block;
+}
+
+.dropmenu li a {
+  background: lightpink;
+  color: #000000;
+  display: block;
+  line-height: 100px;
+  margin: 0px;
+  padding: 0px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.dropmenu li a:hover,
+.dropmenu ul li:hover a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dropmenu li ul {
+  background: lightpink;
+  display: none;
+  height: auto;
+  border: 0px;
+  position: absolute;
+  width: 200px;
+  z-index: 200;
+}
+
+.dropmenu li:hover ul {
+  display: block;
+}
+
+.dropmenu li li {
+  background: lightpink;
+  display: block;
+  float: center;
+  margin: 0px;
+  padding: 0px;
+  width: 200px;
+}
+
+.dropmenu li:hover li a {
+  background: none;
+}
+
+.dropmenu li ul a {
+  display: block;
+  height: 80px;
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px 10px 0px 15px;
+  text-align: left;
+}
+
+.dropmenu li ul a:hover,
+.dropmenu li ul li:hover a {
+  background: lightslategray;
+  border: 0px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dropmenu p {
+  clear: left;
+}
+/*카테고리 드롭다운 끝*/

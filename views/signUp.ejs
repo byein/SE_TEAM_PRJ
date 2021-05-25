@@ -10,7 +10,75 @@
 </head>
 
 <body>
-
+    <header id="header">
+        <div id="head-wrapper">
+            <h1>
+                <a id="logo" href="/" title="로고">로고</a>
+            </h1>
+            <form id="search-form" method="GET">
+                <input id="search" type="search" placeholder="검색">
+                <button id="search-btn" class="search">
+                    <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+                </button>
+            </form>
+            <div class="wrap-user-util">
+                <% if(is_logined == false){ %>
+                    <button id="login">
+                    <a href="/login">로그인</a>
+                    </button>
+                    <button id="signup-btn">
+                    <a id="goto-signup" href="/signUp">회원가입</a>
+                    </button>
+                <% }else{ %>
+                    <a><%= name %> 님 환영합니다!</a>
+                    <button id="logout">
+                    <a href="/logout">logout</a></button>
+                    <button id="bucket">
+                    <a id="goto-bucket" href="/basket">장바구니</a>
+                    </button>
+                    <button id="notice">
+                        <a id="goto-notice" href="#">공지사항</a>
+                    </button>
+                <% } %>
+            </div>
+        </div>
+    </header>
+    <div class="dropmenu">
+        <ul>
+                <li><a href="/category/TOP">상의</a>
+                    <ul>
+                        <li><a href="/sub_category/0">반팔</a></li>
+                        <li><a href="/sub_category/1">긴팔</a></li>
+                    </ul>
+                </li>
+            <li><a href="/category/BOTTOM">하의</a>
+                    <ul>
+                            <li><a href="/sub_category/2">반바지</a></li>
+                            <li><a href="/sub_category/3">긴바지</a></li>
+                                <li><a href="/sub_category/4">치마</a></li>
+                    </ul>
+            </li>
+            <li><a href="/category/DRESS">원피스</a>
+                    <ul>
+                            <li><a href="/sub_category/5">숏원피스</a></li>
+                            <li><a href="/sub_category/6">롱원피스</a></li>
+                    </ul>   
+            </li>
+            <li><a href="/category/BAG&SOCKS">잡화류</a>
+                    <ul>
+                            <li><a href="/sub_category/7">가방</a></li>
+                            <li><a href="/sub_category/8">양말</a></li>
+                    </ul>
+            </li>
+            <li><a href="/category/ACC">악세사리</a>
+                    <ul>
+                            <li><a href="/sub_category/9">목걸이</a></li>
+                            <li><a href="/sub_category/10">귀걸이</a></li>
+                            <li><a href="/sub_category/11">팔찌</a></li>
+                    </ul>
+            </li>
+        </ul>
+    </div>
     <h2 id="signUp"> 회원가입 </h2>
     <form class="" action="/signUp_create" method="post" onsubmit="return check()">
         <table id="infoTable" name="newID" width="800" height="">
@@ -53,5 +121,8 @@
             </tr>
         </table>
     </form>
+    <footer id="footer">
+        <p>Copyright 2021. 24팀 all rights reserved.</p>
+    </footer>
 </body>
 </html>
