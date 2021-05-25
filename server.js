@@ -88,7 +88,7 @@ app.get('/category/:categoryName', function(request, response){
 
 app.get('/admin', function(request, response){
         console.log(request.session);
-        db.query(`SELECT * FROM productWHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
+        db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                 db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                         if(!admin[0]){
                                 response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
