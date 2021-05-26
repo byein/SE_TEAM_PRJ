@@ -97,7 +97,7 @@ app.get('/category/:categoryName/:page', function(request, response){
 	}
 
         var page = request.params.page;
-        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=? and p.pDelete=0 ORDER BY`+sortby, [filteredId], function(error, products){
+        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=? and p.pDelete=0 ORDER BY `+sortby, [filteredId], function(error, products){
                 if(error) throw error;
                 else {
                         if(request.session.is_logined == true){
