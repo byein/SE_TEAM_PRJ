@@ -381,13 +381,17 @@
   }
 
   #footer {
-      position: relative;
-      bottom: 0;
-      height: 150px;
-      width: 100%;
-      text-align: center;
-      background-color: aquamarine;
-      padding: 0.1px;
+    position: relative;
+    bottom: 0%;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    background-color: aquamarine;
+    padding: 0.1px;
+  }
+  
+  #footer a{
+    font-weight: bold;
   }
 
 }

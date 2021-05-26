@@ -3,11 +3,7 @@ html, body {
   overflow-x: hidden;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
+body{
   margin: 0;
   padding: 0;
   height: 100%;
@@ -26,12 +22,14 @@ body {
   display: flex;
   align-items: center;
 }
+
 body a {
   text-decoration: none;
 }
 
 section{
   overflow: hidden;
+  margin: 30px;
 }
 
 #head-wrapper {
@@ -102,9 +100,23 @@ a {
   text-decoration: none;
 }
 
-/*카테고리 드롭다운 코드 */
+#category {
+  position: relative;
+  top: 0px;
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  background-color: lightpink;
+}
 
- .dropmenu{
+.category-menu {
+  display: inline-block;
+  margin: 17px 4.5%;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
+.dropmenu{
   border:none;
   border:0px;
   margin:0px;
@@ -193,54 +205,37 @@ a {
   .dropmenu p{
   clear: left;
   }
-/*카테고리 드롭다운 끝*/
 
-#main-container {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 800px;
-  /*
-  height: 1400px;
-  */
-}
 
-ul {
+.head, .circle_number{
   list-style: none;
+}  
+
+.Korean {
+   list-style:none;
+   text-indent: -1.5em;
 }
 
-#latest-items {
-  display: block;
-  width: 100%;
-  /*
-  height: 600px;
-  */
-  height: 50%;
-  background-color: lightgray;
-  margin: 0;
-  padding: 0.1px;
+.Korean .dash {
+    list-style-type:none;
+    text-indent: -0.8em;
 }
 
-.row {
-  margin: 0;
-  padding: 0;
+table{
+    width: 100%;
+}
+table, th, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px auto;
+    text-align: center;
+    padding: 5px 0;
+
 }
 
-.cell {
-  float: left;
-  margin: 0;
-  width: 20%;
-  text-align: center;
-}
-
-.img_box{
-  text-align: center;
-}
-
-#latest-items img{
-  width: 60%;
-  height: 20%;
+h2{
+    text-align: center;
+    color: lightcoral;
 }
 
 #footer {
@@ -256,78 +251,3 @@ ul {
 #footer a{
   font-weight: bold;
 }
-
-/* banner css*/
-.mySlides {
-  display: none;
-}
-img {
-  vertical-align: middle;
-}
-
-/* Slideshow container */
-.main-banner {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-.banner-img {
-  width: 100%;
-  height: 500px;
-}
-
-/* 배너 btn 추가할 수도 있음
-.banner-roll-btn img { 
-  width: 50px;
-  height: 50px;
-}
-*/
-
-/* The dots/bullets/indicators */
-#dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: #bbb 0.6s ease;
-}
-
-.active {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {
-    font-size: 11px;
-  }
-}
-
