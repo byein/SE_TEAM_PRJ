@@ -49,7 +49,7 @@ var upload = multer({
 app.get('/', function(request, response){
         console.log('메인페이지 작동');
         console.log(request.session);
-        db.query(`SELECT nImg FROM notice WHERE nEndDate >= DATE(NOW())`, function(error, banner_imgs){
+        db.query(`SELECT nIdx, nImg FROM notice WHERE nEndDate >= DATE(NOW())`, function(error, banner_imgs){
                 db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                         if(request.session.is_logined == true){
                                 response.render('mainPage', {
@@ -630,16 +630,16 @@ app.get('/banner_detail_customer/:nIdx', function(request, response){
 });
 
 app.post('/create_banner', upload.single('nImg'), function(request, response){
-	var nImg = '/uploads/' +`${file['nImg'][0].filename}`;
-	const sql = "INSERT INTO notice SET ?"
-	db.query(sql, request.body, function(err, result, fields){
-		if(err) throw err;
-		response.redirect('/banner_list_admin');
-	});
+        var file = request.file;
+        var post = request.body;
+        var nImg = '/uploads/' +`${file.filename}`;
+        db.query(`INSERT INTO notice (nCat, nTitle, nDetail, nImg, nStartDate, nEndDate, nDate) VALUES (?, ?, ?, ?, ?, ?, NOW()) `, [post.nCat, post.nTitle, post.nDetail, nImg, post.nStartDate, post.nEndDate], function(err, result, fields){
+                if(err) throw err;
+                response.redirect('/banner_list_admin');
+        });
 });
 
-app.get('/edit_banner_admin/:nIdx', upload.single('nImg'), function(request, response){
-	var nImg = '/uploads/' +`${file['nImg'][0].filename}`;
+app.get('/edit_banner_admin/:nIdx', function(request, response){
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
                         response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
@@ -650,22 +650,27 @@ app.get('/edit_banner_admin/:nIdx', upload.single('nImg'), function(request, res
                                         if (err) throw err;
                                         response.render('edit_banner_admin',{
                                                 is_logined :request.session.is_logined,
-                                                notice : result
+                                                notice : result,
+                                                ID : request.session.name,
+                                                name : request.session.name
 
                                         });
                                 });
                         };
                 };
-        });        
+        });
 });
 
-app.post('/banner_update/:nIdx', function(request, response){
+app.post('/banner_update/:nIdx', upload.single('nImg'), function(request, response){
+        var file = request.file;
+        var post = request.body;
+        var nImg = '/uploads/' +`${file.filename}`;
         const sql = "UPDATE notice SET ? WHERE nIdx =" + request.params.nIdx;
-        db.query(sql,request.body,function (err, result, fields) {
+        db.query(`UPDATE notice SET nTitle=?, nDetail=?, nImg=?, nStartDate=?, nEndDate=? WHERE nIdx=?`,[post.nTitle, post.nDetail, nImg, post.nStartDate, post.nEndDate, request.params.nIdx],function (err, result, fields) {
                 if(err) throw  err;
                 console.log(result);
                 response.redirect('/banner_list_admin');
-        }); 
+        });
 });
 
 app.get('/banner_delete/:nIdx', function(request, response){

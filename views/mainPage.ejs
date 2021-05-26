@@ -46,7 +46,7 @@
                     <a id="goto-bucket" href="/basket">장바구니</a>
                     </button>
                     <button id="notice">
-                        <a id="goto-notice" href="#">공지사항</a>
+                        <a id="goto-notice" href="/banner_list_customer">공지사항</a>
                     </button>
                 <% } %>
             </div>
@@ -92,7 +92,7 @@
     <section id="main-container">
         <div class="main-banner">
             <% for(let i=0; i<banner_imgs.length; i++){ %>
-            <div class="mySlides fade">
+            <div class="mySlides fade" onclick="location.href='/banner_detail_customer/<%= banner_imgs[i].nIdx %>'">
                 <img class="banner-img" src="<%= banner_imgs[i].nImg %>">
             </div>
             <%} %>
