@@ -48,7 +48,7 @@ var upload = multer({
 app.get('/', function(request, response){
         console.log('메인페이지 작동');
         console.log(request.session);
-        db.query(`SELECT eImg FROM event WHERE eDate + ePeriod <= DATE(NOW())`, function(error, banner_imgs){
+        db.query(`SELECT eImg FROM event WHERE ePeriod >= DATE(NOW())`, function(error, banner_imgs){
                 db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                         if(request.session.is_logined == true){
                                 response.render('mainPage', {

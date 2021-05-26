@@ -44,19 +44,15 @@
                 <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
-    <section>
-        <div id="main-banner">
-            <div id="banner-img-wrapper">
-                <ul class="rollimgs">
-                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1615422266317.png" alt="1st"></li>
-                    <li><img class="roll-img" src="https://www.seoultech.ac.kr/storage/banner/rolling/SNUST1619655416062.png" alt="2st"></li>
-                    <li><img class="roll-img" src="http://bnx.oa.gg/img/bnx_16fw_visual_03_list.jpg" alt="3st"></li>
-                </ul>
+    <section id="main-container">
+        <div class="main-banner">
+            <% for(let i=0; i<banner_imgs.length; i++){ %>
+            <div class="mySlides fade">
+                <img class="banner-img" src="<%= banner_imgs[i].eImg %>">
             </div>
+            <%} %>
         </div>
-    </section>
-    <section id="latest-items">
-        <div>
+        <div id="latest-items">
             <h2>최신상품</h2>
             <ul class="row">
                 <% for(let i=0; i<new_products.length; i++){ %>
