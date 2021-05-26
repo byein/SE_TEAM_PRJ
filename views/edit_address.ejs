@@ -1,0 +1,113 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>배송지 관리화면</title>
+
+  <link rel="stylesheet" href="delivery_address.css"/>
+
+</head>
+
+<body>
+
+  <header id="header">
+    <div id="head-wrapper">
+        <h1>
+            <a id="logo" href="/views/mainPage_admin.html" title="로고">로고</a>
+        </h1>
+
+        <form id="search-form" method="GET">
+          <input id="search" type="search" placeholder="검색">
+          <button id="search-btn" class="search">
+              <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+          </button>
+      </form>
+
+        <div class="wrap-user-util">
+            <button id="logout">
+                <a href="/logout">logout</a>
+            </button>
+            <button id="bucket">
+                <a id="goto-bucket" href="/views/bucket.html">장바구니</a>
+            </button>
+        </div>
+
+    </div>
+    
+</header>
+ <!-- 카테고리 드롭박스 구현 -->
+ <div class="dropmenu">
+  <ul>
+      <li><a href="/views/product_list.html">상의</a>
+          <ul>
+              <li><a href="#">반팔</a></li>
+              <li><a href="#">긴팔</a></li>
+          </ul>
+      </li>
+      <li><a href="/views/product_list.html">하의</a>
+          <ul>
+              <li><a href="#">반바지</a></li>
+              <li><a href="#">긴바지</a></li>
+              <li><a href="#">치마</a></li>
+          </ul>
+      </li>
+      <li><a href="/views/product_list.html">원피스</a>
+          <ul>
+              <li><a href="#">롱원피스</a></li>
+              <li><a href="#">숏원피스</a></li>
+          </ul>
+      </li>
+      <li><a href="/views/product_list.html">잡화류</a>
+          <ul>
+              <li><a href="#">양말</a></li>
+              <li><a href="#">가방</a></li>
+          </ul>
+      </li>
+      <li><a href="/views/product_list.html">악세사리</a>
+          <ul>
+              <li><a href="#">목걸이</a></li>
+              <li><a href="#">귀걸이</a></li>
+              <li><a href="#">팔찌</a></li>
+          </ul>
+      </li>
+  </ul>
+</div>
+
+<section>
+    <h2> 배송지 수정 </h2>
+    <form action = "/address_update/<%= address[0].adIdx %>" method = "POST">
+    <div>
+        <table>
+            
+            <tr><td>배송지명</td><td><input type = "text" name= "adTitle" value="<%= address[0].adTitle %>"><td></td></tr> 
+            <tr><td>수령인</td><td><input type = "text" name= "adName" value="<%= address[0].adName %>"></tr>
+            <tr><td>주소</td><td><input type = "text" name= "adPost_code" value="<%= address[0].adPost_code %>"></td><td><input type = "text" name= "adRoad_address" value="<%= address[0].adRoad_address %>"></td>
+                <td><input type = "text" name= "adJibun_address" value="<%= address[0].adJibun_address %>"></td><td><input type = "text" name= "adDetail_address" value="<%= address[0].adDetail_adress %>"></td>
+                <td><input type = "text" name= "adRef" value="<%= address[0].adRef %>"></td></tr>
+            <tr><td>연락처</td><td><input type = "text" name= "adNum1" value="<%= address[0].adNum1 %>"></td><td><input type = "text" name= "adNum2" value="<%= address[0].adNum2 %>"></td>
+                               <td><input type = "text" name= "adNum3" value="<%= address[0].adNum3 %>"></td></tr>
+            <tr><td>배송지 유형</td> <td><input type = "text" name= "adType" value="<%= address[0].adType %>"></td></tr> 
+        </table>
+    </div>
+    <button type ="submit"> 수정 </button>
+</form>
+</section>
+
+
+<footer id="footer">
+  <p>Copyright 2021. 24팀 all rights reserved.</p>
+</footer>
+
+<script language="javascript" >
+  let delivery = {
+    delItem: function () {
+        event.target.parentElement.parentElement.parentElement.remove();
+    }
+  
+  }
+</script>
+
+</body>
+
+</html>
