@@ -52,18 +52,19 @@
             </div>
             <%} %>
         </div>
-        <div id="latest-items">
-            <h2>최신상품</h2>
-            <ul class="row">
-                <% for(let i=0; i<new_products.length; i++){ %>
-                    <li class="cell">
-                            <div class="img_box"><img src="<%= new_products[i].pImg %>" alt=""><!--상품사진--></div>
-                            <div class="product_name"><a href="/product_admin/<%= new_products[i].pIdx %>"><%= new_products[i].pName %></div>
-                            <div class="product_price"><%= new_products[i].pPrice %></div>
-                    </li>
-                <%} %>
-        </div>
+        
     </section>
+    <section id="latest-items">
+        <h2>최신상품</h2>
+        <ul class="row">
+            <% for(let i=0; i<new_products.length; i++){ %>
+                <li class="cell">
+                        <div class="img_box"><img src="<%= new_products[i].pImg %>" alt=""><!--상품사진--></div>
+                        <div class="product_name"><a href="/product_admin/<%= new_products[i].pIdx %>"><%= new_products[i].pName %></div>
+                        <div class="product_price"><%= new_products[i].pPrice %></div>
+                </li>
+            <%} %>
+        </section>
 
     <footer id="footer">
         <p>Copyright 2021. 24팀 all rights reserved.</p>
