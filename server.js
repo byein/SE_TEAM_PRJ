@@ -49,23 +49,22 @@ app.get('/', function(request, response){
         console.log('메인페이지 작동');
         console.log(request.session);
         db.query(`SELECT eImg FROM event WHERE eDate + ePeriod <= DATE(NOW())`, function(error, banner_imgs){
-                response.render('mainPage', {
-                        banner_imgs: banner_imgs
-                })
-        });
-        db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
-                if(request.session.is_logined == true){
-                        response.render('mainPage', {
-                                is_logined : request.session.is_logined,
-                                name : request.session.name,
-                                new_products : new_products
-                        });
-                }else{
-                        response.render('mainPage', {
-                                is_logined : false,
-                                new_products : new_products
-                        });
-                }
+                db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
+                        if(request.session.is_logined == true){
+                                response.render('mainPage', {
+                                        is_logined : request.session.is_logined,
+                                        name : request.session.name,
+                                        new_products : new_products,
+                                        banner_imgs: banner_imgs
+                                });
+                        }else{
+                                response.render('mainPage', {
+                                        is_logined : false,
+                                        new_products : new_products,
+                                        banner_imgs: banner_imgs
+                                });
+                        }
+                });
         });
 });
 
