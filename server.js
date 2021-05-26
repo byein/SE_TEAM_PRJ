@@ -273,8 +273,7 @@ app.get('/delete_product_admin/:productId', function(request, response){
         });
 });
 
-app.get('/product_list_admin/:page', function(request, response){
-        var page = request.params.page;
+app.get('/product_list_admin', function(request, response){
         var query = url.parse(request.url, true).query.query;
         var sortBy = url.parse(request.url, true).query.sortBy;
         var sprice = url.parse(request.url, true).query.sprice;
@@ -285,9 +284,15 @@ app.get('/product_list_admin/:page', function(request, response){
         if (sortBy == undefined){
                 sortBy ='';
         }
+        if(eprice == undefined){
+                eprice='';
+        }
+        if(sprice == undefined){
+                sprice='';
+        }
         if (sprice == ''){
                var sprice = '1';
-	}
+        }
         if (eprice == ''){
                eprice = '100000000';
         }
@@ -297,30 +302,27 @@ app.get('/product_list_admin/:page', function(request, response){
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
                         response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
-                } else { 
-			 if (sortBy == "asc"){
-				 var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice + " ORDER BY pPrice ASC";}
-			else if (sortBy == "desc") {
-				var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice +" ORDER BY pPrice DESC";
-                       
+                } else {
+                         if (sortBy == "asc"){
+                                 var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice + " ORDER BY pPrice ASC";}
+                        else if (sortBy == "desc") {
+                                var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice +" ORDER BY pPrice DESC";
+
                         } else{
-				var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice +" ORDER BY pDate DESC";
-		              } 
-			db.query(sql, function(err2, products, fields){
-				if (err2) throw err2;
-				else{
-					response.render('product_list_admin', {
-						is_logined : request.session.is_logined,
-						name : request.session.name,
-						products : products,
-						page : page,
-                                                length : products.length-1,
-                                                page_num : 24
+                                var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice +" ORDER BY pDate DESC";
+                              }
+                        db.query(sql, function(err2, products, fields){
+                                if (err2) throw err2;
+                                else{
+                                        response.render('product_list_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name,
+                                                products : products
                                         });
-				}
-			});
-        	}
-	});
+                                }
+                        });
+                }
+        });
 });
 
 app.get('/search', function(request, response){
@@ -368,14 +370,20 @@ app.get('/search', function(request, response){
                                         name : request.session.name,
                                         products : result,
                                         main_name : category,
-					sub : false
+					sub : false,
+                                        page : 1,
+                                        page_num : 24,
+                                        length : result.length-1
                                 });
                         } else {
                                 response.render('product_list', {
                                         is_logined : false,
                                         products : result,
 					main_name : category,
-                                        sub : false
+                                        sub : false,
+                                        page : 1,
+                                        page_num : 24,
+                                        length : result.length-1
                                 });
                         }
                 }
