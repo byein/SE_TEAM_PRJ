@@ -763,6 +763,66 @@ app.get('/privacy', function(request, response){
         }
 });
 
+app.get('/delivery_address', function(request, response){
+	console.log(request.session);
+	db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
+			
+		console.log(address);
+
+        	if(request.session.is_logined == true){
+			response.render('delivery_address',{
+			is_logined : request.session.is_logined,
+			name : request.session.name,
+			ID : request.session.ID,
+			address : address	
+		});
+		};
+	});
+});
+
+app.get('/edit_address/:adIdx', function(request, response) {
+        const sql = "SELECT * FROM address WHERE adIdx=?";
+	console.log(request.params.adIdx);
+	db.query(sql,[request.params.adIdx], function(err, result, fields){
+                if (err) throw err;
+                response.render('edit_address',{ address : result });
+	});
+});
+
+app.post('/address_update/:adIdx', function(request, response){
+        const sql = "UPDATE address SET ? WHERE adIdx =" + request.params.adIdx;
+        console.log(sql);
+	db.query(sql, request.body, function (err, result, fields) {
+                if(err) throw  err;
+                console.log(result);
+                response.redirect('/delivery_address');
+        }); 
+})
+
+
+
+app.get('/pop_up', function(request, response){
+        response.render('pop_up');
+})
+
+
+app.post('/create_address', function(request, response){
+        const sql = "INSET INTO address SET ?"
+        db.query = (sql, request.body, function(err, result, fields){
+                if(err) throw err;
+                response.redirect('/delivery_address');
+
+        })
+})
+
+app.get('/delete_address/:adIdx', function(request, response){
+        const sql = "DELETE FROM address WHERE adIdx=?"
+        db.query(sql, request.params.adIdx, function(err, result, fields){
+                if(err) throw err;
+                response.redirect('/delivery_address');
+        })
+});
+
 app.listen(3000, function(){
         console.log('3000 port');
 });
