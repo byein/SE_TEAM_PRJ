@@ -71,9 +71,9 @@
                     <% for ( var i = 0; i< products.length; i++)  { %>
 
                         <li class="cell">
-                                <div class="img_box" href="/product_admin/<%= products[i].pIdx %>"><img src="<%= products[i].pImg %>" alt=""/><!-- 상품사진--></div>
-                                <div class="product_name"><a href="/product_admin/<%= products[i].pIdx %>"><%= products[i].pName %></div>
-                                <div class="product_price" href="/product_admin/<%= products[i].pIdx %>"><%= products[i].pPrice %></div>
+                                <div class="img_box" onclick="location.href='/product_admin/<%= data.pIdx %>'"><img src="<%= products[i].pImg %>" alt=""/><!-- 상품사진--></div>
+                                <div class="product_name"  onclick="location.href='/product_admin/<%= data.pIdx %>'"><%= products[i].pName %></div>
+                                <div class="product_price"  onclick="location.href='/product_admin/<%= data.pIdx %>'"><%= products[i].pPrice %></div>
                         </li>
                 <%}  %>
                     <!--상품 수만큼 li 반복-->

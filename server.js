@@ -109,7 +109,8 @@ app.get('/category/:categoryName/:page', function(request, response){
                                         main_name : filteredId,
                                         page : page,
                                         length : products.length-1,
-                                        page_num : 24
+                                        page_num : 24,
+                                        sortby : sortby
                                 });
                                 console.log(products.length-1);
                         } else {
@@ -120,7 +121,8 @@ app.get('/category/:categoryName/:page', function(request, response){
                                         main_name : filteredId,
                                         page : page,
                                         length : products.length-1,
-                                        page_num : 24
+                                        page_num : 24,
+                                        sortby : sortby
                                 });
                                 console.log(products.length-1);
                         }
@@ -169,7 +171,8 @@ app.get('/sub_category/:categoryId/:page', function(request, response){
                                                 sub : sub,
                                                 page : page,
                                                 length : products.length-1,
-                                                page_num : 24
+                                                page_num : 24,
+                                                sortby : sortby
                                         });
                                 } else {
                                         response.render('product_list', {
@@ -179,7 +182,8 @@ app.get('/sub_category/:categoryId/:page', function(request, response){
                                                 sub : sub,
                                                 page : page,
                                                 length : products.length-1,
-                                                page_num : 24
+                                                page_num : 24,
+                                                sortby : sortby
                                         });
                                 }
                         });
