@@ -1,0 +1,203 @@
+#header {
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 200px;
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+  }
+
+  #head-wrapper {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+  }
+  
+  #logo {
+    position: absolute;
+    left: 10%;
+    text-decoration: none;
+    text-align: center;
+    padding: auto;
+    display: flex;
+    float: left;
+
+    
+  }
+
+  #footer {
+  position: absolute;
+  bottom: 0%;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  background-color: aquamarine;
+  padding: 0.1px;
+}
+
+.wrap-user-util {
+  display:inline;
+  position: relative;
+  width: 30%;
+}
+
+.wrap-user-util button {
+  background: none;
+}
+
+/*카테고리 드롭다운 코드 */
+
+.dropmenu{
+border:none;
+border:0px;
+margin:0px;
+padding:0px;
+font: "sans-serif";
+font-size:20px;
+}
+
+.dropmenu ul{
+
+background: lightpink;
+height:100px;
+list-style:none;
+margin:0;
+padding:0;
+text-align: center;
+}
+
+.dropmenu li{
+/* float: left; */
+margin-right: 50px;
+padding:0px;
+display: inline-block;
+}
+
+.dropmenu li a{
+background: lightpink;
+color:#000000;
+display:block;
+line-height:100px;
+margin:0px;
+padding:0px 25px;
+text-align:center;
+text-decoration:none;
+display: inline-block;
+}
+
+.dropmenu li a:hover, .dropmenu ul li:hover a{
+color:#ffffff;
+text-decoration:none;
+}
+
+.dropmenu li ul{
+background: lightpink;
+display:none; 
+height:auto;
+border:0px;
+position: absolute;
+width:200px;
+z-index:200;
+}
+
+.dropmenu li:hover ul{
+display:block;
+}
+
+.dropmenu li li {
+background: lightpink;
+display:block;
+float:center;
+margin:0px;
+padding:0px;
+width:200px;
+}
+
+.dropmenu li:hover li a{
+background:none;
+}
+
+.dropmenu li ul a{
+display:block;
+height:80px;
+font-size:14px;
+margin:0px;
+padding:0px 10px 0px 15px;
+text-align:left;
+}
+
+.dropmenu li ul a:hover, .dropmenu li ul li:hover a{
+background: lightslategray;
+border:0px;
+color:#ffffff;
+text-decoration:none;
+}
+
+.dropmenu p{
+clear: left;
+}
+/*카테고리 드롭다운 끝*/
+
+
+#search-form {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  left: 35%;
+  float: left;
+}
+
+#search {
+  display: block;
+  margin: 3px;
+  height: 40px;
+  width: 30%;
+  border-radius: 15px;
+  float: left;
+
+}
+
+#search-btn{
+  border-radius: none;
+  background: none;
+}
+
+#search-btn a {
+  background: none;
+}
+#search-btn a img {
+  width: 35px;
+  height: 35px;  
+}
+
+.delivery_table {
+    margin-top: 80px;
+    margin-left: 100px;
+    width: 90%;
+    height: 100px;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+    background-color: #00000031;
+  }
+.add_address{
+    position: relative;
+    top: 60px;
+    left:1600px;
+}
+
+
