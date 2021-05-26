@@ -46,34 +46,33 @@
             <h2>Notice/Event</h2>
             <h3>상세보기</h3>
             <div>
-                <table class="banner_detail">
-                    <!--<colgroup>
-                    <col width="15">
-                    <col width="80">
-                    <col width="15">
-                    <col width="20">
-                    <col width="15">
-                    </colgroup>-->
+                <<table>
                     <thead>
                         <tr>
-                            <th>제목</th><td colspan="5" class="title">공지 제목이 들어가는 곳</td>
+                            <th>제목</th><td colspan="5" class="title"> <%= notice[0].nTitle %></td>
                         </tr>
                         <tr>
-                            <th>작성자</th><td class="name">seoultech</td>
-                            <th>조회수</th><td class="hit">123</td>
-                            <th>등록일</th><td class="date">2021/05/06</td>
+                            <th>등록일</th><td class="date"> <%= notice[0].nDate %></td>
                         </tr>
-
+                        <tr>
+                            <th>카테고리</th><td class ="category"> <%= notice[0].nat %> </td>
+                        </tr>
+                        <tr>
+                            <th>세부정보</th><td class = "detail"> <%= notice[0].nDetail %></td>                            
+                        </tr>
                     </thead>
-                    <!--상품 정보 들어갈 공간 list 개수만큼 tr-->
                     <tbody>
                         <tr>
-                            <td class="banner_image" colspan="6"><img src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg" alt="배너 이미지"></td>
+                            <th> 이미지 </th><td class="banner_image" colspan="6"> <%= notice[0].nImg %></td>
                         </tr>
-                        <tr class="blank"><td></td></tr>
-                        <tr class="btn"><td></td><td></td>
-                            <td class="modify"><a href="/add_banner_admin">수정</a></td>
-                            <td class="delete"><a href="javascript:void(0);" onclick="delete_check()">삭제</a></td>
+                        <tr>
+                            <th> 시작 시간</th> <td class="startdate"> <%= notice[0].nStartDate %></td>
+                            <th> 끝나는 시간 </th> <td class="enddate"> <%= notice[0].nEndDate %></td>
+                        </tr>
+
+                        <tr>
+                            <th> <a href="/edit_banner_admin/<%= notice[0].nIdx %>"> 수정 </a> </th>
+                            <th> <a href="/banner_delete/<%= notice[0].nIdx %>"> 삭제 </a></th>
                         </tr>
                     </tbody>
                 </table>

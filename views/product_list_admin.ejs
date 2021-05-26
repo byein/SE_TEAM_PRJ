@@ -46,6 +46,16 @@
         </div>
         <section>
             <h2>Product list</h2>
+
+            <form action="" method="get" class="sort-by">
+                <input type="text" class ="search-bar" name = query placeholder="검색어를 입력하세요"> </br>
+                <select name ="sortBy">
+                    <option value="asc"> 가격 오름차순 </option>
+                <option value="desc"> 가격 내림차순 </option>
+                </select></br>
+                <input type="int" class = "search-bar" name="sprice" placeholer="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격"><br>
+                <input type="submit" value="확인" class ="sort-button">
+            </form>
             
             <div class="list">
                 <ul class="row">

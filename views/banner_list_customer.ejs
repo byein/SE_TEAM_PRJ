@@ -2,7 +2,9 @@
 <html>
     <head>
         <title>banner_admin</title>
-        <link rel="stylesheet" href="/banner_list_admin.css" type="text/css">
+        <link rel="stylesheet" href="/banner_detail_admin.css" type="text/css">
+        <link rel="stylesheet" href="/mainPage.css">
+        <script src="/banner_detail_admin.js"></script>
     </head>
     <body>
         <header id="header">
@@ -17,36 +19,70 @@
                     </button>
                 </form>
                 <div class="wrap-user-util">
-                    <% if(is_logined == true){ %>
-                        <a><%= name %> 관리자</a>
-                        <button id="logout">
-                            <a href="/logout">logout</a>
+                    <% if(is_logined == false){ %>
+                        <button id="login">
+                        <a href="/login">로그인</a>
                         </button>
+                        <button id="signup-btn">
+                        <a id="goto-signup" href="/signUp">회원가입</a>
+                        </button>
+                    <% }else{ %>
+                        <a><%= name %> 님 환영합니다!</a>
+                        <button id="logout">
+                        <a href="/logout">logout</a></button>
                         <button id="bucket">
-                            <a id="goto-bucket" href="/basket">장바구니</a>
+                        <a id="goto-bucket" href="/basket">장바구니</a>
+                        </button>
+                        <button id="notice">
+                            <a id="goto-notice" href="#">공지사항</a>
                         </button>
                     <% } %>
                 </div>
+               
             </div>
         </header>
-
-
-
-        <nav class="nav">
+        <div class="dropmenu">
             <ul>
-                <li><a href="/admin" class="active">Home</a></li>
-                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
-                <li><a href="/product_list_admin/1">Product 관리</a></li>
-                <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
-                <li><a href="/logout">Logout</a></li>
+                    <li><a href="/category/TOP/1">상의</a>
+                        <ul>
+                            <li><a href="/sub_category/0/1">반팔</a></li>
+                            <li><a href="/sub_category/1/1">긴팔</a></li>
+                        </ul>
+                    </li>
+                <li><a href="/category/BOTTOM/1">하의</a>
+                        <ul>
+                                <li><a href="/sub_category/2/1">반바지</a></li>
+                                <li><a href="/sub_category/3/1">긴바지</a></li>
+                                    <li><a href="/sub_category/4/1">치마</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/DRESS/1">원피스</a>
+                        <ul>
+                                <li><a href="/sub_category/5/1">숏원피스</a></li>
+                                <li><a href="/sub_category/6/1">롱원피스</a></li>
+                        </ul>   
+                </li>
+                <li><a href="/category/BAG&SOCKS/1">잡화류</a>
+                        <ul>
+                                <li><a href="/sub_category/7/1">가방</a></li>
+                                <li><a href="/sub_category/8/1">양말</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/ACC/1">악세사리</a>
+                        <ul>
+                                <li><a href="/sub_category/9/1">목걸이</a></li>
+                                <li><a href="/sub_category/10/1">귀걸이</a></li>
+                                <li><a href="/sub_category/11/1">팔찌</a></li>
+                        </ul>
+                </li>
             </ul>
-        </nav>
+        </div>
         
         <section>
             <h2>Notice/Event</h2>
-            <div class="notice_list_div">
+            <h3>상세보기</h3>
+            <div>
                 <table class="notice_list">
-                    <caption><a href="/add_banner_admin">공지 등록</a></caption>
                     <form action="" method="get" class="sort-by">
                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요">
                         <select name = "sortBy">
@@ -60,13 +96,10 @@
 
                     <colgroup>
                     <col width="15">
+                    <col width="80">
                     <col width="15">
-                    <col width="30">
                     <col width="20">
-                    <col width="20">
                     <col width="15">
-                    <col width="15">
-
                     </colgroup>
                     <thead>
                         <th>번호</th>
@@ -74,36 +107,21 @@
                         <th>제목</th>
                         <th>등록일</th>
                         <th>마감날짜</th>
-                        <th>수정</th>
-                        <th>삭제</th>
                     </thead>
                     <tbody>
                         <% notice.forEach(function (value) { %>
                             <tr>
                                 <td> <%= value.nIdx %></td>
                                 <td> <%= value.nCat %></td>
-                                <td> <a href="/banner_detail_admin/<%= value.nIdx %>"> <%= value.nTitle %></a> </td>
+                                <td> <a href="/banner_detail_customer/<%= value.nIdx %>"> <%= value.nTitle %></a> </td>
                                 <td> <%= value.nDate%></td>
                                 <td> <%= value.nEndDate %></td>
-                                <td> <a href="/edit_banner_admin/<%= value.nIdx %>"> 수정 </a></td>
-                                <td> <a href="/banner_delete/<%= value.nIdx %>"> 삭제 </a></td>
         
                             </tr>
                             <% }); %>
                     </tbody>
     
                 </table>
-            </div>
-            <div class="outer">
-                <div class="pagination">
-                    <a href="#">&laquo;</a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">&raquo;</a>
-                </div>
             </div>
         </section>
         <footer id="footer">

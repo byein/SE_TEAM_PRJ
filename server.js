@@ -14,6 +14,7 @@ var sanitizeHtml = require('sanitize-html');
 var signUp = require('./router/signUp');
 var login = require('./router/login');
 var multer = require('multer');
+var url = require('url');
 
 app.use(express.static('public'));
 app.use(express.static('router'));
@@ -273,25 +274,76 @@ app.get('/delete_product_admin/:productId', function(request, response){
 });
 
 app.get('/product_list_admin/:page', function(request, response){
+        var query = url.parse(request.url, true).query.query;
+        var sortBy = url.parse(request.url, true).query.sortBy;
+        var sprice = url.parse(request.url, true).query.sprice;
+        var eprice = url.parse(request.url, true).query.eprice;
+
+        if (query == undefined){
+                query = ''; }
+        if (sortBy == undefined){
+                sortBy ='';
+        }
+        if(sprice == undefined){
+                sprice ='0';
+        }
+        if (eprice == undefined){
+                eprice ='1000000000';
+        }
+
         var page = request.params.page;
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
                         response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
                 } else {
-                        db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC;`, function(error, products){
-                                if(error2) throw error2;
-                                else {
-                                        response.render('product_list_admin', {
-                                                is_logined : request.session.is_logined,
-                                                name : request.session.name,
-                                                products        : products,
-                                                page : page,
-                                                length : products.length-1,
-                                                page_num : 24
+                        if (sortBy == "asc"){
+                                db.query(`SELECT * FROM product WHERE pDelete=0 AND pName like '%` + query + `%' AND pPrice>=` + sprice +`AND pPrice<=` +eprice +`ORDER BY pPrice ASC`, function(error, products){
+                                        console.log(`SELECT * FROM product WHERE pDelete=0 AND pName like '%` + query + `%' AND pPrice>=` + sprice +` AND pPrice<=` +eprice +` ORDER BY pPrice ASC`);
+                                        if(error2) throw error2;
+                                        else {
+                                                response.render('product_list_admin', {
+                                                        is_logined : request.session.is_logined,
+                                                        name : request.session.name,
+                                                        products        : products,
+                                                        page : page,
+                                                        length : products.length-1,
+                                                        page_num : 24
+                                                });
+                                        }
+                                });
 
-                                        });
-                                }
-                        });
+                        } else if (sortBy == "desc"){
+                                db.query(`SELECT * FROM product WHERE pDelete=0 AND pName like '%` + query + `%' AND pPrice>=` + sprice +` AND pPrice<=` + eprice +` ORDER BY ORDER BY pPrice DESC`, function(error, products){
+                                        console.log(`SELECT * FROM product WHERE pDelete=0 AND pName like '%` + query + `%' AND pPrice>=` + sprice +` AND pPrice<=` + eprice +` ORDER BY pPrice DESC`);
+                                        if(error2) throw error2;
+                                        else {
+                                                response.render('product_list_admin', {
+                                                        is_logined : request.session.is_logined,
+                                                        name : request.session.name,
+                                                        products        : products,
+                                                        page : page,
+                                                        length : products.length-1,
+                                                        page_num : 24
+                                                });
+                                        }
+                                });
+                        } else{
+                                db.query(`SELECT * FROM product WHERE pDelete=0 AND pName like '%` + query + `%' AND pPrice>=` + sprice +` AND pPrice<=` + eprice +` ORDER BY pDate DESC`, function(error, products){
+                                        console.log(`SELECT * FROM product WHERE pDelete=0 AND pName like '%` + query + `%' AND pPrice>=` + sprice +` AND pPrice<=` + eprice +` ORDER BY pDate DESC`)
+                                        if(error2) throw error2;
+                                        else {
+                                                response.render('product_list_admin', {
+                                                        is_logined : request.session.is_logined,
+                                                        name : request.session.name,
+                                                        products        : products,
+                                                        page : page,
+                                                        length : products.length-1,
+                                                        page_num : 24
+                                                });
+					}
+
+				});
+                	}
                 }
         });
 });
@@ -343,35 +395,170 @@ app.get('/product_admin/:productId', function(request, response){
 });
 
 app.get('/banner_list_admin', function(request, response){
-                db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
-                        if(!admin[0]){
-                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
-                        } else {
-                                if(request.session.is_logined == true){
-                                        response.render('banner_list_admin', {
-                                                is_logined : request.session.is_logined,
-                                                name : request.session.name
-                                        });
-                                }
-                        }
-                });
+        var sortBy = url.parse(request.url, true).query.sortBy;
+        var query = url.parse(request.url, true).query.query;
+        if (sortBy == undefined && query == undefined){
+               query = ''
+               sortBy = ''
+        }
         
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                } else {
+                        if(request.session.is_logined == true){
+                                if (sortBy == 'nTitle-asc')
+                                { 
+                                        var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" +"ORDER BY nTitle asc "; 
+                                } 
+                                else if(sortBy == 'nTitle-desc')
+                                { 
+                                        var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nTitle desc"; 
+                                } 
+                                else if(sortBy == 'nEndDate-asc')
+                                {
+                                        var sql = "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate asc"; 
+                                } 
+                                else if(sortBy == 'nEndDate-desc'){
+                                var sql =  "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate desc "; 
+                                }
+                                else {
+                                var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'"; 
+                                }       
+                                
+                                db.query(sql, function(err, result, fields){
+                                        if(err) throw err;
+                                
+                                response.render('banner_list_admin', {
+                                        is_logined : request.session.is_logined,
+					name :request.session.name,
+					ID : request.session.name,
+                                        notice : result
+                                });
+                        });
+                }
+        }
+        });
+}); 
+
+app.get('/banner_list_customer', function(request, response){
+        var sortBy = url.parse(request.url, true).query.sortBy;
+        var query = url.parse(request.url, true).query.query;
+        if (sortBy == undefined && query == undefined){
+               // var sql = "SELECT * FROM notice";
+               query = ''
+               sortBy = ''
+        }
+       
+        if (sortBy == 'nTitle-asc')
+        { 
+                var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" +"ORDER BY nTitle asc "; 
+        } 
+        else if(sortBy == 'nTitle-desc')
+        { 
+                var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nTitle desc"; 
+        } 
+        else if(sortBy == 'nEndDate-asc')
+        {
+                var sql = "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate asc"; 
+        } 
+        else if(sortBy == 'nEndDate-desc'){
+        var sql =  "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate desc "; 
+        }
+        else {
+        var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'"; 
+        }       
+        
+        
+        db.query(sql, function(err, result, fields){
+                if(err) throw err;
+        response.render('banner_list_customer', {
+				notice : result,
+				is_logined : request.session.is_logined,
+				name : request.session.name,
+				ID : request.session.name
+	});
+        });
 });
 
-app.get('/banner_detail_admin', function(request, response){
-                db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
-                        if(!admin[0]){
-                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
-                        } else {
-                                if(request.session.is_logined == true){
-                                        response.render('bannner_datail_admin', {
-                                                is_logined : request.session.is_logined,
-                                                name : request.session.name
+app.get('/banner_detail_admin/:nIdx', function(request, response){
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+        if(!admin[0]){
+                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+        } else {
+                if(request.session.is_logined == true){
+                        const sql = "SELECT * FROM notice where nIdx=?"
+                        db.query(sql, [request.params.nIdx], function(err, result, fields){
+                                if (err) throw err;
+                                response.render('banner_detail_admin',{
+                                        is_logined :request.session.is_logined,
+                                        notice : result,
+					name : request.session.name,
+					ID : request.session.name
+                                });
+                        });
+                };
+        };
+});
+});
+
+app.get('/banner_detail_customer/:nIdx', function(request, response){
+        const sql = "SELECT * FROM notice where nIdx=?"
+        console.log(sql);
+        db.query(sql, [request.params.nIdx], function(err, result, fields){
+                if(err) throw err;
+                response.render('banner_detail_customer', {
+			notice : result,
+			is_logined : request.session.is_logined,
+			ID : request.session.name,
+			name : request.session.name
+		});
+        });
+});
+
+app.post('/create_banner', function(request, response){
+	const sql = "INSERT INTO notice SET ?"
+	db.query(sql, request.body, function(err, result, fields){
+		if(err) throw err;
+		response.redirect('/banner_list_admin');
+	});
+});
+
+app.get('/edit_banner_admin/:nIdx', function(request, response){
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                } else {
+                        if(request.session.is_logined == true){
+                                const sql = "SELECT * FROM notice where nIdx=?"
+                                db.query(sql, [request.params.nIdx], function(err, result, fields){
+                                        if (err) throw err;
+                                        response.render('edit_banner_admin',{
+                                                is_logined :request.session.is_logined,
+                                                notice : result
+
                                         });
-                                }
-                        }
-                });
-        
+                                });
+                        };
+                };
+        });        
+});
+
+app.post('/banner_update/:nIdx', function(request, response){
+        const sql = "UPDATE notice SET ? WHERE nIdx =" + request.params.nIdx;
+        db.query(sql,request.body,function (err, result, fields) {
+                if(err) throw  err;
+                console.log(result);
+                response.redirect('/banner_list_admin');
+        }); 
+});
+
+app.get('/banner_delete/:nIdx', function(request, response){
+        const sql = "DELETE FROM notice WHERE nIdx=?"
+        db.query(sql, request.params.nIdx, function(err, result, fields){
+                if(err) throw err;
+                response.redirect('/banner_list_admin');
+        });
 });
 
 app.get('/basket', function(request, response){
