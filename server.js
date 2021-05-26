@@ -338,7 +338,8 @@ app.get('/search', function(request, response){
 
         if (category == "all"){
                 var sql = "SELECT * FROM product WHERE pDelete=0 AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
-        }
+		category = "TOP" + "BOTTOM" + "DRESS" + "BAG&SOCKS" + "ACC" ;
+	}
         else if (category == "top"){
                 var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=0 OR category_id=1) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
 
@@ -352,6 +353,7 @@ app.get('/search', function(request, response){
         }
         else if (category == "goods"){
                 var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=7 OR category_id=8 OR category_id=9) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
+		category = "BAG&SOCKS";
         }
         else {
                 var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=10 OR category_id=11) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
@@ -365,12 +367,14 @@ app.get('/search', function(request, response){
                                         is_logined : request.session.is_logined,
                                         name : request.session.name,
                                         products : result,
-                                        sub : false
+                                        main_name : category,
+					sub : false
                                 });
                         } else {
                                 response.render('product_list', {
                                         is_logined : false,
                                         products : result,
+					main_name : category,
                                         sub : false
                                 });
                         }
@@ -385,7 +389,7 @@ app.get('/product/:productId', function(request, response){
         db.query(`SELECT * FROM product WHERE pIdx=?`, [filteredId], function(error, product){
                 if(error) throw error;
                 else {
-                        db.query(`select sum(bQuantity) from basket b, member m where b.member_id=m.mId and b.product_id=? GROUP BY b.product_id;`, [filteredId], function(error2, basket){
+                        db.query(`select sum(bQuantity) sum from basket b, member m where b.member_id=m.mId and b.product_id=? GROUP BY b.product_id;`, [filteredId], function(error2, basket){
                                 if(request.session.is_logined == true){
                                         response.render('detail_page', {
                                                 is_logined : request.session.is_logined,
