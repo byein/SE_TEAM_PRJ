@@ -68,19 +68,32 @@
       alt="">
       <article id="slide">
         <ul id="slide_box">
-          <li><img src="<%= product[0].pImg %>" alt="img1"></li>
-          <% if (!product[0].pImg2 == false) { %>
-          <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
-          <% } %>
-          <% if (!product[0].pImg3 == false) { %>
-          <li><img src="<%= product[0].pImg3 %>" alt="img3"></li>
-          <% } %>
-          <% if (!product[0].pImg4 == false) { %>
-          <li><img src="<%= product[0].pImg4 %>" alt="img4"></li>
-          <% } %>
-          <% if (!product[0].pImg5 == false) { %>
-          <li><img src="<%= product[0].pImg5 %>" alt="img4"></li>
-          <% } %>
+          <% if (!product[0].pImg5 && !product[0].pImg4 && !product[0].pImg3 && !product[0].pImg2) { %>
+            <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+            <% var count = 1; console.log(count); %>
+            <% } else if (!product[0].pImg5 && !product[0].pImg4 && !product[0].pImg3 && product[0].pImg2 != null ) { %>
+            <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+            <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
+            <% var count = 2;  console.log(count);%>
+            <% } else if (!product[0].pImg5 && !product[0].pImg4 && product[0].pImg3 != null && product[0].pImg2 != null ) { %>
+            <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+            <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
+            <li><img src="<%= product[0].pImg3 %>" alt="img3"></li>
+            <% var count = 3; console.log(count);%>
+            <% } else if (!product[0].pImg5 && product[0].pImg4 != null && product[0].pImg3 != null && product[0].pImg2 != null ) { %>
+            <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+            <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
+            <li><img src="<%= product[0].pImg3 %>" alt="img3"></li>
+            <li><img src="<%= product[0].pImg4 %>" alt="img4"></li>
+            <% var count = 4; console.log(count);%>
+            <% } else { %>
+            <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+            <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
+            <li><img src="<%= product[0].pImg3 %>" alt="img3"></li>
+            <li><img src="<%= product[0].pImg4 %>" alt="img4"></li>
+            <li><img src="<%= product[0].pImg5 %>" alt="img5"></li>
+            <% var count = 5; console.log(count);%>
+            <% } %>
         </ul>
       </article>
       <img id="right_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
@@ -116,6 +129,8 @@
 </footer>
 
     <script type="text/javascript" src="/detail_page_admin.js"></script>
+    <script>var count = <%= count %>;</script>
+    
 
 </body>
 

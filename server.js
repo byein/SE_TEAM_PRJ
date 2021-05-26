@@ -49,7 +49,7 @@ var upload = multer({
 app.get('/', function(request, response){
         console.log('메인페이지 작동');
         console.log(request.session);
-        db.query(`SELECT eImg FROM event WHERE ePeriod >= DATE(NOW())`, function(error, banner_imgs){
+        db.query(`SELECT nImg FROM notice WHERE nEndDate >= DATE(NOW())`, function(error, banner_imgs){
                 db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                         if(request.session.is_logined == true){
                                 response.render('mainPage', {
@@ -189,7 +189,7 @@ app.get('/sub_category/:categoryId/:page', function(request, response){
 
 app.get('/admin', function(request, response){
         console.log(request.session);
-        db.query(`SELECT eImg FROM event WHERE ePeriod >= DATE(NOW())`, function(error, banner_imgs){
+        db.query(`SELECT nImg FROM notice WHERE nEndDate >= DATE(NOW())`, function(error, banner_imgs){
                 db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                                 if(!admin[0]){
@@ -273,7 +273,7 @@ app.post('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdet
 
         db.query(`INSERT INTO product (category_id, pName, pPrice, pImg, pImg2, pImg3, pImg4, pImg5, pDetail,  pDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`, [body.sub_category, body.pname, body.pprice, img[0], img[1], img[2], img[3], img[4], detail], function(error2, result){
                 db.query(`INSERT INTO stock (product_id, sQuantity) VALUES (?, ?)`, [result.insertId, body.pquantity], function(error3, results){
-                response.redirect(`/product/${result.insertId}`);
+                response.redirect(`/product_admin/${result.insertId}`);
                 });
         });
 });
@@ -317,7 +317,7 @@ app.get('/delete_product_admin/:productId', function(request, response){
         var filteredId = path.parse(request.params.productId).base;
         db.query(`SELECT * FROM product p, stock s WHERE p.pIdx=s.product_id and p.pIdx=?`, [filteredId], function(error, product){
                 db.query(`UPDATE product SET pDelete=? WHERE pIdx=?`, [1, filteredId], function(error, result){
-                        response.redirect(`/product_list_admin/1`);
+                        response.redirect(`/product_list_admin`);
                 });
         });
 });
@@ -735,6 +735,32 @@ app.get('/payment', function(request, response) {
                         });                
                 });
         });
+});
+
+app.get('/use', function(request, response){
+        if(request.session.is_logined == true){
+                response.render('use', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }else{
+                response.render('use', {
+                        is_logined : false
+                });
+        }
+});
+
+app.get('/privacy', function(request, response){
+        if(request.session.is_logined == true){
+                response.render('privacy', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }else{
+                response.render('privacy', {
+                        is_logined : false
+                });
+        }
 });
 
 app.listen(3000, function(){
