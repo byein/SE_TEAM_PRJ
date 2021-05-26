@@ -268,12 +268,13 @@ app.get('/delete_product_admin/:productId', function(request, response){
         var filteredId = path.parse(request.params.productId).base;
         db.query(`SELECT * FROM product p, stock s WHERE p.pIdx=s.product_id and p.pIdx=?`, [filteredId], function(error, product){
                 db.query(`UPDATE product SET pDelete=? WHERE pIdx=?`, [1, filteredId], function(error, result){
-                        response.redirect(`/product_list_admin`);
+                        response.redirect(`/product_list_admin/1`);
                 });
         });
 });
 
 app.get('/product_list_admin/:page', function(request, response){
+        var page = request.params.page;
         var query = url.parse(request.url, true).query.query;
         var sortBy = url.parse(request.url, true).query.sortBy;
         var sprice = url.parse(request.url, true).query.sprice;
@@ -284,43 +285,99 @@ app.get('/product_list_admin/:page', function(request, response){
         if (sortBy == undefined){
                 sortBy ='';
         }
-        if(sprice == undefined){
-                sprice ='0';
-        }
-        if (eprice == undefined){
-                eprice ='1000000000';
+        if (sprice == ''){
+               var sprice = '1';
+	}
+        if (eprice == ''){
+               eprice = '100000000';
         }
 
-        var page = request.params.page;
+        console.log(query, sortBy, sprice, eprice);
+
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
                         response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
-                } else {
-                        if (sortBy == "asc"){
-                                var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + "AND pPrice<=" + eprice + " ORDER BY pPrice ASC";}
-                        else if (sortBy == "desc") {
-                               var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice +" AND pPrice<=" + eprice +" ORDER BY pPrice DESC";
-                      
+                } else { 
+			 if (sortBy == "asc"){
+				 var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice + " ORDER BY pPrice ASC";}
+			else if (sortBy == "desc") {
+				var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice +" ORDER BY pPrice DESC";
+                       
                         } else{
-                               var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice +" AND pPrice<=" + eprice +" ORDER BY pDate DESC";
-                        } 
-                        db.query(sql, function(err2, products, fields){
-                               if (err2) throw err2;
-                               else{
-                                       response.render('product_list_admin', {
-                                               is_logined : request.session.is_logined,
-                                               name : request.session.name,
-                                               products : products,
-                                               page : page,
-                                               length : products.length-1,
-                                               page_num : 24
-
+				var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice +" ORDER BY pDate DESC";
+		              } 
+			db.query(sql, function(err2, products, fields){
+				if (err2) throw err2;
+				else{
+					response.render('product_list_admin', {
+						is_logined : request.session.is_logined,
+						name : request.session.name,
+						products : products,
+						page : page,
+                                                length : products.length-1,
+                                                page_num : 24
                                         });
-                                }
-                        });
+				}
+			});
+        	}
+	});
+});
 
+app.get('/search', function(request, response){
+        var category = url.parse(request.url, true).query.category;
+        var query = url.parse(request.url, true).query.query;
+        var sprice = url.parse(request.url, true).query.sprice;
+        var eprice = url.parse(request.url, true).query.eprice;
+
+        if(sprice == ""){
+                sprice ='0';
+        }
+        if (eprice == ""){
+                eprice ='1000000000';
+        }
+
+        if (category == "all"){
+                var sql = "SELECT * FROM product WHERE pDelete=0 AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
+        }
+        else if (category == "top"){
+                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=0 OR category_id=1) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
+
+        }
+        else if (category == "bottom"){
+                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=2 OR category_id=3 OR category_id= 4) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
+
+        }
+        else if (category == "dress"){
+                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=5 OR category_id=6) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
+        }
+        else if (category == "goods"){
+                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=7 OR category_id=8 OR category_id=9) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
+        }
+        else {
+                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=10 OR category_id=11) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
+        }
+
+        db.query(sql, function(err, result, field){
+                if (err) throw err;
+                else{
+                        if(request.session.is_logined == true){
+                                response.render('product_list', {
+                                        is_logined : request.session.is_logined,
+                                        name : request.session.name,
+                                        products : result,
+                                        sub : false
+                                });
+                        } else {
+                                response.render('product_list', {
+                                        is_logined : false,
+                                        products : result,
+                                        sub : false
+                                });
+                        }
                 }
         });
+
+        
 });
 
 app.get('/product/:productId', function(request, response){
@@ -328,20 +385,24 @@ app.get('/product/:productId', function(request, response){
         db.query(`SELECT * FROM product WHERE pIdx=?`, [filteredId], function(error, product){
                 if(error) throw error;
                 else {
-                        if(request.session.is_logined == true){
-                                response.render('detail_page', {
-                                        is_logined : request.session.is_logined,
-                                        name : request.session.name,
-                                        ID : request.session.ID,
-                                        product : product
-                                });
-                        } else {
-                                response.render('detail_page', {
-                                        is_logined : request.session.is_logined,
-                                        ID : false,
-                                        product : product
-                                });
-                        }
+                        db.query(`select sum(bQuantity) from basket b, member m where b.member_id=m.mId and b.product_id=? GROUP BY b.product_id;`, [filteredId], function(error2, basket){
+                                if(request.session.is_logined == true){
+                                        response.render('detail_page', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name,
+                                                ID : request.session.ID,
+                                                product : product,
+                                                basket : basket
+                                        });
+                                } else {
+                                        response.render('detail_page', {
+                                                is_logined : request.session.is_logined,
+                                                ID : false,
+                                                product : product,
+                                                basket : basket
+                                        });
+                                }
+                        });
                 }
         });
 });
@@ -349,23 +410,27 @@ app.get('/product/:productId', function(request, response){
 app.get('/product_admin/:productId', function(request, response){
         var filteredId = path.parse(request.params.productId).base;
         db.query(`SELECT * FROM product WHERE pIdx=?`, [filteredId], function(error, product){
-                if(error) throw error;
-                else {
-                        if(request.session.is_logined == true){
-                                response.render('detail_page_admin', {
-                                        is_logined : request.session.is_logined,
-                                        name : request.session.name,
-                                        ID : request.session.name,
-                                        product : product
-                                });
-                        } else {
-                                response.render('detail_page_admin', {
-                                        is_logined : request.session.is_logined,
-                                        ID : false,
-                                        product : product
-                                });
+                db.query(`SELECT * FROM category WHERE sub_id=?`,[product[0].category_id],function(error2, category){
+                        if(error) throw error;
+                        else {
+                                if(request.session.is_logined == true){
+                                        response.render('detail_page_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name : request.session.name,
+                                                ID : request.session.name,
+                                                product : product,
+                                                category : category
+                                        });
+                                } else {
+                                        response.render('detail_page_admin', {
+                                                is_logined : request.session.is_logined,
+                                                ID : false,
+                                                product : product,
+                                                category : category
+                                        });
+                                }
                         }
-                }
+                });
         });
 });
 
