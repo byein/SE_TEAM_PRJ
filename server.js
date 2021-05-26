@@ -621,7 +621,8 @@ app.get('/banner_detail_customer/:nIdx', function(request, response){
         });
 });
 
-app.post('/create_banner', function(request, response){
+app.post('/create_banner', upload.single('nImg'), function(request, response){
+	var nImg = '/uploads/' +`${file['nImg'][0].filename}`;
 	const sql = "INSERT INTO notice SET ?"
 	db.query(sql, request.body, function(err, result, fields){
 		if(err) throw err;
@@ -629,7 +630,8 @@ app.post('/create_banner', function(request, response){
 	});
 });
 
-app.get('/edit_banner_admin/:nIdx', function(request, response){
+app.get('/edit_banner_admin/:nIdx', upload.single('nImg'), function(request, response){
+	var nImg = '/uploads/' +`${file['nImg'][0].filename}`;
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
                         response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
