@@ -53,7 +53,7 @@
         </nav>
         <section>
             <h2> 공지 수정 </h2>
-            <form action = "/banner_update/<%=notice[0].nIdx %>" method="POST">
+            <form action = "/banner_update/<%=notice[0].nIdx %>" method="POST" enctype="multipart/form-data">
                 <div>
                     <table>
                         <tr><td>제목</td><td><input type = "text" name= "nTitle" value="<%= notice[0].nTitle %>"></td></tr>
