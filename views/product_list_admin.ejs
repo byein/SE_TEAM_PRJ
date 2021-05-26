@@ -29,13 +29,6 @@
                 </div>
             </div>
         </header>
-        <nav id="category">
-            <a class="category-menu" href="/product_list_admin">상의</a>
-            <a class="category-menu" href="/product_list_admin">하의</a>
-            <a class="category-menu" href="/product_list_admin">원피스</a>
-            <a class="category-menu" href="/product_list_admin">잡화류</a>
-            <a class="category-menu" href="/product_list_admin">악세서리</a>
-        </nav>
 
 
 
@@ -43,7 +36,7 @@
             <ul class="menu">
                 <li><a href="/admin" class="active">Home</a></li>
                 <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
-                <li><a href="/product_list_admin" class="current">Product 관리</a></li>
+                <li><a href="/product_list_admin/1" class="current">Product 관리</a></li>
                 <li><a href="/product_information_admin">Sales Information</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
@@ -56,25 +49,23 @@
             
             <div class="list">
                 <ul class="row">
-                    <% for(let i=0; i<products.length; i++){ %>
-                        <li class="cell">
-                                <div class="img_box"><img src="<%= products[i].pImg %>" alt=""><!--상품사진--></div>
-                                <div class="product_name"><a href="/product_admin/<%= products[i].pIdx %>"><%= products[i].pName %></div>
-                                <div class="product_price"><%= products[i].pPrice %></div>
-                        </li>
-                    <%} %>
+                    <% for ( var i = ( page * page_num) -  page_num; i< (page * page_num); i++) {
+                        if (length < i) { i++; } else { var data = products[i]; %>
+    
+                            <li class="cell">
+                                    <div class="img_box"><img src="<%= data.pImg %>" alt=""><!-- 상품사진--></div>
+                                    <div class="product_name"><a href="/product_admin/<%= data.pIdx %>"><%= data.pName %></div>
+                                    <div class="product_price"><%= data.pPrice %></div>
+                            </li>
+                    <%}  }%>
                     <!--상품 수만큼 li 반복-->
                 </ul>
             </div>
             <div class="outer">
                 <div class="pagination">
-                    <a href="#">&laquo;</a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">&raquo;</a>
+                    <% for (var j=0; j<products.length / page_num; j++){ %>
+                        <a href="/product_list_admin/<%= j+1 %>"><%= j+1 %></a>
+                    <% } %>
                 </div>
             </div>
             
