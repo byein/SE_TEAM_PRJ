@@ -12,12 +12,21 @@
                 <h1>
                     <a id="logo" href="/admin" title="로고">로고</a>
                 </h1>
-                <form id="search-form" method="GET">
-                    <input id="search" type="search" placeholder="검색">
-                    <button id="search-btn" class="search">
-                        <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
-                    </button>
-                </form>
+                <div id ="search-form">
+                    <form action="/search" method="get" class="category">
+                         <select name = "category">
+                             <option value="all"> 전체</option>
+                             <option value="top"> 상의</option>
+                             <option value="bottom"> 하의</option>
+                             <option value="dress"> 원피스</option>
+                             <option value="goods"> 잡화류</option>
+                             <option value="acc"> 악세서리</option>
+                         </select>
+                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                         <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                         <input type = "submit" value ="확인" class = "sort-button">
+                     </form>
+                 </div>
                 <div class="wrap-user-util">
                     <% if(is_logined == true){ %>
                         <a><%= name %> 관리자</a>
