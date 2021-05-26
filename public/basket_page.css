@@ -345,6 +345,11 @@ input[type="button"] {
   padding: 0.1px;
 }
 
+#footer a{
+  font-weight: bold;
+}
+
+
 .wrap-user-util {
   display: inline;
   position: relative;
