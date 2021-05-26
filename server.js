@@ -110,7 +110,8 @@ app.get('/category/:categoryName/:page', function(request, response){
                                         page : page,
                                         length : products.length-1,
                                         page_num : 24,
-                                        sortby : sortby
+                                        sortby : sortby,
+                                        search : 0
                                 });
                                 console.log(products.length-1);
                         } else {
@@ -122,7 +123,8 @@ app.get('/category/:categoryName/:page', function(request, response){
                                         page : page,
                                         length : products.length-1,
                                         page_num : 24,
-                                        sortby : sortby
+                                        sortby : sortby,
+                                        search : 0
                                 });
                                 console.log(products.length-1);
                         }
@@ -172,7 +174,8 @@ app.get('/sub_category/:categoryId/:page', function(request, response){
                                                 page : page,
                                                 length : products.length-1,
                                                 page_num : 24,
-                                                sortby : sortby
+                                                sortby : sortby,
+                                                search : 0
                                         });
                                 } else {
                                         response.render('product_list', {
@@ -183,7 +186,8 @@ app.get('/sub_category/:categoryId/:page', function(request, response){
                                                 page : page,
                                                 length : products.length-1,
                                                 page_num : 24,
-                                                sortby : sortby
+                                                sortby : sortby,
+                                                search : 0
                                         });
                                 }
                         });
@@ -426,7 +430,9 @@ app.get('/search', function(request, response){
 					sub : false,
                                         page : 1,
                                         page_num : 24,
-                                        length : result.length-1
+                                        length : result.length-1,
+                                        sortby : 'p.pDate DESC',
+                                        search : 1
                                 });
                         } else {
                                 response.render('product_list', {
@@ -436,7 +442,9 @@ app.get('/search', function(request, response){
                                         sub : false,
                                         page : 1,
                                         page_num : 24,
-                                        length : result.length-1
+                                        length : result.length-1,
+                                        sortby : 'p.pDate DESC',
+                                        search : 1
                                 });
                         }
                 }
