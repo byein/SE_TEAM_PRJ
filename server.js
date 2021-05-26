@@ -71,8 +71,33 @@ app.get('/', function(request, response){
 
 app.get('/category/:categoryName/:page', function(request, response){
         var filteredId = path.parse(request.params.categoryName).base;
+        var sortby = url.parse(request.url, true).query.sortby;
+	if (sortby == undefined){
+		sortby = "p.pDate DESC";
+	}
+	if (sortby == "pName-asc")
+	{
+		sortby = "p.pName ASC";
+	}
+	if (sortby == "pName-desc")
+	{
+		sortby = "p.pName DESC";
+	}
+	if (sortby == "pPrice-asc"){
+		sortby = "p.pPrice ASC";
+	}
+	if (sortby == "pPrice-desc"){
+		sortby = "p.pPrice DESC";
+	}
+	if (sortby == "pDate-asc"){
+		sortby = "p.pDate ASC";
+	}
+	if (sortby == "pDate-desc"){
+		sortby = "p.pDate DESC";
+	}
+
         var page = request.params.page;
-        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=? and p.pDelete=0 ORDER BY p.pDate DESC;`, [filteredId], function(error, products){
+        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=? and p.pDelete=0 ORDER BY`+sortby, [filteredId], function(error, products){
                 if(error) throw error;
                 else {
                         if(request.session.is_logined == true){
@@ -106,8 +131,32 @@ app.get('/category/:categoryName/:page', function(request, response){
 
 app.get('/sub_category/:categoryId/:page', function(request, response){
         var filteredId = path.parse(request.params.categoryId).base;
+        var sortby = url.parse(request.url, true).query.sortby;
+	if (sortby == undefined){
+		sortby = "p.pDate DESC";
+	}
+	if (sortby == "pName-asc")
+	{
+		sortby = "p.pName ASC";
+	}
+	if (sortby == "pName-desc")
+	{
+		sortby = "p.pName DESC";
+	}
+	if (sortby == "pPrice-asc"){
+		sortby = "p.pPrice ASC";
+	}
+	if (sortby == "pPrice-desc"){
+		sortby = "p.pPrice DESC";
+	}
+	if (sortby == "pDate-asc"){
+		sortby = "p.pDate ASC";
+	}
+	if (sortby == "pDate-desc"){
+		sortby = "p.pDate DESC";
+	}
         var page = request.params.page;
-        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and p.pDelete=0 and c.sub_id=? ORDER BY p.pDATE DESC;`, [filteredId], function(error, products){
+        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and p.pDelete=0 and c.sub_id=? ORDER BY `+sortby, [filteredId], function(error, products){
                 if(error) throw error;
                 else {
                         db.query(`SELECT * FROM category WHERE sub_id=?`, [filteredId], function(error2, sub){

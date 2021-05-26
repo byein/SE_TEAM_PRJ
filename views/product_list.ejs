@@ -90,7 +90,17 @@
                         <h2><%=sub[0].sub_name %></h2>
                 <% } %>
             </h2>
-            
+            <form action="" method = "get" class= "sortBy">
+                <select name="sortby">
+                    <option value = "pName-asc"> 이름 오름차순 </option>
+                    <option value = "pName-desc"> 이름 내림차순 </option>
+                    <option value = "pPrice-asc"> 가격 오름차순 </option>
+                    <option value = "pPrice-desc"> 가격 내림차순 </option>
+                    <option value = "pDate-asc"> 날짜 오름차순 </option>
+                    <option value = "pDate-desc"> 날짜 내림차순 </option>
+                </select>
+                <input type ="submit" value = "확인" class ="sort-button">
+            </form>
             <div class="list">
                 <ul class="row">
                     <% for ( var i= ( page * page_num) - page_num; i< (page * page_num); i++) {
