@@ -34,15 +34,19 @@
            </form>
        </div>
 
-        <div class="wrap-user-util">
-            <% if(is_logined == true){ %>
-                <a><%= name %> 님 환영합니다!</a>
-                <button id="logout">
-                    <a href="/logout">logout</a>
-                </button>
-            <% } %>
-            </button>
-        </div>
+      <div class="wrap-user-util">
+        <% if(is_logined==true){ %>
+          <a>
+            <%= name %> 관리자
+          </a>
+          <button id="logout">
+            <a href="/logout">logout</a>
+          </button>
+          <button id="bucket">
+            <a id="goto-bucket" href="/basket">장바구니</a>
+          </button>
+          <% } %>
+      </div>
 
     </div>
 
