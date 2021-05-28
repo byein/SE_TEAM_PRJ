@@ -80,13 +80,12 @@ function S_ani_R() {
   }
 }
 
-
 slide_bt_L.addEventListener('click', function () {
   if (s_count > 0) {
     slide_bt_R.style.display = "block";
-  clearInterval(s_itv);
-  s_count--;
-  S_ani_L();
+    clearInterval(s_itv);
+    s_count--;
+    S_ani_L();
   }
   if (s_count == 0) {
   slide_bt_L.style.display = "none";
