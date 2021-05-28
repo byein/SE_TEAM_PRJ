@@ -56,7 +56,7 @@ function change() {
 
 
 slide_bt_R.addEventListener('click', function () {
-  if (s_count == count-1) {
+  if (s_count < 5) {
     slide_bt_R.style.display = "none";
   } else if (s_count < count) {
     clearInterval(s_itv);
@@ -78,17 +78,17 @@ function S_ani_R() {
   }
 }
 
-
 slide_bt_L.addEventListener('click', function () {
-  if (s_count == 0) {
-    slide_bt_L.style.display = "block";
-  } else if (s_count > 0) {
-    clearInterval(s_itv);
-    s_count--;
-    S_ani_L();
-  } else {
-    slide_bt_R.style.display = "none";
-  }
+   if (s_count > 0) {
+      clearInterval(s_itv);
+      s_count--;
+      S_ani_L();
+   }
+   if (s_count == 0) {
+      slide_bt_L.style.display = "none";
+   } else {
+     slide_bt_R.style.display = "block";
+   }
 });
 function S_ani_L() {
   s_itv = setInterval(frame, 1);
