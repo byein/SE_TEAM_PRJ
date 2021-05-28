@@ -16,6 +16,9 @@ body {
   background-color: lightcyan;
   overflow-x: hidden;
 }
+body a {
+  text-decoration: none;
+}
 
 #header {
   position: relative;
@@ -26,9 +29,6 @@ body {
   background-color: antiquewhite;
   display: flex;
   align-items: center;
-}
-body a {
-  text-decoration: none;
 }
 
 section {
@@ -74,7 +74,6 @@ section {
   border-radius: none;
   background: none;
 }
-
 #search-btn a {
   background: none;
 }
@@ -253,8 +252,7 @@ ul {
   background-color: aquamarine;
   padding: 0.1px;
 }
-
-#footer a{
+#footer a {
   font-weight: bold;
 }
 
@@ -266,7 +264,6 @@ img {
   vertical-align: middle;
 }
 
-/* Slideshow container */
 .main-banner {
   max-width: 1000px;
   position: relative;
@@ -283,14 +280,6 @@ img {
   height: 500px;
 }
 
-/* 배너 btn 추가할 수도 있음
-.banner-roll-btn img { 
-  width: 50px;
-  height: 50px;
-}
-*/
-
-/* The dots/bullets/indicators */
 #dot {
   height: 15px;
   width: 15px;
@@ -305,7 +294,6 @@ img {
   background-color: #717171;
 }
 
-/* Fading animation */
 .fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
