@@ -1,4 +1,3 @@
-
 function search_period_check() {
     var search_period_start = document.getElementById("search_start");
     var search_period_end = document.getElementById("search_end");
@@ -37,4 +36,49 @@ function search_period_check() {
         return true;
     }
 }
+function change_order_processing(id){
 
+    var tr = document.getElementsByClassName("check_order");
+    var tds = tr[id-1].getElementsByTagName("td");
+
+    console.log(tr.length);
+
+    var sales_date = tds[0].firstChild.data;
+    var sales_product = tds[1].firstChild.data;
+    var sales_processing_phase = tds[2].firstChild.data;
+    var sales_count = tds[3].firstChild.data;
+    var sales_price = tds[4].firstChild.data;
+    var sales_processing_btn = tds[5].firstChild.value;
+
+    console.log(sales_date);
+    console.log(sales_product);
+    console.log(sales_processing_phase);
+    console.log(sales_count);
+    console.log(sales_price);
+    console.log(sales_processing_btn);
+
+
+    if(sales_processing_btn == "배송하기"){
+        if(sales_processing_phase == "결제완료"){
+            tds[2].firstChild.data = "배송중";
+            tds[5].firstChild.value = "배송완료";
+
+            return true;
+        }else{
+            return false;
+        }
+    }else if(sales_processing_btn == "배송완료"){
+        if(sales_processing_phase == "배송중"){
+            tds[2].firstChild.data = "배송완료";
+            tds[5].firstChild.value = "상품평";
+            return true;
+        }else{
+            return false;
+        }
+    }else if(sales_processing_btn == "상품평"){
+        /*4차 요구사항에 나온 상품평 기능 추가*/
+        return true;
+    }else{
+        return false;
+    }
+}

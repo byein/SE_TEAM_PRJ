@@ -1,0 +1,253 @@
+html, body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: lightcyan;
+  overflow-x: hidden;
+}
+
+#header {
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 200px;
+  width: 100%;
+  background-color: antiquewhite;
+  display: flex;
+  align-items: center;
+}
+
+body a {
+  text-decoration: none;
+}
+
+section{
+  overflow: hidden;
+  margin: 30px;
+}
+
+#head-wrapper {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+#logo {
+  position: absolute;
+  left: 10%;
+  text-decoration: none;
+  text-align: center;
+  padding: auto;
+  display: flex;
+  float: left;
+}
+
+#search-form {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  left: 35%;
+  float: left;
+}
+
+#search {
+  display: block;
+  margin: 3px;
+  height: 40px;
+  width: 30%;
+  border-radius: 15px;
+  float: left;
+
+}
+
+#search-btn{
+  border-radius: none;
+  background: none;
+}
+
+#search-btn a {
+  background: none;
+}
+#search-btn a img {
+  width: 35px;
+  height: 35px;  
+}
+
+.wrap-user-util {
+  display:inline;
+  position: relative;
+  width: 30%;
+}
+
+.wrap-user-util button {
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  color: lightcoral;
+}
+
+#goto-signup {
+  text-decoration: none;
+}
+
+#category {
+  position: relative;
+  top: 0px;
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  background-color: lightpink;
+}
+
+.category-menu {
+  display: inline-block;
+  margin: 17px 4.5%;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
+.dropmenu{
+  border:none;
+  border:0px;
+  margin:0px;
+  padding:0px;
+  font: "sans-serif";
+  font-size:20px;
+  }
+
+  .dropmenu ul{
+
+  background: lightpink;
+  height:100px;
+  list-style:none;
+  margin:0px;
+  padding:0px;
+  text-align: center;
+  }
+
+  .dropmenu li{
+  /* float: left; */
+  margin-right: 50px;
+  padding:0px;
+  display: inline-block;
+  }
+
+  .dropmenu li a{
+  background: lightpink;
+  color:#000000;
+  display:block;
+  line-height:100px;
+  margin:0px;
+  padding:0px 25px;
+  text-align:center;
+  text-decoration:none;
+  display: inline-block;
+  }
+
+  .dropmenu li a:hover, .dropmenu ul li:hover a{
+  color:#ffffff;
+  text-decoration:none;
+  }
+
+  .dropmenu li ul{
+  background: lightpink;
+  display:none; 
+  height:auto;
+  border:0px;
+  position: absolute;
+  width:200px;
+  z-index:200;
+  }
+
+  .dropmenu li:hover ul{
+  display:block;
+  }
+
+  .dropmenu li li {
+  background: lightpink;
+  display:block;
+  float:center;
+  margin:0px;
+  padding:0px;
+  width:200px;
+  }
+
+  .dropmenu li:hover li a{
+  background:none;
+  }
+
+  .dropmenu li ul a{
+  display:block;
+  height:80px;
+  font-size:14px;
+  margin:0px;
+  padding:0px 10px 0px 15px;
+  text-align:left;
+  }
+
+  .dropmenu li ul a:hover, .dropmenu li ul li:hover a{
+  background: lightslategray;
+  border:0px;
+  color:#ffffff;
+  text-decoration:none;
+  }
+
+  .dropmenu p{
+  clear: left;
+  }
+
+
+.head, .circle_number{
+  list-style: none;
+}  
+
+.Korean {
+   list-style:none;
+   text-indent: -1.5em;
+}
+
+.Korean .dash {
+    list-style-type:none;
+    text-indent: -0.8em;
+}
+
+table{
+    width: 100%;
+}
+table, th, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px auto;
+    text-align: center;
+    padding: 5px 0;
+
+}
+
+h2{
+    text-align: center;
+    color: lightcoral;
+}
+
+#footer {
+  position: relative;
+  bottom: 0%;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  background-color: aquamarine;
+  padding: 0.1px;
+}
+
+#footer a{
+  font-weight: bold;
+}

@@ -254,6 +254,10 @@ ul {
   padding: 0.1px;
 }
 
+#footer a{
+  font-weight: bold;
+}
+
 /* banner css*/
 .mySlides {
   display: none;

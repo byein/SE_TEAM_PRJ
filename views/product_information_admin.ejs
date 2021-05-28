@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>product_information_admin</title>
-    <link rel="stylesheet" href="/product_information_admin.css">
+    <link rel="stylesheet" href="/product_information_admin.css" type="text/css">
     <script type="text/javascript" src="/product_information_admin.js"></script>
 </head>
 
@@ -14,35 +14,34 @@
             <h1>
                 <a id="logo" href="/admin" title="로고">로고</a>
             </h1>
-            <form id="search-form" method="GET">
-                <input id="search" type="search" placeholder="검색">
-                <button id="search-btn" class="search">
-                    <a href="#"><img class="search-img"
-                            src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+            <div id ="search-form">
+                <form action="/search" method="get" class="category">
+                     <select name = "category">
+                         <option value="all"> 전체</option>
+                         <option value="top"> 상의</option>
+                         <option value="bottom"> 하의</option>
+                         <option value="dress"> 원피스</option>
+                         <option value="goods"> 잡화류</option>
+                         <option value="acc"> 악세서리</option>
+                     </select>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                     <input type = "submit" value ="확인" class = "sort-button">
+                 </form>
+             </div>
+             <div class="wrap-user-util">
+                <% if(is_logined == true){ %>
+                <a><%= name %> 관리자</a>
+                <button id="logout">
+                    <a href="/logout">logout</a>
                 </button>
-            </form>
-            <div class="wrap-user-util">
-                <% if(is_logined==true){ %>
-                    <a>
-                        <%= name %> 관리자
-                    </a>
-                    <button id="logout">
-                        <a href="/logout">logout</a>
-                    </button>
-                    <button id="bucket">
-                        <a id="goto-bucket" href="/basket">장바구니</a>
-                    </button>
-                    <% } %>
+                <button id="bucket">
+                    <a id="goto-bucket" href="/basket">장바구니</a>
+                </button>
+                <% } %>
             </div>
         </div>
     </header>
-    <nav id="category">
-        <a class="category-menu" href="/product_list_admin">상의</a>
-        <a class="category-menu" href="/product_list_admin">하의</a>
-        <a class="category-menu" href="/product_list_admin">원피스</a>
-        <a class="category-menu" href="/product_list_admin">잡화류</a>
-        <a class="category-menu" href="/product_list_admin">악세서리</a>
-    </nav>
 
 
 
@@ -57,12 +56,16 @@
     </nav>
     <section>
         <section id="sales_statistics">
-            <div>
-
                 <table id="search_sales_statistics">
+                    <caption class="table_period">
+                        <a href="#">오늘</a>
+                        <a href="#">최근 일주일</a>
+                        <a href="#">1개월</a>
+                        <a href="#">1년</a>
+                    </caption>
                     <thead>
                         <tr>
-                            <th>검색 기간</th>
+                            <th class="table_left">검색 기간</th>
                             <td colspan="5">
                                 <input type="date" id="search_start">
                                 ~
@@ -76,15 +79,16 @@
                                 </button>
                             </td>
                         </tr>
+
                         <tr class="table_space">
                             <td></td>
                         </tr>
 
-                        <!--판매 순위 개수로 할 건지 금액으로 할 건지 결정 필요!-->
+                        <!--판매 순위 판매 개수로 매기기로 결정!-->
 
-                        <th>총 판매금액</th>
+                        <th class="table_left_up">총 판매금액</th>
                         <th colspan="3">판매 순위 Top3(Category)</th>
-                        <th colspan="3">판매 순위 Top3(Product)</th>
+                        <th colspan="3" class="table_right_up">판매 순위 Top3(Product)</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -126,45 +130,57 @@
         <section id="check_order">
         -->
                 <table id="check_order">
-                    <tbody id="check_order">
+                    <thead>
+                        <tr>
+                            <th class="table_left_up">판매일자</th>
+                            <th>상품이름</th>
+                            <th>현재상태</th>
+                            <th>판매개수</th>
+                            <th>판매금액</th>
+                            <th class="table_right_up">상태변경</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
                         <!--
                         <tr class="table_space">
                             <td></td>
                         </tr>
                     -->
-                        <tr>
+                        <tr class="check_order">
                             <td class="sales_date">21-04-15</td>
                             <td class="sales_product">미키마우스 후드티</td>
                             <td class="sales_processing_phase">결제완료</td>
                             <td class="sales_count">2개</td>
                             <td class="sales_price">80,000원</td>
-                            <td class="sales_processing_btn"><button>배송하기</button></td>
+                            <td><input type="button" class="sales_processing_btn" id="1" onclick="change_order_processing(this.id)" value="배송하기"></td>
                         </tr>
-                        <tr>
+                        <tr class="check_order">
                             <td class="sales_date">21-04-14</td>
                             <td class="sales_product">프릴 블라우스</td>
                             <td class="sales_processing_phase">배송중</td>
                             <td class="sales_count">1개</td>
                             <td class="sales_price">36,000원</td>
-                            <td class="sales_processing_btn"><button>배송완료</button></td>
+                            <td><input type="button" class="sales_processing_btn" id="2" onclick="change_order_processing(this.id)" value="배송완료"></td>
                         </tr>
-                        <tr>
+                        <tr class="check_order">
                             <td class="sales_date">21-04-14</td>
                             <td class="sales_product">검정 무지 티셔츠</td>
                             <td class="sales_processing_phase">배송완료</td>
                             <td class="sales_count">3개</td>
                             <td class="sales_price">10,000원</td>
-                            <td class="sales_processing_btn"><button>상품평</button></td>
+                            <td><input type="button" class="sales_processing_btn" id="3"onclick="change_order_processing(this.id)" value="상품평"></td>
                         </tr>
 
-                        <tr>
+                        <tr class="check_order">
                             <td class="sales_date">21-04-13</td>
                             <td class="sales_product">미키마우스 후드티</td>
                             <td class="sales_processing_phase">구매확정</td>
                             <td class="sales_count">1개</td>
                             <td class="sales_price">40,000원</td>
-                            <td class="sales_processing_btn"><button>상품평</button></td>
+                            <td><input type="button" class="sales_processing_btn" id="4" onclick="change_order_processing(this.id)" value="상품평"></td>
                         </tr>
+                        <tr><td colspan="3"></td><td>총 금액</td><td colspan="2">987,654,321원</td></tr>
                     </tbody>
 
                 </table>
@@ -184,7 +200,14 @@
 
 
     <footer id="footer">
-        <p>Copyright 2021. 24팀 all rights reserved.</p>
+        <p>
+            <a href="/use">[이용약관]</a>
+            <a href="/privacy">[개인정보처리방침]</a>
+            <br>
+
+            [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+            Copyright 2021. 24팀 all rights reserved.<br>
+        </p>
     </footer>
 </body>
 

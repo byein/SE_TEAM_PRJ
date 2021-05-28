@@ -18,12 +18,21 @@
             <a id="logo" href="/" title="로고">로고</a>
         </h1>
 
-        <form id="search-form" method="GET">
-          <input id="search" type="search" placeholder="검색">
-          <button id="search-btn" class="search">
-              <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
-          </button>
-      </form>
+        <div id ="search-form">
+          <form action="/search" method="get" class="category">
+               <select name = "category">
+                   <option value="all"> 전체</option>
+                   <option value="top"> 상의</option>
+                   <option value="bottom"> 하의</option>
+                   <option value="dress"> 원피스</option>
+                   <option value="goods"> 잡화류</option>
+                   <option value="acc"> 악세서리</option>
+               </select>
+               <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+               <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+               <input type = "submit" value ="확인" class = "sort-button">
+           </form>
+       </div>
 
         <div class="wrap-user-util">
             <% if(is_logined == true){ %>
@@ -31,8 +40,17 @@
                 <button id="logout">
                     <a href="/logout">logout</a>
                 </button>
+                <br>
+                <% if (!basket[0]) { %>
+                <a>장바구니 수량 : 0 </a>
+                <% } else { %>
+                <a>장바구니 수량 : <%= basket[0].sum %></a>
+                <% } %>
                 <button id="bucket">
                     <a id="goto-bucket" href="/basket">장바구니</a>
+                </button>
+                <button id="notice">
+                  <a id="goto-notice" href="/banner_list_customer">공지사항</a>
                 </button>
             <% } %>
             </button>
@@ -41,13 +59,42 @@
     </div>
 
 </header>
-<nav id="category">
-  <a class="category-menu" href="/category/TOP">상의</a>
-  <a class="category-menu" href="/category/BOTTOM">하의</a>
-  <a class="category-menu" href="/category/DRESS">원피스</a>
-  <a class="category-menu" href="/category/BAG&SOCKS">잡화류</a>
-  <a class="category-menu" href="/category/ACC">악세서리</a>
-</nav>
+<div class="dropmenu">
+  <ul>
+          <li><a href="/category/TOP/1">상의</a>
+              <ul>
+                  <li><a href="/sub_category/0/1">반팔</a></li>
+                  <li><a href="/sub_category/1/1">긴팔</a></li>
+              </ul>
+          </li>
+      <li><a href="/category/BOTTOM/1">하의</a>
+              <ul>
+                      <li><a href="/sub_category/2/1">반바지</a></li>
+                      <li><a href="/sub_category/3/1">긴바지</a></li>
+                          <li><a href="/sub_category/4/1">치마</a></li>
+              </ul>
+      </li>
+      <li><a href="/category/DRESS/1">원피스</a>
+              <ul>
+                      <li><a href="/sub_category/5/1">숏원피스</a></li>
+                      <li><a href="/sub_category/6/1">롱원피스</a></li>
+              </ul>   
+      </li>
+      <li><a href="/category/BAG&SOCKS/1">잡화류</a>
+              <ul>
+                      <li><a href="/sub_category/7/1">가방</a></li>
+                      <li><a href="/sub_category/8/1">양말</a></li>
+              </ul>
+      </li>
+      <li><a href="/category/ACC/1">악세사리</a>
+              <ul>
+                      <li><a href="/sub_category/9/1">목걸이</a></li>
+                      <li><a href="/sub_category/10/1">귀걸이</a></li>
+                      <li><a href="/sub_category/11/1">팔찌</a></li>
+              </ul>
+      </li>
+  </ul>
+</div>
 
 
 <section>
@@ -57,18 +104,31 @@
     alt="">
     <article id="slide">
       <ul id="slide_box">
+        <% if (!product[0].pImg5 && !product[0].pImg4 && !product[0].pImg3 && !product[0].pImg2) { %>
         <li><img src="<%= product[0].pImg %>" alt="img1"></li>
-        <% if (!product[0].pImg2 == false) { %>
+        <% var count = 1; console.log(count); %>
+        <% } else if (!product[0].pImg5 && !product[0].pImg4 && !product[0].pImg3 && product[0].pImg2 != null ) { %>
+        <li><img src="<%= product[0].pImg %>" alt="img1"></li>
         <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
-        <% } %>
-        <% if (!product[0].pImg3 == false) { %>
+        <% var count = 2;  console.log(count);%>
+        <% } else if (!product[0].pImg5 && !product[0].pImg4 && product[0].pImg3 != null && product[0].pImg2 != null ) { %>
+        <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+        <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
         <li><img src="<%= product[0].pImg3 %>" alt="img3"></li>
-        <% } %>
-        <% if (!product[0].pImg4 == false) { %>
+        <% var count = 3; console.log(count);%>
+        <% } else if (!product[0].pImg5 && product[0].pImg4 != null && product[0].pImg3 != null && product[0].pImg2 != null ) { %>
+        <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+        <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
+        <li><img src="<%= product[0].pImg3 %>" alt="img3"></li>
         <li><img src="<%= product[0].pImg4 %>" alt="img4"></li>
-        <% } %>
-        <% if (!product[0].pImg5 == false) { %>
-        <li><img src="<%= product[0].pImg5 %>" alt="img4"></li>
+        <% var count = 4; console.log(count);%>
+        <% } else { %>
+        <li><img src="<%= product[0].pImg %>" alt="img1"></li>
+        <li><img src="<%= product[0].pImg2 %>" alt="img2"></li>
+        <li><img src="<%= product[0].pImg3 %>" alt="img3"></li>
+        <li><img src="<%= product[0].pImg4 %>" alt="img4"></li>
+        <li><img src="<%= product[0].pImg5 %>" alt="img5"></li>
+        <% var count = 5; console.log(count);%>
         <% } %>
       </ul>
     </article>
@@ -90,7 +150,13 @@
     <br>
 
     <input type="button" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/>
-    
+    <input type="text" id="sample4_postcode" placeholder="우편번호">
+    <!-- <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br> -->
+    <input type="text" id="sample4_roadAddress" placeholder="도로명주소"><br> 
+    <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+    <span id="guide" style="color:#999;display:none"></span>
+    <input type="text" id="sample4_detailAddress" placeholder="상세주소">
+    <input type="text" id="sample4_extraAddress" placeholder="참고항목">
     <br>
     <input type = "hidden" name="userid" value="<%= ID %>" />
     <input type = "hidden" name="productid" value="<%= product[0].pIdx %>" />
@@ -105,11 +171,19 @@
     <h4><img src="<%= product[0].pDetail %>"></h4>
 </section>
 
-  <footer id="footer">
-    <p>Copyright 2021. 24팀 all rights reserved.</p>
-  </footer>
+<footer id="footer">
+  <p>
+      <a href="/use">[이용약관]</a>
+      <a href="/privacy">[개인정보처리방침]</a>
+      <br>
+
+      [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+      Copyright 2021. 24팀 all rights reserved.<br>
+  </p>
+</footer>
 
   <script type="text/javascript" src="/detail_page.js"></script>
+  <script>var count = <%= count %>;</script>
 
 </body>
 

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>banner_admin</title>
+        <title>banner_customer</title>
         <link rel="stylesheet" href="/banner_detail_admin.css" type="text/css">
+        <link rel="stylesheet" href="/mainPage.css">
         <script src="/banner_detail_admin.js"></script>
     </head>
     <body>
@@ -27,29 +28,66 @@
                      </form>
                  </div>
                 <div class="wrap-user-util">
-                    <% if(is_logined == true){ %>
-                        <a><%= name %> 관리자</a>
-                        <button id="logout">
-                            <a href="/logout">logout</a>
-                        </button>
-                        <button id="bucket">
+                    <div class="wrap-user-util">
+                        <% if(is_logined == false){ %>
+                            <button id="login">
+                            <a href="/login">로그인</a>
+                            </button>
+                            <button id="signup-btn">
+                            <a id="goto-signup" href="/signUp">회원가입</a>
+                            </button>
+                        <% }else{ %>
+                            <a><%= name %> 님 환영합니다!</a>
+                            <button id="logout">
+                            <a href="/logout">logout</a></button>
+                            <button id="bucket">
                             <a id="goto-bucket" href="/basket">장바구니</a>
-                        </button>
-                    <% } %>
+                            </button>
+                            <button id="notice">
+                                <a id="goto-notice" href="/banner_list_customer">공지사항</a>
+                            </button>
+                        <% } %>
+                    </div>
+                    
                 </div>
             </div>
         </header>
-
-
-        <nav class="nav">
+        <div class="dropmenu">
             <ul>
-                <li><a href="/admin" class="active">Home</a></li>
-                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
-                <li><a href="/product_list_admin">Product 관리</a></li>
-                <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
-                <li><a href="/logout">Logout</a></li>
+                    <li><a href="/category/TOP/1">상의</a>
+                        <ul>
+                            <li><a href="/sub_category/0/1">반팔</a></li>
+                            <li><a href="/sub_category/1/1">긴팔</a></li>
+                        </ul>
+                    </li>
+                <li><a href="/category/BOTTOM/1">하의</a>
+                        <ul>
+                                <li><a href="/sub_category/2/1">반바지</a></li>
+                                <li><a href="/sub_category/3/1">긴바지</a></li>
+                                    <li><a href="/sub_category/4/1">치마</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/DRESS/1">원피스</a>
+                        <ul>
+                                <li><a href="/sub_category/5/1">숏원피스</a></li>
+                                <li><a href="/sub_category/6/1">롱원피스</a></li>
+                        </ul>   
+                </li>
+                <li><a href="/category/BAG&SOCKS/1">잡화류</a>
+                        <ul>
+                                <li><a href="/sub_category/7/1">가방</a></li>
+                                <li><a href="/sub_category/8/1">양말</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/ACC/1">악세사리</a>
+                        <ul>
+                                <li><a href="/sub_category/9/1">목걸이</a></li>
+                                <li><a href="/sub_category/10/1">귀걸이</a></li>
+                                <li><a href="/sub_category/11/1">팔찌</a></li>
+                        </ul>
+                </li>
             </ul>
-        </nav>
+        </div>
         
         <section>
             <h2>Notice/Event</h2>
@@ -64,7 +102,7 @@
                             <th>등록일</th><td class="date"> <%= notice[0].nDate %></td>
                         </tr>
                         <tr>
-                            <th>카테고리</th><td class ="category"> <%= notice[0].nat %> </td>
+                            <th>카테고리</th><td class ="category"> <%= notice[0].nCat %> </td>
                         </tr>
                         <tr>
                             <th>세부정보</th><td class = "detail"> <%= notice[0].nDetail %></td>                            
@@ -77,11 +115,6 @@
                         <tr>
                             <th> 시작 시간</th> <td class="startdate"> <%= notice[0].nStartDate %></td>
                             <th> 끝나는 시간 </th> <td class="enddate"> <%= notice[0].nEndDate %></td>
-                        </tr>
-
-                        <tr>
-                            <th> <a href="/edit_banner_admin/<%= notice[0].nIdx %>"> 수정 </a> </th>
-                            <th> <a href="/banner_delete/<%= notice[0].nIdx %>"> 삭제 </a></th>
                         </tr>
                     </tbody>
                 </table>

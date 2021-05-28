@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/payment.css">
-    <script type="text/javascript" src="/router/payment.js"></script>
+    <link rel="stylesheet" href="/payment.css">
+    <script defer type="text/javascript" src="/payment.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>     <!--우편번호 찾기 api-->
     <title>Document</title>
 </head>
 <body>
@@ -16,29 +17,37 @@
             <h1>
                 <a id="logo" href="/" title="로고">로고</a>
             </h1>
+            <div id ="search-form">
+                <form action="/search" method="get" class="category">
+                     <select name = "category">
+                         <option value="all"> 전체</option>
+                         <option value="top"> 상의</option>
+                         <option value="bottom"> 하의</option>
+                         <option value="dress"> 원피스</option>
+                         <option value="goods"> 잡화류</option>
+                         <option value="acc"> 악세서리</option>
+                     </select>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                     <input type = "submit" value ="확인" class = "sort-button">
+                 </form>
+             </div>
         </div>
     </header>
     <div class="container">
         <h1>주문하기</h1>
-        <div class="order-product">
+        <div class="order-product-container">
             <h2>주문 상품</h2>
-            <ul id="order-list">
-                <li class="order-product-item-info">
-                    <img class="orderProductImg" src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg"/>
-                    <div class="orderSubject">단가라원피스</div>
-                    <div class="orderQuantity">1개</div>
-                    <div class="orderPrice">14000원</div>
-                </li>
-                <li class="order-product-item-info">
-                    <img class="orderProductImg" src="http://bnx.oa.gg/img/bnx_16fw_visual_02_list.jpg"/>
-                    <div class="orderSubject">단가라원피스</div>
-                    <div class="orderQuantity">2개</div>
-                    <div class="orderPrice">14000원</div>
+            <ul id="order-ul">
+                <li class="product-info-to-order-wrapper">
+                    <img id="orderProductImg" class="order-product-item-info" src="http://bnx.oa.gg/img/bnx_16fw_visual_01_list.jpg"/>
+                    <div id="orderSubject" class="order-product-item-info">단가라원피스</div>
+                    <div id="orderQuantity" class="order-product-item-info">1개</div>
+                    <div id="orderPrice" class="order-product-item-info">14000원</div>
                 </li>
             </ul>
-            <div class="sum">
-                합계 : 42000원
-            </div>
+            <h3 id="sum">
+            </h3>
         </div>
 
         <div class="address-info">
@@ -51,30 +60,40 @@
                     <dt>이메일</dt>
                     <dd><%= email %></dd>
                     <dt>연락처</dt>
-                    <dd><%= phone_num %></dd>
+                    <dd><input type="tel" placeholder="000-0000-0000" id="get-phone-num"/></dd>
                 </dl>
             </div>
             <div class="address-select-wrap">
                 <h3>배송지</h3>
                 <div class="confirm-address">
-                    <p>이름 : <%= mName %></p>
-                    <p>우편번호 : <%= post_num %></p>
-                    <p>주소 : 서울특별시 노원구 서울과학기술대학교 미래관 101호</p>
+                    <div>이름 : <input type="text" value="<%= email %>" id="get-mName"></div>
+                    <p>주소</p>
+                    <input type="text" id="sample4_postcode" name='postcode' placeholder="우편번호" value="<%= mPost_code %>">
+                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+                    <input type="text" id="sample4_roadAddress" name='road' placeholder="도로명주소" value="<%= mRoad_address %>">
+                    <input type="text" id="sample4_jibunAddress" name='jibun' placeholder="지번주소" value="<%= mJibun_address %>">
+                    <span id="guide" style="color:#999;display:none"></span><br>
+                    <input type="text" id="sample4_detailAddress" name='detail' placeholder="상세주소" value="<%= mDetail_address %>">
+                    <input type="text" id="sample4_extraAddress" name='extra' placeholder="참고항목" value="<%= mExtra_address %>">
                 </div>
             </div>
         </div>
         <div class="pay">
             <h2>결제하기</h2>
-            <button id="pay-with-kakao" class="pay-btn" onclick="requestPaywithKakao()">
-                <a href="#">카카오페이 결제</a>
-            </button>
             <button id="pay-with-card" class="pay-btn" onclick="requestPaywithCard()">
-                <a href="">카드결제</a>
+                <a href="">결제하기</a>
             </button>
         </div>
     </div>
-    <footer class="footer">
-        <p>Copyright 2021. 24팀 all rights reserved.</p>
+    <footer id="footer">
+        <p>
+            <a href="/use">[이용약관]</a>
+            <a href="/privacy">[개인정보처리방침]</a>
+            <br>
+
+            [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+            Copyright 2021. 24팀 all rights reserved.<br>
+        </p>
     </footer>
 </body>
 </html>

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>add_banner_admin</title>
-        <link rel="stylesheet" href="/add_banner_admin.css" type="text/css">
-        <script src="/add_banner_admin.js"></script>
+        <title>banner_admin</title>
+        <link rel="stylesheet" href="/banner_list_admin.css" type="text/css">
     </head>
     <body>
         <header id="header">
@@ -26,19 +25,20 @@
                          <input type = "submit" value ="확인" class = "sort-button">
                      </form>
                  </div>
-                <div class="wrap-user-util">
-                    <% if(is_logined == true){ %>
-                        <a><%= name %> 관리자</a>
-                        <button id="logout">
-                            <a href="/logout">logout</a>
-                        </button>
-                        <button id="bucket">
-                            <a id="goto-bucket" href="/basket">장바구니</a>
-                        </button>
-                    <% } %>
-                </div>
+            </div>
+            <div class="wrap-user-util">
+                <% if(is_logined == true){ %>
+                    <a><%= name %> 관리자</a>
+                    <button id="logout">
+                        <a href="/logout">logout</a>
+                    </button>
+                    <button id="bucket">
+                        <a id="goto-bucket" href="/basket">장바구니</a>
+                    </button>
+                <% } %>
             </div>
         </header>
+        
 
 
 
@@ -47,29 +47,26 @@
                 <li><a href="/admin" class="active">Home</a></li>
                 <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
                 <li><a href="/product_list_admin">Product 관리</a></li>
-                <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
+                <li><a href="/product_information_admin">Sales Information</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
         <section>
-            <h2>New Notice/Event</h2>
-            <form action= "/create_banner" method="POST" enctype="multipart/form-data">
+            <h2> 공지 수정 </h2>
+            <form action = "/banner_update/<%=notice[0].nIdx %>" method="POST" enctype="multipart/form-data">
                 <div>
                     <table>
-                        <tr><td>제목</td><td><input type = "text" name = "nTitle"></td></tr>
-                        <tr><td>종류</td>
-                            <td><input type="radio" name="nCat" value="notice">공지사항
-                                <input type="radio" name="nCat" value="event">이벤트</td></tr>
-                        <tr><td>공지/이벤트 이미지</td><td><input type="file" name ="nImg" accept="image/*"></td></tr>
-                        <tr><td>기타 설명</td><td><input type = "text" name ="nDetail" rows="5" cols="30"></td></tr>
-                        <tr><td>기간</td><td><input type = "date" name ="nStartDate" pattern="\d*">
-                                             <input type = "date" name ="nEndDate" pattern="\d*"></td>
-                        </tr>
+                        <tr><td>제목</td><td><input type = "text" name= "nTitle" value="<%= notice[0].nTitle %>"></td></tr>
+                        <tr><td>이미지</td><td><input type = "file" name = "nImg" value="<% notice[0].nImg %>"> </td></tr>
+                        <tr><td>내용</td><td><input type ="text" name= "nDetail" value="<%= notice[0].nDetail %>"></td></tr>
+                        <tr><td>기간</td><td><input type="date" name="nStartDate"  value="<%= notice[0].nStartDate %>">
+                                             <input type="date" name="nEndDate" value="<%= notice[0].nEndDate %>" ></td></tr>
                     </table>
                 </div>
-                <button type = "submit"> submit </button>    
+                <button type="submit"> 수정 </button>
             </form>
         </section>
+    
         <footer id="footer">
             <p>
                 <a href="/use">[이용약관]</a>

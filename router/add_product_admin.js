@@ -38,6 +38,8 @@ function PImgCheck() {
     if (objpImg == "") {
         alert("상품 이미지를 추가해 주세요.");
         return false;
+    } else if(document.getElementById("pimg").files.length > 5){
+        alert("이미지 파일은 최대 5개까지 가능합니다.");
     } else {
         fileSize = document.getElementById("pimg").files[0].size;
         if (!fileForm.test(objpImg)) {
@@ -78,6 +80,9 @@ function PPriceCheck() {
     } else if (!regPPrice.test(objpPrice.value)) {
         alert("상품 가격은 숫자로만 입력해 주세요.");
         objpCode.value == "";
+        return false;
+    } else if (objpPrice.value > 100000000){
+        alert("상품 가격은 최대 1억원까지 가능합니다.");
         return false;
     } else {
         return true;
