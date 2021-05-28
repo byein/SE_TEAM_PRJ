@@ -842,6 +842,21 @@ app.get('/delete_address/:adIdx', function(request, response){
         })
 });
 
+app.get('/product_information_admin', function(request, response){
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                } else {
+                        if(request.session.is_logined == true){
+                                response.render('product_information_admin', {
+                                        is_logined : request.session.is_logined,
+                                        name : request.session.name
+                                });
+                        }
+                }
+        });
+});
+
 app.listen(3000, function(){
         console.log('3000 port');
 });

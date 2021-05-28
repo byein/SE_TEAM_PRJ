@@ -65,7 +65,7 @@
     <nav id="box"> 
       <div id="wrap_product_img">
       <img id="left_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
-      alt="">
+      alt="" style="display:none">
       <article id="slide">
         <ul id="slide_box">
           <% if (!product[0].pImg5 && !product[0].pImg4 && !product[0].pImg3 && !product[0].pImg2) { %>
@@ -96,8 +96,11 @@
             <% } %>
         </ul>
       </article>
+      <% if (count == 1) { %>
+      <% } else { %>
       <img id="right_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
       alt="">
+      <% } %>
       </div>
    </nav>
 
