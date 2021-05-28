@@ -183,11 +183,6 @@ border-radius: 10px;
   
 }
 
-#check_order{
-  width: 90%;
-  height: 80%;
-}
-
 #check_order {
   width: 90%;
   margin: auto;
@@ -265,6 +260,17 @@ border-bottom: 1px solid #999;
   cursor: pointer;
 }
 
+#check_order{
+width: 90%;
+}
+
+#check_order .sales_product{
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+width: 30%;
+}
+
 #check_order, #check_order th, #check_order td{
 border: 0;
 border-collapse: collapse;
@@ -272,6 +278,7 @@ border-collapse: collapse;
 
 #check_order tr{
 border-bottom: 1px solid #999;
+cursor: pointer;
 }
 
 .outer{

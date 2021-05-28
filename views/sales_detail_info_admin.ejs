@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>product_information_admin</title>
+    <link rel="stylesheet" href="/sales_detail_info_admin.css" type="text/css">
+    <script type="text/javascript" src="/sales_detail_info_admin.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <div id="head-wrapper">
+            <h1>
+                <a id="logo" href="/admin" title="로고">로고</a>
+            </h1>
+            <div id ="search-form">
+                <form action="/search" method="get" class="category">
+                     <select name = "category">
+                         <option value="all"> 전체</option>
+                         <option value="top"> 상의</option>
+                         <option value="bottom"> 하의</option>
+                         <option value="dress"> 원피스</option>
+                         <option value="goods"> 잡화류</option>
+                         <option value="acc"> 악세서리</option>
+                     </select>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                     <input type = "submit" value ="확인" class = "sort-button">
+                 </form>
+             </div>
+             <div class="wrap-user-util">
+                <% if(is_logined == true){ %>
+                <a><%= name %> 관리자</a>
+                <button id="logout">
+                    <a href="/logout">logout</a>
+                </button>
+                <button id="bucket">
+                    <a id="goto-bucket" href="/basket">장바구니</a>
+                </button>
+                <% } %>
+            </div>
+        </div>
+    </header>
+
+
+
+    <nav class="nav">
+        <ul class="menu">
+            <li><a href="/admin" class="active">Home</a></li>
+            <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
+            <li><a href="/product_list_admin">Product 관리</a></li>
+            <li><a href="/product_information_admin" class="current">Sales Information</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+        <h2>상품 주문 내역</h2>
+        <section id="sales_detail_info">
+                <table id="sales_detail_list">
+                    <colgroup>
+                        <col width="15">
+                        <col width="35">
+                        <col width="25">
+                        <col width="15">
+                        <col width="15">
+                        <col width="15">
+                    </colgroup>
+                      <thead>
+                        <tr>
+                            <th class="table_left_up">주문날짜</th>
+                            <th>배송주소</th>
+                            <th>상품목록</th>
+                            <th>상품개수</th>
+                            <th>상품금액</th>
+                            <th class="table_right_up">총결제금액</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--
+                        <tr class="table_space">
+                            <td></td>
+                        </tr>
+                    -->
+                        <tr class="sales_list">
+                            <!--rowspan 크게 잡아도 테이블 추가 생성은 없어서 일단 틀은 rowspan 크게 잡아뒀습니다.-->
+                            <td class="sales_date" rowspan="100">21-04-15</td>
+                            <td class="sales_address" rowspan="100"> 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호</td>
+                            <td class="sales_product">미키마우스 후드티</td>
+                            <td class="sales_product_count">1개</td>
+                            <td class="sales_product_price">36,000원</td>
+                            <td class="sales_price" rowspan="100">80,000원</td>
+                        </tr>
+                        <tr class="sales_list">
+                            <td class="sales_product">검은색 무지 티셔츠</td>
+                            <td class="sales_product_count">3개</td>
+                            <td class="sales_product_price">12,000원</td>
+                        </tr>
+                        <tr class="sales_list">
+                            <td class="sales_product">프릴 블라우스</td>
+                            <td class="sales_product_count">2개</td>
+                            <td class="sales_product_price">80,000원</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+        </section>
+
+
+
+    <footer id="footer">
+        <p>
+            <a href="/use">[이용약관]</a>
+            <a href="/privacy">[개인정보처리방침]</a>
+            <br>
+
+            [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+            Copyright 2021. 24팀 all rights reserved.<br>
+        </p>
+    </footer>
+</body>
+
+</html>

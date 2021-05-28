@@ -46,14 +46,12 @@ function change_order_processing(id){
     var sales_date = tds[0].firstChild.data;
     var sales_product = tds[1].firstChild.data;
     var sales_processing_phase = tds[2].firstChild.data;
-    var sales_count = tds[3].firstChild.data;
-    var sales_price = tds[4].firstChild.data;
-    var sales_processing_btn = tds[5].firstChild.value;
+    var sales_price = tds[3].firstChild.data;
+    var sales_processing_btn = tds[4].firstChild.value;
 
     console.log(sales_date);
     console.log(sales_product);
     console.log(sales_processing_phase);
-    console.log(sales_count);
     console.log(sales_price);
     console.log(sales_processing_btn);
 
@@ -61,7 +59,7 @@ function change_order_processing(id){
     if(sales_processing_btn == "배송하기"){
         if(sales_processing_phase == "결제완료"){
             tds[2].firstChild.data = "배송중";
-            tds[5].firstChild.value = "배송완료";
+            tds[4].firstChild.value = "배송완료";
 
             return true;
         }else{
@@ -70,7 +68,7 @@ function change_order_processing(id){
     }else if(sales_processing_btn == "배송완료"){
         if(sales_processing_phase == "배송중"){
             tds[2].firstChild.data = "배송완료";
-            tds[5].firstChild.value = "상품평";
+            tds[4].firstChild.value = "상품평";
             return true;
         }else{
             return false;
