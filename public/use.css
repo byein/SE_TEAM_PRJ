@@ -1,15 +1,19 @@
-html{
-    font-family: "Noto Sans KR", sans-serif;
-}
-body{
+html, body {
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  body{
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     background-color: lightcyan;
     overflow-x: hidden;
-}
-#header {
+  }
+  
+  #header {
+    position: relative;
     left: 0;
     top: 0;
     height: 200px;
@@ -22,13 +26,10 @@ body{
   body a {
     text-decoration: none;
   }
-
-  section h2{
-      text-align: center;
-  }
   
   section{
     overflow: hidden;
+    margin: 30px;
   }
   
   #head-wrapper {
@@ -100,6 +101,8 @@ body{
   }
   
   #category {
+    position: relative;
+    top: 0px;
     width: 100%;
     height: fit-content;
     text-align: center;
@@ -113,7 +116,6 @@ body{
     font-size: 20px;
     color: black;
   }
-
   .dropmenu{
     border:none;
     border:0px;
@@ -203,169 +205,40 @@ body{
     .dropmenu p{
     clear: left;
     }
-  
 
 
-.nav{
-    width: 230px;
-    height: 70%;
-    float: left;
-}
-.section{
-    width: 70%;
-    height: 70%;
-    float: left;
-}
+  .head, .circle_number{
+    list-style: none;
+  }  
 
-ul.menu{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
-}
-.nav li a{
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-.nav li a.active{
-    background-color: lightseagreen;
-    color: white;
-}
-.nav .menu>li :hover:not(.active){
-    background-color: lightpink;
-    color: white;
-}
-.nav li a.current{
-    background-color: lightcoral;
-    color: white;
-}
-th{
-    background-color: lightseagreen;
-    padding: 30px;
-}
-.btn a{
-    display: block;
-    color: white;
-    float: right;
-    margin: 15px auto;
-    text-decoration: none;
-    background-color: lightcoral;
-    padding: 10px;
-    border-radius: 10px;
-}
-table{
-    padding: auto;
-    margin: auto 10px;
-}
-.outer{
-    display: flex;
-    justify-content: center;
-}
-.pagination {
-    display: inline-block;
-}
-  
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-}
+  .Korean {
+     list-style:none;
+     text-indent: -1.5em;
+  }
 
-.pagination a.active {
-    background-color: lightseagreen;
-    color: white;
+  .Korean .dash {
+      list-style-type:none;
+      text-indent: -0.8em;
   }
   
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-}
+  table{
+      width: 100%;
+  }
+  table, th, tr, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      margin: 20px auto;
+      text-align: center;
+      padding: 5px 0;
 
-section, ul, li{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+  }
 
-a{
-    text-decoration: none;
-}
+  h2{
+      text-align: center;
+      color: lightcoral;
+  }
 
-.cell{
-    float: left;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-}
-.row::after{
-    content: "";
-    display: block;
-    clear: both;
-}
-.img_box>img{
-    display: block;
-    width: 100%;
-}
-section{
-    overflow-x: hidden;
-    padding: 30px;
-}
-.list>ul>li{
-    width: calc(100%/6);
-}
-.list>ul>li{
-    padding: 0 10px;
-}
-.list>ul{
-    margin: 0 -10px;
-}
-.list>ul>li>.product_name{
-    text-align: center;
-    font-weight: bold;
-    font-size: medium;
-}
-.list>ul>li>.product_price{
-    text-align: center;
-    font-weight: bold;
-    font-size:medium;
-}
-.list>ul>li>.product_price::after{
-    content: "원";
-    font-size: medium;
-    font-weight: bold;
-}
-@media(max-width:800px){
-    .list>ul>li{
-        width: calc(100%/5);
-    }
-}
-@media(max-width:650px){
-    .list>ul>li{
-        width: calc(100%/4);
-    }
-}
-@media(max-width:500px){
-    .list>ul>li{
-        width: calc(100%/3);
-    }
-}
-@media(max-width:400px){
-    .list>ul>li{
-        width: calc(100%/2);
-    }
-}
-@media(max-width:300px){
-    .list>ul>li{
-        width: calc(100%/1);
-    }
-}
-
-
-
-
-#footer {
+  #footer {
     position: relative;
     bottom: 0%;
     height: 150px;
@@ -374,7 +247,8 @@ section{
     background-color: aquamarine;
     padding: 0.1px;
   }
-  
+
   #footer a{
     font-weight: bold;
   }
+  

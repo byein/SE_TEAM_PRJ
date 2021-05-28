@@ -1,9 +1,5 @@
 function check() {
-    if (!PRegDateCheck()) {
-        return false;
-    } else if (!PCategoryCheck()) {
-        return false;
-    } else if (!PCodeCheck()) {
+    if (!PCategoryCheck()) {
         return false;
     } else if (!PNameCheck()) {
         return false;
@@ -19,23 +15,9 @@ function check() {
         alert("상품이 성공적으로 등록되었습니다.");
         return true;
     }
+    
 }
 
-function PCodeCheck() {
-    var objpCode = document.getElementById("pcode");
-    var regPCode = /^[A-Z]{2}[0-9]{4}$/;
-
-    if (objpCode.value == "") {
-        alert("상품 코드를 입력해 주세요.");
-        return false;
-    } else if (!regPCode.test(objpCode.value)) {
-        alert("상품코드를 영문 대문자 2자 숫자 4자의 조합으로 만들어주세요. ex)AC1234");
-        objpCode.value == "";
-        return false;
-    } else {
-        return true;
-    }
-}
 function PNameCheck() {
     var objpName = document.getElementById("pname");
 
@@ -56,6 +38,8 @@ function PImgCheck() {
     if (objpImg == "") {
         alert("상품 이미지를 추가해 주세요.");
         return false;
+    } else if(document.getElementById("pimg").files.length > 5){
+        alert("이미지 파일은 최대 5개까지 가능합니다.");
     } else {
         fileSize = document.getElementById("pimg").files[0].size;
         if (!fileForm.test(objpImg)) {
@@ -97,6 +81,9 @@ function PPriceCheck() {
         alert("상품 가격은 숫자로만 입력해 주세요.");
         objpCode.value == "";
         return false;
+    } else if (objpPrice.value > 100000000){
+        alert("상품 가격은 최대 1억원까지 가능합니다.");
+        return false;
     } else {
         return true;
     }
@@ -121,36 +108,6 @@ function PExplainCheck() {
         return true;
     }
 }
-function PRegDateCheck() {
-    var objpRegDate = document.getElementById("pregdate");
-
-    objpRegDate = new Date(objpRegDate.value);
-    var year = objpRegDate.getFullYear();
-    var month = objpRegDate.getMonth() + 1;
-    var date = objpRegDate.getDate();
-
-    if (isNaN(year) || isNaN(month) || isNaN(date)) {
-        year = 0;
-        month = 0;
-        date = 0;
-    }
-
-    var today = new Date();
-    var todayYear = today.getFullYear();
-    var todayMonth = today.getMonth() + 1;
-    var todayDate = today.getDate();
-
-    if (year==0&&month==0&date==0) {
-        alert("등록 날짜를 입력해 주세요.");
-        return false;
-    } else if (todayYear != year || todayMonth != month || todayDate != date) {
-        alert("등록 날짜는 오늘만 가능합니다.");
-        objpRegDate.value == "";
-        return false;
-    } else {
-        return true;
-    }
-}
 
 
 $(document).ready(function() {
@@ -161,27 +118,27 @@ $(document).ready(function() {
     var mainCategoryObject = new Object();
     
     mainCategoryObject = new Object();
-    mainCategoryObject.main_category_id = "1";
+    mainCategoryObject.main_category_id = "0";
     mainCategoryObject.main_category_name = "상의";
     mainCategoryArray.push(mainCategoryObject);
     
     mainCategoryObject = new Object();
-    mainCategoryObject.main_category_id = "2";
+    mainCategoryObject.main_category_id = "1";
     mainCategoryObject.main_category_name = "하의";
     mainCategoryArray.push(mainCategoryObject);
 
     mainCategoryObject = new Object();
-    mainCategoryObject.main_category_id = "3";
+    mainCategoryObject.main_category_id = "2";
     mainCategoryObject.main_category_name = "원피스";
     mainCategoryArray.push(mainCategoryObject);
 
     mainCategoryObject = new Object();
-    mainCategoryObject.main_category_id = "4";
+    mainCategoryObject.main_category_id = "3";
     mainCategoryObject.main_category_name = "잡화";
     mainCategoryArray.push(mainCategoryObject);
 
     mainCategoryObject = new Object();
-    mainCategoryObject.main_category_id = "5";
+    mainCategoryObject.main_category_id = "4";
     mainCategoryObject.main_category_name = "악세서리";
     mainCategoryArray.push(mainCategoryObject);
     
@@ -191,78 +148,78 @@ $(document).ready(function() {
     
     //상의에 해당하는 sub category 리스트
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "1";
-    subCategoryObject.sub_category_id = "1"
+    subCategoryObject.main_category_id = "0";
+    subCategoryObject.sub_category_id = "0"
     subCategoryObject.sub_category_name = "반팔"    
     subCategoryArray.push(subCategoryObject);
     
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "1";
-    subCategoryObject.sub_category_id = "2"
+    subCategoryObject.main_category_id = "0";
+    subCategoryObject.sub_category_id = "1"
     subCategoryObject.sub_category_name = "긴팔"    
     subCategoryArray.push(subCategoryObject);
     
     //하의에 해당하는 sub category 리스트
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "2";
-    subCategoryObject.sub_category_id = "1"
+    subCategoryObject.main_category_id = "1";
+    subCategoryObject.sub_category_id = "2"
     subCategoryObject.sub_category_name = "반바지"    
     subCategoryArray.push(subCategoryObject);
     
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "2";
-    subCategoryObject.sub_category_id = "2"
+    subCategoryObject.main_category_id = "1";
+    subCategoryObject.sub_category_id = "3"
     subCategoryObject.sub_category_name = "긴바지"    
     subCategoryArray.push(subCategoryObject);
     
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "2";
-    subCategoryObject.sub_category_id = "3"
+    subCategoryObject.main_category_id = "1";
+    subCategoryObject.sub_category_id = "4"
     subCategoryObject.sub_category_name = "치마"    
     subCategoryArray.push(subCategoryObject);
     
     //원피스에 해당하는 sub category 리스트
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "3";
-    subCategoryObject.sub_category_id = "1"
+    subCategoryObject.main_category_id = "2";
+    subCategoryObject.sub_category_id = "6"
     subCategoryObject.sub_category_name = "롱"    
     subCategoryArray.push(subCategoryObject);
     
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "3";
-    subCategoryObject.sub_category_id = "2"
+    subCategoryObject.main_category_id = "2";
+    subCategoryObject.sub_category_id = "5"
     subCategoryObject.sub_category_name = "숏"    
     subCategoryArray.push(subCategoryObject);
     
     //잡화에 해당하는 sub category 리스트
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "4";
-    subCategoryObject.sub_category_id = "1"
+    subCategoryObject.main_category_id = "3";
+    subCategoryObject.sub_category_id = "8"
     subCategoryObject.sub_category_name = "양말"    
     subCategoryArray.push(subCategoryObject);
     
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "4";
-    subCategoryObject.sub_category_id = "2"
+    subCategoryObject.main_category_id = "3";
+    subCategoryObject.sub_category_id = "7"
     subCategoryObject.sub_category_name = "가방"    
     subCategoryArray.push(subCategoryObject);
     
     //악세서리에 해당하는 sub category 리스트
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "5";
-    subCategoryObject.sub_category_id = "1"
+    subCategoryObject.main_category_id = "4";
+    subCategoryObject.sub_category_id = "9"
     subCategoryObject.sub_category_name = "목걸이"    
     subCategoryArray.push(subCategoryObject);
     
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "5";
-    subCategoryObject.sub_category_id = "2"
+    subCategoryObject.main_category_id = "4";
+    subCategoryObject.sub_category_id = "10"
     subCategoryObject.sub_category_name = "귀걸이"    
     subCategoryArray.push(subCategoryObject);
     
     subCategoryObject = new Object();
-    subCategoryObject.main_category_id = "5";
-    subCategoryObject.sub_category_id = "3"
+    subCategoryObject.main_category_id = "4";
+    subCategoryObject.sub_category_id = "11"
     subCategoryObject.sub_category_name = "팔찌"    
     subCategoryArray.push(subCategoryObject);
     //****************이부분은 DB로 셋팅하세요.

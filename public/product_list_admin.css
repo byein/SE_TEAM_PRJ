@@ -6,7 +6,112 @@ body{
     padding: 0;
     height: 100%;
     width: 100%;
-}            
+    background-color: lightcyan;
+    overflow-x: hidden;
+}
+#header {
+    left: 0;
+    top: 0;
+    height: 200px;
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+  }
+  
+  body a {
+    text-decoration: none;
+  }
+  
+  section{
+    overflow: hidden;
+  }
+  
+  #head-wrapper {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  #logo {
+    position: absolute;
+    left: 10%;
+    text-decoration: none;
+    text-align: center;
+    padding: auto;
+    display: flex;
+    float: left;
+  }
+  
+  #search-form {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    left: 35%;
+    float: left;
+  }
+  
+  #search {
+    display: block;
+    margin: 3px;
+    height: 40px;
+    width: 30%;
+    border-radius: 15px;
+    float: left;
+  
+  }
+  
+  #search-btn{
+    border-radius: none;
+    background: none;
+  }
+  
+  #search-btn a {
+    background: none;
+  }
+  #search-btn a img {
+    width: 35px;
+    height: 35px;  
+  }
+  
+  .wrap-user-util {
+    display:inline;
+    position: relative;
+    width: 30%;
+  }
+  
+  .wrap-user-util button {
+    background: none;
+  }
+  
+  a {
+    text-decoration: none;
+    color: lightcoral;
+  }
+  
+  #goto-signup {
+    text-decoration: none;
+  }
+  
+  #category {
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+    background-color: lightpink;
+  }
+  
+  .category-menu {
+    display: inline-block;
+    margin: 17px 4.5%;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+  }
+  
+
+
 .nav{
     width: 230px;
     height: 70%;
@@ -17,6 +122,11 @@ body{
     height: 70%;
     float: left;
 }
+
+section h2{
+    text-align: center;
+}
+
 
 ul.menu{
     list-style-type: none;
@@ -32,19 +142,19 @@ ul.menu{
     text-decoration: none;
 }
 .nav li a.active{
-    background-color: #4CAF50;
+    background-color: lightseagreen;
     color: white;
 }
 .nav .menu>li :hover:not(.active){
-    background-color: #555;
+    background-color: lightpink;
     color: white;
 }
 .nav li a.current{
-    background-color: #555;
+    background-color: lightcoral;
     color: white;
 }
 th{
-    background-color: #4CAF50;
+    background-color: lightseagreen;
     padding: 30px;
 }
 .btn a{
@@ -53,7 +163,7 @@ th{
     float: right;
     margin: 15px auto;
     text-decoration: none;
-    background-color: #555;
+    background-color: lightcoral;
     padding: 10px;
     border-radius: 10px;
 }
@@ -77,7 +187,7 @@ table{
 }
 
 .pagination a.active {
-    background-color: #4CAF50;
+    background-color: lightseagreen;
     color: white;
   }
   
@@ -93,7 +203,6 @@ section, ul, li{
 
 a{
     text-decoration: none;
-    color: inherit;
 }
 
 .cell{
@@ -112,7 +221,7 @@ a{
 }
 section{
     overflow-x: hidden;
-    padding-right: 30px;
+    padding: 30px;
 }
 .list>ul>li{
     width: calc(100%/6);
@@ -164,3 +273,20 @@ section{
     }
 }
 
+
+
+
+#footer {
+    position: relative;
+    bottom: 0%;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    background-color: aquamarine;
+    padding: 0.1px;
+  }
+  
+  #footer a{
+    font-weight: bold;
+  }
+  

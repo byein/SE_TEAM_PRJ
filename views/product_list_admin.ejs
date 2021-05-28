@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>product_list_admin</title>
+        <link rel="stylesheet" href="/product_list_admin.css" type="text/css">
+    </head>
+    <body>
+        <header id="header">
+            <div id="head-wrapper">
+                <h1>
+                    <a id="logo" href="/admin" title="로고">로고</a>
+                </h1>
+                <div id ="search-form">
+                    <form action="/search" method="get" class="category">
+                         <select name = "category">
+                             <option value="all"> 전체</option>
+                             <option value="top"> 상의</option>
+                             <option value="bottom"> 하의</option>
+                             <option value="dress"> 원피스</option>
+                             <option value="goods"> 잡화류</option>
+                             <option value="acc"> 악세서리</option>
+                         </select>
+                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                         <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                         <input type = "submit" value ="확인" class = "sort-button">
+                     </form>
+                 </div>
+                <div class="wrap-user-util">
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/basket">장바구니</a>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </header>
+
+
+
+        <nav class="nav">
+            <ul class="menu">
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin" class="current">Product 관리</a></li>
+                <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="btn">
+            <a href="/add_product_admin">상품 등록</a>
+        </div>
+        <section>
+            <h2>Product list</h2>
+
+            <form action="" method="get" class="sort-by">
+                <input type="text" class ="search-bar" name = query placeholder="검색어를 입력하세요"> </br>
+                <select name ="sortBy">
+                    <option value="asc"> 가격 오름차순 </option>
+                <option value="desc"> 가격 내림차순 </option>
+                </select></br>
+                <input type="int" class = "search-bar" name="sprice" placeholer="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격"><br>
+                <input type="submit" value="확인" class ="sort-button">
+            </form>
+            
+            <div class="list">
+                <ul class="row">
+                    <% for ( var i = 0; i< products.length; i++)  { %>
+
+                        <li class="cell">
+                                <div class="img_box" onclick="location.href='/product_admin/<%=  products[i].pIdx %>'"><img src="<%= products[i].pImg %>" alt=""/><!-- 상품사진--></div>
+                                <div class="product_name"  onclick="location.href='/product_admin/<%= products[i].pIdx %>'"><%= products[i].pName %></div>
+                                <div class="product_price"  onclick="location.href='/product_admin/<%=  products[i].pIdx %>'"><%= products[i].pPrice %></div>
+                        </li>
+                <%}  %>
+                    <!--상품 수만큼 li 반복-->
+                </ul>
+            </div>
+            
+            
+        </section>
+        
+        <footer id="footer">
+            <p>
+                <a href="/use">[이용약관]</a>
+                <a href="/privacy">[개인정보처리방침]</a>
+                <br>
+    
+                [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+                Copyright 2021. 24팀 all rights reserved.<br>
+            </p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>product_list</title>
+        <link rel="stylesheet" href="/product_list.css" type="text/css">
+    </head>
+    <body>
+        <header id="header">
+            <div id="head-wrapper">
+                <h1>
+                    <a id="logo" href="/" title="로고">로고</a>
+                </h1>
+                <div id ="search-form">
+                    <form action="/search" method="get" class="category">
+                         <select name = "category">
+                             <option value="all"> 전체</option>
+                             <option value="top"> 상의</option>
+                             <option value="bottom"> 하의</option>
+                             <option value="dress"> 원피스</option>
+                             <option value="goods"> 잡화류</option>
+                             <option value="acc"> 악세서리</option>
+                         </select>
+                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                         <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                         <input type = "submit" value ="확인" class = "sort-button">
+                     </form>
+                 </div>
+                <div class="wrap-user-util">
+                    <% if(is_logined == false){ %>
+                        <button id="login">
+                        <a href="/login">로그인</a>
+                        </button>
+                        <button id="signup-btn">
+                        <a id="goto-signup" href="/signUp">회원가입</a>
+                        </button>
+                    <% }else { %>
+                        <a><%= name %> 님 환영합니다!</a>
+                        <button id="logout">
+                        <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                        <a id="goto-bucket" href="/basket">장바구니</a>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </header>
+        <div class="dropmenu">
+            <ul>
+                    <li><a href="/category/TOP/1">상의</a>
+                        <ul>
+                            <li><a href="/sub_category/0/1">반팔</a></li>
+                            <li><a href="/sub_category/1/1">긴팔</a></li>
+                        </ul>
+                    </li>
+                <li><a href="/category/BOTTOM/1">하의</a>
+                        <ul>
+                                <li><a href="/sub_category/2/1">반바지</a></li>
+                                <li><a href="/sub_category/3/1">긴바지</a></li>
+                                    <li><a href="/sub_category/4/1">치마</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/DRESS/1">원피스</a>
+                        <ul>
+                                <li><a href="/sub_category/5/1">숏원피스</a></li>
+                                <li><a href="/sub_category/6/1">롱원피스</a></li>
+                        </ul>   
+                </li>
+                <li><a href="/category/BAG&SOCKS/1">잡화류</a>
+                        <ul>
+                                <li><a href="/sub_category/7/1">가방</a></li>
+                                <li><a href="/sub_category/8/1">양말</a></li>
+                        </ul>
+                </li>
+                <li><a href="/category/ACC/1">악세사리</a>
+                        <ul>
+                                <li><a href="/sub_category/9/1">목걸이</a></li>
+                                <li><a href="/sub_category/10/1">귀걸이</a></li>
+                                <li><a href="/sub_category/11/1">팔찌</a></li>
+                        </ul>
+                </li>
+            </ul>
+        </div>
+
+
+
+        <section>
+            <h2><%= main_name %>
+                        <% if(!sub) { }else { %>
+                        <h2><%=sub[0].sub_name %></h2>
+                <% } %>
+            </h2>
+            <form action="" method = "get" class= "sortBy">
+                <select name="sortby">
+                    <option value = "pName-asc"> 이름 오름차순 </option>
+                    <option value = "pName-desc"> 이름 내림차순 </option>
+                    <option value = "pPrice-asc"> 가격 오름차순 </option>
+                    <option value = "pPrice-desc"> 가격 내림차순 </option>
+                    <option value = "pDate-asc"> 날짜 오름차순 </option>
+                    <option value = "pDate-desc"> 날짜 내림차순 </option>
+                </select>
+                <input type ="submit" value = "확인" class ="sort-button">
+            </form>
+            <div class="list">
+                <ul class="row">
+                    <% if (search ==1 ) { %>
+                        <% for ( var i= 0; i< length; i++) { %>
+                       <li class="cell">
+                                   <div class="img_box" onclick="location.href='/product/<%= products[i].pIdx %>'"><img src="<%= products[i].pImg %>" alt=""/><!-- 상품사진--></div>
+                                   <div class="product_name" onclick="location.href='/product/<%= products[i].pIdx %>'"><%= products[i].pName %></div>
+                                   <div class="product_price" onclick="location.href='/product/<%= products[i].pIdx %>'"><%= products[i].pPrice %></div>
+                       </li>
+                       <% } %>
+                    <% } else { %>
+                    <% for ( var i= ( page * page_num) - page_num; i< (page * page_num); i++) {
+                        if (length < i) { i++; } else { var data = products[i]; %>
+                       <li class="cell">
+                                   <div class="img_box" onclick="location.href='/product/<%= data.pIdx %>'"><img src="<%= data.pImg %>" alt=""/><!-- 상품사진--></div>
+                                   <div class="product_name" onclick="location.href='/product/<%= data.pIdx %>'"><%= data.pName %></div>
+                                   <div class="product_price" onclick="location.href='/product/<%= data.pIdx %>'"><%= data.pPrice %></div>
+                       </li>
+                    <% }  } %>
+                    <% } %>
+                    <!--상품 수만큼 li 반복-->
+                </ul>
+            </div>
+            <div class="outer">
+                <div class="pagination">
+                    <% if(search == 1)  { } else {%>
+                        <% for (var j=0; j<products.length / page_num; j++){ %>
+                            <% if (!sub) { %>
+    
+                                        <a href="/category/<%= products[0].main_name %>/<%= j+1 %>?sortby= <%= sortby %>"><%= j+1 %></a>
+                                        <% } else { %>
+                                        <a href="/sub_category/<%= products[0].category_id %>/<%= j+1 %>?sortby= <%= sortby %>"><%= j+1 %></a>
+                                        <% } %>
+                            <% } %>
+                        <% } %>
+                </div>
+            </div>
+        </section>
+        
+
+        <footer id="footer">
+            <p>
+                <a href="/use">[이용약관]</a>
+                <a href="/privacy">[개인정보처리방침]</a>
+                <br>
+    
+                [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+                Copyright 2021. 24팀 all rights reserved.<br>
+            </p>
+        </footer>
+    </body>
+</html>

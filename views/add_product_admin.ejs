@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>add_product_admin</title>
+        <link rel="stylesheet" href="/add_product_admin.css" type="text/css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script src="/add_product_admin.js"></script>
+    </head>
+    <body>
+        <header id="header">
+            <div id="head-wrapper">
+                <h1>
+                    <a id="logo" href="/admin" title="로고">로고</a>
+                </h1>
+                <div id ="search-form">
+                    <form action="/search" method="get" class="category">
+                         <select name = "category">
+                             <option value="all"> 전체</option>
+                             <option value="top"> 상의</option>
+                             <option value="bottom"> 하의</option>
+                             <option value="dress"> 원피스</option>
+                             <option value="goods"> 잡화류</option>
+                             <option value="acc"> 악세서리</option>
+                         </select>
+                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                         <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                         <input type = "submit" value ="확인" class = "sort-button">
+                     </form>
+                 </div>
+                <div class="wrap-user-util">
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/basket">장바구니</a>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </header>
+
+
+        <nav class="nav">
+            <ul>
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin" class="current">Product 관리</a></li>
+                <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <section>
+            <h2>New Product</h2>
+            <form action="/add_product_admin_in" method="post" onsubmit="return check()" enctype="multipart/form-data">
+                <div>
+                    <table>
+                        <tr><td>상품 이름</td><td><input type="text" name="pname" id="pname" maxsize=20></td></tr>
+                        <tr><td>상품 사진</td><td><input type="file" multiple name="pimg" multiple id="pimg" accept="image/*"></td></tr>
+                        <tr><td>카테고리</td><td>
+                            <select name="main_category" id="main_category">
+                                <option value="">전체</option>
+                            </select>
+                            <select name="sub_category" id="sub_category">
+                                <option value="">전체</option>                                
+                            </select>
+                        </td></tr>                        
+                        <tr><td>상품 가격</td><td><input type="text" name="pprice" id="pprice"></td></tr>
+                        <tr><td>상품 수량</td><td><input type="number" name="pquantity" id="pcnt" pattern="\d*"></td></tr>
+                        <tr><td>상품 설명</td><td><input type="file" multiple name="pdetail" multiple id="pexplain" accept="image/*" ></td></tr>
+                        <tr><td colspan="2"><input type="submit" value="등록하기" class="btn"></td></tr>
+                    </table>
+                </div>
+                
+            </form>
+        </section>
+        <footer id="footer">
+            <p>
+                <a href="/use">[이용약관]</a>
+                <a href="/privacy">[개인정보처리방침]</a>
+                <br>
+    
+                [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+                Copyright 2021. 24팀 all rights reserved.<br>
+            </p>
+        </footer>
+    </body>
+</html>

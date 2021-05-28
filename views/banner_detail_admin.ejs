@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>banner_admin</title>
+        <link rel="stylesheet" href="/banner_detail_admin.css" type="text/css">
+        <script src="/banner_detail_admin.js"></script>
+    </head>
+    <body>
+        <header id="header">
+            <div id="head-wrapper">
+                <h1>
+                    <a id="logo" href="/admin" title="로고">로고</a>
+                </h1>
+                <div id ="search-form">
+                    <form action="/search" method="get" class="category">
+                         <select name = "category">
+                             <option value="all"> 전체</option>
+                             <option value="top"> 상의</option>
+                             <option value="bottom"> 하의</option>
+                             <option value="dress"> 원피스</option>
+                             <option value="goods"> 잡화류</option>
+                             <option value="acc"> 악세서리</option>
+                         </select>
+                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                         <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                         <input type = "submit" value ="확인" class = "sort-button">
+                     </form>
+                 </div>
+                <div class="wrap-user-util">
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/basket">장바구니</a>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </header>
+
+
+        <nav class="nav">
+            <ul>
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin">Product 관리</a></li>
+                <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <section>
+            <h2>Notice/Event</h2>
+            <h3>상세보기</h3>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>제목</th><td colspan="5" class="title"> <%= notice[0].nTitle %></td>
+                        </tr>
+                        <tr>
+                            <th>등록일</th><td class="date"> <%= notice[0].nDate %></td>
+                        </tr>
+                        <tr>
+                            <th>카테고리</th><td class ="category"> <%= notice[0].nat %> </td>
+                        </tr>
+                        <tr>
+                            <th>세부정보</th><td class = "detail"> <%= notice[0].nDetail %></td>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th> 이미지 </th><td class="banner_image" colspan="6"> <%= notice[0].nImg %></td>
+                        </tr>
+                        <tr>
+                            <th> 시작 시간</th> <td class="startdate"> <%= notice[0].nStartDate %></td>
+                            <th> 끝나는 시간 </th> <td class="enddate"> <%= notice[0].nEndDate %></td>
+                        </tr>
+
+                        <tr>
+                            <th> <a href="/edit_banner_admin/<%= notice[0].nIdx %>"> 수정 </a> </th>
+                            <th> <a href="/banner_delete/<%= notice[0].nIdx %>"> 삭제 </a></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <footer id="footer">
+            <p>
+                <a href="/use">[이용약관]</a>
+                <a href="/privacy">[개인정보처리방침]</a>
+                <br>
+    
+                [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+                Copyright 2021. 24팀 all rights reserved.<br>
+            </p>
+        </footer>
+    </body>
+</html>
