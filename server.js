@@ -748,9 +748,17 @@ app.get('/payment', function(request, response) {
                 response.render('payment',{
                         basket: basket
                 });
+                // pDeliveryfee 추가해주세요!
                 db.query(`SELECT pName, pPrice, pImg FROM product WHERE pIdx in (?) ORDER BY pIdx`, [basket.product_id], function(err, products){
+                        for(let i = 0; i<basket.length; i++) {
+                                let sum = 0;
+                                let delivery_fee = 0;
+
+                                sum = sum + (basket.bQuentity[i] * produects.pPrice[i]); }
                         response.render('payment',{
-                                products: products
+                                products: products,
+                                pSum: sum,
+                                delivery_fee: delivery_fee
                         });                
                 });
         });
