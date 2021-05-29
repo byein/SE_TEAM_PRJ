@@ -197,6 +197,14 @@ tbody tr {
   height: auto;
 }
 
+#additional-inquiry-btn {
+  font-size: 18pt;
+  height: 60px;
+}
+#additional-inquiry-btn a {
+  color: lightcoral;
+}
+
 #footer {
   position: relative;
   bottom: 0%;
