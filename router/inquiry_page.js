@@ -1,9 +1,12 @@
-function submit() {
+function check() {
     const confirm_cancel = confirm('문의를 등록하시겠습니까?');
+
     if(confirm_cancel){
         alert('등록되었습니다.');
         location.reload();
+        return true;
     }
+    else return false;
 }
 
 function cancel() {
