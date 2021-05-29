@@ -15,6 +15,7 @@ var signUp = require('./router/signUp');
 var login = require('./router/login');
 var multer = require('multer');
 var url = require('url');
+const { type } = require('os');
 
 app.use(express.static('public'));
 app.use(express.static('router'));
@@ -856,6 +857,21 @@ app.get('/product_information_admin', function(request, response){
                 }
         });
 });
+
+// inquiry 테이블 필요
+app.post('/inquiry_page', function(request, response){
+        const body = request.body;
+        let type = '';
+        for(let i = 0; i<body.select_type.length; i++){
+                if(body.select_type[i].checked){
+                        type = body.select_type[i];
+                        break;
+                }
+        }
+        db.query(`INSERT INTO inquiry (mId, iId, subject, content, type) VALUES (?, ?, ?, ?, ?, ?)`, 
+                [request.session.ID, iId, body.subject, body.content, type])    // iId 설정 필요
+});
+
 
 app.listen(3000, function(){
         console.log('3000 port');
