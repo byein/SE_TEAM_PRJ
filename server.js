@@ -16,6 +16,7 @@ var login = require('./router/login');
 var multer = require('multer');
 var url = require('url');
 const { type } = require('os');
+const { request, response } = require('express');
 
 app.use(express.static('public'));
 app.use(express.static('router'));
@@ -271,7 +272,7 @@ app.get('/add_product_admin', function(request, response){
                 });
 });
 
-app.post('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
+app.get('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
         var body = request.body;
         var file = request.files;
         var img = new Array();
@@ -859,7 +860,8 @@ app.get('/product_information_admin', function(request, response){
 });
 
 // inquiry 테이블 필요
-app.post('/inquiry_page', function(request, response){
+// 임의 컬럼네임과 테이블네임 사용
+app.get('/inquiry_page', function(request, response){
         const body = request.body;
         let type = '';
         for(let i = 0; i<body.select_type.length; i++){
@@ -868,8 +870,22 @@ app.post('/inquiry_page', function(request, response){
                         break;
                 }
         }
-        db.query(`INSERT INTO inquiry (mId, iId, subject, content, type) VALUES (?, ?, ?, ?, ?, ?)`, 
-                [request.session.ID, iId, body.subject, body.content, type])    // iId 설정 필요
+        db.query(`INSERT INTO inquiry (mId, iId, subject, content, type, status, iDate) VALUES (?, ?, ?, ?, ?, ?, NOW())`, 
+                [request.session.ID, iId, body.subject, body.content, type, '미등록'], function(err, result){
+                        response.redirect('/inquiry_list');
+                });
+});
+
+app.get('/inquiry_list', function(request, response){
+        db.query(`SELECT iId, subject, content, type, iDate, status, FROM inquiry WHERE mId=?`, [request.session.ID], function(err, inquiry){
+                if(err) throw err;
+                else {
+                        response.render('inquiry_list', {
+                                inquiry: inquiry
+                        });
+                }
+
+        });
 });
 
 

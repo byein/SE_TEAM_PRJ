@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/inquiry_list.css">
+    <script defer type="text/javascript" src="/inquiry_list.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header id="header">
+        <div id="head-wrapper">
+            <h1>
+                <a id="logo" href="/" title="로고">로고</a>
+            </h1>
+            <div id ="search-form">
+                <form action="/search" method="get" class="category">
+                     <select name = "category">
+                         <option value="all"> 전체</option>
+                         <option value="top"> 상의</option>
+                         <option value="bottom"> 하의</option>
+                         <option value="dress"> 원피스</option>
+                         <option value="goods"> 잡화류</option>
+                         <option value="acc"> 악세서리</option>
+                     </select>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                     <input type = "submit" value ="확인" class = "sort-button">
+                 </form>
+             </div>
+            <div class="wrap-user-util">
+                <% if(is_logined == false){ %>
+                    <button id="login">
+                    <a href="/login">로그인</a>
+                    </button>
+                    <button id="signup-btn">
+                    <a id="goto-signup" href="/signUp">회원가입</a>
+                    </button>
+                <% }else{ %>
+                    <a><%= name %> 님 환영합니다!</a>
+                    <button id="logout">
+                    <a href="/logout">logout</a></button>
+                    <button id="bucket">
+                    <a id="goto-bucket" href="/basket">장바구니</a>
+                    </button>
+                    <button id="notice">
+                        <a id="goto-notice" href="/banner_list_customer">공지사항</a>
+                    </button>
+                <% } %>
+            </div>
+        </div>
+    </header>
+    <div class="dropmenu">
+        <ul>
+                <li><a href="/category/TOP/1">상의</a>
+                    <ul>
+                        <li><a href="/sub_category/0/1">반팔</a></li>
+                        <li><a href="/sub_category/1/1">긴팔</a></li>
+                    </ul>
+                </li>
+            <li><a href="/category/BOTTOM/1">하의</a>
+                    <ul>
+                            <li><a href="/sub_category/2/1">반바지</a></li>
+                            <li><a href="/sub_category/3/1">긴바지</a></li>
+                                <li><a href="/sub_category/4/1">치마</a></li>
+                    </ul>
+            </li>
+            <li><a href="/category/DRESS/1">원피스</a>
+                    <ul>
+                            <li><a href="/sub_category/5/1">숏원피스</a></li>
+                            <li><a href="/sub_category/6/1">롱원피스</a></li>
+                    </ul>   
+            </li>
+            <li><a href="/category/BAG&SOCKS/1">잡화류</a>
+                    <ul>
+                            <li><a href="/sub_category/7/1">가방</a></li>
+                            <li><a href="/sub_category/8/1">양말</a></li>
+                    </ul>
+            </li>
+            <li><a href="/category/ACC/1">악세사리</a>
+                    <ul>
+                            <li><a href="/sub_category/9/1">목걸이</a></li>
+                            <li><a href="/sub_category/10/1">귀걸이</a></li>
+                            <li><a href="/sub_category/11/1">팔찌</a></li>
+                    </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-container">
+        <h1>문의내역</h1>
+        <div id="inquiry-list-container">
+            <table id="inquiry-table">
+                <colgroup>
+                    <col width="15%">
+                    <col width="15%">
+                    <col width="50%">
+                    <col width="20%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <td>등록 일시</td>
+                        <td>종류</td>
+                        <td>문의 내용</td>
+                        <td>답변</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0; i<inquiry.length; i++) { %>
+                        <tr>
+                            <td><%= inquiry[i].iDate %></td>
+                            <td><%= inquiry[i].type %></td>
+                            <td><a href="#" onclick="showDetails()"><%= inquiry[i].subject %></a></td>
+                            <td><%= inquiry[i].status %></td>
+                        </tr>
+                        <tr id="inquiry-details">
+                            <td colspan="4" height="auto">
+                                <p>주문번호 : <%= oIdx %>, 상품명 : <%= pName %></p>
+                                <p>문의제목 : <%= inquiry[i] %></p>
+                                <p>문의내용 : <%= inquiry[i] %></p>
+                                <p>답변 : <%= answer %></p>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <p>
+            <a href="/use">[이용약관]</a>
+            <a href="/privacy">[개인정보처리방침]</a>
+            <br>
+
+            [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+            Copyright 2021. 24팀 all rights reserved.<br>
+        </p>
+    </footer>
+</body>
+</html>
