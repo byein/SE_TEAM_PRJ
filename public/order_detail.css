@@ -1,0 +1,162 @@
+table {
+    width: 90%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+    margin-left: 70px;
+  }
+  td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+    background-color: #00000031;
+  }
+
+
+  #header {
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 200px;
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+  }
+
+  #head-wrapper {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+  }
+  
+  #logo {
+    position: absolute;
+    left: 10%;
+    text-decoration: none;
+    text-align: center;
+    padding: auto;
+    display: flex;
+    float: left;
+
+    
+  }
+
+  #footer {
+  position: absolute;
+  bottom: 0%;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  background-color: aquamarine;
+  padding: 0.1px;
+}
+
+.wrap-user-util {
+  display:inline;
+  position: relative;
+  width: 30%;
+}
+
+.wrap-user-util button {
+  background: none;
+}
+
+#category {
+  position: relative;
+  top: 0px;
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  background-color: lightpink;
+}
+
+.category-menu {
+  display: inline-block;
+  margin: 17px 4.5%;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
+
+#search-form {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  left: 35%;
+  float: left;
+}
+
+#search {
+  display: block;
+  margin: 3px;
+  height: 40px;
+  width: 30%;
+  border-radius: 15px;
+  float: left;
+
+}
+
+#search-btn{
+  border-radius: none;
+  background: none;
+}
+
+#search-btn a {
+  background: none;
+}
+#search-btn a img {
+  width: 35px;
+  height: 35px;  
+}
+
+a {
+  text-decoration: none;
+  color: lightcoral;
+}
+.paging {
+  text-align: center;
+}
+.paging a {
+
+  display: inline-block;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  color: #000;
+  background-color: white;
+}
+
+.paging a.select {
+  color: #fff;
+  background-color: lightslategray;
+}
+
+.day {
+  text-align: left;
+  margin-left: 70px;
+}
+
+.day a {
+  display: inline-block;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  color: #000;
+  background-color: white;
+}
+
+.day a.select {
+  color: #fff;
+  background-color: lightslategray;
+}
+  
