@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/inquiry_admin.css">
+    <script type="text/javascript" src="/inquiry_admin.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header id="header">
+        <div id="head-wrapper">
+            <h1>
+                <a id="logo" href="/admin" title="로고">로고</a>
+            </h1>
+            <div id ="search-form">
+                <form action="/search" method="get" class="category">
+                     <select name = "category">
+                         <option value="all"> 전체</option>
+                         <option value="top"> 상의</option>
+                         <option value="bottom"> 하의</option>
+                         <option value="dress"> 원피스</option>
+                         <option value="goods"> 잡화류</option>
+                         <option value="acc"> 악세서리</option>
+                     </select>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                     <input type = "submit" value ="확인" class = "sort-button">
+                 </form>
+             </div>
+            <div class="wrap-user-util">
+                <% if(is_logined == true){ %>
+                <a><%= name %> 관리자</a>
+                <button id="logout">
+                    <a href="/logout">logout</a>
+                </button>
+                <button id="bucket">
+                    <a id="goto-bucket" href="/basket">장바구니</a>
+                </button>
+                <% } %>
+            </div>
+        </div>
+    </header>
+    <nav class="nav">
+        <ul class="menu">
+            <li><a href="/admin" class="active" class="current">Home</a></li>
+                <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin">Product 관리</a></li>
+                <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
+                <li><a href="/views/inquiry_admin.html">고객 문의 관리</a></li>
+                <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="main-container">
+        <div class="inquiry-list-wrapper">
+            <table id="inquiry-table">
+                <colgroup>
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <form action="/inquiry-admin" method="GET" onsubmit="return onDateCheck();">
+                            <td>검색기간</td>
+                            <td colspan="2">
+                                <input type="date" id="search-date-from"> ~
+                                <input type="date" id="search-date-to">
+                            </td>
+                            <td>전체</td>
+                            <td>
+                                <input type="submit" value="검색">
+                            </td>
+                        </form>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0; i<length; i++) %>
+                    <tr>
+                        <td>oDate</td>
+                        <td>order detail</td>
+                        <td colspan="2">inquiry-subject</td>
+                        <td>
+                        <% if(!status) { %>                            <!--답변등록이 안되어있는 버튼-->
+                            <button id="answer-inquiry-btn" onclick="showDetails()"><a href="#" >답변하기</a></button>
+                        </td>
+                    </t>
+                    <tr id="inquiry-details">
+                        <td colspan="5">
+                            <p>주문번호 : <%= oIdx %>, 상품명 : <%= pName %></p>
+                            <p>문의제목 : <%= inquiry[i].subject %></p>
+                            <p>문의내용 : <%= inquiry[i].content %></p>
+                            <p>답변하기 
+                                <form action="/inquiry-admin" method="GET" onsubmit="return saveAnswer()">
+                                    <textarea name="answer" id="answer-textarea" cols="30" rows="10"></textarea>
+                                    <input type="submit" value="등록">
+                                </form>
+                            </p>
+                        </td>
+                    </tr>
+                        <% } else { %>                               <!--답변이 등록되어있는 버튼-->
+                            <button id="answer-complete-btn" onclick="showDetails()"><a href="#">답변완료</a></button>
+                        </td>
+                    </tr>
+                    <tr id="inquiry-details">
+                        <td colspan="5">
+                            <p>주문번호 : <%= oIdx %>, 상품명 : <%= pName %></p>
+                            <p>문의제목 : <%= inquiry[i].subject %></p>
+                            <p>문의내용 : <%= inquiry[i].content %></p>
+                            <p>답변 : <%= answer %></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="outer">
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
