@@ -17,6 +17,8 @@ var multer = require('multer');
 var url = require('url');
 const { type } = require('os');
 const { request, response } = require('express');
+var product_user = require('./lib/product_user');
+var product_admin = require('./lib/product_admin');
 
 app.use(express.static('public'));
 app.use(express.static('router'));
@@ -72,129 +74,11 @@ app.get('/', function(request, response){
 });
 
 app.get('/category/:categoryName/:page', function(request, response){
-        var filteredId = path.parse(request.params.categoryName).base;
-        var sortby = url.parse(request.url, true).query.sortby;
-	if (sortby == undefined){
-		sortby = "p.pDate DESC";
-	}
-	if (sortby == "pName-asc")
-	{
-		sortby = "p.pName ASC";
-	}
-	if (sortby == "pName-desc")
-	{
-		sortby = "p.pName DESC";
-	}
-	if (sortby == "pPrice-asc"){
-		sortby = "p.pPrice ASC";
-	}
-	if (sortby == "pPrice-desc"){
-		sortby = "p.pPrice DESC";
-	}
-	if (sortby == "pDate-asc"){
-		sortby = "p.pDate ASC";
-	}
-	if (sortby == "pDate-desc"){
-		sortby = "p.pDate DESC";
-	}
-
-        var page = request.params.page;
-        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and c.main_name=? and p.pDelete=0 ORDER BY `+sortby, [filteredId], function(error, products){
-                if(error) throw error;
-                else {
-                        if(request.session.is_logined == true){
-                                response.render('product_list', {
-                                        is_logined : request.session.is_logined,
-                                        name : request.session.name,
-                                        products : products,
-                                        sub : false,
-                                        main_name : filteredId,
-                                        page : page,
-                                        length : products.length-1,
-                                        page_num : 24,
-                                        sortby : sortby,
-                                        search : 0
-                                });
-                                console.log(products.length-1);
-                        } else {
-                                response.render('product_list', {
-                                        is_logined : false,
-                                        products : products,
-                                        sub : false,
-                                        main_name : filteredId,
-                                        page : page,
-                                        length : products.length-1,
-                                        page_num : 24,
-                                        sortby : sortby,
-                                        search : 0
-                                });
-                                console.log(products.length-1);
-                        }
-
-                }
-        });
+        product_user.category(request, response);
 });
 
 app.get('/sub_category/:categoryId/:page', function(request, response){
-        var filteredId = path.parse(request.params.categoryId).base;
-        var sortby = url.parse(request.url, true).query.sortby;
-	if (sortby == undefined){
-		sortby = "p.pDate DESC";
-	}
-	if (sortby == "pName-asc")
-	{
-		sortby = "p.pName ASC";
-	}
-	if (sortby == "pName-desc")
-	{
-		sortby = "p.pName DESC";
-	}
-	if (sortby == "pPrice-asc"){
-		sortby = "p.pPrice ASC";
-	}
-	if (sortby == "pPrice-desc"){
-		sortby = "p.pPrice DESC";
-	}
-	if (sortby == "pDate-asc"){
-		sortby = "p.pDate ASC";
-	}
-	if (sortby == "pDate-desc"){
-		sortby = "p.pDate DESC";
-	}
-        var page = request.params.page;
-        db.query(`SELECT * FROM product p, category c WHERE p.category_id = c.sub_id and p.pDelete=0 and c.sub_id=? ORDER BY `+sortby, [filteredId], function(error, products){
-                if(error) throw error;
-                else {
-                        db.query(`SELECT * FROM category WHERE sub_id=?`, [filteredId], function(error2, sub){
-                                if(request.session.is_logined == true){
-                                        response.render('product_list', {
-                                                is_logined : request.session.is_logined,
-                                                name : request.session.name,
-                                                products : products,
-                                                main_name : sub[0].main_name,
-                                                sub : sub,
-                                                page : page,
-                                                length : products.length-1,
-                                                page_num : 24,
-                                                sortby : sortby,
-                                                search : 0
-                                        });
-                                } else {
-                                        response.render('product_list', {
-                                                is_logined : false,
-                                                products : products,
-                                                main_name : sub[0].main_name,
-                                                sub : sub,
-                                                page : page,
-                                                length : products.length-1,
-                                                page_num : 24,
-                                                sortby : sortby,
-                                                search : 0
-                                        });
-                                }
-                        });
-                }
-        });
+        product_user.sub_category(request, response);
 });
 
 app.get('/admin', function(request, response){
@@ -273,54 +157,15 @@ app.get('/add_product_admin', function(request, response){
 });
 
 app.get('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
-        var body = request.body;
-        var file = request.files;
-        var img = new Array();
-        for(var i=0; i<file['pimg'].length; i++){
-                img[i] = '/uploads/'+`${file['pimg'][i].filename}`;
-        }
-        var detail = '/uploads/' + `${file['pdetail'][0].filename}`;
-
-        db.query(`INSERT INTO product (category_id, pName, pPrice, pImg, pImg2, pImg3, pImg4, pImg5, pDetail,  pDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`, [body.sub_category, body.pname, body.pprice, img[0], img[1], img[2], img[3], img[4], detail], function(error2, result){
-                db.query(`INSERT INTO stock (product_id, sQuantity) VALUES (?, ?)`, [result.insertId, body.pquantity], function(error3, results){
-                response.redirect(`/product_admin/${result.insertId}`);
-                });
-        });
+        product_admin.add(request, response);
 });
 
 app.get('/update_product_admin/:productId', function(request, response){
-        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
-                if(!admin[0]){
-                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
-                } else {
-                        var filteredId = path.parse(request.params.productId).base;
-                        db.query(`SELECT * FROM product p, stock s WHERE p.pIdx=s.product_id and p.pIdx=?`, [filteredId], function(error, product){
-                                if(request.session.is_logined == true){
-                                        response.render('update_product_admin', {
-                                                is_logined : request.session.is_logined,
-                                                name : request.session.name,
-                                                product : product
-                                        });
-                                }
-                        });
-                }
-        });
+        product_admin.update(request, response);
 });
 
 app.post('/update_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
-        var body = request.body;
-        var file = request.files;
-        var img = new Array();
-        for(var i=0; i<file['pimg'].length; i++){
-                img[i] = '/uploads/'+`${file['pimg'][i].filename}`;
-        }
-        var detail = '/uploads/' + `${file['pdetail'][0].filename}`;
-
-        db.query(`UPDATE product SET category_id=?, pName=?, pPrice=?, pImg=?, pImg2=?, pImg3=?, pImg4=?, pImg5=?, pDetail=? WHERE pIdx=?`, [body.sub_category, body.pname, body.pprice, img[0], img[1], img[2], img[3], img[4], detail, body.pIdx], function(error2, result){
-                db.query(`UPDATE stock SET sQuantity=? WHERE product_id=?`, [body.pquantity, body.pIdx], function(error3, results){
-                response.redirect(`/product_admin/${body.pIdx}`);
-                });
-        });
+        product_admin.update_in(request, response);
 });
 
 app.get('/delete_product_admin/:productId', function(request, response){
@@ -333,180 +178,19 @@ app.get('/delete_product_admin/:productId', function(request, response){
 });
 
 app.get('/product_list_admin', function(request, response){
-        var query = url.parse(request.url, true).query.query;
-        var sortBy = url.parse(request.url, true).query.sortBy;
-        var sprice = url.parse(request.url, true).query.sprice;
-        var eprice = url.parse(request.url, true).query.eprice;
-
-        if (query == undefined){
-                query = ''; }
-        if (sortBy == undefined){
-                sortBy ='';
-        }
-        if(eprice == undefined){
-                eprice='';
-        }
-        if(sprice == undefined){
-                sprice='';
-        }
-        if (sprice == ''){
-               var sprice = '1';
-        }
-        if (eprice == ''){
-               eprice = '100000000';
-        }
-
-        console.log(query, sortBy, sprice, eprice);
-
-        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
-                if(!admin[0]){
-                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
-                } else {
-                         if (sortBy == "asc"){
-                                 var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice + " ORDER BY pPrice ASC";}
-                        else if (sortBy == "desc") {
-                                var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice +" ORDER BY pPrice DESC";
-
-                        } else{
-                                var sql = "SELECT * FROM product WHERE pDelete=0 AND pName like '%" + query + "%' AND pPrice>=" + sprice + " AND pPrice<=" + eprice +" ORDER BY pDate DESC";
-                              }
-                        db.query(sql, function(err2, products, fields){
-                                if (err2) throw err2;
-                                else{
-                                        response.render('product_list_admin', {
-                                                is_logined : request.session.is_logined,
-                                                name : request.session.name,
-                                                products : products
-                                        });
-                                }
-                        });
-                }
-        });
+        product_admin.list(request, response);
 });
 
 app.get('/search', function(request, response){
-        var category = url.parse(request.url, true).query.category;
-        var query = url.parse(request.url, true).query.query;
-        var sprice = url.parse(request.url, true).query.sprice;
-        var eprice = url.parse(request.url, true).query.eprice;
-
-        if(sprice == ""){
-                sprice ='0';
-        }
-        if (eprice == ""){
-                eprice ='1000000000';
-        }
-
-        if (category == "all"){
-                var sql = "SELECT * FROM product WHERE pDelete=0 AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
-		category = "TOP" + "BOTTOM" + "DRESS" + "BAG&SOCKS" + "ACC" ;
-	}
-        else if (category == "top"){
-                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=0 OR category_id=1) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
-
-        }
-        else if (category == "bottom"){
-                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=2 OR category_id=3 OR category_id= 4) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
-
-        }
-        else if (category == "dress"){
-                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=5 OR category_id=6) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
-        }
-        else if (category == "goods"){
-                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=7 OR category_id=8 OR category_id=9) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
-		category = "BAG&SOCKS";
-        }
-        else {
-                var sql = "SELECT * FROM product WHERE pDelete=0 AND (category_id=10 OR category_id=11) AND pName LIKE '%" + query + "%' AND pPrice >=" + sprice + " AND pPrice <=" + eprice;
-        }
-
-        db.query(sql, function(err, result, field){
-                if (err) throw err;
-                else{
-                        if(request.session.is_logined == true){
-                                response.render('product_list', {
-                                        is_logined : request.session.is_logined,
-                                        name : request.session.name,
-                                        products : result,
-                                        main_name : category,
-					sub : false,
-                                        page : 1,
-                                        page_num : 24,
-                                        length : result.length-1,
-                                        sortby : 'p.pDate DESC',
-                                        search : 1
-                                });
-                        } else {
-                                response.render('product_list', {
-                                        is_logined : false,
-                                        products : result,
-					main_name : category,
-                                        sub : false,
-                                        page : 1,
-                                        page_num : 24,
-                                        length : result.length-1,
-                                        sortby : 'p.pDate DESC',
-                                        search : 1
-                                });
-                        }
-                }
-        });
-
-        
+        product_user.search(request, response);
 });
 
 app.get('/product/:productId', function(request, response){
-        var filteredId = path.parse(request.params.productId).base;
-        db.query(`SELECT * FROM product WHERE pIdx=?`, [filteredId], function(error, product){
-                if(error) throw error;
-                else {
-                        db.query(`select sum(bQuantity) sum from basket b, member m where b.member_id=m.mId and b.product_id=? GROUP BY b.product_id;`, [filteredId], function(error2, basket){
-                                if(request.session.is_logined == true){
-                                        response.render('detail_page', {
-                                                is_logined : request.session.is_logined,
-                                                name : request.session.name,
-                                                ID : request.session.ID,
-                                                product : product,
-                                                basket : basket
-                                        });
-                                } else {
-                                        response.render('detail_page', {
-                                                is_logined : request.session.is_logined,
-                                                ID : false,
-                                                product : product,
-                                                basket : basket
-                                        });
-                                }
-                        });
-                }
-        });
+        product_user.detail(request, response);
 });
 
 app.get('/product_admin/:productId', function(request, response){
-        var filteredId = path.parse(request.params.productId).base;
-        db.query(`SELECT * FROM product WHERE pIdx=?`, [filteredId], function(error, product){
-                db.query(`SELECT * FROM category WHERE sub_id=?`,[product[0].category_id],function(error2, category){
-                        if(error) throw error;
-                        else {
-                                if(request.session.is_logined == true){
-                                        response.render('detail_page_admin', {
-                                                is_logined : request.session.is_logined,
-                                                name : request.session.name,
-                                                ID : request.session.name,
-                                                product : product,
-                                                category : category
-                                        });
-                                } else {
-                                        response.render('detail_page_admin', {
-                                                is_logined : request.session.is_logined,
-                                                ID : false,
-                                                product : product,
-                                                category : category
-                                        });
-                                }
-                        }
-                });
-        });
+        product_admin.detail(request, response);
 });
 
 app.get('/banner_list_admin', function(request, response){
