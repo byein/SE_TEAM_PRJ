@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>주문 내역 페이지</title>
+
+    <link rel="stylesheet" href="order_detail.css" />
+    <script src="order_detail.js"></script>
+
+  </head>
+
+  <body>
+    <header id="header">
+        <div id="head-wrapper">
+            <h1>
+                <a id="logo" href="/" title="로고">로고</a>
+            </h1>
+            <div id ="search-form">
+                <form action="/search" method="get" class="category">
+                     <select name = "category">
+                         <option value="all"> 전체</option>
+                         <option value="top"> 상의</option>
+                         <option value="bottom"> 하의</option>
+                         <option value="dress"> 원피스</option>
+                         <option value="goods"> 잡화류</option>
+                         <option value="acc"> 악세서리</option>
+                     </select>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                     <input type = "submit" value ="확인" class = "sort-button">
+                 </form>
+             </div>
+            <div class="wrap-user-util">
+                <% if(is_logined == false){ %>
+                    <button id="login">
+                    <a href="/login">로그인</a>
+                    </button>
+                    <button id="signup-btn">
+                    <a id="goto-signup" href="/signUp">회원가입</a>
+                    </button>
+                <% }else{ %>
+                    <a><%= name %> 님 환영합니다!</a>
+                    <button id="logout">
+                    <a href="/logout">logout</a></button>
+                    <button id="bucket">
+                    <a id="goto-bucket" href="/basket">장바구니</a>
+                    </button>
+                    <button id="notice">
+                        <a id="goto-notice" href="/banner_list_customer">공지사항</a>
+                    </button>
+                <% } %>
+            </div>
+        </div>
+    </header>
+ 
+
+    <div style="text-align: center">
+      <h1>주문 내역</h1>
+    </div>
+
+
+    <!-- 기간별 조회-->
+
+    <div class="day">
+        <a href="#">오늘</a>
+        <a href="#">최근 일주일</a>
+        <a href="#">1개월</a>
+        <a href="#">1년</a>
+    </div>
+
+    <!-- Orders Details 테이블-->
+
+    <br>
+
+      <table>
+        <thead>
+          <tr>
+            <th>주문날짜</th>
+            <th>주문수량</th>
+            <th>주문상태</th>
+            <th>주문금액</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>
+              <!--주문날짜-->
+              21-05-20
+            </td>
+            <td>
+              <!--주문한 상품 목록 및 수량-->
+              스트라이프 티셔츠 1개
+            </td>
+
+            <td>
+              <!--현재 주문 상태-->
+              배송완료
+            </td>
+
+            <td>
+              <!-- 상품 각가의 금액 및 총 결제 금액-->
+              12,900원
+            </td>
+
+            <td>
+              <!-- 주문상태에 알맞은 버튼-->
+              <!-- 배송완료 -> 문의하기/후기쓰기 배송중 -> 문의하기 -->
+              <input type="button" name="name" value="문의하기" />
+              <input type="button" name="name" value="후기쓰기" />
+            </td>
+          </tr>
+
+          </tbody>
+      </table>
+    </div>
+
+    <br />
+
+    <!-- 페이징 영역 -->
+
+    <div class="paging">
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+    </div>
+
+    <footer id="footer">
+        <p>
+            <a href="/use">[이용약관]</a>
+            <a href="/privacy">[개인정보처리방침]</a>
+            <br>
+
+            [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+            Copyright 2021. 24팀 all rights reserved.<br>
+        </p>
+    </footer>
+  </body>
+</html>
