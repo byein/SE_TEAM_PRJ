@@ -52,7 +52,7 @@
                 </li>
             </ul>
             <h3 id="sum">
-                합계 : <%= sum %>원
+                합계 : <%= pSum %>원
             </h3>
         </div>
 
@@ -91,9 +91,9 @@
         </div>
         <div class="pay">
             <h2>결제하기</h2>
-            <h3 class="total-payment">총 결제 금액 : <% sum + delivery_fee %></h3>
+            <h3 class="total-payment">배송비 : <%= delivery_fee %>원<br>총 결제 금액 : <%= pSum + delivery_fee %>원</h3>
             <input type="hidden" name="sum" id="sum" value = "<%= pSum + delivery_fee %>"/>
-            <input type="submit" id="pay-with-card" class="pay-btn" value="결제하기" onclick="requestPaywithCard()">
+            <input type="submit" id="pay-with-card" class="pay-btn" value="결제하기">
         </div>
     </form>
     </div>

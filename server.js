@@ -453,9 +453,22 @@ app.post('/order_create', function(request, response){
         var sum = parseInt(post.sum);
         var addr = post.road + post.jibun + post.detail;
         db.query('INSERT INTO `order`(member_id, oStatus, oDate, oTotal_price, oPhone_num, oAddress) VALUES(?, ?, NOW(), ?, ?, ?)',[post.ID, 0, sum, post.phonenum, addr], function(error, result){
-            if(error) throw error;
-            console.log(result);
+                if(error) throw error;
+                console.log(result);
         });
+});
+
+app.get('/order_detail', function(request, response){
+        if(request.session.is_logined == true){
+                response.render('order_detail', {
+                        is_logined : request.session.is_logined,
+                        name : request.session.name
+                });
+        }else{
+                response.render('order_detail', {
+                        is_logined : false
+                });
+        }
 });
 
 app.get('/use', function(request, response){
