@@ -156,7 +156,7 @@ app.get('/add_product_admin', function(request, response){
                 });
 });
 
-app.get('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
+app.post('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
         product_admin.add(request, response);
 });
 
@@ -413,40 +413,48 @@ app.post('/basket_update', function(request, response){
 });
 
 app.get('/payment', function(request, response) {
-        // 주문자 정보 및 배송 정보 채워넣기
-        db.query(`SELECT * FROM member WHERE mId=?`,[request.session.ID], function(err, memberInfo){
+        db.query(`SELECT * FROM member WHERE mId=?;`,[request.session.ID], function(err, memberInfo){
                 if(err) throw err;
                 else {
-                        response.render('payment', {
-                                is_logined: true,
-                                mName: request.session.name,
-                                email: memberInfo.mEmail,
-                                mPost_code: memberInfo.mPost_code,
-                                mRoad_address: memberInfo.mRoad_address,
-                                mJibun_address: memberInfo.mJibun_address,
-                                mDetail_address: memberInfo.mDetail_address
+                        db.query(`SELECT * FROM basket b, product p WHERE b.product_id=p.pIdx and b.member_id=?`, [request.session.ID], function(error, basket){
+                                if(error) throw error;
+                                else {
+                                        let sum = 0;
+                                        let delivery_fee = 0;
+                                        for(let i = 0; i<basket.length; i++) {
+                                                sum = sum + (basket[i].bQuantity * basket[i].pPrice);
+                                                if(delivery_fee <= basket[i].pDeliveryfee){
+                                                        delivery_fee = basket[i].pDeliveryfee;
+                                                }
+                                        }
+                                        response.render('payment', {
+                                                is_logined: true,
+                                                ID : request.session.ID,
+                                                mName: request.session.name,
+                                                email: memberInfo[0].mEmail,
+                                                mPost_code: memberInfo[0].mPost_code,
+                                                mRoad_address: memberInfo[0].mRoad_address,
+                                                mJibun_address: memberInfo[0].mJibun_address,
+                                                mDetail_address: memberInfo[0].mDetail_address,
+                                                mExtra_address: memberInfo[0].mExtra_address,
+                                                basket: basket,
+                                                pSum: sum,
+                                                delivery_fee: delivery_fee
+                                        });
+                                }
                         });
                 }
         });
+});
 
-        // 장바구니 프로덕트 가져오기
-        db.query(`SELECT product_id, bQuentity FROM basket WHERE mId=? ORDER BY product_id`, [request.session.ID],function (error, basket){
-                response.render('payment',{
-                        basket: basket
-                });
-                // pDeliveryfee 추가해주세요!
-                db.query(`SELECT pName, pPrice, pImg FROM product WHERE pIdx in (?) ORDER BY pIdx`, [basket.product_id], function(err, products){
-                        for(let i = 0; i<basket.length; i++) {
-                                let sum = 0;
-                                let delivery_fee = 0;
-
-                                sum = sum + (basket.bQuentity[i] * produects.pPrice[i]); }
-                        response.render('payment',{
-                                products: products,
-                                pSum: sum,
-                                delivery_fee: delivery_fee
-                        });                
-                });
+app.post('/order_create', function(request, response){
+        console.log(request.body);
+        var post = request.body;
+        var sum = parseInt(post.sum);
+        var addr = post.road + post.jibun + post.detail;
+        db.query('INSERT INTO `order`(member_id, oStatus, oDate, oTotal_price, oPhone_num, oAddress) VALUES(?, ?, NOW(), ?, ?, ?)',[post.ID, 0, sum, post.phonenum, addr], function(error, result){
+            if(error) throw error;
+            console.log(result);
         });
 });
 

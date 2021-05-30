@@ -2,7 +2,10 @@ let oInfo = {
     oName: '',
     phone: '',
     addr: '',
-    postnum: ''
+    postnum: '',
+    price:'',
+    pName:'',
+    email:''
 };
 
 function setDeliveryInfo() {
@@ -16,6 +19,15 @@ function setDeliveryInfo() {
 
 // iamport를 이용해서 결제 진행
 function requestPaywithCard() {
+    oInfo.price = document.getElementById('sum').value;
+    basket_length = document.getElementById('basket_length').value;
+    if(basket_length>1){
+        productNum = basket_length -1;
+        oInfo.pName = document.getElementById('pName').value + ' 외 ' + productNum + '개';
+    } else {
+        oInfo.pName = document.getElementById('pName').value;
+    }
+    oInfo.email = document.getElementById('email').value;
     const IMP = window.IMP; 
     IMP.init("imp15169128"); // 발급받은 "가맹점 식별코드"를 사용
 
@@ -23,14 +35,14 @@ function requestPaywithCard() {
         pg : 'kakaopay', // version 1.1.0부터 지원.
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),      // 주문번호
-        name : '단가라 원피스',
+        name : oInfo.pName,
         amount : 1,
-        buyer_email : 'dlqjdgus99@naver.com', //mEmail,
+        buyer_email : oInfo.email, //mEmail,
         buyer_name : oInfo.oName,
         buyer_tel : oInfo.phone,
         buyer_addr : oInfo.addr,
         buyer_postcode : oInfo.postnum,
-        m_redirect_url : 'http://3.36.117.232:3000/order_detail' // 카드결제 완료시 이동할 페이지
+        //m_redirect_url : 'http://3.36.117.232:3000/order_detail' // 카드결제 완료시 이동할 페이지
     }, function(rsp) {
         if ( rsp.success ) {
             var msg = '결제가 완료되었습니다.\n';
