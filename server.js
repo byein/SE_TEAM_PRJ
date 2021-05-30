@@ -22,6 +22,7 @@ var product_admin = require('./lib/product_admin');
 
 app.use(express.static('public'));
 app.use(express.static('router'));
+app.use(express.static('template'));
 
 //ejs 설정
 app.set('views', __dirname + '/views');
