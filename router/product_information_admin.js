@@ -74,7 +74,15 @@ function change_order_processing(id){
             return false;
         }
     }else if(sales_processing_btn == "상품평"){
-        /*4차 요구사항에 나온 상품평 기능 추가*/
+        /*
+        관리자 페이지라서 상품평 버튼 눌렀을 때
+        관리자 부분만 구현
+        상품 상세 관리자 페이지로 이동
+
+        고객 상품평 부분은 주문 내역 페이지에서
+        따로 연결
+        */ 
+        location.href="detail_page_admin.js";
         return true;
     }else{
         return false;

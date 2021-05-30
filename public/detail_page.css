@@ -380,6 +380,113 @@
       padding: 30px;
   }
 
+
+
+  
+.product_score {
+    background-color: #F8BA00;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.starrate {
+    background-color: orange;
+    font-weight: bold;
+    color: white;
+    width: fit-content;
+    padding: 0;
+    border-radius: 50px;
+    text-align: center;
+}
+#review_table {
+    justify-content: center;
+    background-color: white;
+    position: relative;
+    width: 100%;
+    padding: auto 30px;
+}
+#review_table td {
+    text-align: center;
+}
+#review_table span {
+    padding: 5px;
+    border-radius: 20px;
+}
+.strong_recommand {
+    display: block;
+    background-color: #0076BA;
+    color: white;
+}
+.recommand {
+    display: block;
+    background-color: #00A2FF;
+    color: white;
+}
+.normal_recommand {
+    display: block;
+    background-color: #51a1cf;
+    color: white;
+}
+.not_recommand {
+    display: block;
+    background-color: #000;
+    color: white;
+}
+.very_fast_delivery {
+    display: block;
+    background-color: #1e8f07;
+    color: white;
+}
+.fast_delivery {
+    display: block;
+    background-color: #1DB100;
+    color: white;
+}
+.normal_delivery {
+    display: block;
+    background-color: #F8BA00;
+    color: white;
+}
+.late_delivery {
+    display: block;
+    background-color: #FF644E;
+    color: white;
+}
+.very_late_delivery {
+    display: block;
+    background-color: #ec3c25;
+    color: white;
+}
+
+.outer {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: lightcoral;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
   #footer {
     position: relative;
     bottom: 0%;
