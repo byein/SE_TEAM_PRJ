@@ -1,0 +1,220 @@
+html,
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-size: 15pt;
+  text-align: center;
+  vertical-align: middle;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: lightcyan;
+  overflow-x: hidden;
+}
+
+#header {
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 200px;
+  width: 100%;
+  background-color: antiquewhite;
+  display: flex;
+  align-items: center;
+}
+body a {
+  text-decoration: none;
+  color: black;
+}
+
+#head-wrapper {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+#logo {
+  position: absolute;
+  left: 10%;
+  text-decoration: none;
+  text-align: center;
+  padding: auto;
+  display: flex;
+  float: left;
+}
+
+.wrap-user-util {
+  display: inline;
+  position: relative;
+  width: 30%;
+}
+
+.wrap-user-util button {
+  background: none;
+}
+
+#goto-signup {
+  text-decoration: none;
+}
+
+/*카테고리 드롭다운 코드 */
+
+.dropmenu {
+  border: none;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  font: "sans-serif";
+  font-size: 20px;
+}
+
+.dropmenu ul {
+  background: lightpink;
+  height: 100px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+.dropmenu li {
+  /* float: left; */
+  margin-right: 50px;
+  padding: 0px;
+  display: inline-block;
+}
+
+.dropmenu li a {
+  background: lightpink;
+  color: #000000;
+  display: block;
+  line-height: 100px;
+  margin: 0px;
+  padding: 0px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.dropmenu li a:hover,
+.dropmenu ul li:hover a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dropmenu li ul {
+  background: lightpink;
+  display: none;
+  height: auto;
+  border: 0px;
+  position: absolute;
+  width: 200px;
+  z-index: 200;
+}
+
+.dropmenu li:hover ul {
+  display: block;
+}
+
+.dropmenu li li {
+  background: lightpink;
+  display: block;
+  float: center;
+  margin: 0px;
+  padding: 0px;
+  width: 200px;
+}
+
+.dropmenu li:hover li a {
+  background: none;
+}
+
+.dropmenu li ul a {
+  display: block;
+  height: 80px;
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px 10px 0px 15px;
+  text-align: left;
+}
+
+.dropmenu li ul a:hover,
+.dropmenu li ul li:hover a {
+  background: lightslategray;
+  border: 0px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dropmenu p {
+  clear: left;
+}
+/*카테고리 드롭다운 끝*/
+
+/* start main css */
+.main-container {
+  text-align: center;
+}
+
+#inquiry-list-container {
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+#inquiry-table {
+  position: relative;
+  width: 70%;
+  word-wrap: break-word;
+  border-bottom: 1px solid #999;
+  table-layout: fixed;
+  margin: 30px auto;
+  border: black;
+  border-collapse: collapse;
+  border-spacing: 2px;
+}
+thead {
+  background-color: lightpink;
+  border-color: #666;
+  border: solid;
+  border-width: 1px 0;
+}
+tbody tr {
+  border-bottom: 1px solid #999;
+}
+#inquiry-details {
+  display: none;
+  background-color: lightgray;
+  height: auto;
+}
+
+#additional-inquiry-btn {
+  font-size: 18pt;
+  height: 60px;
+}
+#additional-inquiry-btn a {
+  color: lightcoral;
+}
+
+#footer {
+  position: relative;
+  bottom: 0%;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  background-color: aquamarine;
+  padding: 0.1px;
+}
+
+#footer a {
+  font-weight: bold;
+}
