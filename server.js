@@ -448,26 +448,15 @@ app.get('/payment', function(request, response) {
 });
 
 app.post('/order_create', function(request, response){
-        console.log(request.body);
         var post = request.body;
-        var sum = parseInt(post.sum);
-        var addr = post.road + post.jibun + post.detail;
-    if(post.basket_length>1){
-        productNum = post.basket_length -1;
-        oName = post.pName + ' 외 ' + productNum + '개';
-    } else {
-        oName = post.pName;
-    }
-        db.query('INSERT INTO `order`(member_id, oStatus, oDate, oTotal_price, oPhone_num, oAddress, oName) VALUES(?, ?, NOW(), ?, ?, ?, ?)',[post.ID, 0, sum, post.phonenum, addr, oName], function(error, result){
+        var sum = parseInt(post.Sum);
+        db.query('INSERT INTO `order`(member_id, oStatus, oDate, oTotal_price, oPhone_num, oAddress, oName) VALUES(?, ?, NOW(), ?, ?, ?, ?)',[post.ID, 0, sum, post.phonenum, post.addr, post.oName], function(error, result){
                 if(error) throw error;
-                console.log(result);
                 for(let i=0; i<post.basket_length; i++){
                         var Idx = 'pIdx';
                         var Idx = Idx+i;
                         var Quantity = 'pQuantity';
                         var Quantity = Quantity+i;
-                        console.log(Idx);
-                        console.log(Quantity);
                         var pIdx = eval('post.'+Idx);
                         var pQuantity = eval('post.'+Quantity);
                         db.query('INSERT INTO order_detail(order_id, product_id, product_quantity) VALUES(?, ?, ?)', [result.insertId, pIdx, pQuantity], function(error2, result2){
@@ -508,7 +497,7 @@ app.get('/order_detail/:page', function(request, response){
                                         order : order,
                                         page : page,
                                         length : order.length-1,
-                                        page_num : 1
+                                        page_num : 5
                                 });
                         }else{
                                 response.render('order_detail', {
@@ -516,7 +505,7 @@ app.get('/order_detail/:page', function(request, response){
                                         order : order,
                                         page : page,
                                         length : order.length-1,
-                                        page_num : 1
+                                        page_num : 5
                                 });
                         }
                 });
