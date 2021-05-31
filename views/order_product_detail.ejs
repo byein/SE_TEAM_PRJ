@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/payment.css">
+    <script defer type="text/javascript" src="/payment.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>     <!--우편번호 찾기 api-->
+    <title>Document</title>
+</head>
+<body>
+    <header id="header">
+        <div id="head-wrapper">
+            <h1>
+                <a id="logo" href="/" title="로고">로고</a>
+            </h1>
+            <div id ="search-form">
+                <form action="/search" method="get" class="category">
+                     <select name = "category">
+                         <option value="all"> 전체</option>
+                         <option value="top"> 상의</option>
+                         <option value="bottom"> 하의</option>
+                         <option value="dress"> 원피스</option>
+                         <option value="goods"> 잡화류</option>
+                         <option value="acc"> 악세서리</option>
+                     </select>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색 어를 입력하세요"> </br>
+                     <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                     <input type = "submit" value ="확인" class = "sort-button">
+                 </form>
+             </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="order-product-container">
+            <h2>주문 상품</h2>
+            <ul id="order-ul">
+                <li id="product-info-to-order-wrapper">
+                    <% for(let i=0; i<od.length; i++) { %>
+                    <img id="orderProductImg" class="product-info-to-order" src="<%= od[i].pImg %>"/>
+                    <div id="orderSubject" class="product-info-to-order"><%= od[i].pName %></div>
+                    <div id="orderQuantity" class="product-info-to-order"><%= od[i].bQuantity %>개</div>
+                    <div id="orderPrice" class="product-info-to-order"><%= od[i].pPrice %>원</div>
+                    <% } %>
+                </li>
+            </ul>
+        </div>
+
+        <div class="address-info">
+            <div class="orderer-info">
+                <h3>주문자 정보</h3>
+                <dl>
+                    <dt>주문자</dt>
+                    <dd><%= name %></dd>
+                    <dt>연락처</dt>
+                    <dd><%= od[0].oPhone_num %></dd>
+                    <dt>주소</dt>
+                    <dd><%= od[0].oAddress %></dd>
+                </dl>
+            </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <p>
+            <a href="/use">[이용약관]</a>
+            <a href="/privacy">[개인정보처리방침]</a>
+            <br>
+
+            [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+            Copyright 2021. 24팀 all rights reserved.<br>
+        </p>
+    </footer>
+</body>
+</html>

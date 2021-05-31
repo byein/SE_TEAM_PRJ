@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <title>주문 내역 페이지</title>
 
-    <link rel="stylesheet" href="order_detail.css" />
-    <script src="order_detail.js"></script>
+    <link rel="stylesheet" href="/order_detail.css" />
+    <script src="/order_detail.js"></script>
 
   </head>
 
@@ -63,10 +63,11 @@
     <!-- 기간별 조회-->
 
     <div class="day">
-        <a href="#">오늘</a>
-        <a href="#">최근 일주일</a>
-        <a href="#">1개월</a>
-        <a href="#">1년</a>
+      <a href="/order_detail/1/?duration=day">오늘</a>
+      <a href="/order_detail/1/?duration=week">최근 일주일</a>
+      <a href="/order_detail/1/?duration=month">1개월</a>
+      <a href="/order_detail/1/?duration=year">1년</a>
+      <a href="/order_detail/1/?duration=hour">1시간</a>
     </div>
 
     <!-- Orders Details 테이블-->
@@ -83,51 +84,73 @@
             <th>비고</th>
           </tr>
         </thead>
+        <% for (let i = ( page * page_num) - page_num; i<(page* page_num); i++){
+          if (length < i) {i++;} else { var data = order[i]; %>
+            <tbody>
 
-        <tbody>
-          <tr>
-            <td>
-              <!--주문날짜-->
-              21-05-20
-            </td>
-            <td>
-              <!--주문한 상품 목록 및 수량-->
-              스트라이프 티셔츠 1개
-            </td>
-
-            <td>
-              <!--현재 주문 상태-->
-              배송완료
-            </td>
-
-            <td>
-              <!-- 상품 각가의 금액 및 총 결제 금액-->
-              12,900원
-            </td>
-
-            <td>
-              <!-- 주문상태에 알맞은 버튼-->
-              <!-- 배송완료 -> 문의하기/후기쓰기 배송중 -> 문의하기 -->
-              <input type="button" name="name" value="문의하기" />
-              <input type="button" name="name" value="후기쓰기" />
-            </td>
-          </tr>
-
-          </tbody>
-      </table>
-    </div>
-
-    <br />
-
-    <!-- 페이징 영역 -->
-
-    <div class="paging">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-    </div>
+              <tr>
+                <td>
+                  <!--주문날짜-->
+                  <%= data.oDate %>
+                </td>
+                <td>
+                  <!--주문한 상품 목록 및 수량-->
+                  <a href = "/order_product_detail/<%= data.oIdx %>"><%= data.oName %></a>
+                </td>
+    
+                <td>
+                  <!--현재 주문 상태-->
+                  <% if(data.oStatus==0) { %>
+                  결제완료
+                  <% } else if(data.oStatus==1) { %>
+                  배송중
+                  <% } else if(data.oStatus==2) { %>
+                  배송완료
+                  <% } else { %>
+                  구매확정
+                  <% } %>
+                </td>
+    
+                <td>
+                  <!-- 상품 각가의 금액 및 총 결제 금액-->
+                  <%= data.oTotal_price %>원
+                </td>
+    
+                <td>
+                  <!-- 주문상태에 알맞은 버튼-->
+                  <!-- 배송완료 -> 문의하기/후기쓰기 배송중 -> 문의하기 -->
+                  <form class="" action="/oStatus_update" method="post">
+    
+                  <% if(data.oStatus==0) { %>
+                  <input type="button" name="name" value="문의하기" />
+                  <% } else if(data.oStatus==1) { %>
+                  <input type="button" name="name" value="문의하기" />
+                  <% } else if(data.oStatus==2) { %>
+                  <input type="hidden" name="oIdx" value="<%= data.oIdx %>" />
+                  <input type="hidden" name="status" value="3" />
+                  <input type="submit" name="name" value="구매확정" />
+                  <% } else { %>
+                  <input type="button" name="name" value="상품평" />
+                  <% } %>
+    
+                  </form>
+                </td>
+              </tr>
+                  <% } %>
+    
+              </tbody>
+                  <% } %>
+          </table>
+    
+        <br />
+    
+        <!-- 페이징 영역 -->
+    
+        <div class="paging">
+                <% for(var j=0; j<order.length/page_num; j++){ %>
+                <a href="/order_detail/<%= j+1 %>"><%= j+1 %></a>
+                <%} %>
+        </div>
 
     <footer id="footer">
         <p>

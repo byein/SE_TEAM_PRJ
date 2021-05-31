@@ -44,6 +44,9 @@
                     <input type="hidden" name="pName" id="pName" value="<%= basket[0].pName %>">
                     <input type="hidden" name="basket_length" id="basket_length" value="<%= basket.length %>">
                     <% for(let i=0; i<basket.length; i++) { %>
+                    <input type="hidden" name="pName<%= i %>"  value="<%= basket[i].pName %>">
+                    <input type="hidden" name="pQuantity<%= i %>"  value="<%= basket[i].bQuantity %>">
+                    <input type="hidden" name="pIdx<%= i %>"  value="<%= basket[i].pIdx %>">
                     <img id="orderProductImg" class="product-info-to-order" src="<%= basket[i].pImg %>"/>
                     <div id="orderSubject" class="product-info-to-order"><%= basket[i].pName %></div>
                     <div id="orderQuantity" class="product-info-to-order"><%= basket[i].bQuantity %></div>

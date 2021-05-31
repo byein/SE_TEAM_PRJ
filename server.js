@@ -452,23 +452,101 @@ app.post('/order_create', function(request, response){
         var post = request.body;
         var sum = parseInt(post.sum);
         var addr = post.road + post.jibun + post.detail;
-        db.query('INSERT INTO `order`(member_id, oStatus, oDate, oTotal_price, oPhone_num, oAddress) VALUES(?, ?, NOW(), ?, ?, ?)',[post.ID, 0, sum, post.phonenum, addr], function(error, result){
+    if(post.basket_length>1){
+        productNum = post.basket_length -1;
+        oName = post.pName + ' 외 ' + productNum + '개';
+    } else {
+        oName = post.pName;
+    }
+        db.query('INSERT INTO `order`(member_id, oStatus, oDate, oTotal_price, oPhone_num, oAddress, oName) VALUES(?, ?, NOW(), ?, ?, ?, ?)',[post.ID, 0, sum, post.phonenum, addr, oName], function(error, result){
                 if(error) throw error;
                 console.log(result);
+                for(let i=0; i<post.basket_length; i++){
+                        var Idx = 'pIdx';
+                        var Idx = Idx+i;
+                        var Quantity = 'pQuantity';
+                        var Quantity = Quantity+i;
+                        console.log(Idx);
+                        console.log(Quantity);
+                        var pIdx = eval('post.'+Idx);
+                        var pQuantity = eval('post.'+Quantity);
+                        db.query('INSERT INTO order_detail(order_id, product_id, product_quantity) VALUES(?, ?, ?)', [result.insertId, pIdx, pQuantity], function(error2, result2){
+                                console.log(result2);
+                        });
+                }
         });
 });
 
-app.get('/order_detail', function(request, response){
-        if(request.session.is_logined == true){
-                response.render('order_detail', {
-                        is_logined : request.session.is_logined,
-                        name : request.session.name
-                });
-        }else{
-                response.render('order_detail', {
-                        is_logined : false
-                });
+app.get('/order_detail/:page', function(request, response){
+        var page = request.params.page;
+        var duration = url.parse(request.url, true).query.duration;
+
+        if(duration == undefined){
+                duration = 'AND oDate between date_add(NOW(), interval -1 week) and NOW();';
         }
+        if (duration == 'day'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 day) and NOW();';
+        }
+        if (duration == 'week'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 week) and NOW();';
+        }
+        if (duration == 'month'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 month) and NOW();';
+        }
+        if (duration == 'year'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 year) and NOW();';
+        }
+        if (duration == 'hour'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 hour) and NOW();';
+        }
+
+        db.query("SELECT * FROM `order` WHERE member_id=? "+duration, [request.session.ID], function(error, order){
+                        if(request.session.is_logined == true){
+                                response.render('order_detail', {
+                                        is_logined : request.session.is_logined,
+                                        name : request.session.name,
+                                        order : order,
+                                        page : page,
+                                        length : order.length-1,
+                                        page_num : 1
+                                });
+                        }else{
+                                response.render('order_detail', {
+                                        is_logined : false,
+                                        order : order,
+                                        page : page,
+                                        length : order.length-1,
+                                        page_num : 1
+                                });
+                        }
+                });
+});
+
+app.post('/oStatus_update', function(request, response){
+        var post = request.body;
+        console.log(post);
+        db.query('UPDATE `order` SET oStatus=? WHERE oIdx=?', [post.status, post.oIdx], function(error, result){
+                response.redirect('/order_detail/1');
+        });
+});
+
+app.get('/order_product_detail/:orderId', function(request, response){
+        var filteredId = path.parse(request.params.orderId).base;
+        console.log(filteredId);
+        db.query('SELECT * FROM `order` o, order_detail od, product p WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and o.member_id=? and od.order_id=?', [request.session.ID, filteredId], function(error2, od){
+                        if(request.session.is_logined == true){
+                                response.render('order_product_detail', {
+                                        is_logined : request.session.is_logined,
+                                        name : request.session.name,
+                                        od : od
+                                });
+                        }else{
+                                response.render('order_product_detail', {
+                                        is_logined : false,
+                                        od : od
+                                });
+                        }
+                });
 });
 
 app.get('/use', function(request, response){
