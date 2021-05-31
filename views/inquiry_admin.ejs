@@ -58,20 +58,15 @@
                 <colgroup>
                     <col width="20%">
                     <col width="20%">
-                    <col width="20%">
-                    <col width="20%">
+                    <col width="40%">
                     <col width="20%">
                 </colgroup>
                 <thead>
                     <tr>
                         <form action="/inquiry-admin" method="GET" onsubmit="return onDateCheck();">
-                            <td>검색기간</td>
-                            <td colspan="2">
+                            <td colspan="4"><h4>검색기간</h4>
                                 <input type="date" id="search-date-from"> ~
                                 <input type="date" id="search-date-to">
-                            </td>
-                            <td>전체</td>
-                            <td>
                                 <input type="submit" value="검색">
                             </td>
                         </form>
@@ -113,6 +108,7 @@
                             <p>답변 : <%= answer %></p>
                         </td>
                     </tr>
+                    <% } %>
                 </tbody>
             </table>
         </div>

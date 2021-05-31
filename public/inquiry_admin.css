@@ -16,6 +16,7 @@ body {
   background-color: lightcyan;
   overflow-x: hidden;
   text-align: center;
+  vertical-align: middle;
 }
 body a {
   text-decoration: none;
@@ -143,12 +144,7 @@ ul.menu {
   background-color: lightcoral;
   color: white;
 }
-th {
-  background-color: lightseagreen;
-  padding: 30px;
-}
 
-section,
 ul,
 li {
   margin: 0;
@@ -230,10 +226,26 @@ th {
   height: 70%;
   float: left;
   background-color: honeydew;
+  padding: 0;
 }
 
 .inquiry-list-wrapper {
   width: 100%;
+}
+#inquiry-table {
+  width: 100%;
+  border: black;
+  border-collapse: collapse;
+  border-spacing: 2px;
+}
+thead {
+  background-color: lightpink;
+  border-color: #666;
+  border: solid;
+  border-width: 1px 0;
+}
+tbody tr {
+  border-bottom: 1px solid #999;
 }
 
 #inquiry-details {
