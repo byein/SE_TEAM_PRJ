@@ -42,7 +42,7 @@
                     <% for(let i=0; i<od.length; i++) { %>
                     <img id="orderProductImg" class="product-info-to-order" src="<%= od[i].pImg %>"/>
                     <div id="orderSubject" class="product-info-to-order"><%= od[i].pName %></div>
-                    <div id="orderQuantity" class="product-info-to-order"><%= od[i].bQuantity %>개</div>
+                    <div id="orderQuantity" class="product-info-to-order"><%= od[i].product_quantity %>개</div>
                     <div id="orderPrice" class="product-info-to-order"><%= od[i].pPrice %>원</div>
                     <% } %>
                 </li>
