@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>상품평 등록페이지</title>
+        <link rel="stylesheet" href="/add_review_customer.css" type="text/css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script src="/add_review_customer.js"></script>
+    </head>
+    <body>
+        <header id="header">
+            <div id="head-wrapper">
+                <h1>
+                    <a id="logo" href="/admin" title="로고">로고</a>
+                </h1>
+                <form id="search-form" method="GET">
+                    <input id="search" type="search" placeholder="검색">
+                    <button id="search-btn" class="search">
+                        <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
+                    </button>
+                </form>
+                <div class="wrap-user-util">
+                    <% if(is_logined == true){ %>
+                        <a><%= name %> 관리자</a>
+                        <button id="logout">
+                            <a href="/logout">logout</a>
+                        </button>
+                        <button id="bucket">
+                            <a id="goto-bucket" href="/basket">장바구니</a>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </header>
+        <nav id="category">
+            <a class="category-menu" href="/product_list_admin">상의</a>
+            <a class="category-menu" href="/product_list_admin">하의</a>
+            <a class="category-menu" href="/product_list_admin">원피스</a>
+            <a class="category-menu" href="/product_list_admin">잡화류</a>
+            <a class="category-menu" href="/product_list_admin">악세서리</a>
+        </nav>
+
+
+        <nav class="nav">
+            <ul>
+                <li><a href="/admin" class="active">Home</a></li>
+                <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
+                <li><a href="/product_list_admin" class="current">Product 관리</a></li>
+                <li><a href="/product_information_admin">Sales Information</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <section>
+            <h2>New Review</h2>
+            <form action="#" method="post" onsubmit="return check()" enctype="multipart/form-data">
+                <div>
+                    <table>
+                        <tr><td>추천</td><td>
+                            <select name="recommand" id="recommand">
+                                <option value="none">선택</option>
+                                <option value="strong_recommand">매우추천</option>
+                                <option value="recommand">추천</option>
+                                <option value="normal">보통</option>
+                                <option value="not_recommand">비추천</option>
+                            </select>
+                        </td></tr>  
+                        <tr><td>배송평가</td><td>
+                            <select name="delivery_evaluation" id="delivery_evaluation">
+                                <option value="none">선택</option>
+                                <option value="very_fast">매우빠름</option>
+                                <option value="fast">빠름</option>
+                                <option value="normal">보통</option>
+                                <option value="late">느림</option>
+                                <option value="very_late">매우느림</option>
+                            </select>
+                        </td></tr>  
+                        <tr>
+                            <td>별점</td>
+                            <td><div class="startRadio">
+                                <label class="startRadio__box">
+                                  <input type="radio" name="star" id="1">
+                                  <span class="startRadio__img"><span class="blind">별 1개</span></span>
+                                </label>
+                                <label class="startRadio__box">
+                                  <input type="radio" name="star" id="2">
+                                  <span class="startRadio__img"><span class="blind">별 2개</span></span>
+                                </label>
+                                <label class="startRadio__box">
+                                  <input type="radio" name="star" id="3">
+                                  <span class="startRadio__img"><span class="blind">별 3개</span></span>
+                                </label>
+                                <label class="startRadio__box">
+                                  <input type="radio" name="star" id="4">
+                                  <span class="startRadio__img"><span class="blind">별 4개</span></span>
+                                </label>
+                                <label class="startRadio__box">
+                                  <input type="radio" name="star" id="5">
+                                  <span class="startRadio__img"><span class="blind">별 5개</span></span>
+                                </label>
+                              </div>
+                            </td>
+                        </tr>
+                               
+                        <tr><td>후기</td><td><textarea id="review" rows="5" cols="30" maxlength="80" 
+                            placeholder="80자 이내(미만)의 간단한 후기를 작성해주세요."></textarea></td></tr>
+                        <tr><td colspan="2"><input type="submit" value="등록하기" class="btn"></td></tr>
+                    </table>
+                </div>
+                
+            </form>
+        </section>
+        <footer id="footer">
+            <p>
+                <a href="/use">[이용약관]</a>
+                <a href="/privacy">[개인정보처리방침]</a>
+                <br>
+    
+                [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+                Copyright 2021. 24팀 all rights reserved.<br>
+            </p>
+        </footer>
+    </body>
+</html>

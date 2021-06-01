@@ -1,0 +1,33 @@
+.coupon_list table {
+    width: 90%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+    margin-left: 70px;
+  }
+  td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+    background-color: #00000031;
+  }
+
+  .coupon_add {
+    display: block;
+    color: white;
+    text-align: center;
+
+    width: 100px;
+    float: right;
+    margin: 15px auto;
+    text-decoration: none;
+    background-color: lightcoral;
+
+    padding: 10px;
+    border-radius: 10px;
+  }

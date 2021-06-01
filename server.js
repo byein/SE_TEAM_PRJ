@@ -156,7 +156,7 @@ app.get('/add_product_admin', function(request, response){
                 });
 });
 
-app.get('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
+app.post('/add_product_admin_in', upload.fields([{name : 'pimg' }, {name : 'pdetail' }]), function(request, response){
         product_admin.add(request, response);
 });
 
@@ -367,6 +367,54 @@ app.get('/banner_delete/:nIdx', function(request, response){
         });
 });
 
+app.get('/coupon_list_admin', function(request, response){
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                } else {
+                        if(request.session.is_logined == true){                                
+                                response.render('coupon_list_admin', {
+                                        is_logined : request.session.is_logined,
+					name :request.session.name,
+					ID : request.session.name
+                                });
+                        }
+                }
+        });
+}); 
+
+app.get('/coupon_add_admin', function(request, response){
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                } else {
+                        if(request.session.is_logined == true){                                
+                                response.render('coupon_add_admin', {
+                                        is_logined : request.session.is_logined,
+					name :request.session.name,
+					ID : request.session.name
+                                });
+                        }
+                }
+        });
+}); 
+
+app.get('/coupon_select', function(request, response){
+        response.render('coupon_select', {
+                is_logined : request.session.is_logined,
+		name :request.session.name,
+		ID : request.session.ID
+        });
+}); 
+
+app.get('/coupon_user_download', function(request, response){
+        response.render('coupon_user_download', {
+                is_logined : request.session.is_logined,
+		name :request.session.name,
+		ID : request.session.ID
+        });
+}); 
+
 app.get('/basket', function(request, response){
         db.query(`SELECT * FROM basket b, product p WHERE b.product_id=p.pIdx and b.member_id=?`, [request.session.ID], function(error, basket){
                 if(request.session.is_logined == true){
@@ -413,41 +461,129 @@ app.post('/basket_update', function(request, response){
 });
 
 app.get('/payment', function(request, response) {
-        // 주문자 정보 및 배송 정보 채워넣기
-        db.query(`SELECT * FROM member WHERE mId=?`,[request.session.ID], function(err, memberInfo){
+        db.query(`SELECT * FROM member WHERE mId=?;`,[request.session.ID], function(err, memberInfo){
                 if(err) throw err;
                 else {
-                        response.render('payment', {
-                                is_logined: true,
-                                mName: request.session.name,
-                                email: memberInfo.mEmail,
-                                mPost_code: memberInfo.mPost_code,
-                                mRoad_address: memberInfo.mRoad_address,
-                                mJibun_address: memberInfo.mJibun_address,
-                                mDetail_address: memberInfo.mDetail_address
+                        db.query(`SELECT * FROM basket b, product p WHERE b.product_id=p.pIdx and b.member_id=?`, [request.session.ID], function(error, basket){
+                                if(error) throw error;
+                                else {
+                                        let sum = 0;
+                                        let delivery_fee = 0;
+                                        for(let i = 0; i<basket.length; i++) {
+                                                sum = sum + (basket[i].bQuantity * basket[i].pPrice);
+                                                if(delivery_fee <= basket[i].pDeliveryfee){
+                                                        delivery_fee = basket[i].pDeliveryfee;
+                                                }
+                                        }
+                                        response.render('payment', {
+                                                is_logined: true,
+                                                ID : request.session.ID,
+                                                mName: request.session.name,
+                                                email: memberInfo[0].mEmail,
+                                                mPost_code: memberInfo[0].mPost_code,
+                                                mRoad_address: memberInfo[0].mRoad_address,
+                                                mJibun_address: memberInfo[0].mJibun_address,
+                                                mDetail_address: memberInfo[0].mDetail_address,
+                                                mExtra_address: memberInfo[0].mExtra_address,
+                                                basket: basket,
+                                                pSum: sum,
+                                                delivery_fee: delivery_fee
+                                        });
+                                }
                         });
                 }
         });
+});
 
-        // 장바구니 프로덕트 가져오기
-        db.query(`SELECT product_id, bQuentity FROM basket WHERE mId=? ORDER BY product_id`, [request.session.ID],function (error, basket){
-                response.render('payment',{
-                        basket: basket
-                });
-                // pDeliveryfee 추가해주세요!
-                db.query(`SELECT pName, pPrice, pImg FROM product WHERE pIdx in (?) ORDER BY pIdx`, [basket.product_id], function(err, products){
-                        for(let i = 0; i<basket.length; i++) {
-                                let sum = 0;
-                                let delivery_fee = 0;
-
-                                sum = sum + (basket.bQuentity[i] * produects.pPrice[i]); }
-                        response.render('payment',{
-                                products: products,
-                                pSum: sum,
-                                delivery_fee: delivery_fee
-                        });                
-                });
+app.post('/order_create', function(request, response){
+        var post = request.body;
+        var sum = parseInt(post.Sum);
+        db.query('INSERT INTO `order`(member_id, oStatus, oDate, oTotal_price, oPhone_num, oAddress, oName) VALUES(?, ?, NOW(), ?, ?, ?, ?)',[post.ID, 0, sum, post.phonenum, post.addr, post.oName], function(error, result){
+                if(error) throw error;
+                for(let i=0; i<post.basket_length; i++){
+                        var Idx = 'pIdx';
+                        var Idx = Idx+i;
+                        var Quantity = 'pQuantity';
+                        var Quantity = Quantity+i;
+                        var pIdx = eval('post.'+Idx);
+                        var pQuantity = eval('post.'+Quantity);
+                        db.query('INSERT INTO order_detail(order_id, product_id, product_quantity) VALUES(?, ?, ?)', [result.insertId, pIdx, pQuantity], function(error2, result2){
+                                console.log(result2);
+                        });
+                }
         });
+});
+
+app.get('/order_detail/:page', function(request, response){
+        var page = request.params.page;
+        var duration = url.parse(request.url, true).query.duration;
+
+        if(duration == undefined){
+                duration = 'AND oDate between date_add(NOW(), interval -1 week) and NOW();';
+        }
+        if (duration == 'day'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 day) and NOW();';
+        }
+        if (duration == 'week'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 week) and NOW();';
+        }
+        if (duration == 'month'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 month) and NOW();';
+        }
+        if (duration == 'year'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 year) and NOW();';
+        }
+        if (duration == 'hour'){
+                duration = 'AND oDate between date_add(NOW(), interval -1 hour) and NOW();';
+        }
+
+        db.query("SELECT * FROM `order` WHERE member_id=? "+duration, [request.session.ID], function(error, order){
+                        if(request.session.is_logined == true){
+                                response.render('order_detail', {
+                                        is_logined : request.session.is_logined,
+                                        name : request.session.name,
+                                        order : order,
+                                        page : page,
+                                        length : order.length-1,
+                                        page_num : 5
+                                });
+                        }else{
+                                response.render('order_detail', {
+                                        is_logined : false,
+                                        order : order,
+                                        page : page,
+                                        length : order.length-1,
+                                        page_num : 5
+                                });
+                        }
+                });
+});
+
+app.post('/oStatus_update', function(request, response){
+        var post = request.body;
+        console.log(post);
+        db.query('UPDATE `order` SET oStatus=? WHERE oIdx=?', [post.status, post.oIdx], function(error, result){
+                response.redirect('/order_detail/1');
+        });
+});
+
+app.get('/order_product_detail/:orderId', function(request, response){
+        var filteredId = path.parse(request.params.orderId).base;
+        console.log(filteredId);
+        db.query('SELECT * FROM `order` o, order_detail od, product p WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and o.member_id=? and od.order_id=?', [request.session.ID, filteredId], function(error2, od){
+                        if(request.session.is_logined == true){
+                                response.render('order_product_detail', {
+                                        is_logined : request.session.is_logined,
+                                        name : request.session.name,
+                                        od : od
+                                });
+                        }else{
+                                response.render('order_product_detail', {
+                                        is_logined : false,
+                                        od : od
+                                });
+                        }
+                });
 });
 
 app.get('/use', function(request, response){

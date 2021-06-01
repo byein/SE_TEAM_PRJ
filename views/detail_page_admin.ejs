@@ -15,7 +15,7 @@
   <header id="header">
     <div id="head-wrapper">
         <h1>
-            <a id="logo" href="/" title="로고">로고</a>
+            <a id="logo" href="/admin" title="로고">로고</a>
         </h1>
 
         <div id ="search-form">
@@ -58,6 +58,7 @@
               <li><a href="/product_list_admin" class="current">Product 관리</a></li>
               <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
               <li><a href="/inquiry_admin">고객 문의 관리</a></li>
+              <li><a href="/coupon_list_admin" class="current">Coupon 등록/관리</a></li>
               <li><a href="/logout">Logout</a></li>
       </ul>
   </nav>
@@ -107,7 +108,11 @@
 
     <div id="product_name">
       <h3>상품명      : <%= product[0].pName %></h3><br>
-      <h3>가격        :<%= product[0].pPrice %></h3><br>
+      <h3>
+          <span class="product_score">4.3</span>
+          가격        :<%= product[0].pPrice %>
+      </h3><br>
+      <h3>배송비      :<%= product[0].pDeliveryfee %>원</h3><br>
       <h3>카테고리    :<%= category[0].main_name %></h3><br>
       <h3>세부카테고리:<%= category[0].sub_name %></h3><br>
     <br><br>
@@ -119,6 +124,64 @@
         <td class="delete"><a href="/delete_product_admin/<%= product[0].pIdx %>;" onclick="delete_check()">삭제</a></td>
       </tr>
     </table>
+
+    <table id="review_table">
+      <colgroup>
+        <col width="10">
+        <col width="15">
+        <col width="10">
+        <col width="100">
+        <col width="30">
+
+      </colgroup>
+      <tr>
+        <td><span class="strong_recommand">강추</span></td>
+        <td><span class="fast_delivery">빠름</span></td>
+        <td class="starrate">5점</td>
+        <td class="review">배송이 아주 빠르네요~</td>
+        <td>로고<br>21.05.22</td>
+      </tr>
+      <tr>
+        <td><span class="not_recommand">비추</span></td>
+        <td><span class="late_delivery">느림</span></td>
+        <td class="starrate">3점</td>
+        <td class="review">배송이 너무 느려요~</td>
+        <td>김진대<br>21.05.20</td>
+      </tr>
+      <tr>
+        <td><span class="recommand">추천</span></td>
+        <td><span class="normal_delivery">보통</span></td>
+        <td class="starrate">4점</td>
+        <td class="review">물건이 아주 좋아요~</td>
+        <td>김과기대<br>21.05.10</td>
+      </tr>
+      <tr>
+        <td><span class="normal_recommand">보통</span></td>
+        <td><span class="very_fast_delivery">매우빠름</span></td>
+        <td class="starrate">4점</td>
+        <td class="review">물건이 아주 좋아요~</td>
+        <td>서울과기대<br>21.05.10</td>
+      </tr>
+      <tr>
+        <td><span class="normal_recommand">보통</span></td>
+        <td><span class="very_late_delivery">매우느림</span></td>
+        <td class="starrate">2점</td>
+        <td class="review">물건이 아주 좋아요~</td>
+        <td>서울과학기술대학교<br>21.05.10</td>
+      </tr>
+    </table>
+
+    <div class="outer">
+      <div class="pagination">
+          <a href="#">&laquo;</a>
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="#">&raquo;</a>
+      </div>
+  </div>
   </section>
 
   <footer id="footer">

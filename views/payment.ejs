@@ -40,16 +40,21 @@
             <h2>주문 상품</h2>
             <ul id="order-ul">
                 <li id="product-info-to-order-wrapper">
+                    <input type="hidden" name="pName" id="pName" value="<%= basket[0].pName %>">
+                    <input type="hidden" name="basket_length" id="basket_length" value="<%= basket.length %>">
                     <% for(let i=0; i<basket.length; i++) { %>
-                    <img id="orderProductImg" class="product-info-to-order" src="<%= products.pImg[i] %>"/>
-                    <div id="orderSubject" class="product-info-to-order"><%= products.pName[i] %></div>
-                    <div id="orderQuantity" class="product-info-to-order"><%= basket.bQuentity[i] %></div>
-                    <div id="orderPrice" class="product-info-to-order"><%= products.pPrice[i] %></div>
+                    <input type="hidden" name="pName<%= i %>" value="<%= basket[i].pName %>">
+                    <input type="hidden" name="pQuantity<%= i %>" id="pQuantity<%= i %>" value="<%= basket[i].bQuantity %>">
+                    <input type="hidden" name="pIdx<%= i %>" id="pIdx<%= i %>" value="<%= basket[i].pIdx %>">
+                    <img id="orderProductImg" class="product-info-to-order" src="<%= basket[i].pImg %>"/>
+                    <div id="orderSubject" class="product-info-to-order"><%= basket[i].pName %></div>
+                    <div id="orderQuantity" class="product-info-to-order"><%= basket[i].bQuantity %>개</div>
+                    <div id="orderPrice" class="product-info-to-order"><%= basket[i].pPrice %>원</div>
                     <% } %>
                 </li>
             </ul>
             <h3 id="sum">
-                합계 : <%= sum %>원
+                합계 : <%= pSum %>원
             </h3>
         </div>
 
@@ -61,17 +66,19 @@
                     <dt>주문자</dt>
                     <dd><%= mName %></dd>
                     <dt>이메일</dt>
+                    <input type="hidden" name="email" id="email" value="<%= email %>">
                     <dd><%= email %></dd>
                     <dt>연락처</dt>
-                    <dd><input type="tel" placeholder="000-0000-0000" id="get-phone-num"/></dd>
+                    <dd><input type="tel" name="phonenum" placeholder="000-0000-0000" id="get-phone-num"/></dd>
                 </dl>
             </div>
             <div class="address-select-wrap">
                 <h3>배송지</h3>
                 <div class="confirm-address">
-                    <div>이름 : <input type="text" value="<%= mName %>" id="get-mName"></div>
+                    <div>이름 : <input type="text" value="<%= mName %>" name="oName" id="get-oName"></div>
+                    <input type="hidden" value="<%= ID %>" id="ID" name="ID"></div>
                     <p>주소</p>
-                    <input type="text" id="sample4_postcode" name='postcode' placeholder="우편번호" value="<%= mPost_code %>">
+                    <input type="text" id="sample4_postcode" name='postcode' placeholder="우 편번호" value="<%= mPost_code %>">
                     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
                     <input type="text" id="sample4_roadAddress" name='road' placeholder="도로명주소" value="<%= mRoad_address %>">
                     <input type="text" id="sample4_jibunAddress" name='jibun' placeholder="지번주소" value="<%= mJibun_address %>">
@@ -83,13 +90,17 @@
                     <a href="#">배송지 정보 저장</a></button>
                 </button>
             </div>
+            <div class="discount-info">
+                <h3>할인쿠폰</h3>
+                    <input type="text" placeholder="할인률"> <a href="/coupon_select">쿠폰선택</a>
+
+            </div>
         </div>
         <div class="pay">
             <h2>결제하기</h2>
-            <h3 class="total-payment">총 결제 금액 : <% sum + delivery_fee %></h3>
-            <button id="pay-with-card" class="pay-btn" onclick="requestPaywithCard()">
-                <a href="">결제하기</a>
-            </button>
+            <h3 class="total-payment">배송비 : <%= delivery_fee %>원<br>총 결제 금액 : <%= pSum + delivery_fee %>원</h3>
+            <input type="hidden" name="sum" id="pSum" value = "<%= pSum + delivery_fee %>"/>
+            <input type="button" id="pay-with-card" class="pay-btn" value="결제하기" onclick="requestPaywithCard()">
         </div>
     </div>
     <footer id="footer">

@@ -105,4 +105,49 @@ function S_ani_L() {
   }
 }
 
+
+
+////////////이름 마스킹 작업 js
+let maskingFunc = {
+  checkNull : function (str){ 
+    if(typeof str == "undefined" || str == null || str == ""){ 
+      return true; 
+    } else{ 
+      return false; 
+    } 
+  },
+
+  name : function(str){ 
+    let originStr = str; 
+    let maskingStr; 
+    let strLength; 
+    if(this.checkNull(originStr) == true){ 
+      return originStr; 
+    } 
+    
+    strLength = originStr.length; 
+    
+    if(strLength < 3){ 
+      maskingStr = originStr.replace(/(?<=.{1})./gi, "*"); 
+    }else { 
+      maskingStr = originStr.replace(/(?<=.{2})./gi, "*"); 
+    } 
+    
+    return maskingStr; 
+  }
+}
+
+/////////////////처음 페이지 로드 시 마스킹 작업 실행
+document.addEventListener('DOMContentLoaded', function() {
+  var tr = document.getElementById("review_table").getElementsByTagName("tr");
+  console.log(tr.length);
+
+  for (var i = 0; i < tr.length; i++) {
+    var tds = tr[i].getElementsByTagName("td");
+    var uid = tds[4].firstChild;
+    tds[4].firstChild.textContent = maskingFunc.name(uid.textContent);
+  }
+}, false);
+
+
 {/* </script> */}

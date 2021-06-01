@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main</title>
+    <title>쿠폰관리</title>
     <link rel="stylesheet" href="/mainPage_admin.css">
+    <link rel="stylesheet" href="/mainPage.css">
+    <link rel="stylesheet" href="/coupon_list.css">
     <script type="text/javascript" src="/mainPage.js"></script>
     <script defer type="text/javascript" src="/main_banner.js"></script>
 </head>
@@ -50,39 +52,65 @@
                 <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
                 <li><a href="/product_list_admin">Product 관리</a></li>
                 <li><a href="/product_information_admin">Sales Information(구현중)</a></li>
-                <li><a href="/inquiry_admin">고객 문의 관리</a></li>
                 <li><a href="/coupon_list_admin" class="current">Coupon 등록/관리</a></li>
                 <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
-    <section id="main-container">
-        <div class="main-banner">
-            <% for(let i=0; i<banner_imgs.length; i++){ %>
-            <div class="mySlides fade">
-                <img class="banner-img" src="<%= banner_imgs[i].nImg %>">
-            </div>
-            <%} %>
+
+    <section>
+        <h2>쿠폰 관리</h2>
+        <div>
+            <table class="coupon_list">
+                <caption><a href="/coupon_add_admin" class="coupon_add">쿠폰 등록</a></caption>
+
+                <thead>
+                    <th>쿠폰명</th>
+                    <th>쿠폰종류</th>
+                    <th>최소주문금액</th>
+                    <th>금액할인(원)</th>
+                    <th>카테고리지정</th>
+                    <th>카테고리할인률(%)</th>
+                    <th>카테고리할인 한도</th>
+                    <th>비고</th>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>악세사리 20% 할인쿠폰</td>
+                        <td>지정카테고리 할인</td>
+                        <td></td>
+                        <td></td>
+                        <td>악세사리</td>
+                        <td>20%</td>
+                        <td>10000원</td>
+                        <td><input type="button" value="쿠폰 발급"></td>
+                    </tr>
+                    <tr>
+                        <td>5000원 할인쿠폰</td>
+                        <td>금액할인</td>
+                        <td>20000원</td>
+                        <td>5000원</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="button" value="쿠폰 발급"></td>
+                    </tr>
+                </tbody>
+
+            </table>
         </div>
-        
     </section>
-    <section id="latest-items">
-        <h2>최신상품</h2>
-        <ul class="row">
-            <% for(let i=0; i<new_products.length; i++){ %>
-                <li class="cell">
-                        <div class="img_box" onclick="location.href='/product/<%= new_products[i].pIdx %>'"><img src="<%= new_products[i].pImg %>" alt=""><!--상품사진--></div>
-                        <div class="product_name" onclick="location.href='/product/<%= new_products[i].pIdx %>'"><%= new_products[i].pName %></div>
-                        <div class="product_price"><%= new_products[i].pPrice %></div>
-                </li>
-            <%} %>
-        </section>
+
+    <br>
+    <br>
+    <br>
 
         <footer id="footer">
             <p>
                 <a href="/use">[이용약관]</a>
                 <a href="/privacy">[개인정보처리방침]</a>
                 <br>
-    
+
                 [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
                 Copyright 2021. 24팀 all rights reserved.<br>
             </p>

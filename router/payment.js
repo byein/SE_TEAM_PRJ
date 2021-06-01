@@ -2,7 +2,10 @@ let oInfo = {
     oName: '',
     phone: '',
     addr: '',
-    postnum: ''
+    postnum: '',
+    price:'',
+    pName:'',
+    email:''
 };
 
 function setDeliveryInfo() {
@@ -16,32 +19,68 @@ function setDeliveryInfo() {
 
 // iamport를 이용해서 결제 진행
 function requestPaywithCard() {
-    const IMP = window.IMP; 
+    oInfo.oName = document.getElementById('get-oName').value;
+    oInfo.phone = document.getElementById('get-phone-num').value;
+    oInfo.addr = document.getElementById('sample4_roadAddress').value + document.getElementById('sample4_jibunAddress').value + document.getElementById('sample4_detailAddress').value;
+    oInfo.postnum = document.getElementById('sample4_postcode').value;
+    oInfo.price = document.getElementById('pSum').value;
+    basket_length = document.getElementById('basket_length').value;
+    ID = document.getElementById('ID').value;
+    if(basket_length>1){
+        productNum = basket_length -1;
+        oInfo.pName = document.getElementById('pName').value + ' 외 ' + productNum + '개';
+    } else {
+        oInfo.pName = document.getElementById('pName').value;
+    }
+    oInfo.email = document.getElementById('email').value;
+    const IMP = window.IMP;
     IMP.init("imp15169128"); // 발급받은 "가맹점 식별코드"를 사용
 
     IMP.request_pay({
         pg : 'kakaopay', // version 1.1.0부터 지원.
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),      // 주문번호
-        name : '단가라 원피스',
+        name : oInfo.pName,
         amount : 1,
-        buyer_email : 'dlqjdgus99@naver.com', //mEmail,
+        buyer_email : oInfo.email, //mEmail,
         buyer_name : oInfo.oName,
         buyer_tel : oInfo.phone,
         buyer_addr : oInfo.addr,
-        buyer_postcode : oInfo.postnum,
-        m_redirect_url : 'http://3.36.117.232:3000/order_detail' // 카드결제 완료시 이동할 페이지
+        buyer_postcode : oInfo.postnum
     }, function(rsp) {
         if ( rsp.success ) {
+            let data = {
+                oName : oInfo.pName,
+                buyer_email : oInfo.email, //mEmail,
+                buyer_name : oInfo.oName,
+                basket_length : basket_length,
+                phonenum : oInfo.phone,
+                addr : oInfo.addr,
+                ID : ID,
+                Sum : oInfo.price,
+            };
+        for(let i=0;i<basket_length;i++){
+                data['pIdx'+i] = document.getElementById('pIdx'+i).value;
+                data['pQuantity'+i] = document.getElementById('pQuantity'+i).value;
+        }
+                jQuery.ajax({
+                        url:"/order_create",
+                        type :"post",
+                        data : data,
+                        dataType : "text"
+                }).done(function(data){
             var msg = '결제가 완료되었습니다.\n';
             msg += '고유ID : ' + rsp.imp_uid;
             msg += '\n상점 거래ID : ' + rsp.merchant_uid;
             msg += '\n결제 금액 : ' + rsp.paid_amount;
             msg += '\n카드 승인번호 : ' + rsp.apply_num;
+                })
         } else {
-            var msg = rsp.error_msg + '.';
+                var msg = "결제 실패";
+            msg += rsp.error_msg + '.';
         }
-        alert(msg);
+            alert(msg);
+            window.location.href="/order_detail/1";
     });
 }
 

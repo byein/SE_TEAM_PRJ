@@ -142,7 +142,10 @@
 
   <div id="product_name">
     <h3><%= product[0].pName %></h3><br>
-    <h3><%= product[0].pPrice %></h3><br>
+    <h3>        
+      <span class="product_score">4.3</span>
+      <%= product[0].pPrice %>
+    </h3><br>
     <form name="form" action="/basket_in" method="post" onsubmit="return func_confirm()" />
       수량 선택 : <input type=hidden name="sell_price" value="<%= product[0].pPrice %>">
       <input type="text" name="amount" value="1" size="3" onchange="change();">
@@ -172,6 +175,64 @@
     <br><br>
   </div>
     <h4><img src="<%= product[0].pDetail %>"></h4>
+
+    <table id="review_table">
+      <colgroup>
+        <col width="10">
+        <col width="15">
+        <col width="10">
+        <col width="100">
+        <col width="30">
+
+      </colgroup>
+      <tr>
+        <td><span class="strong_recommand">강추</span></td>
+        <td><span class="fast_delivery">빠름</span></td>
+        <td class="starrate">5점</td>
+        <td class="review">배송이 아주 빠르네요~</td>
+        <td>로고<br>21.05.22</td>
+      </tr>
+      <tr>
+        <td><span class="not_recommand">비추</span></td>
+        <td><span class="late_delivery">느림</span></td>
+        <td class="starrate">3점</td>
+        <td class="review">배송이 너무 느려요~</td>
+        <td>김진대<br>21.05.20</td>
+      </tr>
+      <tr>
+        <td><span class="recommand">추천</span></td>
+        <td><span class="normal_delivery">보통</span></td>
+        <td class="starrate">4점</td>
+        <td class="review">물건이 아주 좋아요~</td>
+        <td>김과기대<br>21.05.10</td>
+      </tr>
+      <tr>
+        <td><span class="normal_recommand">보통</span></td>
+        <td><span class="very_fast_delivery">매우빠름</span></td>
+        <td class="starrate">4점</td>
+        <td class="review">물건이 아주 좋아요~</td>
+        <td>서울과기대<br>21.05.10</td>
+      </tr>
+      <tr>
+        <td><span class="normal_recommand">보통</span></td>
+        <td><span class="very_late_delivery">매우느림</span></td>
+        <td class="starrate">2점</td>
+        <td class="review">물건이 아주 좋아요~</td>
+        <td>서울과학기술대학교<br>21.05.10</td>
+      </tr>
+    </table>
+
+    <div class="outer">
+      <div class="pagination">
+        <a href="#">&laquo;</a>
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">&raquo;</a>
+      </div>
+    </div>
 </section>
 
 <footer id="footer">
