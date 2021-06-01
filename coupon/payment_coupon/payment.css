@@ -1,0 +1,210 @@
+html,
+body {
+  margin: 0;
+  overflow-x: hidden;
+  min-width: 100px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: lightcyan;
+  overflow-x: hidden;
+}
+
+#header {
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 200px;
+  width: 100%;
+  background-color: antiquewhite;
+  display: flex;
+  align-items: center;
+}
+
+body a {
+  text-decoration: none;
+}
+
+#head-wrapper {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+#logo {
+  position: absolute;
+  left: 10%;
+  text-decoration: none;
+  text-align: center;
+  padding: auto;
+  display: flex;
+  float: left;
+}
+
+#search-form {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  left: 35%;
+  float: left;
+}
+
+#search {
+  display: block;
+  margin: 3px;
+  height: 40px;
+  width: 30%;
+  border-radius: 15px;
+  float: left;
+}
+
+#search-btn {
+  border-radius: none;
+  background: none;
+}
+#search-btn a {
+  background: none;
+}
+#search-btn a img {
+  width: 35px;
+  height: 35px;
+}
+
+a {
+  text-decoration: none;
+  color: lightcoral;
+}
+
+h1 {
+  margin: 70px 0;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  margin: 0 10%;
+}
+
+.order-product-container {
+  background-color: bisque;
+  height: auto;
+}
+
+#order-ul {
+  float: left;
+  margin-bottom: 10px;
+}
+
+#product-info-to-order div {
+  display: inline-block;
+  margin: 0;
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+  height: 100px;
+}
+
+.product-info-to-order {
+  text-align: center;
+}
+
+#orderProductImg {
+  width: 80px;
+  height: 100px;
+  margin: 0;
+  float: left;
+}
+
+#orderSubject {
+  width: 700px;
+  height: 100px;
+  margin: 0;
+}
+
+#orderQuantity {
+  width: 100px;
+  margin: 0;
+}
+
+#orderPrice {
+  width: 100px;
+  margin: 0;
+}
+
+.dt dd {
+  display: inline-block;
+}
+
+.sum {
+  display: inline-block;
+  float: right;
+}
+
+.address-info {
+  background-color: beige;
+  height: auto;
+  padding-bottom: 10px;
+}
+
+.orderer-info {
+  margin: 0 10px;
+  padding: 10px;
+  background-color: white;
+}
+
+.discount-info {
+  margin: 0 10px;
+  padding: 10px;
+  background-color: white;
+}
+
+.address-select-wrap {
+  background-color: white;
+  margin: 0 10px 10px 10px;
+  height: auto;
+}
+
+.confirm-address {
+  margin-left: 10px;
+}
+
+#set-address-btn {
+  margin-left: 10px;
+}
+
+.pay-container {
+  height: auto;
+  background-color: mistyrose;
+  margin-bottom: 10px;
+}
+
+.total-payment {
+  display: inline-block;
+  margin-left: 100px;
+}
+
+#pay-btn {
+  margin-left: 10px;
+}
+
+#footer {
+  position: relative;
+  bottom: 0%;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  background-color: aquamarine;
+  padding: 0.1px;
+}
+
+#footer a {
+  font-weight: bold;
+}
