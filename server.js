@@ -367,6 +367,54 @@ app.get('/banner_delete/:nIdx', function(request, response){
         });
 });
 
+app.get('/coupon_list_admin', function(request, response){
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                } else {
+                        if(request.session.is_logined == true){                                
+                                response.render('coupon_list_admin', {
+                                        is_logined : request.session.is_logined,
+					name :request.session.name,
+					ID : request.session.name
+                                });
+                        }
+                }
+        });
+}); 
+
+app.get('/coupon_add_admin', function(request, response){
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                } else {
+                        if(request.session.is_logined == true){                                
+                                response.render('coupon_add_admin', {
+                                        is_logined : request.session.is_logined,
+					name :request.session.name,
+					ID : request.session.name
+                                });
+                        }
+                }
+        });
+}); 
+
+app.get('/coupon_select', function(request, response){
+        response.render('coupon_select', {
+                is_logined : request.session.is_logined,
+		name :request.session.name,
+		ID : request.session.ID
+        });
+}); 
+
+app.get('/coupon_user_download', function(request, response){
+        response.render('coupon_user_download', {
+                is_logined : request.session.is_logined,
+		name :request.session.name,
+		ID : request.session.ID
+        });
+}); 
+
 app.get('/basket', function(request, response){
         db.query(`SELECT * FROM basket b, product p WHERE b.product_id=p.pIdx and b.member_id=?`, [request.session.ID], function(error, basket){
                 if(request.session.is_logined == true){
