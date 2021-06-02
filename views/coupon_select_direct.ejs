@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="/coupon_select.css">
     <title>쿠폰 적용</title>
     <script type="text/javascript" src="/coupon_select.js"></script>
-
+        <script>
+                function direct(frm){
+                        frm.action="/payment_direct/<%= post.pIdx0 %>";
+                        frm.submit();
+                        return true;
+                }
+        </script>
 </head>
 <body>
-        <form class="" action="/payment" method="post" onsubmit="return check()">
+        <form class="" action="/payment_direct/coupon" method="post" onsubmit="return check()">
         <% console.log(post) %>
 
     <table>
@@ -58,9 +64,21 @@
     <% } %>
     </table>
     <br>
+    <input type="hidden" name="pName" value="<%= post.pName %>">
+    <input type="hidden" name="basket_length" value="<%= post.basket_length %>">
+    <input type="hidden" name="amount" value="<%= post.pQuantity0 %>">
+    <input type="hidden" name="pIdx0" value="<%= post.pIdx0 %>">
+    <input type="hidden" name="email" value="<%= post.email %>">
+    <input type="hidden" name="phonenum" value="<%= post.phonenum %>">
+    <input type="hidden" name="postcode" value="<%= post.postcode %>">
+    <input type="hidden" name="road" value="<%= post.road %>">
+    <input type="hidden" name="jibun" value="<%= post.jibun %>">
+    <input type="hidden" name="detail" value="<%= post.detail %>">
+    <input type="hidden" name="extra" value="<%= post.extra %>">
+    <input type="hidden" name="coupon_sum" value="<%= post.coupon_sum %>">
 
     <input type="submit" value="확인" class="button">
-    <input type="button" value="취소" class="button" onclick="location.href='/payment'">
+    <input type="button" value="취소" class="button" onclick="return direct(this.form);">
         </form>
 
 

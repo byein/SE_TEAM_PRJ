@@ -19,6 +19,8 @@ const { type } = require('os');
 const { request, response } = require('express');
 var product_user = require('./lib/product_user');
 var product_admin = require('./lib/product_admin');
+var coupon = require('./lib/coupon');
+var payment = require('./lib/payment');
 
 app.use(express.static('public'));
 app.use(express.static('router'));
@@ -138,7 +140,7 @@ app.get('/add_banner_admin', function(request, response){
                                 }
                         }
                 });
-        
+
 });
 
 app.get('/add_product_admin', function(request, response){
@@ -200,45 +202,45 @@ app.get('/banner_list_admin', function(request, response){
                query = ''
                sortBy = ''
         }
-        
+
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
-                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        response.send('<script>alert("접근 권한이 없습 니다"); window.location.href = `/`;</script>');
                 } else {
                         if(request.session.is_logined == true){
                                 if (sortBy == 'nTitle-asc')
-                                { 
-                                        var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" +"ORDER BY nTitle asc "; 
-                                } 
+                                {
+                                        var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" +"ORDER BY nTitle asc ";
+                                }
                                 else if(sortBy == 'nTitle-desc')
-                                { 
-                                        var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nTitle desc"; 
-                                } 
+                                {
+                                        var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nTitle desc";
+                                }
                                 else if(sortBy == 'nEndDate-asc')
                                 {
-                                        var sql = "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate asc"; 
-                                } 
+                                        var sql = "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate asc";
+                                }
                                 else if(sortBy == 'nEndDate-desc'){
-                                var sql =  "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate desc "; 
+                                var sql =  "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate desc ";
                                 }
                                 else {
-                                var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'"; 
-                                }       
-                                
+                                var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'";
+                                }
+
                                 db.query(sql, function(err, result, fields){
                                         if(err) throw err;
-                                
+
                                 response.render('banner_list_admin', {
                                         is_logined : request.session.is_logined,
-					name :request.session.name,
-					ID : request.session.name,
+                                        name :request.session.name,
+                                        ID : request.session.name,
                                         notice : result
                                 });
                         });
                 }
         }
         });
-}); 
+});
 
 app.get('/banner_list_customer', function(request, response){
         var sortBy = url.parse(request.url, true).query.sortBy;
@@ -248,35 +250,35 @@ app.get('/banner_list_customer', function(request, response){
                query = ''
                sortBy = ''
         }
-       
+
         if (sortBy == 'nTitle-asc')
-        { 
-                var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" +"ORDER BY nTitle asc "; 
-        } 
+        {
+                var sql = "SELECT * FROM notice WHERE nEndDate >= DATE(NOW()) and nTitle like" + "'%"+ query +"%'" +"ORDER BY nTitle asc ";
+        }
         else if(sortBy == 'nTitle-desc')
-        { 
-                var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nTitle desc"; 
-        } 
+        {
+                var sql = "SELECT * FROM notice WHERE nEndDate >= DATE(NOW()) and nTitle like" + "'%"+ query +"%'" + "ORDER BY nTitle desc";
+        }
         else if(sortBy == 'nEndDate-asc')
         {
-                var sql = "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate asc"; 
-        } 
+                var sql = "SELECT * FROM notice  WHERE nEndDate >= DATE(NOW()) and nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate asc";
+        }
         else if(sortBy == 'nEndDate-desc'){
-        var sql =  "SELECT * FROM notice  WHERE nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate desc "; 
+        var sql =  "SELECT * FROM notice  WHERE nEndDate >= DATE(NOW()) and nTitle like" + "'%"+ query +"%'" + "ORDER BY nEndDate desc ";
         }
         else {
-        var sql = "SELECT * FROM notice WHERE nTitle like" + "'%"+ query +"%'"; 
-        }       
-        
-        
+        var sql = "SELECT * FROM notice WHERE nEndDate >= DATE(NOW()) and nTitle like" + "'%"+ query +"%'";
+        }
+
+
         db.query(sql, function(err, result, fields){
                 if(err) throw err;
         response.render('banner_list_customer', {
-				notice : result,
-				is_logined : request.session.is_logined,
-				name : request.session.name,
-				ID : request.session.name
-	});
+                                notice : result,
+                                is_logined : request.session.is_logined,
+                                name : request.session.name,
+                                ID : request.session.name
+        });
         });
 });
 
@@ -292,8 +294,8 @@ app.get('/banner_detail_admin/:nIdx', function(request, response){
                                 response.render('banner_detail_admin',{
                                         is_logined :request.session.is_logined,
                                         notice : result,
-					name : request.session.name,
-					ID : request.session.name
+                                        name : request.session.name,
+                                        ID : request.session.name
                                 });
                         });
                 };
@@ -307,11 +309,11 @@ app.get('/banner_detail_customer/:nIdx', function(request, response){
         db.query(sql, [request.params.nIdx], function(err, result, fields){
                 if(err) throw err;
                 response.render('banner_detail_customer', {
-			notice : result,
-			is_logined : request.session.is_logined,
-			ID : request.session.name,
-			name : request.session.name
-		});
+                        notice : result,
+                        is_logined : request.session.is_logined,
+                        ID : request.session.name,
+                        name : request.session.name
+                });
         });
 });
 
@@ -328,7 +330,7 @@ app.post('/create_banner', upload.single('nImg'), function(request, response){
 app.get('/edit_banner_admin/:nIdx', function(request, response){
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
-                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        response.send('<script>alert("접근 권한이 없습 니다"); window.location.href = `/`;</script>');
                 } else {
                         if(request.session.is_logined == true){
                                 const sql = "SELECT * FROM notice where nIdx=?"
@@ -370,50 +372,125 @@ app.get('/banner_delete/:nIdx', function(request, response){
 app.get('/coupon_list_admin', function(request, response){
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
-                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        response.send('<script>alert("접근 권한이 없습 니다"); window.location.href = `/`;</script>');
                 } else {
-                        if(request.session.is_logined == true){                                
-                                response.render('coupon_list_admin', {
-                                        is_logined : request.session.is_logined,
-					name :request.session.name,
-					ID : request.session.name
+                        if(request.session.is_logined == true){
+                                db.query(`SELECT * FROM coupon`, function(error, coupon){
+                                        response.render('coupon_list_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name :request.session.name,
+                                                ID : request.session.name,
+                                                coupon : coupon
+                                        });
                                 });
                         }
                 }
         });
-}); 
+});
 
 app.get('/coupon_add_admin', function(request, response){
         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                 if(!admin[0]){
-                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        response.send('<script>alert("접근 권한이 없습 니다"); window.location.href = `/`;</script>');
                 } else {
-                        if(request.session.is_logined == true){                                
+                        if(request.session.is_logined == true){        
                                 response.render('coupon_add_admin', {
                                         is_logined : request.session.is_logined,
-					name :request.session.name,
-					ID : request.session.name
+                                        name :request.session.name,
+                                        ID : request.session.name
                                 });
                         }
                 }
         });
-}); 
+});
 
-app.get('/coupon_select', function(request, response){
-        response.render('coupon_select', {
-                is_logined : request.session.is_logined,
-		name :request.session.name,
-		ID : request.session.ID
+app.post('/coupon_add_admin_in', function(request, response){
+        var post = request.body;
+        console.log(post);
+        if(post.cpType == 1 ) {
+                db.query(`INSERT INTO coupon (cpName, cpType, cpMiniPrice, cpPriceSale) VALUES (?, ?, ?, ?)`, [post.cpName, post.cpType, post.cpMiniPrice, post.cpPriceSale], function(error, result){
+                        response.redirect('/coupon_list_admin');
+                });
+        } else {
+                db.query(`INSERT INTO coupon (cpName, cpType, cpCategory, cpCategorySale, cpCategoryMax) VALUES (?, ?, ?, ?, ?)`, [post.cpName, post.cpType, post.cpCategory, post.cpCategorySale, post.cpCategoryMax], function(error, result){
+                        response.redirect('/coupon_list_admin');
+                });
+        }
+});
+
+app.get('/coupon_update_admin/:cpIdx', function(request, response){
+        console.log(request.body);
+        var filteredId = path.parse(request.params.cpIdx).base;
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습 니다"); window.location.href = `/`;</script>');
+                } else {
+                        if(request.session.is_logined == true){        
+                                db.query(`SELECT * FROM coupon WHERE cpIdx=?`, [filteredId], function(error, coupon){
+                                        response.render('coupon_update_admin', {
+                                                is_logined : request.session.is_logined,
+                                                name :request.session.name,
+                                                ID : request.session.name,
+                                                coupon : coupon
+                                        });
+                                });
+                        }
+                }
         });
-}); 
+});
+
+app.post('/coupon_update_admin_in/:cpIdx', function(request, response){
+        var filteredId = path.parse(request.params.cpIdx).base;
+        var post = request.body;
+        if(post.cpType == 1 ) {
+                db.query(`UPDATE coupon SET cpName=?, cpType=?, cpMiniPrice=?, cpPriceSale=? WHERE cpIdx=?`, [post.cpName, post.cpType, post.cpMiniPrice, post.cpPriceSale, filteredId], function(error, result){
+                        response.redirect('/coupon_list_admin');
+                });
+        } else {
+                db.query(`UPDATE coupon SET cpName=?, cpType=?, cpCategory=?, cpCategorySale=?, cpCategoryMax=? WHERE cpIdx=?`, [post.cpName, post.cpType, post.cpCategory, post.cpCategorySale, post.cpCategoryMax, filteredId], function(error, result){
+                        response.redirect('/coupon_list_admin');
+                });
+        }
+});
+
+app.get('/coupon_delete_admin/:cpIdx', function(request, response){
+        var filteredId = path.parse(request.params.cpIdx).base;
+        db.query(`DELETE FROM coupon WHERE cpIdx=?`, [filteredId], function(error, result){
+                response.redirect('/coupon_list_admin');
+        });
+});
+
+app.post('/coupon_select', function(request, response){
+        coupon.select(request, response);
+});
+
+app.post('/coupon_select_direct', function(request, response){
+        coupon.select_direct(request, response);
+});
 
 app.get('/coupon_user_download', function(request, response){
-        response.render('coupon_user_download', {
-                is_logined : request.session.is_logined,
-		name :request.session.name,
-		ID : request.session.ID
+        db.query(`SELECT * FROM coupon`, function(error, coupon){
+                response.render('coupon_user_download', {
+                        is_logined : request.session.is_logined,
+                        name :request.session.name,
+                        ID : request.session.ID,
+                        coupon :coupon
+                });
         });
-}); 
+});
+
+app.get('/coupon_download/:cpIdx', function(request, response){
+        var filteredId = path.parse(request.params.cpIdx).base;
+        db.query(`SELECT * FROM coupon_user WHERE coupon_id=? and member_id=?`, [filteredId, request.session.ID], function(error, mycoupon){
+                if(!mycoupon[0]){
+                        db.query(`INSERT INTO coupon_user (coupon_id, member_id) VALUES (?, ?)`, [filteredId, request.session.ID], function(error2, result){
+                                response.send('<script>alert("쿠폰이 발급되었습니다."); window.location.href="/coupon_user_download"; </script>');
+                        });
+                } else {
+                        response.send('<script>alert("이미 발급된 쿠폰 입니다."); window.location.href="/coupon_user_download"; </script>');
+                }
+        });
+});
 
 app.get('/basket', function(request, response){
         db.query(`SELECT * FROM basket b, product p WHERE b.product_id=p.pIdx and b.member_id=?`, [request.session.ID], function(error, basket){
@@ -424,7 +501,7 @@ app.get('/basket', function(request, response){
                                 basket : basket
                         });
                 }
-        });  
+        });
 });
 
 app.post('/basket_in', function(request, response){
@@ -460,39 +537,16 @@ app.post('/basket_update', function(request, response){
         });
 });
 
+app.post('/payment', function(request, response) {
+        payment.payment_post(request, response);
+});
+
 app.get('/payment', function(request, response) {
-        db.query(`SELECT * FROM member WHERE mId=?;`,[request.session.ID], function(err, memberInfo){
-                if(err) throw err;
-                else {
-                        db.query(`SELECT * FROM basket b, product p WHERE b.product_id=p.pIdx and b.member_id=?`, [request.session.ID], function(error, basket){
-                                if(error) throw error;
-                                else {
-                                        let sum = 0;
-                                        let delivery_fee = 0;
-                                        for(let i = 0; i<basket.length; i++) {
-                                                sum = sum + (basket[i].bQuantity * basket[i].pPrice);
-                                                if(delivery_fee <= basket[i].pDeliveryfee){
-                                                        delivery_fee = basket[i].pDeliveryfee;
-                                                }
-                                        }
-                                        response.render('payment', {
-                                                is_logined: true,
-                                                ID : request.session.ID,
-                                                mName: request.session.name,
-                                                email: memberInfo[0].mEmail,
-                                                mPost_code: memberInfo[0].mPost_code,
-                                                mRoad_address: memberInfo[0].mRoad_address,
-                                                mJibun_address: memberInfo[0].mJibun_address,
-                                                mDetail_address: memberInfo[0].mDetail_address,
-                                                mExtra_address: memberInfo[0].mExtra_address,
-                                                basket: basket,
-                                                pSum: sum,
-                                                delivery_fee: delivery_fee
-                                        });
-                                }
-                        });
-                }
-        });
+        payment.payment_get(request, response);
+});
+
+app.post('/payment_direct/:productId', function(request, response) {
+        payment.payment_direct(request, response);
 });
 
 app.post('/order_create', function(request, response){
@@ -572,13 +626,13 @@ app.get('/order_product_detail/:orderId', function(request, response){
         console.log(filteredId);
         db.query('SELECT * FROM `order` o, order_detail od, product p WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and o.member_id=? and od.order_id=?', [request.session.ID, filteredId], function(error2, od){
                         if(request.session.is_logined == true){
-                                response.render('order_product_detail', {
+                                response.render('sales_detail_info', {
                                         is_logined : request.session.is_logined,
                                         name : request.session.name,
                                         od : od
                                 });
                         }else{
-                                response.render('order_product_detail', {
+                                response.render('sales_detail_info', {
                                         is_logined : false,
                                         od : od
                                 });
@@ -613,39 +667,39 @@ app.get('/privacy', function(request, response){
 });
 
 app.get('/delivery_address', function(request, response){
-	console.log(request.session);
-	db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
-			
-		console.log(address);
+        console.log(request.session);
+        db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
 
-        	if(request.session.is_logined == true){
-			response.render('delivery_address',{
-			is_logined : request.session.is_logined,
-			name : request.session.name,
-			ID : request.session.ID,
-			address : address	
-		});
-		};
-	});
+                console.log(address);
+
+                if(request.session.is_logined == true){
+                        response.render('delivery_address',{
+                        is_logined : request.session.is_logined,
+                        name : request.session.name,
+                        ID : request.session.ID,
+                        address : address
+                });
+                };
+        });
 });
 
 app.get('/edit_address/:adIdx', function(request, response) {
         const sql = "SELECT * FROM address WHERE adIdx=?";
-	console.log(request.params.adIdx);
-	db.query(sql,[request.params.adIdx], function(err, result, fields){
+        console.log(request.params.adIdx);
+        db.query(sql,[request.params.adIdx], function(err, result, fields){
                 if (err) throw err;
                 response.render('edit_address',{ address : result });
-	});
+        });
 });
 
 app.post('/address_update/:adIdx', function(request, response){
         const sql = "UPDATE address SET ? WHERE adIdx =" + request.params.adIdx;
         console.log(sql);
-	db.query(sql, request.body, function (err, result, fields) {
+        db.query(sql, request.body, function (err, result, fields) {
                 if(err) throw  err;
                 console.log(result);
                 response.redirect('/delivery_address');
-        }); 
+        });
 })
 
 
@@ -698,7 +752,7 @@ app.get('/inquiry_page', function(request, response){
                         break;
                 }
         }
-        db.query(`INSERT INTO inquiry (mId, iId, subject, content, type, status, iDate) VALUES (?, ?, ?, ?, ?, ?, NOW())`, 
+        db.query(`INSERT INTO inquiry (mId, iId, subject, content, type, status, iDate) VALUES (?, ?, ?, ?, ?, ?, NOW())`,
                 [request.session.ID, iId, body.subject, body.content, type, '미등록'], function(err, result){
                         response.redirect('/inquiry_list');
                 });

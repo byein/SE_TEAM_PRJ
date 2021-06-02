@@ -19,20 +19,54 @@
     <table>
         <thead>
             <th>쿠폰명</th>
-            <th>최소주문금액</th>
+            <th>카테고리</th>
             <th>할인율</th>
-            <th>기능</th>
+            <th>할인한도</th>
+            <th>발급</th>
         </thead>
+        <% if(!coupon) { } else { %>
 
         <tbody>
-            <tr>
-                <td>5000원 할인쿠폰</td>
-                <td>20000원</td>
-                <td>5000원</td>
-                <td><a href="#" download="#"  onClick="alert('쿠폰 다운로드 완료!')">쿠폰다운로드</a></td>
-            </tr>
-        </tbody>
-    </table>
+        <% for (let i=0; i<coupon.length; i++) { %>
+                    <tr>
+                        <% if (coupon[i].cpType == 0) { %>
+                <td><%= coupon[i].cpName %></td>
+                <td><%= coupon[i].cpCategory %></td>
+                <td><%= coupon[i].cpCategorySale %>%</td>
+                <td><%= coupon[i].cpCategoryMax %>원</td>
+                <td><a href="/coupon_download/<%= coupon[i].cpIdx %>" >쿠폰발급</a></td>
+                        <% }else { %>
+                        <% } %>
+                    </tr>
+                    <% } %>
+                </tbody>
+                <% } %>
+
+                <thead>
+                    <th>쿠폰명</th>
+                    <th>최소주문금액</th>
+                    <th>할인금액</th>
+                    <th>발급</th>
+                </thead>
+                <% if(!coupon) { } else { %>
+
+                <tbody>
+                        <% for (let i=0; i<coupon.length; i++) { %>
+                    <tr>
+                        <% if (coupon[i].cpType == 1) { %>
+                <td><%= coupon[i].cpName %></td>
+                <td><%= coupon[i].cpMiniPrice %>원</td>
+                <td><%= coupon[i].cpPriceSale %>원</td>
+                <td><a href="/coupon_download/<%= coupon[i].cpIdx %>"> 쿠폰발급</a></td>
+                        <% } else { %>
+                        <% } %>
+                    </tr>
+                    <% } %>
+                </tbody>
+                <% } %>
+
+            </table>
+        </div>
 
 </body>
 </html>

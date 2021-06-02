@@ -65,13 +65,13 @@
 
         <h2 class="text-center">쿠폰 등록</h2>
 
-        <form action="/coupon_add_admin_in" method="post">
+        <form action="/coupon_update_admin_in/<%= coupon[0].cpIdx %>" method="post">
 
         <table class="coupon_list">
             <tbody>
                 <tr>
                     <th>쿠폰명</th>
-                    <td><input type="text" name="cpName"></td>
+                    <td><input type="text" name="cpName" value="<%= coupon[0].cpName %>"></td>
                 </tr>
                 <tr>
                     <th>쿠폰종류</th>
@@ -82,42 +82,47 @@
                             <option value ="1">카테고리 할인</option>
                         </select> -->
 
-                        <label><input type="radio" name="cpType" class="radio-value" value="1"> 금액할인</label>
-                        <label><input type="radio" name="cpType" class="radio-value" value="0">지정카테고리 할인</label>
+                        <% if(coupon[0].cpType==0) { %>
+                        <label><input type="radio" name="cpType" class="radio-value" value="1" > 금액할인</label>
+                        <label><input type="radio" name="cpType" class="radio-value" value="0" checked="checked" >지정카테고리 할인</label>
+                        <% } else { %>
+                        <label><input type="radio" name="cpType" class="radio-value" value="1" checked="checked"> 금액할인</label>
+                        <label><input type="radio" name="cpType" class="radio-value" value="0" >지정카테고리 할인</label>
+                        <% } %>
                     </td>
                 </tr>
                 <tr>
                     <th>최소주문금액<br><small class="text-muted">X원  이상 구매</small></th>
-                    <td><input type="int" name="cpMiniPrice" class="form-control" min="0"></td>
+                    <td><input type="int" name="cpMiniPrice" value="<%= coupon[0].cpMiniPrice %>" class="form-control" min="0"></td>
                 </tr>
                 <tr>
                     <th>금액할인(원)<br><small class="text-muted">X원  이상 구매 시 Y원 할인</small></th>
-                    <td><input type="int" name="cpPriceSale" class="form-control" id="cdiscash" min="0"></td>
+                    <td><input type="int" name="cpPriceSale" value="<%= coupon[0].cpPriceSale %>" class="form-control" id="cdiscash" min="0"></td>
                 </tr>
                 <tr>
                     <th>카테고리지정</th>
                     <td>
                         <select name = "cpCategory" class="radio-value-detail">
-                            <option value="" selected disabled hidden> 선택</option>
-                            <option value="TOP"> 상의</option>
-                            <option value="BOTTOM"> 하의</option>
-                            <option value="DRESS"> 원피스</option>
-                            <option value="BAG&SOCKS"> 잡화류</option>
-                            <option value="ACC"> 악세서리</option>
+                                <option value="<%= coupon[0].cpCategory %>" selected><%= coupon[0].cpCategory %></option>
+                            <option value="TOP">TOP</option>
+                            <option value="BOTTOM">BOTTOM</option>
+                            <option value="DRESS">DRESS</option>
+                            <option value="BAG&SOCKS">BAG&SOCKS</option>
+                            <option value="ACC">ACC</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th>카테고리할인률(%)<br><small class="text-muted">특정 카테고리 %할인 쿠폰</small></th>
-                    <td><input type="int" name="cpCategorySale" class="form-control" id="cdisper" min="0" max="100"></td>
+                    <td><input type="int" name="cpCategorySale" value="<%= coupon[0].cpCategorySale %>" class="form-control" id="cdisper" min="0" max="100"></td>
                 </tr>
 
                 <tr>
                     <th>카테고리할인 한도(원)</th>
-                    <td> <input type ="int" class ="form-control" name="cpCategoryMax" min="0" ></td>
+                    <td> <input type ="int" class ="form-control" name="cpCategoryMax" value="<%= coupon[0].cpCategoryMax %>" min="0" ></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="submit" value="쿠폰 등록" class="btn"></td>
+                    <td colspan="2"><input type="submit" value="쿠폰 수정" class="btn"></td>
                 </tr>
             </tbody>
         </table>

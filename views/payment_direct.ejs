@@ -40,18 +40,15 @@
             <h2>주문 상품</h2>
             <ul id="order-ul">
                 <li id="product-info-to-order-wrapper">
-                    <form class="" action="/coupon_select" method="post">
-                    <input type="hidden" name="pName" id="pName" value="<%= basket[0].pName %>">
-                    <input type="hidden" name="basket_length" id="basket_length" value="<%= basket.length %>">
-                    <% for(let i=0; i<basket.length; i++) { %>
-                    <input type="hidden" name="pName<%= i %>" value="<%= basket[i].pName %>">
-                    <input type="hidden" name="pQuantity<%= i %>" id="pQuantity<%= i %>" value="<%= basket[i].bQuantity %>">
-                    <input type="hidden" name="pIdx<%= i %>" id="pIdx<%= i %>" value="<%= basket[i].pIdx %>">
-                    <img id="orderProductImg" class="product-info-to-order" src="<%= basket[i].pImg %>"/>
-                    <div id="orderSubject" class="product-info-to-order"><%= basket[i].pName %></div>
-                    <div id="orderQuantity" class="product-info-to-order"><%= basket[i].bQuantity %>개</div>
-                    <div id="orderPrice" class="product-info-to-order"><%= basket[i].pPrice %>원</div>
-                    <% } %>
+                <form class="" action="/coupon_select_direct" method="post">
+                    <input type="hidden" name="pName" id="pName" value="<%= product[0].pName %>">
+                    <input type="hidden" name="basket_length" id="basket_length" value="1">
+                    <input type="hidden" name="pQuantity0" id="pQuantity0" value="<%= post.amount %>">
+                    <input type="hidden" name="pIdx0" id="pIdx0" value="<%= product[0].pIdx %>">
+                    <img id="orderProductImg" class="product-info-to-order" src="<%= product[0].pImg %>"/>
+                    <div id="orderSubject" class="product-info-to-order"><%= product[0].pName %></div>
+                    <div id="orderQuantity" class="product-info-to-order"><%= post.amount %>개</div>
+                    <div id="orderPrice" class="product-info-to-order"><%= product[0].pPrice %>원</div>
                 </li>
             </ul>
             <h3 id="sum">
@@ -91,6 +88,7 @@
                     <a href="#">배송지 정보 저장</a></button>
                 </button>
             </div>
+
             <div class="discount-info">
                 <h3>할인쿠폰</h3>
                 <input type="hidden" name="coupon_sum" value="<%= pSum %>">
@@ -104,11 +102,12 @@
 
             </div>
                     </form>
+
         </div>
         <div class="pay">
             <h2>결제하기</h2>
-            <h3 class="total-payment">배송비 : <%= delivery_fee %>원<br>총 결제 금액 : <%= pSum + delivery_fee - sale %>원</h3>
-            <input type="hidden" name="sum" id="pSum" value = "<%= pSum + delivery_fee -sale %>"/>
+            <h3 class="total-payment">배송비 : <%= product[0].pDeliveryfee %>원<br>총 결제 금액 : <%= pSum + product[0].pDeliveryfee -sale  %>원</h3>
+            <input type="hidden" name="sum" id="pSum" value = "<%= pSum + product[0].pDeliveryfee - sale %>"/>
             <input type="button" id="pay-with-card" class="pay-btn" value="결제하기" onclick="requestPaywithCard()">
         </div>
     </div>

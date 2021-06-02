@@ -6,6 +6,22 @@
   <title>상품 상세페이지</title>
 
   <link rel="stylesheet" href="/detail_page.css"/>
+        <script>
+                function direct(frm){
+                        if(confirm("바로 구매 하시겠습니까?")==true){
+                                frm.action = "/payment_direct/<%= product[0].pIdx %>";
+                                frm.submit();
+                                return true;
+                        } else {
+                                return false;
+                        }
+                }
+                function login(){
+                        alert("로그인이 필요합니다.");
+                        window.location.href="/login";
+                        return true;
+                }
+        </script>
 
 
 </head>
@@ -52,8 +68,14 @@
                 <button id="notice">
                   <a id="goto-notice" href="/banner_list_customer">공지사항</a>
                 </button>
-            <% } %>
-            </button>
+            <% } else { %>
+                    <button id="login">
+                    <a href="/login">로그인</a>
+                    </button>
+                    <button id="signup-btn">
+                    <a id="goto-signup" href="/signUp">회원가입</a>
+                    </button>
+                    <% } %>
         </div>
 
     </div>
@@ -78,7 +100,7 @@
               <ul>
                       <li><a href="/sub_category/5/1">숏원피스</a></li>
                       <li><a href="/sub_category/6/1">롱원피스</a></li>
-              </ul>   
+              </ul>
       </li>
       <li><a href="/category/BAG&SOCKS/1">잡화류</a>
               <ul>
@@ -98,7 +120,7 @@
 
 
 <section>
-  <nav id="box"> 
+  <nav id="box">
     <div id="wrap_product_img">
     <img id="left_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
     alt="" style="display:none">
@@ -142,11 +164,11 @@
 
   <div id="product_name">
     <h3><%= product[0].pName %></h3><br>
-    <h3>        
+    <h3>
       <span class="product_score">4.3</span>
       <%= product[0].pPrice %>
     </h3><br>
-    <form name="form" action="/basket_in" method="post" onsubmit="return func_confirm()" />
+    <form name="form" action="/basket_in" method="post" onsubmit="return func_confirm()" >
       수량 선택 : <input type=hidden name="sell_price" value="<%= product[0].pPrice %>">
       <input type="text" name="amount" value="1" size="3" onchange="change();">
       <input type="button" value=" - " onclick="del();"><input type="button" value=" + " onclick="add();"><br>
@@ -158,7 +180,7 @@
     <input type="button" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/>
     <input type="text" id="sample4_postcode" placeholder="우편번호">
     <!-- <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br> -->
-    <input type="text" id="sample4_roadAddress" placeholder="도로명주소"><br> 
+    <input type="text" id="sample4_roadAddress" placeholder="도로명주소"><br>
     <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
     <span id="guide" style="color:#999;display:none"></span>
     <input type="text" id="sample4_detailAddress" placeholder="상세주소">
@@ -167,10 +189,18 @@
     <input type = "hidden" name="userid" value="<%= ID %>" />
     <input type = "hidden" name="productid" value="<%= product[0].pIdx %>" />
     <input type="submit" value="장바구니추가" style="width: 200px; height: 150px; font-size:2em;" />
-  </form>
 
     <br>
-    <input type="button" value="구매하기" style="width: 200px; height: 150px; font-size:2em;" />
+    <% console.log(is_logined); %>
+
+    <% if (is_logined == undefined) { %>
+    <% console.log(is_logined); %>
+    <input type="button" value="구매하기" style="width: 200px; height: 150px; font-size:2em;" onclick="return login()"/>
+    <% } else  { %>
+
+    <input type="button" value="구매하기" style="width: 200px; height: 150px; font-size:2em;"onclick="return direct(this.form);" />
+    <% } %>
+  </form>
 
     <br><br>
   </div>
@@ -251,4 +281,4 @@
 
 </body>
 
-</html> 
+</html>
