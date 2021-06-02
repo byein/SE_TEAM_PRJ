@@ -12,7 +12,7 @@
     <header id="header">
         <div id="head-wrapper">
             <h1>
-                <a id="logo" href="/admin" title="로고">로고</a>
+                <a id="logo" href="/" title="로고">로고</a>
             </h1>
             <div id ="search-form">
                 <form action="/search" method="get" class="category">
@@ -24,37 +24,37 @@
                          <option value="goods"> 잡화류</option>
                          <option value="acc"> 악세서리</option>
                      </select>
-                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색 어를 입력하세요"> </br>
                      <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
                      <input type = "submit" value ="확인" class = "sort-button">
                  </form>
              </div>
-             <div class="wrap-user-util">
-                <% if(is_logined == true){ %>
-                <a><%= name %> 관리자</a>
-                <button id="logout">
-                    <a href="/logout">logout</a>
-                </button>
-                <button id="bucket">
+            <div class="wrap-user-util">
+                <% if(is_logined == false){ %>
+                    <button id="login">
+                    <a href="/login">로그인</a>
+                    </button>
+                    <button id="signup-btn">
+                    <a id="goto-signup" href="/signUp">회원가입</a>
+                    </button>
+                <% }else{ %>
+                    <a><%= name %> 님 환영합니다!</a>
+                    <button id="logout">
+                    <a href="/logout">logout</a></button>
+                    <button id="bucket">
                     <a id="goto-bucket" href="/basket">장바구니</a>
-                </button>
+                    </button>
+                    <button id="notice">
+                        <a id="goto-notice" href="/banner_list_customer">공지사항</a>
+                    </button>
+                    <button id="notice">
+                        <a id="goto-notice" href="/coupon_user_download" onclick="window.open(this.href, '_blank', 'width=500, height=600'); return false;">쿠폰다운로드</a>
+                    </button>
                 <% } %>
             </div>
         </div>
     </header>
 
-
-
-    <nav class="nav">
-        <ul class="menu">
-            <li><a href="/admin" class="active">Home</a></li>
-            <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
-            <li><a href="/product_list_admin">Product 관리</a></li>
-            <li><a href="/product_information_admin" class="current">Sales Information</a></li>
-            <li><a href="/coupon_list_admin" class="current">Coupon 등 록/관리</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
         <h2>상품 주문 내역</h2>
         <section id="sales_detail_info">
                 <table id="sales_detail_list">
