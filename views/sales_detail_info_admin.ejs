@@ -56,57 +56,35 @@
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
-        <h2>상품 주문 내역</h2>
-        <section id="sales_detail_info">
-                <table id="sales_detail_list">
-                    <colgroup>
-                        <col width="15">
-                        <col width="35">
-                        <col width="25">
-                        <col width="15">
-                        <col width="15">
-                        <col width="15">
-                    </colgroup>
-                      <thead>
-                        <tr>
-                            <th class="table_left_up">주문날짜</th>
-                            <th>배송주소</th>
-                            <th>상품목록</th>
-                            <th>상품개수</th>
-                            <th>상품금액</th>
-                            <th class="table_right_up">총결제금액</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!--
-                        <tr class="table_space">
-                            <td></td>
-                        </tr>
-                    -->
-                        <tr class="sales_list">
-                            <!--rowspan 크게 잡아도 테이블 추가 생성은 없어서 일단 틀은 rowspan 크게 잡아뒀습니다.-->
-                            <td class="sales_date" rowspan="100">21-04-15</td>
-                            <td class="sales_address" rowspan="100"> 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호</td>
-                            <td class="sales_product">미키마우스 후드티</td>
-                            <td class="sales_product_count">1개</td>
-                            <td class="sales_product_price">36,000원</td>
-                            <td class="sales_price" rowspan="100">80,000원</td>
-                        </tr>
-                        <tr class="sales_list">
-                            <td class="sales_product">검은색 무지 티셔츠</td>
-                            <td class="sales_product_count">3개</td>
-                            <td class="sales_product_price">12,000원</td>
-                        </tr>
-                        <tr class="sales_list">
-                            <td class="sales_product">프릴 블라우스</td>
-                            <td class="sales_product_count">2개</td>
-                            <td class="sales_product_price">80,000원</td>
-                        </tr>
+    <br>
+      <div class="container">
+        	<div class="order-product-container">
+            	<h2>주문 상품</h2>
+            	<ul id="order-ul">
+                	<li id="product-info-to-order-wrapper">
+                    	<% for(let i=0; i<od.length; i++) { %>
+                    	<img id="orderProductImg" class="product-info-to-order" src="<%= od[i].pImg %>"/>
+                    	<div id="orderSubject" class="product-info-to-order"><%= od[i].pName %></div>
+                    	<div id="orderQuantity" class="product-info-to-order"><%= od[i].product_quantity %>개</div>
+                    	<div id="orderPrice" class="product-info-to-order"><%= od[i].pPrice %>원</div>
+                    	<% } %>
+                	</li>
+            	</ul>
+        	</div>
 
-                    </tbody>
+            	<div class="orderer-info">
+                <h3>주문자 정보</h3>
+                <dl>
+                    <dt>주문자</dt>
+                    <dd><%= name %></dd>
+                    <dt>연락처</dt>
+                    <dd><%= od[0].oPhone_num %></dd>
+                    <dt>주소</dt>
+                    <dd><%= od[0].oAddress %></dd>
+                </dl>
+            </div>
+        </div>
 
-                </table>
-        </section>
 
 
 
