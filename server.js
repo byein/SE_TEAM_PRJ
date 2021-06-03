@@ -769,6 +769,15 @@ app.get('/product_information_admin', function(request, response){
         
 });
 
+app.post('/oStatus_update_admin',function(request, response){
+	var post = request.body;
+	console.log(post);
+	db.query('UPDATE `order` SET oStatus=? WHERE oIdx=?', [post.status, post.oIdx], function(error,result){
+		response.redirect('/product_information_admin');
+	});
+});
+
+
 app.get('/sales_detail_info_admin/:orderId', function(request, response){
         var filteredId = path.parse(request.params.orderId).base;
         console.log(filteredId);
