@@ -86,32 +86,16 @@
                                 <option value="very_late">매우느림</option>
                             </select>
                         </td></tr>  
-                        <tr>
-		  	   <td>별점</td>
-                           <td><div class="startRadio">
-                                <label class="startRadio__box">
-                                  <input type="radio" name="rPoint" id="star">
-                                  <span class="startRadio__img"><span class="blind">별 1개</span></span>
-                                </label>
-                                <label class="startRadio__box">
-				  <input type="radio" name="rPoint" id="star">
-                                  <span class="startRadio__img"><span class="blind">별 2개</span></span>
-                                </label>
-                                <label class="startRadio__box">
-                                  <input type="radio" name="rPoint" id="star">
-                                  <span class="startRadio__img"><span class="blind">별 3개</span></span>
-                                </label>
-                                <label class="startRadio__box" >
-                                  <input type="radio" name="rPoint" id="star"">
-                                  <span class="startRadio__img"><span class="blind">별 4개</span></span>
-                                </label>
-                                <label class="startRadio__box">
-                                  <input type="radio" name="rPoint" id="star">
-                                  <span class="startRadio__img"><span class="blind">별 5개</span></span>
-                                </label>
-                              </div>
-                            </td> 
-                        </tr>
+                        <tr> <td>별점</td><td>
+				<select name="rPoint" id="star">
+					<option value="none"> 선택 </option>
+					<option value="1">☆☆☆☆★</option>
+					<option value="2">☆☆☆★★ </option>
+					<option value="3">☆☆★★★ </option>
+					<option value="4">☆★★★★ </option>
+					<option value="5">★★★★★</option>
+				</select>
+			</td></tr>
                                
                         <tr><td>후기</td><td><textarea id="review" rows="5" cols="30" maxlength="80" name="rReview"
                             placeholder="80자 이내(미만)의 간단한 후기를 작성해주세요."></textarea></td></tr>
