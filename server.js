@@ -802,6 +802,39 @@ app.get('/sales_detail_info_admin/:orderId', function(request, response){
                 });
 });
 
+app.get('/add_review_customer/:orderId', function(request, response){
+	var filteredId = path.parse(request.params.orderId).base;
+        console.log(filteredId);
+	const sql = "SELECT * FROM order_detail od, product p WHERE od.order_id='" +filteredId+"'AND p.pIdx=od.product_id;"
+	console.log(sql);
+	db.query(sql, function(error2, od){
+	console.log(od);
+		if (request.session.is_logined == true){
+		response.render('add_review_customer',{
+			is_logined : request.session.is_logined,
+			name : request.session.name,
+			od : od
+		});
+	}else{
+		response.render('add_review_customer',{
+			is_logined : false,
+			od : od 
+		});
+	}
+});
+})
+
+app.post('/create_review', function(request, response){
+        var post = request.body;
+	db.query(`INSERT INTO review (product_id, rRecommand, rDelivery, rPoint, rReview, rDate, rName) VALUES (?, ?, ?, ?, ? , NOW(), ?)`, [post.product_id, post.rRecommand, post.rDelivery, post.rPoint, post.rReview, request.session.name], function(err, result ,fields){
+
+		name : request.session.name
+                if (err) throw err;
+                response.redirect('/');
+        })
+})
+
+
 
 
 // inquiry 테이블 필요
