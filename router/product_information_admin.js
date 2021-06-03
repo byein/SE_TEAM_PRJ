@@ -29,7 +29,9 @@ function search_period_check() {
     } else if (year_end==0&&month_end==0&date_end==0) {
         alert("종료 날짜를 입력해 주세요.");
         return false;
-    } else if (year_start > year_end || month_start > month_end || date_start > date_end) {
+    } else if (year_start > year_end || ((year_start >= year_end) 
+                && (month_start > month_end)) || ((year_start >= year_end)
+                && (month_start >= month_end) && (date_start > date_end))) {
         alert("시작 날짜가 종료 날짜보다 더 늦습니다. 시작 날짜와 종료 날짜가 유효한지 다시 확인해 주세요.");
         return false;
     } else {
