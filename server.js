@@ -727,19 +727,69 @@ app.get('/delete_address/:adIdx', function(request, response){
 });
 
 app.get('/product_information_admin', function(request, response){
-        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
-                if(!admin[0]){
-                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
-                } else {
-                        if(request.session.is_logined == true){
-                                response.render('product_information_admin', {
+	var sdate = url.parse(request.url, true).query.sdate;
+	var edate = url.parse(request.url, true).query.edate;
+	console.log(sdate,edate);
+	if(sdate == undefined){
+		sdate = "1900-01-01";
+	}
+	if(edate == undefined){
+		edate = "2200-12-31"; 
+	}
+	if(sdate ==""){
+		sdate = "1900-01-01";
+	}
+	if(edate ==""){
+		edate = "2200-12-31";
+	}
+	console.log(sdate,edate);
+	
+	db.query("SELECT SUM(oTotal_price) FROM `order` WHERE oStatus=3 AND oDate >=date('" +sdate+ "') AND oDate <= date('" +edate+"');", function(error, sales){
+		console.log(sales);
+        	db.query("SELECT * FROM `order` WHERE oDate >=date('" + sdate +"') AND oDate <= date('" +edate+ "');"  , function(error, order){
+			console.log(order);
+			db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                        	if(!admin[0]){
+                                	response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                        	} else {
+                                	if(request.session.is_logined == true){
+                                        	response.render('product_information_admin', {
+                                                	is_logined : request.session.is_logined,
+                                                	name : request.session.name,
+                                                	order : order,
+							length : order.length,
+							sales : sales
+                                        	});
+                                	}
+                        	}
+                	});
+        	});
+	}); 
+        
+        
+});
+
+app.get('/sales_detail_info_admin/:orderId', function(request, response){
+        var filteredId = path.parse(request.params.orderId).base;
+        console.log(filteredId);
+        db.query('SELECT * FROM `order` o, order_detail od, product p WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and od.order_id=?', filteredId, function(error2, od){
+                        console.log(od);
+			if(request.session.is_logined == true){
+                                response.render('sales_detail_info_admin', {
                                         is_logined : request.session.is_logined,
-                                        name : request.session.name
+                                        name : request.session.name,
+                                        od : od
+                                });
+                        }else{
+                                response.render('sales_detail_info_admin', {
+                                        is_logined : false,
+                                        od : od
                                 });
                         }
-                }
-        });
+                });
 });
+
+
 
 // inquiry 테이블 필요
 // 임의 컬럼네임과 테이블네임 사용
