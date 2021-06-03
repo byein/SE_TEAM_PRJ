@@ -14,31 +14,34 @@
             <h1>
                 <a id="logo" href="/admin" title="로고">로고</a>
             </h1>
-            <div id ="search-form">
+            <div id="search-form">
                 <form action="/search" method="get" class="category">
-                     <select name = "category">
-                         <option value="all"> 전체</option>
-                         <option value="top"> 상의</option>
-                         <option value="bottom"> 하의</option>
-                         <option value="dress"> 원피스</option>
-                         <option value="goods"> 잡화류</option>
-                         <option value="acc"> 악세서리</option>
-                     </select>
-                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
-                     <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
-                     <input type = "submit" value ="확인" class = "sort-button">
-                 </form>
-             </div>
-             <div class="wrap-user-util">
-                <% if(is_logined == true){ %>
-                <a><%= name %> 관리자</a>
-                <button id="logout">
-                    <a href="/logout">logout</a>
-                </button>
-                <button id="bucket">
-                    <a id="goto-bucket" href="/basket">장바구니</a>
-                </button>
-                <% } %>
+                    <select name="category">
+                        <option value="all"> 전체</option>
+                        <option value="top"> 상의</option>
+                        <option value="bottom"> 하의</option>
+                        <option value="dress"> 원피스</option>
+                        <option value="goods"> 잡화류</option>
+                        <option value="acc"> 악세서리</option>
+                    </select>
+                    <input type="text" class="search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                    <input type="int" class="search-bar" name="sprice" placeholder="시작가격"> ~ <input type="int"
+                        class="search-bar" name="eprice" placeholder="끝가격">
+                    <input type="submit" value="확인" class="sort-button">
+                </form>
+            </div>
+            <div class="wrap-user-util">
+                <% if(is_logined==true){ %>
+                    <a>
+                        <%= name %> 관리자
+                    </a>
+                    <button id="logout">
+                        <a href="/logout">logout</a>
+                    </button>
+                    <button id="bucket">
+                        <a id="goto-bucket" href="/basket">장바구니</a>
+                    </button>
+                    <% } %>
             </div>
         </div>
     </header>
@@ -56,37 +59,48 @@
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
-    <br>
-      <div class="container">
-        	<div class="order-product-container">
-            	<h2>주문 상품</h2>
-            	<ul id="order-ul">
-                	<li id="product-info-to-order-wrapper">
-                    	<% for(let i=0; i<od.length; i++) { %>
-                    	<img id="orderProductImg" class="product-info-to-order" src="<%= od[i].pImg %>"/>
-                    	<div id="orderSubject" class="product-info-to-order"><%= od[i].pName %></div>
-                    	<div id="orderQuantity" class="product-info-to-order"><%= od[i].product_quantity %>개</div>
-                    	<div id="orderPrice" class="product-info-to-order"><%= od[i].pPrice %>원</div>
-                    	<% } %>
-                	</li>
-            	</ul>
-        	</div>
+    <section>
 
-            	<div class="orderer-info">
+        <div class="container">
+            <div class="order-product-container">
+                <h2>주문 상품</h2>
+                <ul id="order-ul">
+                    <li id="product-info-to-order-wrapper">
+                        <% for(let i=0; i<od.length; i++) { %>
+                            <img id="orderProductImg" class="product-info-to-order" src="<%= od[i].pImg %>" />
+                            <div id="orderSubject" class="product-info-to-order">
+                                <%= od[i].pName %>
+                            </div>
+                            <div id="orderQuantity" class="product-info-to-order">
+                                <%= od[i].product_quantity %>개
+                            </div>
+                            <div id="orderPrice" class="product-info-to-order">
+                                <%= od[i].pPrice %>원
+                            </div>
+                            <% } %>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="orderer-info">
                 <h3>주문자 정보</h3>
                 <dl>
                     <dt>주문자</dt>
-                    <dd><%= name %></dd>
+                    <dd>
+                        <%= name %>
+                    </dd>
                     <dt>연락처</dt>
-                    <dd><%= od[0].oPhone_num %></dd>
+                    <dd>
+                        <%= od[0].oPhone_num %>
+                    </dd>
                     <dt>주소</dt>
-                    <dd><%= od[0].oAddress %></dd>
+                    <dd>
+                        <%= od[0].oAddress %>
+                    </dd>
                 </dl>
             </div>
         </div>
-
-
-
+    </section>
 
     <footer id="footer">
         <p>
