@@ -63,27 +63,20 @@
         <form method="POST" name="sales_list">
 
             <table id="search_sales_statistics">
-                <caption class="table_period">
-                    <a href="#">오늘</a>
-                    <a href="#">최근 일주일</a>
-                    <a href="#">1개월</a>
-                    <a href="#">1년</a>
-                </caption>
+                
                 <thead>
                     <tr>
-                        <th class="table_left">검색 기간</th>
+                        <form action="/product_information_admin" method="post">
+			<th class="table_left">검색 기간</th>
                         <td colspan="5">
-                            <input type="date" id="search_start">
+                            <input type="date" name="sdate" id="search_start">
                             ~
-                            <input type="date" id="search_end">
+                            <input type="date" name="edate" id="search_end">
                         </td>
-                        <td>
-                            <button id="search-btn" class="search" onclick="search_period_check()">
-                                <a href="#"><img class="search-img"
-                                        src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png"
-                                        alt="검색"></a>
-                            </button>
+                        <td> 
+				<input type = "submit" value="확인" class "searh-button">
                         </td>
+			</form>
                     </tr>
 
                     <tr class="table_space">
