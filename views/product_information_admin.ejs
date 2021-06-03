@@ -127,7 +127,7 @@
                 </tbody>
             </table>
 
-            <table id="check_order">
+               <table id="check_order">
                 <thead>
                     <tr>
                         <th class="table_left_up">판매일자</th>
@@ -137,58 +137,72 @@
                         <th class="table_right_up">상태변경</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="check_order">
-                        <td class="sales_date" onclick='location.href="/sales_detail_info_admin"' ;>21-04-15</td>
-                        <td class="sales_product" onclick='location.href="/sales_detail_info_admin"' ;>미키마우스 후드티 외 1종
+                <tbody
+			<% for (i = 0; i<length; i++){
+			var data = order[i]; %>
+                    <tr>
+                        <td>
+                          <!--주문날짜-->
+                          <%= data.oDate %>
                         </td>
-                        <td class="sales_processing_phase" onclick='location.href="/sales_detail_info_admin"' ;>결제완료
+                        <td>
+                          <!--주문한 상품 목록 및 수량-->
+			  <a href = "/sales_detail_info_admin/<%= data.oIdx %>"><%= data.oName %></a>
                         </td>
-                        <td class="sales_price" onclick='location.href="/sales_detail_info_admin"' ;>80,000원</td>
-                        <td><input type="button" class="sales_processing_btn" id="1"
-                                onclick="change_order_processing(this.id)" value="배송하기"></td>
-                    </tr>
-                    <tr class="check_order">
-                        <td class="sales_date" onclick='location.href="/sales_detail_info_admin"' ;>21-04-14</td>
-                        <td class="sales_product" onclick='location.href="/sales_detail_info_admin"' ;>프릴 블라우스</td>
-                        <td class="sales_processing_phase" onclick='location.href="/sales_detail_info_admin"' ;>배송중</td>
-                        <td class="sales_price" onclick='location.href="/sales_detail_info_admin"' ;>36,000원</td>
-                        <td><input type="button" class="sales_processing_btn" id="2"
-                                onclick="change_order_processing(this.id)" value="배송완료"></td>
-                    </tr>
-                    <tr class="check_order">
-                        <td class="sales_date" onclick='location.href="/sales_detail_info_admin"' ;>21-04-14</td>
-                        <td class="sales_product" onclick='location.href="/sales_detail_info_admin"' ;>검정 무지 티셔츠 외 2종
+            
+                        <td>
+                          <!--현재 주문 상태-->
+                          
+                          <% if(data.oStatus==0) { %>
+                          결제완료
+                          <% } else if(data.oStatus==1) { %>
+                          배송중
+                          <% } else if(data.oStatus==2) { %>
+                          배송완료
+                          <% } else { %>
+                          구매확정
+                          <% } %>
                         </td>
-                        <td class="sales_processing_phase" onclick='location.href="/sales_detail_info_admin"' ;>배송완료
+        
+           		<td>
+			<%= data.oTotal_price %>원
+			</td>
+                        <td>
+                          <!-- 주문상태에 알맞은 버튼-->
+                          <!-- 배송완료 -> 문의하기/후기쓰기 배송중 -> 문의하기 -->
+                          <!-- 관리자 페이지 배송하기 -> 배송완료 -> 상품평 순으로 바뀜 -->
+                          <!-- data.Status 0 : 결제완료, 1 : 배송중, 2: 배송완료, else : 구매확정 -->
+                         
+                          <form class="" action="/oStatus_update_admin" method="post">
+            
+                          <% if(data.oStatus==0) { %>
+                          <input type="hidden" name="oIdx" value="<%= data.oIdx %>" />
+                          <input type="hidden" name= "status" value="1"/>
+                          <input type="submit" name="name" value="배송하기" />
+                          <% } else if(data.oStatus==1) { %>
+                          <input type="hidden" name="oIdx" value="<%= data.oIdx %>" />
+                          <input type="hidden" name="status" value="2" />
+                          <input type="submit" name="name" value="배송완료" />
+                          <% } else if(data.oStatus==2) { %>
+                          <input type="submit" name="name" value="상품평" />
+                          <% } else { %>
+                          <input type="submit" name="name" value="상품평" />
+                          <% } %>
+            
+                          </form>
                         </td>
-                        <td class="sales_price" onclick='location.href="/sales_detail_info_admin"' ;>35,000원</td>
-                        <td><input type="button" class="sales_processing_btn" id="3"
-                                onclick="change_order_processing(this.id)" value="상품평"></td>
-                    </tr>
-
-                    <tr class="check_order">
-                        <td class="sales_date" onclick="location.href='/sales_detail_info_admin'">21-04-13</td>
-                        <td class="sales_product" onclick="location.href='/sales_detail_info_admin'">미키마우스 후드티</td>
-                        <td class="sales_processing_phase" onclick="location.href='/sales_detail_info_admin'">구매확정</td>
-                        <td class="sales_price" onclick="location.href='/sales_detail_info_admin'">40,000원</td>
-                        <td><input type="button" class="sales_processing_btn" id="4"
-                                onclick="change_order_processing(this.id)" value="상품평"></td>
-                    </tr>
+                      </tr>
+		      
+                      </tbody>
+		      <% } %>
+                  </table>
+            
+                <br />
+            
+    
                 </tbody>
 
             </table>
-            <div class="outer">
-                <div class="pagination">
-                    <a href="#">&laquo;</a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">&raquo;</a>
-                </div>
-            </div>
         </form>
     </section>
 
