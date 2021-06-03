@@ -130,7 +130,7 @@
                   <input type="hidden" name="status" value="3" />
                   <input type="submit" name="name" value="구매확정" />
                   <% } else { %>
-                  <input type="button" name="name" value="상품평" />
+                  <a href = "/add_review_customer/<%= data.oIdx %>"><input type="button" name="name" value="상품평" /> </a>
                   <% } %>
     
                   </form>
