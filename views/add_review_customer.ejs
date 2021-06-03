@@ -12,52 +12,63 @@
                 <h1>
                     <a id="logo" href="/admin" title="로고">로고</a>
                 </h1>
-                <form id="search-form" method="GET">
-                    <input id="search" type="search" placeholder="검색">
-                    <button id="search-btn" class="search">
-                        <a href="#"><img class="search-img" src="https://cdn.icon-icons.com/icons2/2091/PNG/512/search_icon_128536.png" alt="검색"></a>
-                    </button>
-                </form>
+       		<div id ="search-form">
+                    <form action="/search" method="get" class="category">
+                         <select name = "category">
+                             <option value="all"> 전체</option>
+                             <option value="top"> 상의</option>
+                             <option value="bottom"> 하의</option>
+                             <option value="dress"> 원피스</option>
+                             <option value="goods"> 잡화류</option>
+                             <option value="acc"> 악세서리</option>
+                         </select>
+                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                         <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
+                         <input type = "submit" value ="확인" class = "sort-button">
+                     </form>
+                 </div>
                 <div class="wrap-user-util">
-                    <% if(is_logined == true){ %>
-                        <a><%= name %> 관리자</a>
-                        <button id="logout">
-                            <a href="/logout">logout</a>
-                        </button>
-                        <button id="bucket">
+                    <div class="wrap-user-util">
+                        <% if(is_logined == false){ %>
+                            <button id="login">
+                            <a href="/login">로그인</a>
+                            </button>
+                            <button id="signup-btn">
+                            <a id="goto-signup" href="/signUp">회원가입</a>
+                            </button>
+                        <% }else{ %>
+                            <a><%= name %> 님 환영합니다!</a>
+                            <button id="logout">
+                            <a href="/logout">logout</a></button>
+                            <button id="bucket">
                             <a id="goto-bucket" href="/basket">장바구니</a>
-                        </button>
-                    <% } %>
+                            </button>
+                            <button id="notice">
+                                <a id="goto-notice" href="/banner_list_customer">공지사항</a>
+                            </button>
+                        <% } %>
+                    </div>
+                    
                 </div>
             </div>
         </header>
-        <nav id="category">
-            <a class="category-menu" href="/product_list_admin">상의</a>
-            <a class="category-menu" href="/product_list_admin">하의</a>
-            <a class="category-menu" href="/product_list_admin">원피스</a>
-            <a class="category-menu" href="/product_list_admin">잡화류</a>
-            <a class="category-menu" href="/product_list_admin">악세서리</a>
-        </nav>
-
-
-        <nav class="nav">
-            <ul>
-                <li><a href="/admin" class="active">Home</a></li>
-                <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
-                <li><a href="/product_list_admin">Product 관리</a></li>
-                <li><a href="/product_information_admin" class="current">Sales Information</a></li>
-                <li><a href="/inquiry_admin">고객 문의 관리</a></li>
-                <li><a href="/coupon_list_admin">Coupon 등록/관리</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-        <section>
+	<section>
             <h2>New Review</h2>
-            <form action="#" method="post" onsubmit="return check()" enctype="multipart/form-data">
+            <form action="/create_review" method="POST">
                 <div>
                     <table>
+			<tr><td> 상품 선택 </td><td>
+				<select name="product_id">
+				    <% for(let i=0; i<od.length; i++){ %>
+				    <option value="<%= od[i].pIdx %>"> <%= od[i].pName %> </option>
+				    <% } %>
+
+			    </li>
+				</td></tr>
+
+
                         <tr><td>추천</td><td>
-                            <select name="recommand" id="recommand">
+                            <select name="rRecommand"  id="rRecommand">
                                 <option value="none">선택</option>
                                 <option value="strong_recommand">매우추천</option>
                                 <option value="recommand">추천</option>
@@ -66,7 +77,7 @@
                             </select>
                         </td></tr>  
                         <tr><td>배송평가</td><td>
-                            <select name="delivery_evaluation" id="delivery_evaluation">
+                            <select name="rDelivery" id="rDelivery">
                                 <option value="none">선택</option>
                                 <option value="very_fast">매우빠름</option>
                                 <option value="fast">빠름</option>
@@ -76,35 +87,35 @@
                             </select>
                         </td></tr>  
                         <tr>
-                            <td>별점</td>
-                            <td><div class="startRadio">
+		  	   <td>별점</td>
+                           <td><div class="startRadio">
                                 <label class="startRadio__box">
-                                  <input type="radio" name="star" id="1">
+                                  <input type="radio" name="rPoint" id="1">
                                   <span class="startRadio__img"><span class="blind">별 1개</span></span>
                                 </label>
                                 <label class="startRadio__box">
-                                  <input type="radio" name="star" id="2">
+				  <input type="radio" name="rPoint" id="2">
                                   <span class="startRadio__img"><span class="blind">별 2개</span></span>
                                 </label>
                                 <label class="startRadio__box">
-                                  <input type="radio" name="star" id="3">
+                                  <input type="radio" name="rPoint" id="3">
                                   <span class="startRadio__img"><span class="blind">별 3개</span></span>
                                 </label>
-                                <label class="startRadio__box">
-                                  <input type="radio" name="star" id="4">
+                                <label class="startRadio__box" >
+                                  <input type="radio" name="rPoint" id="4">
                                   <span class="startRadio__img"><span class="blind">별 4개</span></span>
                                 </label>
                                 <label class="startRadio__box">
-                                  <input type="radio" name="star" id="5">
+                                  <input type="radio" name="rPoint" id="5">
                                   <span class="startRadio__img"><span class="blind">별 5개</span></span>
                                 </label>
                               </div>
-                            </td>
+                            </td> 
                         </tr>
                                
-                        <tr><td>후기</td><td><textarea id="review" rows="5" cols="30" maxlength="80" 
+                        <tr><td>후기</td><td><textarea id="review" rows="5" cols="30" maxlength="80" name="rReview"
                             placeholder="80자 이내(미만)의 간단한 후기를 작성해주세요."></textarea></td></tr>
-                        <tr><td colspan="2"><input type="submit" value="등록하기" class="btn"></td></tr>
+                        <tr><td colspan="2"><input type="submit" value="등록하기" class="btn" ></td></tr>
                     </table>
                 </div>
                 
