@@ -24,7 +24,7 @@
                          <option value="goods"> 잡화류</option>
                          <option value="acc"> 악세서리</option>
                      </select>
-                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색 어를 입력하세요"> </br>
                      <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
                      <input type = "submit" value ="확인" class = "sort-button">
                  </form>
@@ -49,7 +49,7 @@
                     </button>
                 <% } %>
             </div>
-            <button id="additional-inquiry-btn"><a href="/inquiry_page">추가 문의하기</a></button>
+            <button id="additional-inquiry-btn"><a href="/inquiry_page %> ">추가 문의하기</a></button>
         </div>
     </header>
     <div class="dropmenu">
@@ -71,7 +71,7 @@
                     <ul>
                             <li><a href="/sub_category/5/1">숏원피스</a></li>
                             <li><a href="/sub_category/6/1">롱원피스</a></li>
-                    </ul>   
+                    </ul>
             </li>
             <li><a href="/category/BAG&SOCKS/1">잡화류</a>
                     <ul>
@@ -95,32 +95,37 @@
             <table id="inquiry-table">
                 <colgroup>
                     <col width="15%">
-                    <col width="15%">
                     <col width="50%">
                     <col width="20%">
+                    <col width="15%">
                 </colgroup>
                 <thead>
                     <tr>
                         <td>등록 일시</td>
-                        <td>종류</td>
                         <td>문의 내용</td>
                         <td>답변</td>
+                        <td>추가문의</td>
                     </tr>
                 </thead>
                 <tbody>
+
                     <% for(let i=0; i<inquiry.length; i++) { %>
                         <tr>
-                            <td><%= inquiry[i].iDate %></td>
-                            <td><%= inquiry[i].type %></td>
-                            <td><a href="#" onclick="showDetails()"><%= inquiry[i].subject %></a></td>
-                            <td><%= inquiry[i].status %></td>
+                            <td><%= inquiry[i].iqDate %></td>
+                            <td><a href="#" onclick="showDetails()"><%= inquiry[i].iqName %></a></td>
+                            <% if (inquiry[i].iqSolved == 0 ) { %>
+                            <td>미등록</td>
+                            <% } else { %>
+                            <td>등록</td>
+                            <% } %>
+                            <td><button id="additional-inquiry-btn"><a href="/inquiry_page/plus/<%= inquiry[i].oIdx %> ">추가 문의하기</a></button></td>
                         </tr>
-                        <tr id="inquiry-details">
+                        <tr id="inquiry_details">
                             <td colspan="4" height="auto">
-                                <p>주문번호 : <%= oIdx %>, 상품명 : <%= pName %></p>
-                                <p>문의제목 : <%= inquiry[i] %></p>
-                                <p>문의내용 : <%= inquiry[i] %></p>
-                                <p>답변 : <%= answer %></p>
+                                    <p><a href="/order_product_detail/<%= inquiry[i].oIdx %>">주문번호 : <%= inquiry[i].oIdx %></a>, 상품명 : <%= inquiry[i].oName %></p>
+                                <p>문의제목 : <%= inquiry[i].iqName %></p>
+                                <p>문의내용 : <%= inquiry[i].iqDetail %></p>
+                                <p>답변 : <%= inquiry[i].iqAnswer %></p>
                             </td>
                         </tr>
                     <% } %>

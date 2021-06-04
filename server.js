@@ -603,7 +603,8 @@ app.get('/order_detail/:page', function(request, response){
                                         order : order,
                                         page : page,
                                         length : order.length-1,
-                                        page_num : 5
+                                        page_num : 5,
+                                        duration : duration
                                 });
                         }else{
                                 response.render('order_detail', {
@@ -611,7 +612,8 @@ app.get('/order_detail/:page', function(request, response){
                                         order : order,
                                         page : page,
                                         length : order.length-1,
-                                        page_num : 5
+                                        page_num : 5,
+                                        duration : duration
                                 });
                         }
                 });
@@ -839,30 +841,96 @@ app.post('/create_review', function(request, response){
 
 // inquiry 테이블 필요
 // 임의 컬럼네임과 테이블네임 사용
-app.get('/inquiry_page', function(request, response){
-        const body = request.body;
-        let type = '';
-        for(let i = 0; i<body.select_type.length; i++){
-                if(body.select_type[i].checked){
-                        type = body.select_type[i];
-                        break;
-                }
-        }
-        db.query(`INSERT INTO inquiry (mId, iId, subject, content, type, status, iDate) VALUES (?, ?, ?, ?, ?, ?, NOW())`,
-                [request.session.ID, iId, body.subject, body.content, type, '미등록'], function(err, result){
+app.get('/inquiry_page/:oIdx', function(request, response){
+        var filteredId = request.params.oIdx;
+        db.query('SELECT * FROM inquiry iq, `order` o WHERE iq.order_id=o.oIdx and o.oIdx=?', [filteredId], function(err, inquiry){
+                if(!inquiry[0]){
+                        if(request.session.is_logined==true){
+                                response.render('inquiry_page', {
+                                        name : request.session.name,
+                                        ID : request.session.ID,
+                                        is_logined : true,
+                                        oIdx : filteredId
+                                });
+                        }
+                }else {
                         response.redirect('/inquiry_list');
+                }
+        });
+});
+
+app.get('/inquiry_page/plus/:oIdx', function(request, response){
+        var filteredId = request.params.oIdx;
+        if(request.session.is_logined==true){
+                response.render('inquiry_page', {
+                        name : request.session.name,
+                        ID : request.session.ID,
+                        is_logined : true,
+                        oIdx : filteredId
                 });
+        }else {
+                response.send('<script>alert("로그인이 필요합니다."); window.location.href="/login"; </script>');
+        }
+});
+
+app.post('/inquiry_page_in', function(request, response){
+        var post = request.body;
+        console.log(post);
+        db.query(`INSERT INTO inquiry (order_id, iqName, iqDetail, iqDate) VALUES (?, ?, ?, NOW())`, [post.oIdx, post.subject, post.content], function(error, result){
+                response.redirect('/inquiry_list');
+        });
 });
 
 app.get('/inquiry_list', function(request, response){
-        db.query(`SELECT iId, subject, content, type, iDate, status, FROM inquiry WHERE mId=?`, [request.session.ID], function(err, inquiry){
+        db.query('SELECT * FROM inquiry iq, `order` o WHERE iq.order_id=o.oIdx and o.member_id=?', [request.session.ID], function(err, inquiry){
                 if(err) throw err;
                 else {
-                        response.render('inquiry_list', {
-                                inquiry: inquiry
+                        if (request.session.is_logined == true){
+                                response.render('inquiry_list', {
+                                        inquiry: inquiry,
+                                        name : request.session.name,
+                                        ID : request.session.ID,
+                                        is_logined : true
+                                });
+                        } else {
+                                response.send('<script>alert("로그인이 필요합니다."); window.location.href="/login"; </script>');
+                        }
+                }
+
+        });
+});
+
+app.get('/inquiry_admin/:page', function(request, response){
+        var page = request.params.page;
+        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                if(!admin[0]){
+                        response.send('<script>alert("접근 권한이 없습 니다"); window.location.href = `/`;</script>');
+                } else {
+                        db.query('SELECT * FROM inquiry iq, `order` o WHERE iq.order_id=o.oIdx ORDER BY iq.iqDate DESC',  function(err, inquiry){
+                                if(err) throw err;
+                                else {
+                                        response.render('inquiry_admin', {
+                                                inquiry: inquiry,
+                                                name : request.session.name,
+                                                ID : request.session.name,
+                                                is_logined : true,
+                                                page : page,
+                                                length : inquiry.length-1,
+                                                page_num : 5
+                                        });
+                                }
                         });
                 }
 
+        });
+});
+
+app.post('/inquiry_admin_in', function(request, response){
+        var post = request.body;
+        console.log(post);
+        db.query(`UPDATE inquiry SET iqAnswer=?, iqSolved=?  WHERE iqIdx=?`, [post.answer, 1,post.iqIdx], function(error, result){
+                console.log(result);
+                response.redirect('/inquiry_admin/1');
         });
 });
 

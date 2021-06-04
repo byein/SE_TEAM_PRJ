@@ -26,7 +26,7 @@
                          <option value="goods"> 잡화류</option>
                          <option value="acc"> 악세서리</option>
                      </select>
-                     <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                     <input type ="text" class = "search-bar" name="query" placeholder="검색 어를 입력하세요"> </br>
                      <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
                      <input type = "submit" value ="확인" class = "sort-button">
                  </form>
@@ -53,7 +53,7 @@
             </div>
         </div>
     </header>
- 
+
 
     <div style="text-align: center">
       <h1>주문 내역</h1>
@@ -63,7 +63,7 @@
     <!-- 기간별 조회-->
 
     <div class="day">
-      <a href="/order_detail/1/?duration=day">오늘</a>
+      <a href="/order_detail/1/?duration=day">최근 24시간</a>
       <a href="/order_detail/1/?duration=week">최근 일주일</a>
       <a href="/order_detail/1/?duration=month">1개월</a>
       <a href="/order_detail/1/?duration=year">1년</a>
@@ -97,7 +97,7 @@
                   <!--주문한 상품 목록 및 수량-->
                   <a href = "/order_product_detail/<%= data.oIdx %>"><%= data.oName %></a>
                 </td>
-    
+
                 <td>
                   <!--현재 주문 상태-->
                   <% if(data.oStatus==0) { %>
@@ -110,21 +110,21 @@
                   구매확정
                   <% } %>
                 </td>
-    
+
                 <td>
                   <!-- 상품 각가의 금액 및 총 결제 금액-->
                   <%= data.oTotal_price %>원
                 </td>
-    
+
                 <td>
                   <!-- 주문상태에 알맞은 버튼-->
                   <!-- 배송완료 -> 문의하기/후기쓰기 배송중 -> 문의하기 -->
                   <form class="" action="/oStatus_update" method="post">
-    
+
                   <% if(data.oStatus==0) { %>
-                  <input type="button" name="name" value="문의하기" />
+                  <a href = "/inquiry_page/<%= data.oIdx %>"><input type="button" name="name" value="문의하기" /> </a>
                   <% } else if(data.oStatus==1) { %>
-                  <input type="button" name="name" value="문의하기" />
+                  <a href = "/inquiry_page/<%= data.oIdx %>"><input type="button" name="name" value="문의하기" /> </a>
                   <% } else if(data.oStatus==2) { %>
                   <input type="hidden" name="oIdx" value="<%= data.oIdx %>" />
                   <input type="hidden" name="status" value="3" />
@@ -132,24 +132,26 @@
                   <% } else { %>
                   <a href = "/add_review_customer/<%= data.oIdx %>"><input type="button" name="name" value="상품평" /> </a>
                   <% } %>
-    
+
                   </form>
                 </td>
               </tr>
                   <% } %>
-    
+
               </tbody>
                   <% } %>
           </table>
-    
+
         <br />
-    
+
         <!-- 페이징 영역 -->
-    
+
         <div class="paging">
+                <a href="#">&laquo;</a>
                 <% for(var j=0; j<order.length/page_num; j++){ %>
-                <a href="/order_detail/<%= j+1 %>"><%= j+1 %></a>
+                <a href="/order_detail/<%= j+1 %>?duration=<%= duration %>"><%= j+1 %></a>
                 <%} %>
+                <a href="#">&raquo;</a>
         </div>
 
     <footer id="footer">
