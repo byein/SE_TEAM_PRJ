@@ -58,7 +58,6 @@
                 합계 : <%= pSum %>원
             </h3>
         </div>
-
         <div class="address-info">
             <h2>배송 정보</h2>
             <div class="orderer-info">
@@ -91,25 +90,24 @@
                     <a href="#">배송지 정보 저장</a></button>
                 </button>
             </div>
-            <div class="discount-info">
-                <h3>할인쿠폰</h3>
-                <input type="hidden" name="coupon_sum" value="<%= pSum %>">
-                <% if (sale == 0) { %>
-                <input type="text" placeholder="할인금액">
-                <input type="submit" value="쿠폰선택"></a>
+        </div>
+        <div class="discount-info">
+            <h3>할인쿠폰</h3>
+            <input type="hidden" name="coupon_sum" value="<%= pSum %>">
+            <% if (sale == 0) { %>
+            <input type="text" placeholder="할인금액">
+            <input type="submit" value="쿠폰선택"></a>
         <% } else { %>
-        <input type="text" placeholder="<%= sale %>원">
-                <input type="submit" value="쿠폰선택"></a>
+            <input type="text" placeholder="<%= sale %>원">
+            <input type="submit" value="쿠폰선택"></a>
         <% } %>
-
-            </div>
-                    </form>
+            </form>
         </div>
         <div class="pay">
             <h2>결제하기</h2>
             <h3 class="total-payment">배송비 : <%= delivery_fee %>원<br>총 결제 금액 : <%= pSum + delivery_fee - sale %>원</h3>
             <input type="hidden" name="sum" id="pSum" value = "<%= pSum + delivery_fee -sale %>"/>
-            <input type="button" id="pay-with-card" class="pay-btn" value="결제하기" onclick="requestPaywithCard()">
+            <input type="button" id="pay-with-card" class="pay-btn" value="결제하기" onclick="requestPay()">
         </div>
     </div>
     <footer id="footer">
