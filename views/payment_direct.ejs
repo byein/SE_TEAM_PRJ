@@ -108,7 +108,7 @@
             <h2>결제하기</h2>
             <h3 class="total-payment">배송비 : <%= product[0].pDeliveryfee %>원<br>총 결제 금액 : <%= pSum + product[0].pDeliveryfee -sale  %>원</h3>
             <input type="hidden" name="sum" id="pSum" value = "<%= pSum + product[0].pDeliveryfee - sale %>"/>
-            <input type="button" id="pay-with-card" class="pay-btn" value="결제하기" onclick="requestPaywithCard()">
+            <input type="button" id="pay-with-card" class="pay-btn" value="결제하기" onclick="requestPay()">
         </div>
     </div>
     <footer id="footer">

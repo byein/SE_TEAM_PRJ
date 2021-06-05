@@ -69,16 +69,25 @@ function requestPay() {
                         data : data,
                         dataType : "text"
                 }).done(function(data){
-                if(msg!=undefined){
-                   alert(msg); }
-                else {
-                var msg = '결제가 완료되었습니다.\n';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                msg += '\n결제 금액 : ' + rsp.paid_amount;
-                alert(msg);
-                window.location.href="/order_detail/1";
-            }
+                        var msg = '결제가 완료되었습니다.\n';
+                        msg += '고유ID : ' + rsp.imp_uid;
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                        msg += '\n결제 금액 : ' + rsp.paid_amount;
+                })
+        } else {
+            var msg = "결제 실패";
+            msg += rsp.error_msg + '.';
+        }
+        if(msg!=undefined){
+            alert(msg);
+        } else {
+            var msg = '결제가 완료되었습니다.\n';
+            msg += '고유ID : ' + rsp.imp_uid;
+            msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+            msg += '\n결제 금액 : ' + rsp.paid_amount;
+            alert(msg);
+            window.location.href="/order_detail/1";
+        }
     });
 }
 
