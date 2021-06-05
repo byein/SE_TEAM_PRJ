@@ -247,8 +247,7 @@ thead {
 tbody tr {
   border-bottom: 1px solid #999;
 }
-
-#inquiry-details {
+.inquiry-details {
   display: none;
   background-color: lightgray;
 }

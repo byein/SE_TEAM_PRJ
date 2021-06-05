@@ -83,10 +83,10 @@
                             <td colspan="2"><%= inquiry[i].iqName %></td>
                         <td>
                         <% if(inquiry[i].iqSolved == 0) { %>                            <!-- 답변등록이 안되어있는 버튼-->
-                            <button id="answer-inquiry-btn" onclick="showDetails()"><a href="#" >답변하기</a></button>
+                            <button id="answer-inquiry-btn" onclick="showDetails(<%= i %>)"><a href="#" >답변하기</a></button>
                         </td>
-                    </t>
-                    <tr id="inquiry-details">
+                    </tr>
+                    <tr id="inquiry-details<%= i %>" class="inquiry-details">
                         <td colspan="5">
                             <p>주문번호 : <%= inquiry[i].oIdx %>, 상품명 : <%= inquiry[i].oName %></p>
                             <p>문의제목 : <%= inquiry[i].iqName %></p>
@@ -101,12 +101,12 @@
                         </td>
                     </tr>
                         <% } else { %>                               <!--답변이 등록되어있는 버튼-->
-                            <button id="answer-complete-btn" onclick="showDetails()"><a href="#">답변완료</a></button>
+                            <button id="answer-complete-btn" onclick="showDetails(<%= i %>)"><a href="#">답변완료</a></button>
                         </td>
                     </tr>
-                    <tr id="inquiry-details">
+                    <tr id="inquiry-details<%= i %>" class="inquiry-details">
                         <td colspan="5">
-                                <p>상품명 : <%= inquiry[i].oName %></p>
+                            <p>상품명 : <%= inquiry[i].oName %></p>
                             <p>문의제목 : <%= inquiry[i].iqName %></p>
                             <p>문의내용 : <%= inquiry[i].iqDetail %></p>
                             <p>답변 : <%= inquiry[i].iqAnswer %></p>
