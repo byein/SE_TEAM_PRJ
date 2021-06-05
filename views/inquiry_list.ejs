@@ -110,9 +110,9 @@
                 <tbody>
 
                     <% for(let i=0; i<inquiry.length; i++) { %>
-                        <tr>
+                        <tr> 
                             <td><%= inquiry[i].iqDate %></td>
-                            <td><a href="#" onclick="showDetails()"><%= inquiry[i].iqName %></a></td>
+                            <td><a href="#" onclick="showDetails(<%= i %>)"><%= inquiry[i].iqName %></a></td>
                             <% if (inquiry[i].iqSolved == 0 ) { %>
                             <td>미등록</td>
                             <% } else { %>
@@ -120,9 +120,9 @@
                             <% } %>
                             <td><button id="additional-inquiry-btn"><a href="/inquiry_page/plus/<%= inquiry[i].oIdx %> ">추가 문의하기</a></button></td>
                         </tr>
-                        <tr id="inquiry_details">
+                        <tr id="inquiry-details<%= i %>" class="inquiry-details">
                             <td colspan="4" height="auto">
-                                    <p><a href="/order_product_detail/<%= inquiry[i].oIdx %>">주문번호 : <%= inquiry[i].oIdx %></a>, 상품명 : <%= inquiry[i].oName %></p>
+                                <p><a href="/order_product_detail/<%= inquiry[i].oIdx %>">주문번호 : <%= inquiry[i].oIdx %></a>, 상품명 : <%= inquiry[i].oName %></p>
                                 <p>문의제목 : <%= inquiry[i].iqName %></p>
                                 <p>문의내용 : <%= inquiry[i].iqDetail %></p>
                                 <p>답변 : <%= inquiry[i].iqAnswer %></p>
@@ -144,5 +144,6 @@
             Copyright 2021. 24팀 all rights reserved.<br>
         </p>
     </footer>
+    <script>var index = 0;</script>
 </body>
 </html>
