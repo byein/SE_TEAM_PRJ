@@ -1,7 +1,8 @@
-function showDetails() {
-    if(document.getElementById('inquiry-details').style.display === 'table-row')
-        document.getElementById('inquiry-details').style.display = 'none';
-    else document.getElementById('inquiry-details').style.display = 'table-row';
+function showDetails(index) {
+    const lNum = 'inquiry-details'+index;
+    if(document.getElementById(lNum).style.display === 'table-row')
+        document.getElementById(lNum).style.display = 'none';
+    else document.getElementById(lNum).style.display = 'table-row';
 }
 
 function saveAnswer() {
