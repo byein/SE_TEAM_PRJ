@@ -117,6 +117,10 @@ app.post('/login_create', function(request, response){
         login.in(request,response);
 });
 
+app.get('/login_create/:userid/:userpw', function(request, response){
+        login.in_direct(request,response);
+});
+
 app.get('/logout', function(request, response){
         request.session.destroy(function(error){
                 response.redirect('/');
@@ -514,7 +518,7 @@ app.post('/basket_in', function(request, response){
                 response.send('<script>alert("로그인이 필요합니다."); window.location.href = `/login` ; </script>');
         } else {
                 db.query(`INSERT INTO basket (member_id, product_id, bQuantity) VALUES (?,?,?)`, [post.userid, post.productid, post.amount], function(error, result){
-                        response.redirect('/basket');
+                        response.redirect(`/product/`+post.productid);
                 });
         }
 });

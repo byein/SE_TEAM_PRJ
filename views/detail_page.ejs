@@ -120,6 +120,46 @@
 
 
 <section>
+  <% if(product[0].category_id == 0 ) {
+    var main_name="#TOP";
+    var sub_name="#short";
+} else if (product[0].category_id == 1) {
+    var main_name="#TOP";
+    var sub_name="#long";
+} else if (product[0].category_id == 2) {
+    var main_name="#BOTTOM";
+    var sub_name="#short";
+} else if (product[0].category_id == 3) {
+    var main_name="#BOTTOM";
+    var sub_name="#long";
+} else if (product[0].category_id == 4) {
+    var main_name="#BOTTOM";
+    var sub_name="#skirt";
+} else if (product[0].category_id == 5) {
+    var main_name="#DRESS";
+    var sub_name="#short";
+} else if (product[0].category_id == 6) {
+    var main_name="#DRESS";
+    var sub_name="#long";
+} else if (product[0].category_id == 7) {
+    var main_name="#BAG&SOCKS";
+    var sub_name="#bag";
+} else if (product[0].category_id == 8) {
+    var main_name="#BAG&SOCKS";
+    var sub_name="#socks";
+} else if (product[0].category_id == 9) {
+    var main_name="#ACC";
+    var sub_name="#necklace";
+} else if (product[0].category_id == 10) {
+    var main_name="#ACC";
+    var sub_name="#earring";
+} else {
+    var main_name="#ACC";
+    var sub_name="#bracelet";
+} %>
+
+<h3><a><%= main_name %> <%= sub_name %></a></h3>
+
   <nav id="box">
     <div id="wrap_product_img">
     <img id="left_bt" src="https://image.flaticon.com/icons/png/512/130/130901.png"
