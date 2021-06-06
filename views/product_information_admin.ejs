@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>product_information_admin</title>
     <link rel="stylesheet" href="/product_information_admin.css" type="text/css">
-    <script type="text/javascript" src="/product_information_admin.js"></script>
 </head>
 
 <body>
@@ -55,15 +54,14 @@
             <li><a href="/product_list_admin">Product 관리</a></li>
             <li><a href="/product_information_admin" class="current">Sales Information</a></li>
             <li><a href="/inquiry_admin">고객 문의 관리</a></li>
-            <li><a href="/coupon_list_admin">Coupon 등록/관리</a></li>
+            <li><a href="/coupon_list_admin" class="current">Coupon 등록/관리</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
     <section id="sales_statistics">
-        <form method="POST" name="sales_list">
+        <form action="" method="get" name="sales_list">
 
             <table id="search_sales_statistics">
-                
                 <thead>
                     <tr>
                         <form action="/product_information_admin" method="post">
@@ -74,7 +72,7 @@
                             <input type="date" name="edate" id="search_end">
                         </td>
                         <td> 
-                            <input type = "submit" value="확인" class = "search-button" onclick="search_period_check()">
+				<input type = "submit" value="확인" class "searh-button">
                         </td>
 			</form>
                     </tr>
