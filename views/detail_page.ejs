@@ -165,7 +165,7 @@
   <div id="product_name">
     <h3><%= product[0].pName %></h3><br>
     <h3>
-      <span class="product_score">4.3</span>
+      <span class="product_score"><%= avg[0].average %></span>
       <%= product[0].pPrice %>
     </h3><br>
     <form name="form" action="/basket_in" method="post" onsubmit="return func_confirm()" >
@@ -177,15 +177,23 @@
 
     <br>
 
-    <input type="button" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/>
-    <input type="text" id="sample4_postcode" placeholder="우편번호">
-    <!-- <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br> -->
-    <input type="text" id="sample4_roadAddress" placeholder="도로명주소"><br>
-    <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-    <span id="guide" style="color:#999;display:none"></span>
-    <input type="text" id="sample4_detailAddress" placeholder="상세주소">
-    <input type="text" id="sample4_extraAddress" placeholder="참고항목">
-    <br>
+    <a href = "/delivery_address"><input type="text" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/></a><br>
+	    <table id="address_table">
+		    <tbody>  
+
+	     	    <% address.forEach(function (value) { %>
+	     <tr>
+		     <td> <%= value.mPost_Code %></td>
+		     <td> <%= value.mRoad_address %></td>
+		     <td> <%= value.mJibun_address %></td>
+		     <td> <%= value.mDetail_address %></td>
+	     </tr>
+	     <% }); %>
+	     
+     		</tbody>
+	    </table> 
+
+
     <input type = "hidden" name="userid" value="<%= ID %>" />
     <input type = "hidden" name="productid" value="<%= product[0].pIdx %>" />
     <input type="submit" value="장바구니추가" style="width: 200px; height: 150px; font-size:2em;" />
@@ -205,51 +213,40 @@
     <br><br>
   </div>
     <h4><img src="<%= product[0].pDetail %>"></h4>
-
-    <table id="review_table">
+	<table id="review_table">
       <colgroup>
         <col width="10">
         <col width="15">
         <col width="10">
         <col width="100">
-        <col width="30">
-
+        <col width="20">
+	<col width="30">
       </colgroup>
-      <tr>
-        <td><span class="strong_recommand">강추</span></td>
-        <td><span class="fast_delivery">빠름</span></td>
-        <td class="starrate">5점</td>
-        <td class="review">배송이 아주 빠르네요~</td>
-        <td>로고<br>21.05.22</td>
-      </tr>
-      <tr>
-        <td><span class="not_recommand">비추</span></td>
-        <td><span class="late_delivery">느림</span></td>
-        <td class="starrate">3점</td>
-        <td class="review">배송이 너무 느려요~</td>
-        <td>김진대<br>21.05.20</td>
-      </tr>
-      <tr>
-        <td><span class="recommand">추천</span></td>
-        <td><span class="normal_delivery">보통</span></td>
-        <td class="starrate">4점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>김과기대<br>21.05.10</td>
-      </tr>
-      <tr>
-        <td><span class="normal_recommand">보통</span></td>
-        <td><span class="very_fast_delivery">매우빠름</span></td>
-        <td class="starrate">4점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>서울과기대<br>21.05.10</td>
-      </tr>
-      <tr>
-        <td><span class="normal_recommand">보통</span></td>
-        <td><span class="very_late_delivery">매우느림</span></td>
-        <td class="starrate">2점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>서울과학기술대학교<br>21.05.10</td>
-      </tr>
+      <thead>
+    	<th> 추천 </th>
+	<th> 배송평가</th>
+	<th> 점수 </th>
+	<th> 후기 </th>
+	<th> 이름</th>
+	<th> 등록일자 </th>
+     </thead>
+     <tbody>
+	     <% review.forEach(function (value) { %>
+	     <tr>
+		     <td> <%= value.rRecommand %></td>
+		     <td> <%= value.rDelivery %></td>
+		     <td> <%= value.rPoint %></td>
+		     <td> <%= value.rReview %></td>
+		     <td> <%= value.rName %></td>
+		     <td> <%= value.rDate %></td>
+	     </tr>
+	     <% }); %>
+     </tbody>
+    
+    
+    
+    
+    
     </table>
 
     <div class="outer">
