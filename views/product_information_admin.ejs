@@ -175,12 +175,13 @@
                           <input type="hidden" name="status" value="2" />
                           <input type="submit" name="name" value="배송완료" />
                           <% } else if(data.oStatus==2) { %>
-                          <input type="submit" name="name" value="상품평" />
+			  <a href = "/sales_detail_info_admin/<%= data.oIdx %>" class="button" value="상품평" > 상품평</a>
                           <% } else { %>
-                          <input type="submit" name="name" value="상품평" />
+			  <a href = "/sales_detail_info_admin/<%= data.oIdx %>" class="button" value="상품평"> 상품평</a>
                           <% } %>
             
                           </form>
+
                         </td>
                       </tr>
 		      
