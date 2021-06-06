@@ -674,19 +674,21 @@ app.get('/privacy', function(request, response){
 
 app.get('/delivery_address', function(request, response){
         console.log(request.session);
-        db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
+        db.query(`SELECT mName, mRoad_address, mJibun_address, mDetail_address FROM member WHERE mId=?`, request.session.ID, function(error, address1){ 
+	db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
 
-                console.log(address);
 
                 if(request.session.is_logined == true){
                         response.render('delivery_address',{
                         is_logined : request.session.is_logined,
-                        name : request.session.name,
+                      	name : request.session.name,
                         ID : request.session.ID,
-                        address : address
+                        address : address,
+			address1 : address1
                 });
                 };
         });
+	});
 });
 
 app.get('/edit_address/:adIdx', function(request, response) {
@@ -784,23 +786,26 @@ app.post('/oStatus_update_admin',function(request, response){
 
 app.get('/sales_detail_info_admin/:orderId', function(request, response){
         var filteredId = path.parse(request.params.orderId).base;
-        console.log(filteredId);
-        db.query('SELECT * FROM `order` o, order_detail od, product p WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and od.order_id=?', filteredId, function(error2, od){
-                        console.log(od);
+        db.query('SELECT * FROM `order` o, order_detail od, product p  WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and od.order_id=?', filteredId, function(error2, od){
+		db.query('SELECT * FROM review WHERE order_id=?', filteredId, function(error1, review){
+			if (review == undefined){
+				review = [];}
 			if(request.session.is_logined == true){
                                 response.render('sales_detail_info_admin', {
                                         is_logined : request.session.is_logined,
                                         name : request.session.name,
-                                        od : od
+                                        od : od,
+					review : review
                                 });
                         }else{
                                 response.render('sales_detail_info_admin', {
-                                        is_logined : false,
-                                        od : od
+                                        is_logined : false
                                 });
                         }
                 });
+	});
 });
+
 
 app.get('/add_review_customer/:orderId', function(request, response){
 	var filteredId = path.parse(request.params.orderId).base;
