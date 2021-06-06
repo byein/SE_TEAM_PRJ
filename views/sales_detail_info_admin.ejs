@@ -87,7 +87,7 @@
                 <dl>
                     <dt>주문자</dt>
                     <dd>
-                        <%= name %>
+                        <%= od[0].member_id %>
                     </dd>
                     <dt>연락처</dt>
                     <dd>
@@ -99,7 +99,34 @@
                     </dd>
                 </dl>
             </div>
-        </div>
+
+	    <div class="reviev">
+		    <h3> 리뷰 </h3>
+		    <table>
+		    	<thead>
+    				<th> 추천 </th>
+				<th> 배송평가</th>
+				<th> 점수 </th>
+				<th> 후기 </th>
+				<th> 이름</th>
+				<th> 등록일자 </th>
+				<th> 상품번호 </th>
+     			</thead>
+     			<tbody>
+	     			<% review.forEach(function (value) { %>
+	     			<tr>
+		     			<td> <%= value.rRecommand %></td>
+		     			<td> <%= value.rDelivery %></td>
+		     			<td> <%= value.rPoint %></td>
+		     			<td> <%= value.rReview %></td>
+		     			<td> <%= value.rName %></td>
+		     			<td> <%= value.rDate %></td>
+					<td> <%= value.product_id %></td>
+	     			</tr>
+	     			<% }); %>
+     			</tbody>
+		    </table>
+		    </div>
     </section>
 
     <footer id="footer">
