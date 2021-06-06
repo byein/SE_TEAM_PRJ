@@ -751,9 +751,7 @@ app.get('/product_information_admin', function(request, response){
 	console.log(sdate,edate);
 	
 	db.query("SELECT SUM(oTotal_price) FROM `order` WHERE oStatus=3 AND oDate >=date('" +sdate+ "') AND oDate <= date('" +edate+"');", function(error, sales){
-		console.log(sales);
         	db.query("SELECT * FROM `order` WHERE oDate >=date('" + sdate +"') AND oDate <= date('" +edate+ "');"  , function(error, order){
-			console.log(order);
 			db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                         	if(!admin[0]){
                                 	response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
