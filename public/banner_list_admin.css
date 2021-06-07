@@ -117,11 +117,6 @@ a {
   height: 70%;
   float: left;
 }
-.section{
-  width: 70%;
-  height: 70%;
-  float: left;
-}
 
 section h2{
   text-align: center;
@@ -136,6 +131,7 @@ section h2{
 section{
   overflow-x: hidden;
   padding: 30px;
+  height: 500px;
 }
 .section{    
   width: 70%;
@@ -264,12 +260,15 @@ div caption a{
 }
 
 
-tbody tr:hover, .notice_list td a:hover{
+.notice_list tbody tr:hover, .notice_list td a:hover{
   background-color: lightyellow;
   color: black;
   
 }
 
+table{
+  margin: auto;
+}
 
 #footer {
   position: relative;
