@@ -131,12 +131,10 @@ section h2{
 section{
   overflow-x: hidden;
   padding: 30px;
-  height: 500px;
+  height: 90%;
 }
 .section{    
-  width: 70%;
-  height: 70%;
-  float: left;
+  height: 400px;
 }
 .nav ul{
   list-style-type: none;
