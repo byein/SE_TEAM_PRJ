@@ -93,7 +93,7 @@ app.get('/admin', function(request, response){
                 db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                         db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
                                 if(!admin[0]){
-                                                response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                                                response.send('<script>alert("접근 권한이 없 습니다"); window.location.href = `/`;</script>');
                                 } else {
                                         if(request.session.is_logined == true){
                                                 response.render('mainPage_admin', {
@@ -195,11 +195,11 @@ app.get('/search', function(request, response){
         product_user.search(request, response);
 });
 
-app.get('/product/:productId', function(request, response){
+app.get('/product/:productId/:page', function(request, response){
         product_user.detail(request, response);
 });
 
-app.get('/product_admin/:productId', function(request, response){
+app.get('/product_admin/:productId/:page', function(request, response){
         product_admin.detail(request, response);
 });
 
@@ -401,7 +401,7 @@ app.get('/coupon_add_admin', function(request, response){
                 if(!admin[0]){
                         response.send('<script>alert("접근 권한이 없습 니다"); window.location.href = `/`;</script>');
                 } else {
-                        if(request.session.is_logined == true){        
+                        if(request.session.is_logined == true){
                                 response.render('coupon_add_admin', {
                                         is_logined : request.session.is_logined,
                                         name :request.session.name,
@@ -433,7 +433,7 @@ app.get('/coupon_update_admin/:cpIdx', function(request, response){
                 if(!admin[0]){
                         response.send('<script>alert("접근 권한이 없습 니다"); window.location.href = `/`;</script>');
                 } else {
-                        if(request.session.is_logined == true){        
+                        if(request.session.is_logined == true){
                                 db.query(`SELECT * FROM coupon WHERE cpIdx=?`, [filteredId], function(error, coupon){
                                         response.render('coupon_update_admin', {
                                                 is_logined : request.session.is_logined,
@@ -518,7 +518,7 @@ app.post('/basket_in', function(request, response){
                 response.send('<script>alert("로그인이 필요합니다."); window.location.href = `/login` ; </script>');
         } else {
                 db.query(`INSERT INTO basket (member_id, product_id, bQuantity) VALUES (?,?,?)`, [post.userid, post.productid, post.amount], function(error, result){
-                        response.redirect(`/product/`+post.productid);
+                        response.redirect(`/product/`+post.productid+'/1');
                 });
         }
 });
@@ -678,21 +678,21 @@ app.get('/privacy', function(request, response){
 
 app.get('/delivery_address', function(request, response){
         console.log(request.session);
-        db.query(`SELECT mName, mRoad_address, mJibun_address, mDetail_address FROM member WHERE mId=?`, request.session.ID, function(error, address1){ 
-	db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
+        db.query(`SELECT mName, mRoad_address, mJibun_address, mDetail_address FROM member WHERE mId=?`, request.session.ID, function(error, address1){
+        db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
 
 
                 if(request.session.is_logined == true){
                         response.render('delivery_address',{
                         is_logined : request.session.is_logined,
-                      	name : request.session.name,
+                        name : request.session.name,
                         ID : request.session.ID,
                         address : address,
-			address1 : address1
+                        address1 : address1
                 });
                 };
         });
-	});
+        });
 });
 
 app.get('/edit_address/:adIdx', function(request, response) {
@@ -739,105 +739,116 @@ app.get('/delete_address/:adIdx', function(request, response){
 });
 
 app.get('/product_information_admin', function(request, response){
-	var sdate = url.parse(request.url, true).query.sdate;
-	var edate = url.parse(request.url, true).query.edate;
-	console.log(sdate,edate);
-	if(sdate == undefined){
-		sdate = "1900-01-01";
-	}
-	if(edate == undefined){
-		edate = "2200-12-31"; 
-	}
-	if(sdate ==""){
-		sdate = "1900-01-01";
-	}
-	if(edate ==""){
-		edate = "2200-12-31";
-	}
-	console.log(sdate,edate);
-	
-	db.query("SELECT SUM(oTotal_price) FROM `order` WHERE oStatus=3 AND oDate >=date('" +sdate+ "') AND oDate <= date('" +edate+"');", function(error, sales){
-        	db.query("SELECT * FROM `order` WHERE oDate >=date('" + sdate +"') AND oDate <= date('" +edate+ "');"  , function(error, order){
-			db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
-                        	if(!admin[0]){
-                                	response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
-                        	} else {
-                                	if(request.session.is_logined == true){
-                                        	response.render('product_information_admin', {
-                                                	is_logined : request.session.is_logined,
-                                                	name : request.session.name,
-                                                	order : order,
-							length : order.length,
-							sales : sales
-                                        	});
-                                	}
-                        	}
-                	});
-        	});
-	}); 
-        
-        
+        var sdate = url.parse(request.url, true).query.sdate;
+        var edate = url.parse(request.url, true).query.edate;
+        console.log(sdate,edate);
+        if(sdate == undefined){
+                sdate = "1900-01-01";
+        }
+        if(edate == undefined){
+                edate = "2200-12-31";
+        }
+        if(sdate ==""){
+                sdate = "1900-01-01";
+        }
+        if(edate ==""){
+                edate = "2200-12-31";
+        }
+        console.log(sdate,edate);
+
+        db.query("SELECT SUM(oTotal_price) sum FROM `order` WHERE oStatus=3 AND oDate >=date('" +sdate+ "') AND oDate <= date('" +edate+"');", function(error, sales){
+                db.query("SELECT sum(od.product_quantity) sum, od.product_id, p.pName, p.pPrice FROM product p, `order` o, order_detail od WHERE (p.pIdx=od.product_id) and (o.oIdx = od.order_id) and (o.oStatus=3) and (o.oDate>='"+sdate+"') AND (o.oDate<='"+edate+"') GROUP BY od.product_id ORDER BY sum(od.product_quantity) DESC limit 3;", function(error, product){
+                        db.query("SELECT p.category_id, od.order_id, c.main_name, c.sub_name, sum(od.product_quantity) sum FROM product p, `order` o, order_detail od, category c WHERE (p.pIdx=od.product_id) and (o.oIdx=od.order_id) and (o.oStatus=3) and (c.sub_id=p.category_id) and (o.oDate>='"+sdate+"') AND (o.oDATE<='"+edate+"') GROUP BY p.category_id ORDER BY sum(od.product_quantity) DESC limit 3; ", function(error, category){
+                db.query("SELECT * FROM `order` WHERE oDate >=date('" + sdate +"') AND oDate <= date('" +edate+ "');"  , function(error, order){
+                        db.query(`SELECT * FROM admin WHERE aId=?`, [request.session.name], function(error2, admin){
+                                if(!admin[0]){
+                                        response.send('<script>alert("접근 권한이 없습니다"); window.location.href = `/`;</script>');
+                                } else {
+                                        if(request.session.is_logined == true){
+                                                response.render('product_information_admin', {
+                                                        is_logined : request.session.is_logined,
+                                                        name : request.session.name,
+                                                        order : order,
+                                                        length : order.length,
+                                                        sales : sales,
+                                                        product : product,
+                                                        category : category
+                                                });
+                                        }
+                                }
+                        });
+                });
+                });
+                });
+        });
+
+
 });
 
 app.post('/oStatus_update_admin',function(request, response){
-	var post = request.body;
-	console.log(post);
-	db.query('UPDATE `order` SET oStatus=? WHERE oIdx=?', [post.status, post.oIdx], function(error,result){
-		response.redirect('/product_information_admin');
-	});
+        var post = request.body;
+        console.log(post);
+        db.query('UPDATE `order` SET oStatus=? WHERE oIdx=?', [post.status, post.oIdx], function(error,result){
+                response.redirect('/product_information_admin');
+        });
 });
 
 
 app.get('/sales_detail_info_admin/:orderId', function(request, response){
         var filteredId = path.parse(request.params.orderId).base;
-        db.query('SELECT * FROM `order` o, order_detail od, product p  WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and od.order_id=?', filteredId, function(error2, od){
-		db.query('SELECT * FROM review WHERE order_id=?', filteredId, function(error1, review){
-			if (review == undefined){
-				review = [];}
-			if(request.session.is_logined == true){
+        console.log(filteredId);
+        db.query("SELECT * FROM `order` o, order_detail od, product p  WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and od.order_id=?", [filteredId], function(error2, od){
+                db.query("SELECT * FROM `order` o, order_detail od, product p, review r WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and r.product_id=p.pIdx and od.order_id=?", [filteredId], function(error1, review){
+                        //if (review == undefined){
+                                //review = []; }else {
+                                console.log(od);
+                                console.log(review);
+                        if(request.session.is_logined == true){
                                 response.render('sales_detail_info_admin', {
                                         is_logined : request.session.is_logined,
                                         name : request.session.name,
                                         od : od,
-					review : review
+                                        review : review
                                 });
                         }else{
                                 response.render('sales_detail_info_admin', {
                                         is_logined : false
                                 });
                         }
+                                //}
                 });
-	});
+        });
 });
 
 
 app.get('/add_review_customer/:orderId', function(request, response){
-	var filteredId = path.parse(request.params.orderId).base;
+        var filteredId = path.parse(request.params.orderId).base;
         console.log(filteredId);
-	const sql = "SELECT * FROM order_detail od, product p WHERE od.order_id='" +filteredId+"'AND p.pIdx=od.product_id;"
-	console.log(sql);
-	db.query(sql, function(error2, od){
-	console.log(od);
-		if (request.session.is_logined == true){
-		response.render('add_review_customer',{
-			is_logined : request.session.is_logined,
-			name : request.session.name,
-			od : od
-		});
-	}else{
-		response.render('add_review_customer',{
-			is_logined : false,
-			od : od 
-		});
-	}
+        const sql = "SELECT * FROM order_detail od, product p WHERE od.order_id='" +filteredId+"'AND p.pIdx=od.product_id;"
+        console.log(sql);
+        db.query(sql, function(error2, od){
+        console.log(od);
+                if (request.session.is_logined == true){
+                response.render('add_review_customer',{
+                        is_logined : request.session.is_logined,
+                        name : request.session.name,
+                        od : od
+                });
+        }else{
+                response.render('add_review_customer',{
+                        is_logined : false,
+                        od : od
+                });
+        }
 });
 })
 
 app.post('/create_review', function(request, response){
         var post = request.body;
-	db.query(`INSERT INTO review (product_id, rRecommand, rDelivery, rPoint, rReview, rDate, rName) VALUES (?, ?, ?, ?, ? , NOW(), ?)`, [post.product_id, post.rRecommand, post.rDelivery, post.rPoint, post.rReview, request.session.name], function(err, result ,fields){
+        console.log(post);
+        db.query(`INSERT INTO review (product_id, rRecommand, rDelivery, rPoint, rReview, rDate, rName, order_id) VALUES (?, ?, ?, ?, ? , NOW(), ?, ?)`, [post.product_id, post.rRecommand, post.rDelivery, post.rPoint, post.rReview, request.session.name, post.order_id], function(err, result ,fields){
 
-		name : request.session.name
+                name : request.session.name
                 if (err) throw err;
                 response.redirect('/');
         })

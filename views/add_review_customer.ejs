@@ -12,7 +12,7 @@
                 <h1>
                     <a id="logo" href="/admin" title="로고">로고</a>
                 </h1>
-       		<div id ="search-form">
+                <div id ="search-form">
                     <form action="/search" method="get" class="category">
                          <select name = "category">
                              <option value="all"> 전체</option>
@@ -22,7 +22,7 @@
                              <option value="goods"> 잡화류</option>
                              <option value="acc"> 악세서리</option>
                          </select>
-                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                         <input type ="text" class = "search-bar" name="query" placeholder=" 검색어를 입력하세요"> </br>
                          <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
                          <input type = "submit" value ="확인" class = "sort-button">
                      </form>
@@ -48,23 +48,23 @@
                             </button>
                         <% } %>
                     </div>
-                    
+
                 </div>
             </div>
         </header>
-	<section>
+        <section>
             <h2>New Review</h2>
             <form action="/create_review" method="POST">
                 <div>
                     <table>
-			<tr><td> 상품 선택 </td><td>
-				<select name="product_id">
-				    <% for(let i=0; i<od.length; i++){ %>
-				    <option value="<%= od[i].pIdx %>"> <%= od[i].pName %> </option>
-				    <% } %>
+                        <tr><td> 상품 선택 </td><td>
+                                <select name="product_id">
+                                    <% for(let i=0; i<od.length; i++){ %>
+                                    <option value="<%= od[i].pIdx %>"> <%= od[i].pName %> </option>
+                                    <% } %>
 
-			    </li>
-				</td></tr>
+                            </li>
+                                </td></tr>
 
 
                         <tr><td>추천</td><td>
@@ -75,7 +75,7 @@
                                 <option value="normal">보통</option>
                                 <option value="not_recommand">비추천</option>
                             </select>
-                        </td></tr>  
+                        </td></tr>
                         <tr><td>배송평가</td><td>
                             <select name="rDelivery" id="delivery_evaluation">
                                 <option value="none">선택</option>
@@ -85,24 +85,25 @@
                                 <option value="late">느림</option>
                                 <option value="very_late">매우느림</option>
                             </select>
-                        </td></tr>  
+                        </td></tr>
                         <tr> <td>별점</td><td>
-				<select name="rPoint" id="star">
-					<option value="none"> 선택 </option>
-					<option value="1">☆☆☆☆★</option>
-					<option value="2">☆☆☆★★ </option>
-					<option value="3">☆☆★★★ </option>
-					<option value="4">☆★★★★ </option>
-					<option value="5">★★★★★</option>
-				</select>
-			</td></tr>
-                               
+                                <select name="rPoint" id="star">
+                                        <option value="none"> 선택 </option>
+                                        <option value="1">☆☆☆☆★</option>
+                                        <option value="2">☆☆☆★★ </option>
+                                        <option value="3">☆☆★★★ </option>
+                                        <option value="4">☆★★★★ </option>
+                                        <option value="5">★★★★★</option>
+                                </select>
+                        </td></tr>
+
                         <tr><td>후기</td><td><textarea id="review" rows="5" cols="30" maxlength="80" name="rReview"
                             placeholder="80자 이내(미만)의 간단한 후기를 작성해주세요."></textarea></td></tr>
+                        <input type="hidden" value="<%= od[0].order_id %>" name="order_id">
                         <tr><td colspan="2"><input type="submit" value="등록하기" class="btn" ></td></tr>
                     </table>
                 </div>
-                
+
             </form>
         </section>
         <footer id="footer">
@@ -110,10 +111,10 @@
                 <a href="/use">[이용약관]</a>
                 <a href="/privacy">[개인정보처리방침]</a>
                 <br>
-    
+
                 [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
                 Copyright 2021. 24팀 all rights reserved.<br>
             </p>
         </footer>
     </body>
-</html>
+<

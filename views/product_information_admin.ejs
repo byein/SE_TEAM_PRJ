@@ -65,16 +65,16 @@
                 <thead>
                     <tr>
                         <form action="/product_information_admin" method="post">
-			<th class="table_left">검색 기간</th>
+                        <th class="table_left">검색 기간</th>
                         <td colspan="5">
                             <input type="date" name="sdate" id="search_start">
                             ~
                             <input type="date" name="edate" id="search_end">
                         </td>
-                        <td> 
-				<input type = "submit" value="확인" class "searh-button">
+                        <td>
+                                <input type = "submit" value="확인" class "searh-button">
                         </td>
-			</form>
+                        </form>
                     </tr>
 
                     <tr class="table_space">
@@ -84,37 +84,58 @@
                     <!--판매 순위 판매 개수로 매기기로 결정!-->
 
                     <th class="table_left_up">총 판매금액</th>
-                    <th colspan="3">판매 순위 Top3(Category)</th>
+                    <th colspan="2">판매 순위 Top3(Category)</th>
                     <th colspan="3" class="table_right_up">판매 순위 Top3(Product)</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td rowspan="4">123,456,789원</td>
+                         <% if(sales[0].sum == undefined) { %>
+                        <td rowspan="4">0원</td>
+                        <% } else { %>
+
+
+                            <td rowspan="4"><%= sales[0].sum %>원</td>
+                            <% } %>
+                    </tr>
+                    <% var c_l = category.length; %>
+                    <% var p_l = product.length; %>
+
+                    <% for(let i=0; i<3; i++) { %>
+                    <tr>
+                            <% if(i < c_l) { %>
+                        <td><%= category[i].main_name %> <%= category[i].sub_name %></td>
+                        <td><%= category[i].sum %>개</td>
+                        <%} else { %>
+                        <td>정보 없음</td>
+                        <td>정보 없음</td>
+                        <% } %>
+                            <% if(i < p_l) { %>
+                        <td><%= product[i].pName %></td>
+                        <td><%= product[i].sum %>개</td>
+                        <td><%= product[i].sum * product[i].pPrice %>원</td>
+                        <% } else { %>
+                        <td>정보 없음</td>
+                        <td>정보 없음</td>
+                        <td>정보 없음</td>
+                        <% } %>
+                    </tr>
+                        <%} %>
+                        <% /* %>
+                    <tr>
+                        <td><%= category[1].main_name %> <%= category[1].sub_name %></td>
+                        <td><%= category[1].sum %>개</td>
+                        <td><%= product[1].pName %></td>
+                        <td><%= product[1].sum %>개</td>
+                        <td><%= product[1].sum * product[1].pPrice %>원</td>
                     </tr>
                     <tr>
-                        <td>상의</td>
-                        <td>789개</td>
-                        <td>87,654,321원</td>
-                        <td>프릴 블라우스</td>
-                        <td>300개</td>
-                        <td>37,654,321원</td>
+                        <td><%= category[2].main_name %> <%= category[2].sub_name %></td>
+                        <td><%= category[2].sum %>개</td>
+                        <td><%= product[2].pName %></td>
+                        <td><%= product[2].sum %>개</td>
+                        <td><%= product[2].sum * product[2].pPrice %>원</td>
                     </tr>
-                    <tr>
-                        <td>악세서리</td>
-                        <td>80개</td>
-                        <td>7,654,321원</td>
-                        <td>검정 무지 티셔츠</td>
-                        <td>200개</td>
-                        <td>1,000,000원</td>
-                    </tr>
-                    <tr>
-                        <td>원피스</td>
-                        <td>5개</td>
-                        <td>54,321원</td>
-                        <td>미키마우스 후드티</td>
-                        <td>130개</td>
-                        <td>15,000,000원</td>
-                    </tr>
+                    <% */ %>
                 </tbody>
             </table>
 
@@ -129,8 +150,8 @@
                     </tr>
                 </thead>
                 <tbody
-			<% for (i = 0; i<length; i++){
-			var data = order[i]; %>
+                        <% for (i = 0; i<length; i++){
+                        var data = order[i]; %>
                     <tr>
                         <td>
                           <!--주문날짜-->
@@ -138,12 +159,12 @@
                         </td>
                         <td>
                           <!--주문한 상품 목록 및 수량-->
-			  <a href = "/sales_detail_info_admin/<%= data.oIdx %>"><%= data.oName %></a>
+                          <a href = "/sales_detail_info_admin/<%= data.oIdx %>"><%= data.oName %></a>
                         </td>
-            
+
                         <td>
                           <!--현재 주문 상태-->
-                          
+
                           <% if(data.oStatus==0) { %>
                           결제완료
                           <% } else if(data.oStatus==1) { %>
@@ -154,18 +175,18 @@
                           구매확정
                           <% } %>
                         </td>
-        
-           		<td>
-			<%= data.oTotal_price %>원
-			</td>
+
+                        <td>
+                        <%= data.oTotal_price %>원
+                        </td>
                         <td>
                           <!-- 주문상태에 알맞은 버튼-->
                           <!-- 배송완료 -> 문의하기/후기쓰기 배송중 -> 문의하기 -->
                           <!-- 관리자 페이지 배송하기 -> 배송완료 -> 상품평 순으로 바뀜 -->
                           <!-- data.Status 0 : 결제완료, 1 : 배송중, 2: 배송완료, else : 구매확정 -->
-                         
+
                           <form class="" action="/oStatus_update_admin" method="post">
-            
+
                           <% if(data.oStatus==0) { %>
                           <input type="hidden" name="oIdx" value="<%= data.oIdx %>" />
                           <input type="hidden" name= "status" value="1"/>
@@ -175,23 +196,23 @@
                           <input type="hidden" name="status" value="2" />
                           <input type="submit" name="name" value="배송완료" />
                           <% } else if(data.oStatus==2) { %>
-			  <a href = "/sales_detail_info_admin/<%= data.oIdx %>" class="button" value="상품평" > 상품평</a>
+                          <a href = "/sales_detail_info_admin/<%= data.oIdx %>" class="button" value="상품평" > 상품평</a>
                           <% } else { %>
-			  <a href = "/sales_detail_info_admin/<%= data.oIdx %>" class="button" value="상품평"> 상품평</a>
+                          <a href = "/sales_detail_info_admin/<%= data.oIdx %>" class="button" value="상품평"> 상품평</a>
                           <% } %>
-            
+
                           </form>
 
                         </td>
                       </tr>
-		      
+
                       </tbody>
-		      <% } %>
+                      <% } %>
                   </table>
-            
+
                 <br />
-            
-    
+
+
                 </tbody>
 
             </table>

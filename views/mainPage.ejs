@@ -117,9 +117,9 @@
             <ul class="row">
                 <% for(let i=0; i<top_products.length; i++){ %>
                     <li class="cell">
-                            <div class="img_box" onclick="location.href='/product/<%= top_products[i].product_id %>'"><img src="<%= top_products[i].pImg %>" alt=""><!--상품사진--></div>
-                            <div class="product_name" onclick="location.href='/product/<%= top_products[i].product_id %>'"><%= top_products[i].pName %></div>
-                            <div class="product_price" onclick="location.href='/product/<%= top_products[i].product_id %>'"><%= top_products[i].pPrice %></div>
+                            <div class="img_box" onclick="location.href='/product/<%= top_products[i].product_id %>/1'"><img src="<%= top_products[i].pImg %>" alt=""><!--상품사진--></div>
+                            <div class="product_name" onclick="location.href='/product/<%= top_products[i].product_id %>/1'"><%= top_products[i].pName %></div>
+                            <div class="product_price" onclick="location.href='/product/<%= top_products[i].product_id %>/1'"><%= top_products[i].pPrice %></div>
                     </li>
                <%} %>
         </div>
@@ -132,9 +132,9 @@
            <ul class="row">
                 <% for(let i=0; i<new_products.length; i++){ %>
                     <li class="cell">
-                            <div class="img_box" onclick="location.href='/product/<%= new_products[i].pIdx %>'"><img src="<%= new_products[i].pImg %>" alt=""><!--상품사진--></div>
-                            <div class="product_name" onclick="location.href='/product/<%= new_products[i].pIdx %>'"><%= new_products[i].pName %></div>
-                            <div class="product_price" onclick="location.href='/product/<%= new_products[i].pIdx %>'"><%= new_products[i].pPrice %></div>
+                            <div class="img_box" onclick="location.href='/product/<%= new_products[i].pIdx %>/1'"><img src="<%= new_products[i].pImg %>" alt=""><!--상품사진--></div>
+                            <div class="product_name" onclick="location.href='/product/<%= new_products[i].pIdx %>/1'"><%= new_products[i].pName %></div>
+                            <div class="product_price" onclick="location.href='/product/<%= new_products[i].pIdx %>/1'"><%= new_products[i].pPrice %></div>
                     </li>
                <%} %>
         </div>

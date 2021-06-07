@@ -218,20 +218,20 @@
     <br>
 
     <a href = "/delivery_address"><input type="text" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/></a><br>
-	    <table id="address_table">
-		    <tbody>  
+            <table id="address_table">
+                    <tbody>
 
-	     	    <% address.forEach(function (value) { %>
-	     <tr>
-		     <td> <%= value.mPost_Code %></td>
-		     <td> <%= value.mRoad_address %></td>
-		     <td> <%= value.mJibun_address %></td>
-		     <td> <%= value.mDetail_address %></td>
-	     </tr>
-	     <% }); %>
-	     
-     		</tbody>
-	    </table> 
+                    <% address.forEach(function (value) { %>
+             <tr>
+                     <td> <%= value.mPost_Code %></td>
+                     <td> <%= value.mRoad_address %></td>
+                     <td> <%= value.mJibun_address %></td>
+                     <td> <%= value.mDetail_address %></td>
+             </tr>
+             <% }); %>
+
+                </tbody>
+            </table>
 
 
     <input type = "hidden" name="userid" value="<%= ID %>" />
@@ -253,50 +253,50 @@
     <br><br>
   </div>
     <h4><img src="<%= product[0].pDetail %>"></h4>
-	<table id="review_table">
+        <table id="review_table">
       <colgroup>
         <col width="10">
         <col width="15">
         <col width="10">
         <col width="100">
         <col width="20">
-	<col width="30">
+        <col width="30">
       </colgroup>
       <thead>
-    	<th> 추천 </th>
-	<th> 배송평가</th>
-	<th> 점수 </th>
-	<th> 후기 </th>
-	<th> 이름</th>
-	<th> 등록일자 </th>
+        <th> 추천 </th>
+        <th> 배송평가</th>
+        <th> 점수 </th>
+        <th> 후기 </th>
+        <th> 이름</th>
+        <th> 등록일자 </th>
      </thead>
      <tbody>
-	     <% review.forEach(function (value) { %>
-	     <tr>
-		     <td> <%= value.rRecommand %></td>
-		     <td> <%= value.rDelivery %></td>
-		     <td> <%= value.rPoint %></td>
-		     <td> <%= value.rReview %></td>
-		     <td> <%= value.rName %></td>
-		     <td> <%= value.rDate %></td>
-	     </tr>
-	     <% }); %>
+             <% for (let i=( page * page_num) -page_num; i<(page * page_num); i++){
+             if(length < i) {i++;} else { var data = review[i]; %>
+             <tr>
+                     <td> <%= data.rRecommand %></td>
+                     <td> <%= data.rDelivery %></td>
+                     <td> <%= data.rPoint %></td>
+                     <td> <%= data.rReview %></td>
+                     <td> <%= data.rName %></td>
+                     <td> <%= data.rDate %></td>
+             </tr>
+             <% } %>
+             <% } %>
      </tbody>
-    
-    
-    
-    
-    
+
+
+
+
+
     </table>
 
     <div class="outer">
       <div class="pagination">
         <a href="#">&laquo;</a>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
+        <% for(var j=0; j<review.length/page_num; j++){ %>
+        <a href="/product/<%= product[0].pIdx %>/<%= j+1 %>"><%= j+1 %></a>
+        <% } %>
         <a href="#">&raquo;</a>
       </div>
     </div>
