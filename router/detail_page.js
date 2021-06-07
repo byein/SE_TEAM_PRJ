@@ -21,6 +21,45 @@ function func_confirm() {
 }
 
 function init() {
+   /////////////이름 마스킹 js
+   var tr = document.getElementById("review_table").getElementsByTagName("tr");
+   console.log(tr.length);
+   let maskingFunc = {
+     checkNull : function (str){ 
+       if(typeof str == "undefined" || str == null || str == ""){ 
+         return true; 
+       } else{ 
+         return false; 
+       } 
+     },
+   
+     name : function(str){ 
+       let originStr = str; 
+       let maskingStr; 
+       let strLength; 
+       if(this.checkNull(originStr) == true){ 
+         return originStr; 
+       } 
+       
+       strLength = originStr.length; 
+       
+       if(strLength < 3){ 
+         maskingStr = originStr.replace(/(?<=.{1})./gi, "*"); 
+       }else { 
+         maskingStr = originStr.replace(/(?<=.{2})./gi, "*"); 
+       } 
+       
+       return maskingStr; 
+     }
+   }
+   for (var i = 1; i < tr.length; i++) {
+     var tds = tr[i].getElementsByTagName("td");
+     var uid = tds[4];
+     tds[4].firstChild.textContent = maskingFunc.name(uid.textContent);
+   }
+   //////////////이름 마스킹 종료
+
+   
   sell_price = document.form.sell_price.value;
   amount = document.form.amount.value;
   document.form.sum.value = sell_price;
@@ -108,6 +147,7 @@ function S_ani_L() {
 
 
 ////////////이름 마스킹 작업 js
+/*
 let maskingFunc = {
   checkNull : function (str){ 
     if(typeof str == "undefined" || str == null || str == ""){ 
@@ -148,6 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
     tds[4].firstChild.textContent = maskingFunc.name(uid.textContent);
   }
 }, false);
-
+*/
 
 {/* </script> */}
