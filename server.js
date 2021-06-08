@@ -798,7 +798,7 @@ app.get('/sales_detail_info_admin/:orderId', function(request, response){
         var filteredId = path.parse(request.params.orderId).base;
         console.log(filteredId);
         db.query("SELECT * FROM `order` o, order_detail od, product p  WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and od.order_id=?", [filteredId], function(error2, od){
-                db.query("SELECT * FROM `order` o, order_detail od, product p, review r WHERE od.product_id=p.pIdx and o.oIdx=od.order_id and r.product_id=p.pIdx and od.order_id=?", [filteredId], function(error1, review){
+                db.query("SELECT * FROM review r, product p WHERE p.pIdx=r.product_id and r.order_id=?", [filteredId], function(error1, review){
                         //if (review == undefined){
                                 //review = []; }else {
                                 console.log(od);
