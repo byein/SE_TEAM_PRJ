@@ -69,7 +69,7 @@
     </div>
 
     <br>
-
+    <form action="/create_address" method="POST">
 <table class="new_address">
     <tr>
         <td> 배송지명 </td>
@@ -97,8 +97,8 @@
         <td>
             <input type="text" id="sample4_postcode" placeholder="우편번호" name = "adPost_code">
             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" id="sample4_roadAddress" placeholder="adRoad_address">
-            <input type="text" id="sample4_jibunAddress" placeholder="adJibun_adress">
+            <input type="text" id="sample4_roadAddress" placeholder="도로명 주소" name ="adRoad_address">
+            <input type="text" id="sample4_jibunAddress" placeholder="지번 주소" name="adJibun_address">
             <span id="guide" style="color:#999;display:none"></span>
             <input type="text" id="sample4_detailAddress" placeholder="상세주소" name = "adDetail_address">
             <input type="text" id="sample4_extraAddress" placeholder="참고항목" name = "adRef">
@@ -109,22 +109,13 @@
 
 <div class="wrap_add">
 
-    <input type="button" type ="submit" class="add" value="등록" onclick="func_confirm()" />
+    <input type ="submit" class="add" value="등록" />
     <input type="button" class="cancel" value="취소" onclick="location.href='delivery_address'" />
-    <script>
-        function func_confirm() {
-            if(confirm('저장하시겠습니까?')) {
-                alert('저장되었습니다.')
-                location = 'delivery_address'
-            } else {
-                alert('취소되었습니다.')
-            }
-        }
-    </script>
 
 </div>
-
+    </form>
     
 </body>
 
 </html>
+
