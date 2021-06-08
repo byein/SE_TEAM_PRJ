@@ -44,7 +44,7 @@
     </header>
 
     <nav class="nav">
-        <ul>
+        <ul class="menu">
             <li><a href="/admin" class="active">Home</a></li>
             <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
             <li><a href="/product_list_admin">Product 관리</a></li>
@@ -65,13 +65,10 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <form action="/inquiry_admin" method="GET" onsubmit="return onDateCheck();">
-                            <td colspan="4"><h4>검색기간</h4>
-                                <input type="date" id="search-date-from"> ~
-                                <input type="date" id="search-date-to">
-                                <input type="submit" value="검색">
-                            </td>
-                        </form>
+                        <td>등록일시</td>
+                        <td>구매자</td>
+                        <td>상품정보</td>
+                        <td>답변여부</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,7 +82,7 @@
                         <% if(inquiry[i].iqSolved == 0) { %>                            <!-- 답변등록이 안되어있는 버튼-->
                             <button id="answer-inquiry-btn" onclick="showDetails(<%= i %>)"><a href="#" >답변하기</a></button>
                         </td>
-                    </t>
+                    </tr>
                     <tr id="inquiry-details<%= i %>" class="inquiry-details">
                         <td colspan="5">
                             <p>주문번호 : <%= inquiry[i].oIdx %>, 상품명 : <%= inquiry[i].oName %></p>
@@ -128,5 +125,15 @@
             </div>
         </div>
     </div>
+        <footer id="footer">
+        <p>
+            <a href="/use">[이용약관]</a>
+            <a href="/privacy">[개인정보처리방침]</a>
+            <br>
+
+            [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
+            Copyright 2021. 24팀 all rights reserved.<br>
+        </p>
+    </footer>
 </body>
 </html>
