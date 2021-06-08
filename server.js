@@ -55,7 +55,7 @@ var upload = multer({
 app.get('/', function(request, response){
         console.log('메인페이지 작동');
         console.log(request.session);
-        db.query(`SELECT nIdx, nImg FROM notice WHERE nEndDate >= DATE(NOW())`, function(error, banner_imgs){
+        db.query(`SELECT nIdx, nImg, nEndDate FROM notice WHERE nEndDate >= DATE(NOW())`, function(error, banner_imgs){
                 db.query(`SELECT * FROM product WHERE pDelete=0 ORDER BY pDate DESC limit 5;`, function(error, new_products){
                         db.query('SELECT sum(od.product_quantity), od.product_id, p.pName, p.pPrice, p.pImg FROM product p, `order` o, order_detail od WHERE p.pIdx=od.product_id and o.oIdx=od.order_id and o.oStatus=3 GROUP BY od.product_id ORDER BY sum(od.product_quantity) DESC limit 5;', function(error2, top_products){
                         if(request.session.is_logined == true){
