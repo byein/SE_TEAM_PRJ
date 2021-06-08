@@ -57,7 +57,7 @@
               <li><a href="/banner_list_admin">Notice/Event 관리</a></li>
               <li><a href="/product_list_admin" class="current">Product 관리</a></li>
               <li><a href="/product_information_admin">Sales Information</a></li>
-              <li><a href="/inquiry_admin">고객 문의 관리</a></li>
+              <li><a href="/inquiry_admin/1">고객 문의 관리</a></li>
               <li><a href="/coupon_list_admin">Coupon 등록/관리</a></li>
               <li><a href="/logout">Logout</a></li>
       </ul>
@@ -109,6 +109,12 @@
     <div id="product_name">
       <h3>상품명      : <%= product[0].pName %></h3><br>
       <h3>
+              <% console.log(avg[0].average) %>
+              <% if (avg[0].average == null) { %>
+      <span class="product_score">0</span>
+      <% } else { %>
+      <span class="product_score"><%= avg[0].average %></span>
+      <% } %>
           가격        :<%= product[0].pPrice %>
       </h3><br>
       <h3>배송비      :<%= product[0].pDeliveryfee %>원</h3><br>

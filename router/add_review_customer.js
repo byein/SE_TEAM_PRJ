@@ -11,7 +11,7 @@ function check() {
         alert("상품평이 성공적으로 등록되었습니다.");
         return true;
     }
-    
+
 }
 
 
@@ -36,14 +36,14 @@ function check_delivery(){
     }
 }
 function check_review_score() {
-    var starrate = document.getElementsByName("star");
+    var starrate = document.getElementsByName("rPoint");
     var type_cnt = 0;
     for(var i = 0; i < starrate.length; i++){
-        if(starrate[i].checked == true) 
+        if(starrate[i].checked == true)
             type_cnt++;
     }
 
-    if(type_cnt<1){
+    if(starrate[0].value=="none"){
         alert("별점을 입력해 주세요.");
         return false;
     } else {

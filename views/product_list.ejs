@@ -90,6 +90,17 @@
                         <h2><%=sub[0].sub_name %></h2>
                 <% } %>
             </h2>
+                    <% if (search ==1 ) { %>
+            <div class="list">
+                <ul class="row">
+                        <% for ( var i= 0; i< products.length; i++) { %>
+                       <li class="cell">
+                                   <div class="img_box" onclick="location.href='/product/<%= products[i].pIdx %>/1'"><img src="<%= products[i].pImg %>" alt=""/><!-- 상품사진--></div>
+                                   <div class="product_name" onclick="location.href='/product/<%= products[i].pIdx %>/1'"><%= products[i].pName %></div>
+                                   <div class="product_price" onclick="location.href='/product/<%= products[i].pIdx %>/1'"><%= products[i].pPrice %></div>
+                       </li>
+                       <% } %>
+                    <% } else { %>
             <form action="" method = "get" class= "sortBy">
                 <select name="sortby">
                     <option value = "pName-asc"> 이름 오름차순 </option>
@@ -103,15 +114,6 @@
             </form>
             <div class="list">
                 <ul class="row">
-                    <% if (search ==1 ) { %>
-                        <% for ( var i= 0; i< length; i++) { %>
-                       <li class="cell">
-                                   <div class="img_box" onclick="location.href='/product/<%= products[i].pIdx %>/1'"><img src="<%= products[i].pImg %>" alt=""/><!-- 상품사진--></div>
-                                   <div class="product_name" onclick="location.href='/product/<%= products[i].pIdx %>/1'"><%= products[i].pName %></div>
-                                   <div class="product_price" onclick="location.href='/product/<%= products[i].pIdx %>/1'"><%= products[i].pPrice %></div>
-                       </li>
-                       <% } %>
-                    <% } else { %>
                     <% for ( var i= ( page * page_num) - page_num; i< (page * page_num); i++) {
                         if (length < i) { i++; } else { var data = products[i]; %>
                        <li class="cell">

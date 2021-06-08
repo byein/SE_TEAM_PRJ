@@ -205,7 +205,11 @@
   <div id="product_name">
     <h3><%= product[0].pName %></h3><br>
     <h3>
-      <span class="product_score"><%= avg[0].average %></span>
+      <% if (avg[0].average == null) { %>
+        <span class="product_score">0</span>
+        <% } else { %>
+        <span class="product_score"><%= avg[0].average %></span>
+        <% } %>
       <%= product[0].pPrice %>
     </h3><br>
     <form name="form" action="/basket_in" method="post" onsubmit="return func_confirm()" >
