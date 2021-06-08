@@ -100,18 +100,13 @@
             <% for(let i=0; i<banner_imgs.length; i++){ %>
             <div class="mySlides fade" onclick="location.href='/banner_detail_customer/<%= banner_imgs[i].nIdx %>'">
                 <img class="banner-img" src="<%= banner_imgs[i].nImg %>">
+                <p><=% banner_imgs.nEndDate[i] %></p>
             </div>
             <%} %>
         </div>
         <br>
-        <div id="dots" style="text-align:center">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
 
         <% if (!top_products) { } else { %>
-
         <div id="latest-items">
             <h2>인기상품</h2>
             <ul class="row">
