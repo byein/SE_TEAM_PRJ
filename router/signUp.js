@@ -12,7 +12,7 @@ exports.create = function(request, response){
                             if(error){
                                 throw error;
                             }
-                            response.send('<script>alert("회원가입이 완료되었습니다."); window.location.href = `/`;</script>');
+                            response.send(`<script>alert("회원가입이 완료되었습니다.");  window.location.href="/login_create/`+post.userid+`/`+post.userpw+`";</script>`);
                         });
                     } else {
                         response.send('<script>alert("이미 등록된 이메일입니다."); window.location.href = `/signUp`;</script>'); 

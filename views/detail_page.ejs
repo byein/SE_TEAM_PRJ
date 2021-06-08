@@ -120,9 +120,49 @@
 
 
 <section>
+  <% if(product[0].category_id == 0 ) {
+    var main_name="#TOP";
+    var sub_name="#short";
+} else if (product[0].category_id == 1) {
+    var main_name="#TOP";
+    var sub_name="#long";
+} else if (product[0].category_id == 2) {
+    var main_name="#BOTTOM";
+    var sub_name="#short";
+} else if (product[0].category_id == 3) {
+    var main_name="#BOTTOM";
+    var sub_name="#long";
+} else if (product[0].category_id == 4) {
+    var main_name="#BOTTOM";
+    var sub_name="#skirt";
+} else if (product[0].category_id == 5) {
+    var main_name="#DRESS";
+    var sub_name="#short";
+} else if (product[0].category_id == 6) {
+    var main_name="#DRESS";
+    var sub_name="#long";
+} else if (product[0].category_id == 7) {
+    var main_name="#BAG&SOCKS";
+    var sub_name="#bag";
+} else if (product[0].category_id == 8) {
+    var main_name="#BAG&SOCKS";
+    var sub_name="#socks";
+} else if (product[0].category_id == 9) {
+    var main_name="#ACC";
+    var sub_name="#necklace";
+} else if (product[0].category_id == 10) {
+    var main_name="#ACC";
+    var sub_name="#earring";
+} else {
+    var main_name="#ACC";
+    var sub_name="#bracelet";
+} %>
+
+<h3><a><%= main_name %> <%= sub_name %></a></h3>
+
   <nav id="box">
     <div id="wrap_product_img">
-    <img id="left_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
+    <img id="left_bt" src="https://image.flaticon.com/icons/png/512/130/130901.png"
     alt="" style="display:none">
     <article id="slide">
       <ul id="slide_box">
@@ -156,7 +196,7 @@
     </article>
     <% if (count == 1) { %>
     <% } else { %>
-    <img id="right_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
+    <img id="right_bt" src="https://image.flaticon.com/icons/png/512/130/130903.png"
     alt="">
     <% } %>
     </div>
@@ -165,7 +205,7 @@
   <div id="product_name">
     <h3><%= product[0].pName %></h3><br>
     <h3>
-      <span class="product_score">4.3</span>
+      <span class="product_score"><%= avg[0].average %></span>
       <%= product[0].pPrice %>
     </h3><br>
     <form name="form" action="/basket_in" method="post" onsubmit="return func_confirm()" >
@@ -177,15 +217,23 @@
 
     <br>
 
-    <input type="button" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/>
-    <input type="text" id="sample4_postcode" placeholder="우편번호">
-    <!-- <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br> -->
-    <input type="text" id="sample4_roadAddress" placeholder="도로명주소"><br>
-    <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-    <span id="guide" style="color:#999;display:none"></span>
-    <input type="text" id="sample4_detailAddress" placeholder="상세주소">
-    <input type="text" id="sample4_extraAddress" placeholder="참고항목">
-    <br>
+    <a href = "/delivery_address"><input type="text" value="배송지선택" style="width: 200px; height: 150px; font-size:2em;"/></a><br>
+            <table id="address_table">
+                    <tbody>
+
+                    <% address.forEach(function (value) { %>
+             <tr>
+                     <td> <%= value.mPost_Code %></td>
+                     <td> <%= value.mRoad_address %></td>
+                     <td> <%= value.mJibun_address %></td>
+                     <td> <%= value.mDetail_address %></td>
+             </tr>
+             <% }); %>
+
+                </tbody>
+            </table>
+
+
     <input type = "hidden" name="userid" value="<%= ID %>" />
     <input type = "hidden" name="productid" value="<%= product[0].pIdx %>" />
     <input type="submit" value="장바구니추가" style="width: 200px; height: 150px; font-size:2em;" />
@@ -205,61 +253,50 @@
     <br><br>
   </div>
     <h4><img src="<%= product[0].pDetail %>"></h4>
-
-    <table id="review_table">
+        <table id="review_table">
       <colgroup>
         <col width="10">
         <col width="15">
         <col width="10">
         <col width="100">
+        <col width="20">
         <col width="30">
-
       </colgroup>
-      <tr>
-        <td><span class="strong_recommand">강추</span></td>
-        <td><span class="fast_delivery">빠름</span></td>
-        <td class="starrate">5점</td>
-        <td class="review">배송이 아주 빠르네요~</td>
-        <td>로고<br>21.05.22</td>
-      </tr>
-      <tr>
-        <td><span class="not_recommand">비추</span></td>
-        <td><span class="late_delivery">느림</span></td>
-        <td class="starrate">3점</td>
-        <td class="review">배송이 너무 느려요~</td>
-        <td>김진대<br>21.05.20</td>
-      </tr>
-      <tr>
-        <td><span class="recommand">추천</span></td>
-        <td><span class="normal_delivery">보통</span></td>
-        <td class="starrate">4점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>김과기대<br>21.05.10</td>
-      </tr>
-      <tr>
-        <td><span class="normal_recommand">보통</span></td>
-        <td><span class="very_fast_delivery">매우빠름</span></td>
-        <td class="starrate">4점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>서울과기대<br>21.05.10</td>
-      </tr>
-      <tr>
-        <td><span class="normal_recommand">보통</span></td>
-        <td><span class="very_late_delivery">매우느림</span></td>
-        <td class="starrate">2점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>서울과학기술대학교<br>21.05.10</td>
-      </tr>
+      <thead>
+        <th> 추천 </th>
+        <th> 배송평가</th>
+        <th> 점수 </th>
+        <th> 후기 </th>
+        <th> 이름</th>
+        <th> 등록일자 </th>
+     </thead>
+     <tbody>
+             <% for (let i=( page * page_num) -page_num; i<(page * page_num); i++){
+             if(length < i) {i++;} else { var data = review[i]; %>
+             <tr>
+                     <td> <%= data.rRecommand %></td>
+                     <td> <%= data.rDelivery %></td>
+                     <td> <%= data.rPoint %></td>
+                     <td> <%= data.rReview %></td>
+                     <td> <%= data.rName %></td>
+                     <td> <%= data.rDate %></td>
+             </tr>
+             <% } %>
+             <% } %>
+     </tbody>
+
+
+
+
+
     </table>
 
     <div class="outer">
       <div class="pagination">
         <a href="#">&laquo;</a>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
+        <% for(var j=0; j<review.length/page_num; j++){ %>
+        <a href="/product/<%= product[0].pIdx %>/<%= j+1 %>"><%= j+1 %></a>
+        <% } %>
         <a href="#">&raquo;</a>
       </div>
     </div>

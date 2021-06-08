@@ -43,7 +43,7 @@
 
 
         <nav class="nav">
-            <ul>
+            <ul class="menu">
                 <li><a href="/admin" class="active">Home</a></li>
                 <li><a href="/banner_list_admin" class="current">Notice/Event 관리</a></li>
                 <li><a href="/product_list_admin">Product 관리</a></li>
@@ -55,21 +55,21 @@
         </nav>
         <section>
             <h2>New Notice/Event</h2>
-            <form action= "/create_banner" method="POST" enctype="multipart/form-data">
+            <form action= "/create_banner" method="POST" onsubmit="return check()" enctype="multipart/form-data">
                 <div>
                     <table>
-                        <tr><td>제목</td><td><input type = "text" name = "nTitle"></td></tr>
+                        <tr><td>제목</td><td><input type = "text" id="banner_title" name = "nTitle"></td></tr>
                         <tr><td>종류</td>
                             <td><input type="radio" name="nCat" value="notice">공지사항
                                 <input type="radio" name="nCat" value="event">이벤트</td></tr>
-                        <tr><td>공지/이벤트 이미지</td><td><input type="file" name ="nImg" accept="image/*"></td></tr>
-                        <tr><td>기타 설명</td><td><input type = "text" name ="nDetail" rows="5" cols="30"></td></tr>
-                        <tr><td>기간</td><td><input type = "date" name ="nStartDate" pattern="\d*">
-                                             <input type = "date" name ="nEndDate" pattern="\d*"></td>
+                        <tr><td>공지/이벤트 이미지</td><td><input type="file" multiple id="banner_img" name ="nImg" accept="image/*"></td></tr>
+                        <tr><td>기타 설명</td><td><input type = "text" id="banner_detail" name ="nDetail" rows="5" cols="30"></td></tr>
+                        <tr><td>기간</td><td><input type = "date" id="banner_period_start" name ="nStartDate" pattern="\d*">
+                                             <input type = "date" id="banner_period_end" name ="nEndDate" pattern="\d*"></td>
                         </tr>
                     </table>
                 </div>
-                <button type = "submit"> submit </button>    
+                <input type = "submit" value="등록하기">    
             </form>
         </section>
         <footer id="footer">

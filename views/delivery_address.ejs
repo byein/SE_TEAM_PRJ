@@ -92,6 +92,18 @@
   </thead>
 
   <tbody>
+	<% address1.forEach(function (value) { %>
+	     <tr>
+		     <td> 가입 시 입력한 배송지 </td>
+		     <td> <%= value.mName %> </td> 
+		     <td> <%= value.mPost_Code %>  <%= value.mRoad_address %> <%= value.mJibun_address %> <%= value.mDetail_address %></td>
+		     <td>  </td>
+		     <td>  </td>
+		     <td>  </td>
+			
+			
+	     </tr>
+	     <% }); %>
     <% address.forEach(function(value) { %>
     <tr>
       <td> <%= value.adTitle %></td>

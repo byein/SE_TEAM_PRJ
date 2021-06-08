@@ -3,6 +3,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   min-width: 100px;
+  height: 100%;
 }
 
 body {
@@ -93,14 +94,19 @@ li {
   margin: 0 10%;
 }
 
-.order-product-container {
+#order-product-container {
   background-color: bisque;
-  height: auto;
+  height: fit-content;
+  min-height: 400px;
 }
 
 #order-ul {
   float: left;
   margin-bottom: 10px;
+}
+
+#product-info-to-order-wrapper {
+  height: auto;
 }
 
 #product-info-to-order div {
@@ -161,9 +167,9 @@ li {
 }
 
 .discount-info {
-  margin: 0 10px;
+  margin-top: 20px;
   padding: 10px;
-  background-color: white;
+  background-color: floralwhite;
 }
 
 .address-select-wrap {
@@ -180,7 +186,8 @@ li {
   margin-left: 10px;
 }
 
-.pay-container {
+.pay {
+  margin: 0;
   height: auto;
   background-color: mistyrose;
   margin-bottom: 10px;
@@ -191,8 +198,8 @@ li {
   margin-left: 100px;
 }
 
-#pay-btn {
-  margin-left: 10px;
+.pay-btn {
+  margin-left: 100px;
 }
 
 #footer {

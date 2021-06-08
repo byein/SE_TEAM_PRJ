@@ -64,9 +64,9 @@
   </nav>
 
   <section>
-    <nav id="box"> 
+    <nav id="box">
       <div id="wrap_product_img">
-      <img id="left_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
+    <img id="left_bt" src="https://image.flaticon.com/icons/png/512/130/130901.png"
       alt="" style="display:none">
       <article id="slide">
         <ul id="slide_box">
@@ -100,7 +100,7 @@
       </article>
       <% if (count == 1) { %>
       <% } else { %>
-      <img id="right_bt" src="/Users/johwajin/Documents/SW_24/SW_Online_Shoppingmall/detail_product_page/image/next2.png"
+    <img id="right_bt" src="https://image.flaticon.com/icons/png/512/130/130903.png"
       alt="">
       <% } %>
       </div>
@@ -109,7 +109,6 @@
     <div id="product_name">
       <h3>상품명      : <%= product[0].pName %></h3><br>
       <h3>
-          <span class="product_score">4.3</span>
           가격        :<%= product[0].pPrice %>
       </h3><br>
       <h3>배송비      :<%= product[0].pDeliveryfee %>원</h3><br>
@@ -131,54 +130,43 @@
         <col width="15">
         <col width="10">
         <col width="100">
+        <col width="20">
         <col width="30">
-
       </colgroup>
-      <tr>
-        <td><span class="strong_recommand">강추</span></td>
-        <td><span class="fast_delivery">빠름</span></td>
-        <td class="starrate">5점</td>
-        <td class="review">배송이 아주 빠르네요~</td>
-        <td>로고<br>21.05.22</td>
-      </tr>
-      <tr>
-        <td><span class="not_recommand">비추</span></td>
-        <td><span class="late_delivery">느림</span></td>
-        <td class="starrate">3점</td>
-        <td class="review">배송이 너무 느려요~</td>
-        <td>김진대<br>21.05.20</td>
-      </tr>
-      <tr>
-        <td><span class="recommand">추천</span></td>
-        <td><span class="normal_delivery">보통</span></td>
-        <td class="starrate">4점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>김과기대<br>21.05.10</td>
-      </tr>
-      <tr>
-        <td><span class="normal_recommand">보통</span></td>
-        <td><span class="very_fast_delivery">매우빠름</span></td>
-        <td class="starrate">4점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>서울과기대<br>21.05.10</td>
-      </tr>
-      <tr>
-        <td><span class="normal_recommand">보통</span></td>
-        <td><span class="very_late_delivery">매우느림</span></td>
-        <td class="starrate">2점</td>
-        <td class="review">물건이 아주 좋아요~</td>
-        <td>서울과학기술대학교<br>21.05.10</td>
-      </tr>
-    </table>
+      <thead>
+        <th> 추천 </th>
+        <th> 배송평가</th>
+        <th> 점수 </th>
+        <th> 후기 </th>
+        <th> 이름</th>
+        <th> 등록일자 </th>
+     </thead>
+     <tbody>
+             <% for (let i=( page * page_num) -page_num; i<(page * page_num); i++){
+             if(length < i) {i++;} else { var data = review[i]; %>
+             <tr>
+                     <td> <%= data.rRecommand %></td>
+                     <td> <%= data.rDelivery %></td>
+                     <td> <%= data.rPoint %></td>
+                     <td> <%= data.rReview %></td>
+                     <td> <%= data.rName %></td>
+                     <td> <%= data.rDate %></td>
+             </tr>
+             <% } %>
+             <% } %>
+     </tbody>
 
+
+
+
+
+    </table>
     <div class="outer">
       <div class="pagination">
           <a href="#">&laquo;</a>
-          <a href="#" class="active">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
+        <% for(var j=0; j<review.length/page_num; j++){ %>
+        <a href="/product_admin/<%= product[0].pIdx %>/<%= j+1 %>"><%= j+1 %></a>
+        <% } %>
           <a href="#">&raquo;</a>
       </div>
   </div>
@@ -197,7 +185,7 @@
 
     <script type="text/javascript" src="/detail_page_admin.js"></script>
     <script>var count = <%= count %>;</script>
-    
+
 
 </body>
 

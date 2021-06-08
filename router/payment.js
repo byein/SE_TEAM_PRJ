@@ -18,7 +18,7 @@ function setDeliveryInfo() {
 }
 
 // iamport를 이용해서 결제 진행
-function requestPaywithCard() {
+function requestPay() {
     oInfo.oName = document.getElementById('get-oName').value;
     oInfo.phone = document.getElementById('get-phone-num').value;
     oInfo.addr = document.getElementById('sample4_roadAddress').value + document.getElementById('sample4_jibunAddress').value + document.getElementById('sample4_detailAddress').value;
@@ -69,14 +69,13 @@ function requestPaywithCard() {
                         data : data,
                         dataType : "text"
                 }).done(function(data){
-            var msg = '결제가 완료되었습니다.\n';
-            msg += '고유ID : ' + rsp.imp_uid;
-            msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-            msg += '\n결제 금액 : ' + rsp.paid_amount;
-            msg += '\n카드 승인번호 : ' + rsp.apply_num;
+                        var msg = '결제가 완료되었습니다.\n';
+                        msg += '고유ID : ' + rsp.imp_uid;
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                        msg += '\n결제 금액 : ' + rsp.paid_amount;
                 })
         } else {
-                var msg = "결제 실패";
+            var msg = "결제 실패";
             msg += rsp.error_msg + '.';
         }
         if(msg!=undefined){

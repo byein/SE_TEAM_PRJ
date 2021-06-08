@@ -9,7 +9,6 @@ function check() {
         return false;
     } else {
         alert("상품이 성공적으로 등록되었습니다.");
-        window.location.href="/views/banner_list_admin.html"
         return true;
     }
 }
@@ -27,7 +26,7 @@ function banner_title_check() {
 }
 
 function banner_type_check() {
-    var banner_type = document.getElementsByName("banner_type");
+    var banner_type = document.getElementsByName("nCat");
     var type_cnt = 0;
     for(var i = 0; i < banner_type.length; i++){
         if(banner_type[i].checked == true) 
@@ -36,7 +35,6 @@ function banner_type_check() {
 
     if(type_cnt<1){
         alert("배너 종류를 선택해 주세요.");
-        document.getElementsByName("banner_type").type_cnt[0].focus();
         return false;
     } else {
         return true;
