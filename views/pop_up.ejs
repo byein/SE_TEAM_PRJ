@@ -81,25 +81,25 @@
     <tr>
         <td> 수령인명</td>
         <td>
-            <input type="text" name="adName" >
+            <input type="text" name="adName" required="required" >
         </td>
     </tr>
     <tr>
         <td>연락처</td>
         <td>
-            <input type='tel' id="cellPhone" name= "adNum1" />
+            <input type='tel' id="cellPhone" name= "adNum1" required="required"/>
         </td>
     </tr>
     <tr>
         <td>주소</td>
         <td>
-            <input type="text" id="sample4_postcode" placeholder="우편번호" name = "adPost_code">
+            <input type="text" id="sample4_postcode" placeholder="우편번호" required="required" name = "adPost_code">
             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" id="sample4_roadAddress" placeholder="도로명 주소" name ="adRoad_address">
-            <input type="text" id="sample4_jibunAddress" placeholder="지번 주소" name="adJibun_address">
+            <input type="text" id="sample4_roadAddress" placeholder="도로명 주소" required="required" name ="adRoad_address">
+            <input type="text" id="sample4_jibunAddress" placeholder="지번 주소" required="required" name="adJibun_address">
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="sample4_detailAddress" placeholder="상세주소" name = "adDetail_address">
-            <input type="text" id="sample4_extraAddress" placeholder="참고항목" name = "adRef">
+            <input type="text" id="sample4_detailAddress" placeholder="상세주소" required="required" name = "adDetail_address">
+            <input type="text" id="sample4_extraAddress" placeholder="참고항목" required="required" name = "adRef">
         </td>
     </tr> 
 </table>
