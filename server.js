@@ -678,21 +678,21 @@ app.get('/privacy', function(request, response){
 
 app.get('/delivery_address', function(request, response){
         console.log(request.session);
-        db.query(`SELECT mName, mRoad_address, mJibun_address, mDetail_address FROM member WHERE mId=?`, request.session.ID, function(error, address1){ 
-	db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
+        db.query(`SELECT * FROM member WHERE mId=?`, request.session.ID, function(error, address1){
+        db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
 
 
                 if(request.session.is_logined == true){
                         response.render('delivery_address',{
                         is_logined : request.session.is_logined,
-                      	name : request.session.name,
+                        name : request.session.name,
                         ID : request.session.ID,
                         address : address,
-			address1 : address1
+                        address1 : address1
                 });
                 };
         });
-	});
+        });
 });
 
 app.get('/edit_address/:adIdx', function(request, response) {
@@ -715,13 +715,21 @@ app.post('/address_update/:adIdx', function(request, response){
 });
 
 app.get('/address_change/:adIdx', function(request, response){
-	db.query(`SELECT * FROM address WHERE adIdx=?`, [request.params.adIdx], function(error,address){
-		response.json(address);
-	db.query(`UPDATE member SET mPost_code=?, mRoad_address=?, mJibun_address=?, mDetail_address=? WHERE mId=?`, [address[0].adPost_code, address[0].adRoad_address, address[0].adJibun_address, address[0].Detail_address, address[0].member_id], function(error, change){
-		console.log(change);
-			
-		});
-	});
+        console.log(request.session.ID);
+        console.log(request.params.adIdx);
+        //db.query(`SELECT * FROM address WHERE adIdx=?`, [request.params.adIdx], function(error,address){
+                //response.json(address);
+                db.query(`update member set mPost_code=(SELECT ad.adPost_code FROM (SELECT adPost_code FROM address WHERE adIdx=?)ad), mRoad_address=(SELECT ad.adRoad_address FROM (SELECT adRoad_address FROM address WHERE adIdx=?)ad), mJibun_address=(SELECT ad.adJibun_address FROM (SELECT adJibun_address FROM address WHERE adIdx=?)ad), mDetail_address=(SELECT ad.adDetail_address FROM (SELECT adDetail_address FROM address WHERE adIdx=?)ad) WHERE mId=?`, [request.params.adIdx, request.params.adIdx, request.params.adIdx, request.params.adIdx, request.session.ID], function(error, change){
+                        //response.send(change);
+                        response.redirect('/delivery_address');
+                });
+                /*
+        db.query(`UPDATE member SET mPost_code=(SELECT ad.adPost_code FROM ( SELECT adPost_code FROM address WHERE adIdx=?)ad), mRoad_address=?, mJibun_address=?, mDetail_address=? WHERE mId=?`, [address[0].adPost_code, address[0].adRoad_address, address[0].adJibun_address, address[0].Detail_address, address[0].member_id], function(error, change){
+                console.log("뒤로 가기 후 새로고침 해주세요!");
+
+                });
+                */
+//      });
 });
 
 
