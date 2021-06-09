@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     
     <title>배송지 입력</title>
-
+    <script src="/delivery_address.js"></script>
     <link rel="stylesheet" href="pop_up.css"/>  
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -69,7 +69,7 @@
     </div>
 
     <br>
-    <form action="/create_address" method="POST">
+    <form action="/create_address" method="POST" onsubmit="return check()" >
 <table class="new_address">
     <tr>
         <td> 배송지명 </td>
@@ -87,9 +87,7 @@
     <tr>
         <td>연락처</td>
         <td>
-            <input type='tel' name= "adNum1" />-
-            <input type='tel' name= "adNum2" />-
-            <input type='tel' name= "adNum3" />
+            <input type='tel' id="cellPhone" name= "adNum1" />
         </td>
     </tr>
     <tr>
@@ -109,8 +107,18 @@
 
 <div class="wrap_add">
 
-    <input type ="submit" class="add" value="등록" />
+    <input type ="submit" class="add" value="등록" onclick="func_confrim()" />
     <input type="button" class="cancel" value="취소" onclick="location.href='delivery_address'" />
+    <script>
+        function func_confirm() {
+            if(confirm('저장하시겠습니까?')) {
+                alert('저장되었습니다.')
+                location = 'delivery_address'
+            } else {
+                alert('취소되었습니다.')
+            }
+        }
+    </script>
 
 </div>
     </form>
