@@ -700,7 +700,8 @@ app.get('/edit_address/:adIdx', function(request, response) {
         console.log(request.params.adIdx);
         db.query(sql,request.params.adIdx, function(err, result, fields){
                 if (err) throw err;
-                response.render('edit_address',{ address : result });
+                response.render('edit_address',{ address : result,
+                is_logined : request.session.is_logined });
         });
 });
 
