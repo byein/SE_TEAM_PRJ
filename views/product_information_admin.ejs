@@ -84,7 +84,7 @@
                     <!--판매 순위 판매 개수로 매기기로 결정!-->
 
                     <th class="table_left_up">총 판매금액</th>
-                    <th colspan="2">판매 순위 Top3(Category)</th>
+                    <th colspan="3">판매 순위 Top3(Category)</th>
                     <th colspan="3" class="table_right_up">판매 순위 Top3(Product)</th>
                 </thead>
                 <tbody>
@@ -104,10 +104,10 @@
                     <tr>
                             <% if(i < c_l) { %>
                         <td><%= category[i].main_name %> <%= category[i].sub_name %></td>
-                        <td><%= category[i].sum %>개</td>
+                        <td colspan="2"><%= category[i].sum %>개</td>
                         <%} else { %>
                         <td>정보 없음</td>
-                        <td>정보 없음</td>
+                        <td colspan="2">정보 없음</td>
                         <% } %>
                             <% if(i < p_l) { %>
                         <td><%= product[i].pName %></td>

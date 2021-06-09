@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main</title>
     <link rel="stylesheet" href="/mainPage_admin.css">
-    <script type="text/javascript" src="/mainPage.js"></script>
-    <script defer type="text/javascript" src="/main_banner.js"></script>
 </head>
 <body>
     <header id="header">
@@ -60,6 +58,7 @@
             <% for(let i=0; i<banner_imgs.length; i++){ %>
             <div class="mySlides fade">
                 <img class="banner-img" src="<%= banner_imgs[i].nImg %>">
+                <p><%= banner_imgs[i].nEndDate %></p>
             </div>
             <%} %>
         </div>
@@ -87,6 +86,7 @@
                 Copyright 2021. 24팀 all rights reserved.<br>
             </p>
         </footer>
+        <script type="text/javascript" src="/main_banner.js"></script>
 </body>
 
 </html>

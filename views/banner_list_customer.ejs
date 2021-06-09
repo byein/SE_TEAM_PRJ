@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>banner_admin</title>
-        <link rel="stylesheet" href="/banner_detail_admin.css" type="text/css">
+        <title>banner</title>
+        <link rel="stylesheet" href="/banner_list_admin.css" type="text/css">
         <link rel="stylesheet" href="/mainPage.css">
         <script src="/banner_detail_admin.js"></script>
     </head>
@@ -22,7 +22,7 @@
                              <option value="goods"> 잡화류</option>
                              <option value="acc"> 악세서리</option>
                          </select>
-                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요"> </br>
+                         <input type ="text" class = "search-bar" name="query" placeholder=" 검색어를 입력하세요"> </br>
                          <input type="int" class = "search-bar" name="sprice" placeholder="시작가격"> ~ <input type ="int" class ="search-bar" name="eprice" placeholder="끝가격">
                          <input type = "submit" value ="확인" class = "sort-button">
                      </form>
@@ -47,7 +47,7 @@
                         </button>
                     <% } %>
                 </div>
-               
+
             </div>
         </header>
         <div class="dropmenu">
@@ -69,7 +69,7 @@
                         <ul>
                                 <li><a href="/sub_category/5/1">숏원피스</a></li>
                                 <li><a href="/sub_category/6/1">롱원피스</a></li>
-                        </ul>   
+                        </ul>
                 </li>
                 <li><a href="/category/BAG&SOCKS/1">잡화류</a>
                         <ul>
@@ -86,11 +86,11 @@
                 </li>
             </ul>
         </div>
-        
+
         <section>
             <h2>Notice/Event</h2>
             <h3>상세보기</h3>
-            <div>
+            <div class="notice_list_div">
                 <table class="notice_list">
                     <form action="" method="get" class="sort-by">
                         <input type ="text" class = "search-bar" name="query" placeholder="검색어를 입력하세요">
@@ -105,10 +105,10 @@
 
                     <colgroup>
                     <col width="15">
-                    <col width="80">
                     <col width="15">
+                    <col width="50">
                     <col width="20">
-                    <col width="15">
+                    <col width="20">
                     </colgroup>
                     <thead>
                         <th>번호</th>
@@ -125,11 +125,11 @@
                                 <td> <a href="/banner_detail_customer/<%= value.nIdx %>"> <%= value.nTitle %></a> </td>
                                 <td> <%= value.nDate%></td>
                                 <td> <%= value.nEndDate %></td>
-        
+
                             </tr>
                             <% }); %>
                     </tbody>
-    
+
                 </table>
             </div>
         </section>
@@ -138,7 +138,7 @@
                 <a href="/use">[이용약관]</a>
                 <a href="/privacy">[개인정보처리방침]</a>
                 <br>
-    
+
                 [01811] 서울 노원구 공릉로 232 서울과학기술대학교 컴퓨터공학과 미래관 315호 TEL : 02-970-6707 <br>
                 Copyright 2021. 24팀 all rights reserved.<br>
             </p>
