@@ -678,27 +678,27 @@ app.get('/privacy', function(request, response){
 
 app.get('/delivery_address', function(request, response){
         console.log(request.session);
-        db.query(`SELECT mName, mRoad_address, mJibun_address, mDetail_address FROM member WHERE mId=?`, request.session.ID, function(error, address1){
-        db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
+        db.query(`SELECT mName, mRoad_address, mJibun_address, mDetail_address FROM member WHERE mId=?`, request.session.ID, function(error, address1){ 
+	db.query(`SELECT * FROM address WHERE member_id= ?`, [request.session.ID], function(error, address, fields){
 
 
                 if(request.session.is_logined == true){
                         response.render('delivery_address',{
                         is_logined : request.session.is_logined,
-                        name : request.session.name,
+                      	name : request.session.name,
                         ID : request.session.ID,
                         address : address,
-                        address1 : address1
+			address1 : address1
                 });
                 };
         });
-        });
+	});
 });
 
 app.get('/edit_address/:adIdx', function(request, response) {
         const sql = "SELECT * FROM address WHERE adIdx=?";
         console.log(request.params.adIdx);
-        db.query(sql,[request.params.adIdx], function(err, result, fields){
+        db.query(sql,request.params.adIdx, function(err, result, fields){
                 if (err) throw err;
                 response.render('edit_address',{ address : result });
         });
@@ -712,7 +712,18 @@ app.post('/address_update/:adIdx', function(request, response){
                 console.log(result);
                 response.redirect('/delivery_address');
         });
-})
+});
+
+app.get('/address_change/:adIdx', function(request, response){
+	db.query(`SELECT * FROM address WHERE adIdx=?`, [request.params.adIdx], function(error,address){
+		response.json(address);
+	db.query(`UPDATE member SET mPost_code=?, mRoad_address=?, mJibun_address=?, mDetail_address=? WHERE mId=?`, [address[0].adPost_code, address[0].adRoad_address, address[0].adJibun_address, address[0].Detail_address, address[0].member_id], function(error, change){
+		console.log(change);
+			
+		});
+	});
+});
+
 
 
 
@@ -722,13 +733,18 @@ app.get('/pop_up', function(request, response){
 
 
 app.post('/create_address', function(request, response){
-        const sql = "INSET INTO address SET ?"
-        db.query = (sql, request.body, function(err, result, fields){
+	var post = request.body;
+	db.query(`INSERT INTO address (adTItle, adName, adNum1, adPost_code, adRoad_address, adJibun_address, adDetail_address, adRef, member_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,[post.adTitle, post.adName, post.adNum1, post.adPost_code, post.adRoad_address, post.adJibun_address, post.adDetail_address, post.adRef, request.session.ID], function(err, result, fields){
+		console.log(result);
                 if(err) throw err;
                 response.redirect('/delivery_address');
 
         })
-})
+});
+
+	
+
+
 
 app.get('/delete_address/:adIdx', function(request, response){
         const sql = "DELETE FROM address WHERE adIdx=?"
